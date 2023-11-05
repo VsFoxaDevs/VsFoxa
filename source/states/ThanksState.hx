@@ -28,7 +28,7 @@ class ThanksState extends MusicBeatState
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
 		bg.screenCenter();
-		bg.antialiasing = ClientPrefs.data.globalAntialiasing;
+		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 
 		var theLogoThing:FlxSprite = new FlxSprite(FlxG.width, 0).loadGraphic(Paths.image('logo'));
@@ -37,7 +37,7 @@ class ThanksState extends MusicBeatState
 		theLogoThing.x -= theLogoThing.frameHeight;
 		theLogoThing.y -= 180;
 		theLogoThing.alpha = 0.8;
-		theLogoThing.antialiasing = ClientPrefs.data.globalAntialiasing;
+		theLogoThing.antialiasing = ClientPrefs.data.antialiasing;
 		add(theLogoThing);
 
 		var txt:FlxText = new FlxText(0, 0, FlxG.width,
