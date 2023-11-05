@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="foxa-scared.png">
+	<SubTexture name="foxa scared idle0000" x="382" y="701" width="369" height="679" frameX="-454" frameY="-51" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared idle0001" x="1960" y="700" width="341" height="684" frameX="-473" frameY="-46" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared idle0002" x="2324" y="0" width="325" height="692" frameX="-477" frameY="-38" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared idle0003" x="2324" y="1401" width="314" height="695" frameX="-481" frameY="-35" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared idle0004" x="2649" y="688" width="305" height="701" frameX="-481" frameY="-29" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared down0000" x="331" y="1394" width="334" height="683" frameX="-465" frameY="-47" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared down0001" x="2649" y="0" width="314" height="688" frameX="-476" frameY="-42" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared down0002" x="304" y="2105" width="303" height="692" frameX="-485" frameY="-38" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared down0003" x="0" y="2105" width="304" height="697" frameX="-483" frameY="-33" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared left0000" x="0" y="701" width="382" height="693" frameX="-408" frameY="-37" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared left0001" x="1581" y="696" width="377" height="697" frameX="-408" frameY="-33" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared left0002" x="1198" y="0" width="383" height="698" frameX="-407" frameY="-32" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared left0003" x="812" y="0" width="386" height="701" frameX="-407" frameY="-29" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared right0000" x="0" y="0" width="416" height="701" frameX="-402" frameY="-29" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared right0001" x="416" y="0" width="396" height="699" frameX="-411" frameY="-31" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared right0002" x="1581" y="0" width="379" height="696" frameX="-415" frameY="-34" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared right0003" x="1960" y="0" width="364" height="700" frameX="-425" frameY="-30" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared up0000" x="0" y="1394" width="331" height="711" frameX="-460" frameY="-19" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared up0001" x="2324" y="692" width="315" height="709" frameX="-468" frameY="-21" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared up0002" x="2649" y="1389" width="305" height="699" frameX="-474" frameY="-31" frameWidth="1280" frameHeight="720"/>
+	<SubTexture name="foxa scared up0003" x="2963" y="0" width="291" height="694" frameX="-480" frameY="-36" frameWidth="1280" frameHeight="720"/>
+</TextureAtlas>
