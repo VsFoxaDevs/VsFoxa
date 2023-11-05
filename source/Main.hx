@@ -97,13 +97,13 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
-		var stageWidth:Int = Lib.current.stage.stageWidth;
-		var stageHeight:Int = Lib.current.stage.stageHeight;
+		final stageWidth:Int = Lib.current.stage.stageWidth;
+		final stageHeight:Int = Lib.current.stage.stageHeight;
 
 		if (game.zoom == -1.0)
 		{
-			var ratioX:Float = stageWidth / game.width;
-			var ratioY:Float = stageHeight / game.height;
+			final ratioX:Float = stageWidth / game.width;
+			final ratioY:Float = stageHeight / game.height;
 			game.zoom = Math.min(ratioX, ratioY);
 			game.width = Math.ceil(stageWidth / game.zoom);
 			game.height = Math.ceil(stageHeight / game.zoom);
@@ -120,9 +120,8 @@ class Main extends Sprite
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		if(fpsVar != null) {
+		if(fpsVar != null)
 			fpsVar.visible = ClientPrefs.data.showFPS;
-		}
 		#end
 
 		#if linux

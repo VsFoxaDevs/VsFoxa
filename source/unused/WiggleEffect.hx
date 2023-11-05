@@ -1,4 +1,4 @@
-package shaders;
+package unused;
 
 // STOLEN FROM HAXEFLIXEL DEMO LOL
 import flixel.system.FlxAssets.FlxShader;

@@ -1,4 +1,4 @@
-package shaders;
+package unused;
 
 import flixel.system.FlxAssets.FlxShader;
 

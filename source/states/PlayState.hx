@@ -681,7 +681,7 @@ class PlayState extends MusicBeatState
 		if(eventNotes.length < 1) checkEventNote();
 	}
 
-	function set_songSpeed(value:Float):Float
+	inline function set_songSpeed(value:Float):Float
 	{
 		if(generatedMusic)
 		{
@@ -697,7 +697,7 @@ class PlayState extends MusicBeatState
 		return value;
 	}
 
-	function set_playbackRate(value:Float):Float
+	inline function set_playbackRate(value:Float):Float
 	{
 		if(generatedMusic)
 		{

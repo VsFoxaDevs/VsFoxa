@@ -126,7 +126,7 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Vs. Foxa v3.0", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Vs. Foxa Ultimate v3.0", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -165,7 +165,7 @@ class MainMenuState extends MusicBeatState
 			if(FreeplayState.vocals != null) FreeplayState.vocals.volume += 0.5 * elapsed;
 		}
 		FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 * (FlxG.updateFramerate / 60), 0, 1);
-		
+
 		if (!selectedSomethin)
 		{
 			if (controls.UI_UP_P)

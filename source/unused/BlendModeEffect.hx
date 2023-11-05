@@ -1,4 +1,4 @@
-package shaders;
+package unusual;
 
 import openfl.display.ShaderParameter;
 
