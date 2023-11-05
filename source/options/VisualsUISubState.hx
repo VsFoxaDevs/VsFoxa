@@ -76,6 +76,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			'hideHud',
 			'bool');
 		addOption(option);
+
+		var option:Option = new Option('Icon Colored Health Bar',
+		"If unchecked, the health bar will have the colors from vanilla FNF\nrather than colors based on the icons.",
+		'coloredHealthBar',
+		'bool');
+	    addOption(option);
 		
 		var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
@@ -112,6 +118,11 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		option.decimals = 1;
 		addOption(option);
+
+		var option:Option = new Option('Display MS Offset Every Hit', 
+		'If checked, the text with the note offset (in milliseconds) will appear near notes.',
+		'showMsText', 'bool');
+	    addOption(option);
 		
 		#if !mobile
 		var option:Option = new Option('FPS Counter',
@@ -120,6 +131,9 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 		option.onChange = onChangeFPSCounter;
+
+		var option:Option = new Option('Rainbow FPS', "If checked, makes the FPS have a chroma effect.\nSo Kade Engine, isn't it?", 'fpsRainbow', 'bool');
+		addOption(option);
 		#end
 		
 		var option:Option = new Option('Pause Screen Song:',

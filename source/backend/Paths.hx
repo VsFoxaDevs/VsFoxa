@@ -27,8 +27,8 @@ import backend.Mods;
 
 class Paths
 {
-	inline public static var SOUND_EXT = #if web "mp3" #else "ogg" #end;
-	inline public static var VIDEO_EXT = "mp4";
+	inline public static final SOUND_EXT = #if web "mp3" #else "ogg" #end;
+	inline public static final VIDEO_EXT = "mp4";
 
 	public static function excludeAsset(key:String) {
 		if (!dumpExclusions.contains(key))
@@ -265,12 +265,9 @@ class Paths
 			if (FileSystem.exists(file))
 				bitmap = BitmapData.fromFile(file);
 			#else
-			else
-			#end
-			{
 				if (OpenFlAssets.exists(file, IMAGE))
 					bitmap = OpenFlAssets.getBitmapData(file);
-			}
+				#end
 
 			if(bitmap == null) return null;
 		}

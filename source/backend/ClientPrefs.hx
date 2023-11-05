@@ -14,10 +14,15 @@ class SaveVariables {
 	public var showFPS:Bool = true;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = true;
+	public var fullscreen:Bool = false;
 	public var antialiasing:Bool = true;
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Psych';
 	public var splashAlpha:Float = 0.6;
+	public var fpsRainbow:Bool = false; // kadedev
+	public var laneUnderlay:Float = 0;
+	public var coloredHealthBar = true;
+	public var showMsText:Bool = true;
 	public var lowQuality:Bool = false;
 	public var shaders:Bool = true;
 	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic

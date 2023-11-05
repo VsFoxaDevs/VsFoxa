@@ -45,7 +45,11 @@ import flixel.util.FlxStringUtil;
 import flash.media.Sound;
 #end
 
+#if (flixel < "5.3.0")
+@:access(flixel.system.FlxSound._sound)
+#else
 @:access(flixel.sound.FlxSound._sound)
+#end
 @:access(openfl.media.Sound.__buffer)
 
 class ChartingState extends MusicBeatState

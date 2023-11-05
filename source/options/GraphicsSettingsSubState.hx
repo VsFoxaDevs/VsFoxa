@@ -39,6 +39,10 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Fullscreen', "If checked, makes the game cover the whole screen.\nIt's something most PC games have.", 'fullscreen', 'bool');
+		addOption(option);
+		option.onChange = onChangeFullscreen;
+
 		var option:Option = new Option('GPU Caching', //Name
 			"If checked, allows the GPU to be used for caching textures, decreasing RAM usage.\nDon't turn this on if you have a shitty Graphics Card.", //Description
 			'cacheOnGPU',
@@ -91,5 +95,10 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 	{
 		super.changeSelection(change);
 		boyfriend.visible = (antialiasingOption == curSelected);
+	}
+
+	public static function onChangeFullscreen()
+	{
+		FlxG.fullscreen = ClientPrefs.data.fullscreen;
 	}
 }

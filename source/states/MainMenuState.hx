@@ -20,6 +20,23 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	
+	public static var quotes:Array<String> = [
+		#if html5
+		"You're on web. Why the FUCK are you on web? You can't get even decent easter eggs, bitch."
+		#else
+		"500+  Giftcards! (-CharlesCatYT)",
+		"bro became starfire from teen titans go (-Monomouse)",
+		"Hi (-ScriptedMar)",
+		"Damn how many fnf mods are ya'll making1?!?! (-ItsToppy)",
+		"YOUR ARGUMENT, IS NOW INVALID! (-Monomouse)",
+		"when did we start playing freeze tag (-Vencerist)",
+		"top 100 reasons why I won't ask foxa unless she's online (-CharlesCatYT)",
+		"Lowkey smooth (-TheAnimateMan)",
+		"JHJJTLKGFD WHY IS MILKY SO LOUD IN THE EXPORT (-cyborg henry)",
+		"I like starting a fire (-Vencerist)"
+		#end
+	];
+
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
@@ -105,15 +122,19 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, 'Psych Engine v$psychEngineVersion', 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 84, 0, 'Psych Engine v$psychEngineVersion', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Vs. Foxa v3.0", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Vs. Foxa v3.0", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, quotes[Std.random(quotes.length)], 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);

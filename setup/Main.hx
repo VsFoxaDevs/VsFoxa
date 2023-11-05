@@ -30,7 +30,7 @@ class Main {
 					var ref:String = data.ref == null ? "" : data.ref;
 					Sys.command('haxelib --quiet git ${data.name} ${data.url} ${data.ref}');
 				default: // and finally, throw an error if the library has no type
-					Sys.println('[PSYCH ENGINE SETUP]: Unable to resolve library of type "${data.type}" for library "${data.name}"');
+					Sys.println('[VS FOXA SETUP]: Unable to resolve library of type "${data.type}" for library "${data.name}"');
 			}
 		}
 
