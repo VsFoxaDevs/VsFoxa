@@ -155,8 +155,7 @@ class AchievementsMenuState extends MusicBeatState
 			if (controls.UI_LEFT_P) add = -1;
 			else if (controls.UI_RIGHT_P) add = 1;
 
-			if(add != 0)
-			{
+			if(add != 0){
 				var oldRow:Int = Math.floor(curSelected / MAX_PER_ROW);
 				var rowSize:Int = Std.int(Math.min(MAX_PER_ROW, options.length - oldRow * MAX_PER_ROW));
 				
@@ -178,22 +177,14 @@ class AchievementsMenuState extends MusicBeatState
 				if (controls.UI_UP_P) add = -1;
 				else if (controls.UI_DOWN_P) add = 1;
 
-				if(add != 0)
-				{
+				if(add != 0){
 					var diff:Int = curSelected - (Math.floor(curSelected / MAX_PER_ROW) * MAX_PER_ROW);
 					curSelected += add * MAX_PER_ROW;
-					//trace('Before correction: $curSelected');
-					if(curSelected < 0)
-					{
+					if(curSelected < 0){
 						curSelected += Math.ceil(options.length / MAX_PER_ROW) * MAX_PER_ROW;
 						if(curSelected >= options.length) curSelected -= MAX_PER_ROW;
-						//trace('Pass 1: $curSelected');
 					}
-					if(curSelected >= options.length)
-					{
-						curSelected = diff;
-						//trace('Pass 2: $curSelected');
-					}
+					if(curSelected >= options.length) curSelected = diff;
 
 					_changeSelection();
 				}
@@ -205,7 +196,7 @@ class AchievementsMenuState extends MusicBeatState
 			}
 		}
 
-		FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 / (FlxG.updateFramerate / 60), 0, 1);
+		FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 * (FlxG.updateFramerate / 60), 0, 1);
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));

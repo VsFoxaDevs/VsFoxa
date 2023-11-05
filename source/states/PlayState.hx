@@ -1009,7 +1009,7 @@ class PlayState extends MusicBeatState
 			var swagCounter:Int = 0;
 
 			if (ClientPrefs.data.showMsText) {
-				if (ClientPrefs.downScroll) {
+				if (ClientPrefs.data.downScroll) {
 					msTimeTxt.x = playerStrums.members[1].x-100;
 					msTimeTxt.y = playerStrums.members[1].y+100;
 				} else {
@@ -1017,7 +1017,7 @@ class PlayState extends MusicBeatState
 					msTimeTxt.y = playerStrums.members[1].y-50;
 				}
 
-				if (ClientPrefs.middleScroll) {
+				if (ClientPrefs.data.middleScroll) {
 					msTimeTxt.x = playerStrums.members[0].x-250;
 					msTimeTxt.y = playerStrums.members[1].y+30;
 				}
@@ -1643,7 +1643,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.camera.followLerp = 0;
 		if(!inCutscene && !paused) {
-			FlxG.camera.followLerp = FlxMath.bound(elapsed * 2.4 * cameraSpeed * playbackRate / (FlxG.updateFramerate / 60), 0, 1);
+			FlxG.camera.followLerp = FlxMath.bound(elapsed * 2.4 * cameraSpeed * playbackRate * (FlxG.updateFramerate / 60), 0, 1);
 			if(!startingSong && !endingSong && boyfriend.animation.curAnim != null && boyfriend.animation.curAnim.name.startsWith('idle')) {
 				boyfriendIdleTime += elapsed;
 				if(boyfriendIdleTime >= 0.15) { // Kind of a mercy thing for making the achievement easier to get as it's apparently frustrating to some playerss
