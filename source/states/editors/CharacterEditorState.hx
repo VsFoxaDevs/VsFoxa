@@ -744,7 +744,7 @@ class CharacterEditorState extends MusicBeatState
 				updatePresence();
 			}
 			else if(sender == imageInputText) {
-				char.imageFile = imageInputText.text;
+				char.imageFile = imageInputText.text; // charles snooping in the code :troll:
 			}
 		} else if(id == FlxUINumericStepper.CHANGE_EVENT && (sender is FlxUINumericStepper)) {
 			if (sender == scaleStepper)

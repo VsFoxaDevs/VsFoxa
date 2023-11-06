@@ -27,7 +27,9 @@ class MainMenuState extends MusicBeatState
 		"500+  Giftcards! (-CharlesCatYT)",
 		"bro became starfire from teen titans go (-Monomouse)",
 		"Hi (-ScriptedMar)",
+		"To what? My tits? (-Foxa the Artist)",
 		"Damn how many fnf mods are ya'll making1?!?! (-ItsToppy)",
+		"Get briccedd (-cyborg henry)",
 		"YOUR ARGUMENT, IS NOW INVALID! (-Monomouse)",
 		"when did we start playing freeze tag (-Vencerist)",
 		"top 100 reasons why I won't ask foxa unless she's online (-CharlesCatYT)",
@@ -43,7 +45,7 @@ class MainMenuState extends MusicBeatState
 		#if MODS_ALLOWED 'mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
-		//#if !switch 'donate', #end
+		'discord',
 		'options'
 	];
 
@@ -88,16 +90,11 @@ class MainMenuState extends MusicBeatState
 		magenta.visible = false;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
-		
-		// magenta.scrollFactor.set();
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
 		var scale:Float = 1;
-		/*if(optionShit.length > 6) {
-			scale = 6 / optionShit.length;
-		}*/
 
 		for (i in 0...optionShit.length)
 		{
@@ -116,7 +113,6 @@ class MainMenuState extends MusicBeatState
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
-			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 		}
 
@@ -189,8 +185,8 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == 'donate')
-					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
+				if (optionShit[curSelected] == 'discord')
+					CoolUtil.browserLoad('https://discord.gg/FARpwR9K4k'); //foxacord
 				else
 				{
 					selectedSomethin = true;
