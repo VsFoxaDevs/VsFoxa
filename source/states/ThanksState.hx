@@ -79,7 +79,10 @@ class ThanksState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-        if (controls.ACCEPT || controls.BACK) FlxG.switchState(new MainMenuState());
+        if (controls.ACCEPT || controls.BACK) {
+			FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);
+			FlxG.switchState(new MainMenuState());
+		}
 
 		super.update(elapsed);
 	}
