@@ -17,6 +17,7 @@ import flixel.ui.FlxButton;
 import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
+import flixel.math.FlxPoint;
 import lime.system.Clipboard;
 import tjson.TJSON as Json;
 
@@ -58,6 +59,8 @@ class CharacterEditorState extends MusicBeatState
 
 	var cameraFollowPointer:FlxSprite;
 	var healthBar:Bar;
+	//the begining mouse location that all drag movements are in reference of
+	private var mouseLocation:FlxPoint;
 
 	override function create()
 	{
@@ -131,9 +134,10 @@ class CharacterEditorState extends MusicBeatState
 		\nJKLI - Move Camera
 		\nW/S - Previous/Next Animation
 		\nSpace - Play Animation
-		\nArrow Keys - Move Character Offset
+		\nArrow Keys/Drag & Drop - Move Character Offset
 		\nT - Reset Current Offset
-		\nHold Shift to Move 10x faster\n".split('\n');
+		\nHold down Shift to Move 10x faster
+		\nHold down Control to be able to hold down the Arrow Keys".split('\n');
 
 		for (i in 0...tipTextArray.length-1)
 		{
@@ -1111,8 +1115,7 @@ class CharacterEditorState extends MusicBeatState
 			if (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L)
 			{
 				var addToCam:Float = 500 * elapsed;
-				if (FlxG.keys.pressed.SHIFT)
-					addToCam *= 4;
+				if (FlxG.keys.pressed.SHIFT) addToCam *= 4;
 
 				if (FlxG.keys.pressed.I)
 					camFollow.y -= addToCam;
@@ -1126,21 +1129,17 @@ class CharacterEditorState extends MusicBeatState
 			}
 
 			if(char.animationsArray.length > 0) {
-				if (FlxG.keys.justPressed.W)
-				{
+				if (FlxG.keys.justPressed.W){
 					curAnim -= 1;
 				}
 
-				if (FlxG.keys.justPressed.S)
-				{
+				if (FlxG.keys.justPressed.S){
 					curAnim += 1;
 				}
 
-				if (curAnim < 0)
-					curAnim = char.animationsArray.length - 1;
+				if (curAnim < 0) curAnim = char.animationsArray.length - 1;
 
-				if (curAnim >= char.animationsArray.length)
-					curAnim = 0;
+				if (curAnim >= char.animationsArray.length) curAnim = 0;
 
 				if (FlxG.keys.justPressed.S || FlxG.keys.justPressed.W || FlxG.keys.justPressed.SPACE)
 				{
@@ -1156,9 +1155,57 @@ class CharacterEditorState extends MusicBeatState
 					genBoyOffsets();
 				}
 
+				//drag and drop is active when clicking over anything except for the ui boxes
+				var mouseLoc = FlxG.mouse.getPosition();
+				//refer to 1210
+				try
+				{
+					if(!FlxG.mouse.overlaps(UI_box) && !FlxG.mouse.overlaps(UI_characterbox)){
+						if(FlxG.mouse.justPressed) mouseLocation = mouseLoc;
+						else if (FlxG.mouse.pressed && FlxG.mouse.justMoved)
+						{
+							//if you click during the transition, this sometimes crashes cause
+							//null object error, because the character won't be loaded
+							var xDiff:Int = Std.int(mouseLoc.x - mouseLocation.x);
+							var yDiff:Int = Std.int(mouseLoc.y - mouseLocation.y);
+							//moves the entire character
+							if (FlxG.keys.pressed.SHIFT)
+							{
+								positionXStepper.value += xDiff;
+								positionYStepper.value += yDiff;
+								getEvent(FlxUINumericStepper.CHANGE_EVENT, positionXStepper, null);
+								getEvent(FlxUINumericStepper.CHANGE_EVENT, positionYStepper, null);
+							}
+							//moves the animation
+							else
+							{
+								char.animationsArray[curAnim].offsets[0] -= xDiff;
+								char.animationsArray[curAnim].offsets[1] -= yDiff;
+								char.addOffset(char.animationsArray[curAnim].anim, char.animationsArray[curAnim].offsets[0],
+									char.animationsArray[curAnim].offsets[1]);
+								ghostChar.addOffset(char.animationsArray[curAnim].anim, char.animationsArray[curAnim].offsets[0],
+									char.animationsArray[curAnim].offsets[1]);
+							}
+							char.playAnim(char.animationsArray[curAnim].anim, false);
+							if (ghostChar.animation.curAnim != null
+								&& char.animation.curAnim != null
+								&& char.animation.curAnim.name == ghostChar.animation.curAnim.name)
+							{
+								ghostChar.playAnim(char.animation.curAnim.name, false);
+							}
+							genBoyOffsets();
+							mouseLocation = mouseLoc;
+						}
+					}
+				}
+				catch (e)
+				{
+					trace("temporary error caught, oops");
+				}
+
 				var controlArray:Array<Bool> = [FlxG.keys.justPressed.LEFT, FlxG.keys.justPressed.RIGHT, FlxG.keys.justPressed.UP, FlxG.keys.justPressed.DOWN];
 
-
+				if (FlxG.keys.pressed.CONTROL) controlArray = [FlxG.keys.pressed.LEFT, FlxG.keys.pressed.RIGHT, FlxG.keys.pressed.UP, FlxG.keys.pressed.DOWN];
 
 				for (i in 0...controlArray.length) {
 					if(controlArray[i]) {
