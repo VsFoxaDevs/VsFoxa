@@ -1,5 +1,3 @@
-package source.options;
-
 package options;
 
 import objects.Character;
