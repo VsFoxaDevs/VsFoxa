@@ -13,7 +13,7 @@ import tjson.TJSON as Json;
 
 import flixel.util.FlxSpriteUtil;
 import objects.AttachedSprite;
-import options.ModSettingsSubState;
+import options.ModSettingsSubstate;
 import flixel.addons.transition.FlxTransitionableState;
 
 class ModsMenuState extends MusicBeatState
@@ -241,7 +241,7 @@ class ModsMenuState extends MusicBeatState
 			var curMod:ModItem = modsGroup.members[curSelectedMod];
 			if(curMod != null && curMod.settings != null && curMod.settings.length > 0)
 			{
-				openSubState(new ModSettingsSubState(curMod.settings, curMod.folder, curMod.name));
+				openSubState(new ModSettingsSubstate(curMod.settings, curMod.folder, curMod.name));
 			}
 		}, 54, 54);
 
