@@ -579,7 +579,8 @@ class PlayState extends MusicBeatState
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
-		scoreTxt.visible = !ClientPrefs.data.hideHud;
+		if(!ClientPrefs.data.hideScoreText && !ClientPrefs.data.hideHud) scoreTxt.visible = true;
+		else scoreTxt.visible = false;
 		updateScore(false);
 		uiGroup.add(scoreTxt);
 

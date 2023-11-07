@@ -108,6 +108,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Hide Score Text',
+			'If checked, hides the info bar that is under the health bar in-game.',
+			'hideScoreText',
+			'bool');
+		addOption(option);
+
 		var option:Option = new Option('Health Bar Opacity',
 			'How much transparent should the health bar and icons be.',
 			'healthBarAlpha',
@@ -124,6 +130,14 @@ class VisualsUISubState extends BaseOptionsMenu
 		'showMsText', 'bool');
 	    addOption(option);
 		
+		var option:Option = new Option('Lane Underlay Transparency', "Makes a lane show up based on your set transparency", 'laneUnderlay', 'percent');
+		addOption(option);
+		option.scrollSpeed = 1.6;
+		option.minValue = 0.0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		option.decimals = 1;
+
 		#if !mobile
 		var option:Option = new Option('FPS Counter',
 			'If unchecked, hides FPS Counter.',

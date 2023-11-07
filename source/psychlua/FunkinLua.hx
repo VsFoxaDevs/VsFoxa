@@ -37,6 +37,8 @@ import psychlua.HScript;
 import psychlua.DebugLuaText;
 import psychlua.ModchartSprite;
 
+import Sys;
+
 import tjson.TJSON as Json;
 
 class FunkinLua {
@@ -417,6 +419,10 @@ class FunkinLua {
 			}
 			luaTrace('removeLuaScript: Script $luaFile isn\'t running!', false, false, FlxColor.RED);
 			return false;
+		});
+
+		Lua_helper.add_callback(lua, "pcUserName", function() { // i love danger :D
+			return Sys.environment()["USERNAME"];
 		});
 
 		Lua_helper.add_callback(lua, "loadCredits", function(?musicos:String = null, ?funni:Bool) {
