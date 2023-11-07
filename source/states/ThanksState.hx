@@ -39,15 +39,19 @@ class ThanksState extends MusicBeatState
 		theLogoThing.alpha = 0.8;
 		theLogoThing.antialiasing = ClientPrefs.data.antialiasing;
 		add(theLogoThing);
+		
+		theLogoThing.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		theLogoThing.animation.play('bump');
+		theLogoThing.updateHitbox();
 
 		var txt:FlxText = new FlxText(0, 0, FlxG.width,
-			"Thanks for playing Vs. Foxa 3.0!\nYou are on a Dev Build.\nIf you were given this by someone who isn't a dev/playtester,\nplease contact one of the devs. "
+			"Thanks for playing Vs. Foxa 3.0!\nYou are on a Developer Build.\nIf you were given this by someone who isn't a dev/playtester,\nplease contact one of the devs at Foxacord.\n(https://discord.gg/FARpwR9K4k)"
 			+ "\n\nPress Enter to continue.",
 			32);
 
 		txt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.fromRGB(200, 200, 200), CENTER);
 		txt.borderColor = FlxColor.BLACK;
-		txt.borderSize = 2.3;
+		txt.borderSize = 2.4;
 		txt.borderStyle = FlxTextBorderStyle.OUTLINE;
 		txt.screenCenter();
 		add(txt);

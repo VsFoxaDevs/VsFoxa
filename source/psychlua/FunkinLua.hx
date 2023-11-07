@@ -419,6 +419,13 @@ class FunkinLua {
 			return false;
 		});
 
+		Lua_helper.add_callback(lua, "loadCredits", function(?musicos:String = null, ?funni:Bool) {
+			LoadingState.loadAndSwitchState(new states.CreditsState()); // wowzers!
+			FlxG.sound.playMusic(Paths.music(musicos));
+			if(musicos == '') funni = true;
+			if(funni == true) FlxG.sound.playMusic(Paths.music('freakyMenu'));
+		});
+
 		Lua_helper.add_callback(lua, "loadSong", function(?name:String = null, ?difficultyNum:Int = -1) {
 			if(name == null || name.length < 1)
 				name = PlayState.SONG.song;
