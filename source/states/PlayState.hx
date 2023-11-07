@@ -3226,11 +3226,14 @@ class PlayState extends MusicBeatState
 				if(!callValue.succeeded)
 				{
 					{
-						if (e != null)
+						for (e in callValue.exceptions)
 						{
-							var len:Int = e.message.indexOf('\n') + 1;
-							if(len <= 0) len = e.message.length;
-								addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, len)}', FlxColor.RED);
+							if (e != null)
+							{
+								var len:Int = e.message.indexOf('\n') + 1;
+								if(len <= 0) len = e.message.length;
+									addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, len)}', FlxColor.RED);
+							}
 						}
 					}
 					newScript.destroy();
@@ -3311,7 +3314,8 @@ class PlayState extends MusicBeatState
 		excludeValues.push(psychlua.FunkinLua.Function_Continue);
 
 		var len:Int = hscriptArray.length;
-		if(len < 1) return returnVal;
+		if (len < 1)
+			return returnVal;
 		for(i in 0...len)
 		{
 			var script:HScript = hscriptArray[i];
@@ -3322,14 +3326,17 @@ class PlayState extends MusicBeatState
 			try
 			{
 				var callValue = script.call(funcToCall, args);
-				if(!callValue.succeeded){
+				if(!callValue.succeeded)
+				{
 					var e = callValue.exceptions[0];
 					if(e != null){
-						var len:Int = e.message.indexOf('\n') + 1;
-						if(len <= 0) len = e.message.length;
-						FunkinLua.luaTrace('ERROR (${script.origin}: ${callValue.calledFunction}) - ' + e.message.substr(0, len), true, false, FlxColor.RED);
-					}
-				}else{
+							var len:Int = e.message.indexOf('\n') + 1;
+							if(len <= 0) len = e.message.length;
+							FunkinLua.luaTrace('ERROR (${script.origin}: ${callValue.calledFunction}) - ' + e.message.substr(0, len), true, false, FlxColor.RED);
+						}
+				}
+				else
+				{
 					myValue = callValue.returnValue;
 					if((myValue == FunkinLua.Function_StopHScript || myValue == FunkinLua.Function_StopAll) && !excludeValues.contains(myValue) && !ignoreStops)
 					{
