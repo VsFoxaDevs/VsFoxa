@@ -134,7 +134,7 @@ class CharacterEditorState extends MusicBeatState
 		\nJKLI - Move Camera
 		\nW/S - Previous/Next Animation
 		\nSpace - Play Animation
-		\nArrow Keys/Drag & Drop - Move Character Offset
+		\nArrow Keys/RMOUSE- Move Character Offset
 		\nT - Reset Current Offset
 		\nHold down Shift to Move 10x faster
 		\nHold down Control to be able to hold down the Arrow Keys".split('\n');
@@ -1161,10 +1161,10 @@ class CharacterEditorState extends MusicBeatState
 				try
 				{
 					if(!FlxG.mouse.overlaps(UI_box) && !FlxG.mouse.overlaps(UI_characterbox)){
-						if(FlxG.mouse.justPressed) mouseLocation = mouseLoc;
-						else if (FlxG.mouse.pressed && FlxG.mouse.justMoved)
+						if(FlxG.mouse.justPressedRight) mouseLocation = mouseLoc;
+						else if (FlxG.mouse.pressedRight && FlxG.mouse.justMoved)
 						{
-							//if you click during the transition, this sometimes crashes cause
+							//if you right click during the transition, this sometimes crashes cause
 							//null object error, because the character won't be loaded
 							var xDiff:Int = Std.int(mouseLoc.x - mouseLocation.x);
 							var yDiff:Int = Std.int(mouseLoc.y - mouseLocation.y);
