@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
-				486,
+				481,
 				-56
 			],
-			"indices": [],
-			"fps": 12,
 			"anim": "idle",
-			"loop": false,
-			"name": "Foxa Idle"
-		},
-		{
-			"offsets": [
-				482,
-				-55
-			],
-			"indices": [],
 			"fps": 12,
-			"anim": "singLEFT",
-			"loop": false,
-			"name": "Foxa Left"
+			"name": "Foxa Idle",
+			"indices": []
 		},
 		{
-			"offsets": [
-				480,
-				-55
-			],
-			"indices": [],
-			"fps": 12,
-			"anim": "singDOWN",
 			"loop": false,
-			"name": "Foxa Down"
-		},
-		{
 			"offsets": [
 				483,
 				-55
 			],
-			"indices": [],
+			"anim": "singLEFT",
 			"fps": 12,
-			"anim": "singUP",
-			"loop": false,
-			"name": "Foxa Up"
+			"name": "Foxa Left",
+			"indices": []
 		},
 		{
-			"offsets": [
-				482,
-				-55
-			],
-			"indices": [],
-			"fps": 12,
-			"anim": "singRIGHT",
 			"loop": false,
-			"name": "Foxa Right"
+			"offsets": [
+				479,
+				-56
+			],
+			"anim": "singDOWN",
+			"fps": 12,
+			"name": "Foxa Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				479,
+				-54
+			],
+			"anim": "singUP",
+			"fps": 12,
+			"name": "Foxa Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				475,
+				-56
+			],
+			"anim": "singRIGHT",
+			"fps": 12,
+			"name": "Foxa Right",
+			"indices": []
 		}
 	],
 	"no_antialiasing": true,
@@ -70,7 +70,7 @@
 		252
 	],
 	"camera_position": [
-		300,
+		-560,
 		-10
 	],
 	"sing_duration": 6.1,
