@@ -71,6 +71,12 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.decimals = 1;
 		addOption(option);
 
+		var option:Option = new Option('Botplay Sine Effect', 
+		"If checked, the botplay text in-game does that one sine effect\nwhile the song is being played and when Botplay is on.", 
+		'botplaySine', 
+		'bool');
+		addOption(option);
+
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
 			'hideHud',

@@ -1660,9 +1660,11 @@ class PlayState extends MusicBeatState
 		setOnScripts('curDecStep', curDecStep);
 		setOnScripts('curDecBeat', curDecBeat);
 
-		if(botplayTxt != null && botplayTxt.visible) {
-			botplaySine += 180 * elapsed;
-			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
+		if(ClientPrefs.data.botplaySine){
+			if(botplayTxt != null && botplayTxt.visible){
+				botplaySine += 180 * elapsed;
+				botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
+			}
 		}
 
 		if (controls.PAUSE && startedCountdown && canPause)

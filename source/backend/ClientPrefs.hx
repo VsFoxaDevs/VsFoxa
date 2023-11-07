@@ -22,6 +22,7 @@ class SaveVariables {
 	public var fpsRainbow:Bool = false; // kadedev
 	public var laneUnderlay:Float = 0;
 	public var coloredHealthBar = true;
+	public var botplaySine:Bool = true;
 	public var showMsText:Bool = true;
 	public var lowQuality:Bool = false;
 	public var shaders:Bool = true;
