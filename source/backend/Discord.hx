@@ -11,7 +11,7 @@ class DiscordClient
 	public static var clientID(default, set):String = _defaultID;
 
 	private static var _options:Dynamic = {
-		details: "In the Menus",
+		details: "Starting",
 		state: null,
 		largeImageKey: 'icon',
 		largeImageText: "Psych Engine",

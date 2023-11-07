@@ -34,6 +34,11 @@ class NoteSplashDebugState extends MusicBeatState
 		selection.alpha = 0.4;
 		add(selection);
 
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Note Splash Menu", null);
+		#end
+
 		notes = new FlxTypedGroup<StrumNote>();
 		add(notes);
 

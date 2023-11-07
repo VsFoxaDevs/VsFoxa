@@ -51,11 +51,8 @@ class Prompt extends MusicBeatSubstate
 	{
 		super.create();
 		if (goAnyway){
-			
-			
-				if(okc != null)okc();
+			if(okc != null)okc();
 			close();
-			
 		}else{
 		panel = new FlxSprite(0, 0);
 		panelbg = new FlxSprite(0, 0);

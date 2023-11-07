@@ -81,7 +81,7 @@ class StoryMenuState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("Story Mode Menu", null);
 		#end
 
 		var num:Int = 0;
@@ -191,8 +191,6 @@ class StoryMenuState extends MusicBeatState
 		if(Math.abs(intendedScore - lerpScore) < 10) lerpScore = intendedScore;
 
 		scoreText.text = "(" + ((curWeek + 1) + "/" + loadedWeeks.length) + ") | WEEK SCORE:" + lerpScore;
-
-		// FlxG.watch.addQuick('font', scoreText.font);
 
 		if (!movedBack && !selectedWeek)
 		{

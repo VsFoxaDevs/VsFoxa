@@ -21,6 +21,11 @@ class ThanksState extends MusicBeatState
 
 	override function create()
 	{
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Thanks Menu", null);
+		#end
+
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.10;
@@ -29,6 +34,12 @@ class ThanksState extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
+
+		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33525252, 0x0));
+		grid.velocity.set(40, 40);
+		grid.alpha = 0;
+		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+		add(grid);
 
 		var theLogoThing:FlxSprite = new FlxSprite(FlxG.width, 0);
 		theLogoThing.frames = Paths.getSparrowAtlas('logoBumpin');
