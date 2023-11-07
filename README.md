@@ -41,7 +41,6 @@ same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, 
 ## Credits:
 * Shadow Mario - Programmer
 * RiverOaken - Artist
-* Yoshubs - Assistant Programmer
 
 ### Special Thanks
 * bbpanzu - Ex-Programmer
