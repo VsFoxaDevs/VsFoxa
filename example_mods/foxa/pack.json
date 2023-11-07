@@ -1,6 +1,6 @@
 {
-	"name": "Erm",
-	"description": "uh Description",
+	"name": "VS.Foxa 3.0",
+	"description": "The main pack for Vs.FOXA 3.0.",
 	"restart":true,
 	"runsGlobally": true,
 	"color": [170, 0, 255],
