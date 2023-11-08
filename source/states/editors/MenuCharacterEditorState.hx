@@ -43,7 +43,8 @@ class MenuCharacterEditorState extends MusicBeatState
 			weekCharacterThing.alpha = 0.2;
 			grpWeekCharacters.add(weekCharacterThing);
 		}
-
+		FlxG.sound.playMusic(Paths.music('breakfast'), 0.5);
+		
 		add(new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51));
 		add(grpWeekCharacters);
 

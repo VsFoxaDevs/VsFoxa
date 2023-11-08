@@ -39,6 +39,8 @@ class NoteSplashDebugState extends MusicBeatState
 		DiscordClient.changePresence("Note Splash Menu", null);
 		#end
 
+		FlxG.sound.playMusic(Paths.music('breakfast'), 0.5);
+
 		notes = new FlxTypedGroup<StrumNote>();
 		add(notes);
 

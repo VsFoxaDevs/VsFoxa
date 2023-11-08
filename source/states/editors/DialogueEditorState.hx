@@ -33,6 +33,8 @@ class DialogueEditorState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 		FlxG.camera.bgColor = FlxColor.fromHSL(0, 0, 0.5);
 
+		FlxG.sound.playMusic(Paths.music('breakfast'), 0.5);
+		
 		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
 		grid.velocity.set(40, 40);
 		grid.alpha = 0;
