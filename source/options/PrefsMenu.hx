@@ -3,9 +3,9 @@ package options;
 import states.MainMenuState;
 import backend.StageData;
 
-class OptionsState extends MusicBeatState
+class PrefsMenu extends MusicBeatState
 {
-	var options:Array<String> = ['Note Colors', 'Controls', 'Offseting',  'Preferences'];
+	var options:Array<String> = ['Graphics', 'Visuals and UI', 'Gameplay'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -13,14 +13,12 @@ class OptionsState extends MusicBeatState
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
-			case 'Note Colors':
-				openSubState(new options.NotesSubState());
-			case 'Controls':
-				openSubState(new options.ControlsSubState());
-			case 'Preferences':
-				MusicBeatState.switchState(new options.PrefsMenu());
-			case 'Offseting':
-				MusicBeatState.switchState(new options.NoteOffsetState());
+			case 'Graphics':
+				openSubState(new options.GraphicsSettingsSubState());
+			case 'Visuals and UI':
+				openSubState(new options.VisualsUISubState());
+			case 'Gameplay':
+				openSubState(new options.GameplaySettingsSubState());
 		}
 	}
 
@@ -29,7 +27,7 @@ class OptionsState extends MusicBeatState
 
 	override function create() {
 		#if desktop
-		DiscordClient.changePresence("Options Menu", null);
+		DiscordClient.changePresence("Preferences Menu", null);
 		#end
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -82,16 +80,9 @@ class OptionsState extends MusicBeatState
 		if (controls.UI_DOWN_P) {
 			changeSelection(1);
 		}
-
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			if(onPlayState)
-			{
-				StageData.loadDirectory(PlayState.SONG);
-				MusicBeatState.switchState(new PlayState());
-				FlxG.sound.music.volume = 0;
-			}
-			else MusicBeatState.switchState(new MainMenuState());
+            MusicBeatState.switchState(new OptionsState());
 		}
 		else if (controls.ACCEPT) openSelectedSubstate(options[curSelected]);
 	}
