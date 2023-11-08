@@ -258,6 +258,16 @@
 				]
 			],
 			[
+				31875,
+				[
+					[
+						"Toggle Trail",
+						"0",
+						"0"
+					]
+				]
+			],
+			[
 				31982.2916666667,
 				[
 					[
@@ -276,9 +286,9 @@
 				32000,
 				[
 					[
-						"Toggle Trail",
-						"0",
-						""
+						"Cinematics",
+						"2",
+						"0.5"
 					],
 					[
 						"Flash Camera",
@@ -359,6 +369,16 @@
 						"Set Cam Zoom",
 						"1",
 						""
+					]
+				]
+			],
+			[
+				36125,
+				[
+					[
+						"Toggle Trail",
+						"0",
+						"0"
 					]
 				]
 			],
@@ -518,11 +538,31 @@
 				]
 			],
 			[
+				54000,
+				[
+					[
+						"Toggle Trail",
+						"1",
+						""
+					]
+				]
+			],
+			[
 				55500,
 				[
 					[
 						"Set Cam Zoom",
 						"1.4",
+						""
+					]
+				]
+			],
+			[
+				55875,
+				[
+					[
+						"Toggle Trail",
+						"0",
 						""
 					]
 				]
@@ -538,12 +578,32 @@
 				]
 			],
 			[
+				58000,
+				[
+					[
+						"Toggle Trail",
+						"",
+						"1"
+					]
+				]
+			],
+			[
 				59500,
 				[
 					[
 						"Set Cam Zoom",
 						"1.4 ",
 						""
+					]
+				]
+			],
+			[
+				59875,
+				[
+					[
+						"Toggle Trail",
+						"",
+						"0"
 					]
 				]
 			],
@@ -3032,7 +3092,9 @@
 		],
 		"player2": "foxa-angy",
 		"player3": null,
+		"splashSkin": null,
 		"song": "Burning Flames",
+		"arrowSkin": null,
 		"stage": "stage",
 		"needsVoices": true,
 		"bpm": 120,
