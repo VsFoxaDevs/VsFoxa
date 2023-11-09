@@ -32,6 +32,10 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 		
+		var option:Option = new Option('Instant Respawn', "If checked, you will automatically respawn, skipping the game over animation.", 'instantRespawn',
+		'bool');
+	    addOption(option);
+
 		var option:Option = new Option('Auto Pause',
 			"If checked, the game automatically pauses if the screen isn't on focus.",
 			'autoPause',

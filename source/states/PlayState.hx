@@ -134,7 +134,7 @@ class PlayState extends MusicBeatState
 
 	@:noCompletion
 	static function get_isPixelStage():Bool
-		return stageUI == "pixel";
+		return stageUI == "pixel" || stageUI.endsWith("-pixel");
 
 	public static var SONG:SwagSong = null;
 	public static var isStoryMode:Bool = false;
@@ -1687,7 +1687,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (controls.justPressed('debug_1') && !endingSong && !inCutscene)
+		if (controls.justPressed('debug_1') && !endingSong && !inCutscene && !SONG.disableDebugButtons)
 			openChartEditor();
 
 		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, FlxMath.bound(1 - (elapsed * 9 * playbackRate), 0, 1));
@@ -1724,7 +1724,7 @@ class PlayState extends MusicBeatState
 				iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 1 : 0;
 		}
 
-		if (controls.justPressed('debug_2') && !endingSong && !inCutscene)
+		if (controls.justPressed('debug_2') && !endingSong && !inCutscene && !SONG.disableDebugButtons)
 			openCharacterEditor();
 		
 		if (startedCountdown && !paused)
@@ -1946,9 +1946,9 @@ class PlayState extends MusicBeatState
 					timer.active = true;
 				}
 				#end
-				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollow.x, camFollow.y));
-
-				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+				if (!ClientPrefs.data.instantRespawn)
+					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollowPos.x, camFollowPos.y));
+				else MusicBeatState.resetState();
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
@@ -2585,12 +2585,10 @@ class PlayState extends MusicBeatState
 			numScore.antialiasing = antialias;
 
 			//if (combo >= 10 || combo == 0)
-			if(showComboNum)
-				comboGroup.add(numScore);
+			if(showComboNum) comboGroup.add(numScore);
 
 			FlxTween.tween(numScore, {alpha: 0}, 0.2 / playbackRate, {
-				onComplete: function(tween:FlxTween)
-				{
+				onComplete: function(tween:FlxTween) {
 					numScore.destroy();
 				},
 				startDelay: Conductor.crochet * 0.002 / playbackRate
@@ -2614,6 +2612,7 @@ class PlayState extends MusicBeatState
 		});
 	}
 
+	var shouldMiss:Bool = true;
 	public var strumsBlocked:Array<Bool> = [];
 	private function onKeyPress(event:KeyboardEvent):Void
 	{
@@ -2651,7 +2650,11 @@ class PlayState extends MusicBeatState
 		});
 		plrInputNotes.sort(sortHitNotes);
 
-		var shouldMiss:Bool = !ClientPrefs.data.ghostTapping;
+		if (!SONG.disableAntiMash) {
+			shouldMiss = true;
+		} else {
+			shouldMiss = !ClientPrefs.data.ghostTapping;
+		}
 
 		if (plrInputNotes.length != 0) { // slightly faster than doing `> 0` lol
 			var funnyNote:Note = plrInputNotes[0]; // front note

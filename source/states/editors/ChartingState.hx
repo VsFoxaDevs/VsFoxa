@@ -210,7 +210,9 @@ class ChartingState extends MusicBeatState
 				player2: 'dad',
 				gfVersion: 'gf',
 				speed: 1,
-				stage: 'stage'
+				stage: 'stage',
+				disableAntiMash: false,
+				disableDebugButtons: false
 			};
 			addSection();
 			PlayState.SONG = _song;
@@ -1333,7 +1335,19 @@ class ChartingState extends MusicBeatState
 		{
 			_song.disableNoteRGB = check_disableNoteRGB.checked;
 			updateGrid();
-			//trace('CHECKED!');
+		};
+
+		var check_antiMash = new FlxUICheckBox(10, 200, null, null, "Disable Antimash", 100);
+		check_antiMash.checked = _song.disableAntiMash;
+		check_antiMash.callback = function()
+		{
+			_song.disableAntiMash = check_antiMash.checked;
+		};
+		var check_disableDebug = new FlxUICheckBox(10, 220, null, null, "Disable Debug Keys", 100);
+		check_disableDebug.checked = _song.disableDebugButtons;
+		check_disableDebug.callback = function()
+		{
+			_song.disableDebugButtons = check_disableDebug.checked;
 		};
 
 		//
@@ -1367,16 +1381,14 @@ class ChartingState extends MusicBeatState
 
 		tab_group_data.add(new FlxText(noteSkinInputText.x, noteSkinInputText.y - 15, 0, 'Note Texture:'));
 		tab_group_data.add(new FlxText(noteSplashesInputText.x, noteSplashesInputText.y - 15, 0, 'Note Splashes Texture:'));
+		tab_group_data.add(check_antiMash);
+		tab_group_data.add(check_disableDebug);
 		UI_box.addGroup(tab_group_data);
 	}
 
 	function loadSong():Void
 	{
-		if (FlxG.sound.music != null)
-		{
-			FlxG.sound.music.stop();
-			// vocals.stop();
-		}
+		if (FlxG.sound.music != null) FlxG.sound.music.stop();
 
 		var file:Dynamic = Paths.voices(currentSongName);
 		vocals = new FlxSound();

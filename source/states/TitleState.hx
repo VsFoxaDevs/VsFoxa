@@ -336,91 +336,80 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if (FlxG.sound.music != null)
-			Conductor.songPosition = FlxG.sound.music.time;
-
-		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
+		if(FlxG.sound.music != null) Conductor.songPosition = FlxG.sound.music.time;
+        var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
+		if(FlxG.keys.justPressed.ESCAPE && !pressedEnter){
+			FlxG.sound.music.fadeOut(0.3);
+			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
+			{
+				Sys.exit(0);
+			}, false);
+		}
 
 		#if mobile
-		for (touch in FlxG.touches.list)
-		{
-			if (touch.justPressed)
-			{
-				pressedEnter = true;
-			}
+		for (touch in FlxG.touches.list){
+			if (touch.justPressed) pressedEnter = true;
 		}
 		#end
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
-		if (gamepad != null)
-		{
-			if (gamepad.justPressed.START)
-				pressedEnter = true;
+		if (gamepad != null){
+			if (gamepad.justPressed.START) pressedEnter = true;
 		}
 		
-		if (newTitle) {
+		if(newTitle) {
 			titleTimer += FlxMath.bound(elapsed, 0, 1);
-			if (titleTimer > 2) titleTimer -= 2;
+			if(titleTimer > 2) titleTimer -= 2;
 		}
 
 		// EASTER EGG
 
-		if (initialized && !transitioning && skippedIntro)
-		{
-			if (newTitle && !pressedEnter)
-			{
+		if(initialized && !transitioning && skippedIntro){
+			if(newTitle && !pressedEnter){
 				var timer:Float = titleTimer;
-				if (timer >= 1)
-					timer = (-timer) + 2;
-				
+				if(timer >= 1) timer = (-timer) + 2;
+
 				timer = FlxEase.quadInOut(timer);
-				
+
 				titleText.color = FlxColor.interpolate(titleTextColors[0], titleTextColors[1], timer);
 				titleText.alpha = FlxMath.lerp(titleTextAlphas[0], titleTextAlphas[1], timer);
 			}
-			
-			if(pressedEnter)
+			if(titleText != null)
 			{
 				titleText.color = FlxColor.WHITE;
 				titleText.alpha = 1;
-				
-				if(titleText != null) titleText.animation.play('press');
-
-				FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
-				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-
-				transitioning = true;
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					if (mustUpdate) {
-						MusicBeatState.switchState(new OutdatedState());
-					} else {
-						MusicBeatState.switchState(new ThanksState());
-					}
-					closedState = true;
-				});
-			}
-			#if TITLE_SCREEN_EASTER_EGG
-			else if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
+				titleText.animation.play('press');
+			};
+			FlxG.camera.flash(ClientPrefs.data.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
+			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+			transitioning = true;
+			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
+				if (mustUpdate){
+					MusicBeatState.switchState(new OutdatedState());
+				}else{
+					MusicBeatState.switchState(new ThanksState());
+				}
+				closedState = true;
+			});
+		}
+		#if TITLE_SCREEN_EASTER_EGG
+		else if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
+		{
 				var keyPressed:FlxKey = FlxG.keys.firstJustPressed();
 				var keyName:String = Std.string(keyPressed);
 				if(allowedKeys.contains(keyName)) {
 					easterEggKeysBuffer += keyName;
 					if(easterEggKeysBuffer.length >= 32) easterEggKeysBuffer = easterEggKeysBuffer.substring(1);
-					//trace('Test! Allowed Key pressed!!! Buffer: ' + easterEggKeysBuffer);
-
+					
 					for (wordRaw in easterEggKeys)
 					{
 						var word:String = wordRaw.toUpperCase(); //just for being sure you're doing it right
 						if (easterEggKeysBuffer.contains(word))
 						{
-							//trace('YOOO! ' + word);
-							if (FlxG.save.data.psychDevsEasterEgg == word)
-								FlxG.save.data.psychDevsEasterEgg = '';
-							else
-								FlxG.save.data.psychDevsEasterEgg = word;
+							if (FlxG.save.data.psychDevsEasterEgg == word) FlxG.save.data.psychDevsEasterEgg = '';
+							else FlxG.save.data.psychDevsEasterEgg = word;
 							FlxG.save.flush();
 
 							FlxG.sound.play(Paths.sound('ToggleJingle'));
@@ -437,8 +426,7 @@ class TitleState extends MusicBeatState
 								}
 							});
 							FlxG.sound.music.fadeOut();
-							if(FreeplayState.vocals != null)
-							{
+							if(FreeplayState.vocals != null){
 								FreeplayState.vocals.fadeOut();
 							}
 							closedState = true;
@@ -451,15 +439,12 @@ class TitleState extends MusicBeatState
 				}
 			}
 			#end
-		}
-
-		if (initialized && pressedEnter && !skippedIntro)
-		{
+	
+		if (initialized && pressedEnter && !skippedIntro){
 			skipIntro();
 		}
 
-		if(swagShader != null)
-		{
+		if(swagShader != null){
 			if(controls.UI_LEFT) swagShader.hue -= elapsed * 0.1;
 			if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
 		}
