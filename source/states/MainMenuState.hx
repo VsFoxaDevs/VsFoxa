@@ -105,7 +105,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(0, (i * 140)  + offset);
+			var menuItem:FlxSprite = new FlxSprite(100, (i * 140)  + offset);
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
@@ -114,13 +114,25 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
+			//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.updateHitbox();
 		}
+		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');//foxa is vibing!
+		gfDance.animation.addByPrefix('danceLeft', 'dance', 24, false);
+		gfDance.animation.addByPrefix('danceRight','dance', 24, false);
+	
+		var char = new FlxSprite(820, 170);
+		char.frames = Paths.getSparrowAtlas('gfDanceTitle');//here put the name of the xml
+		char.animation.addByPrefix('idle', 'dance', 24, true);//on 'idle normal' change it to your xml one
+		char.animation.play('idle');//you can rename the anim however you want to
+		char.scrollFactor.set();
+		char.flipX = true;
+		char.antialiasing = ClientPrefs.data.ntialiasing;
+		add(char);
 
 		FlxG.camera.follow(camFollow, null, 0);
 

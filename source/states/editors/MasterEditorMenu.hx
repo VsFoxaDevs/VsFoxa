@@ -173,11 +173,11 @@ class MasterEditorMenu extends MusicBeatState
 	
 		WeekData.setDirectoryFromWeek();
 		if(directories[curDirectory] == null || directories[curDirectory].length < 1)
-			directoryTxt.text = '< No Mod Loaded >';
+			directoryTxt.text = 'Editors Menu - < No Mod Loaded >';
 		else
 		{
 			Mods.currentModDirectory = directories[curDirectory];
-			directoryTxt.text = '< Mod: ' + Mods.currentModDirectory + ' >';
+			directoryTxt.text = 'Editors Menu - < Selected Mod: ' + Mods.currentModDirectory + ' >';
 		}
 		directoryTxt.text = directoryTxt.text.toUpperCase();
 	}
