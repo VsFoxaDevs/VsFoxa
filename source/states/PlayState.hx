@@ -1256,6 +1256,9 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence (with Time Left)
+		#if debug
+		DiscordClient.changePresence("NO LEAKS", null);
+		#else
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength);
 		#end
 		setOnScripts('songLength', songLength);
@@ -1595,7 +1598,11 @@ class PlayState extends MusicBeatState
 	override public function onFocusLost():Void
 	{
 		#if desktop
+		#if debug
+		if (health > 0 && !paused)  DiscordClient.changePresence("PAUSED - NO LEAKS", null);
+		#else
 		if (health > 0 && !paused) DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+		#end
 		#end
 
 		super.onFocusLost();
@@ -1605,10 +1612,14 @@ class PlayState extends MusicBeatState
 	function resetRPC(?cond:Bool = false)
 	{
 		#if desktop
+		#if debug
+		DiscordClient.changePresence("NO LEAKS", null);
+		#else
 		if (cond)
 			DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.data.noteOffset);
 		else
 			DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+		#end
 		#end
 	}
 
@@ -1876,7 +1887,11 @@ class PlayState extends MusicBeatState
 		openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
 		#if desktop
+		#if debug
+		DiscordClient.changePresence("PAUSED - NO LEAKS", null);
+		#else
 		DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+		#end
 		#end
 	}
 
@@ -1936,7 +1951,11 @@ class PlayState extends MusicBeatState
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
+				#if !debug
 				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				#else
+				DiscordClient.changePresence("Game Over - NO LEAKS", null);
+				#end
 				#end
 				isDead = true;
 				return true;

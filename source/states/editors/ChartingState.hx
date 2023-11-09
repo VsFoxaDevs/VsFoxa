@@ -1426,7 +1426,11 @@ class ChartingState extends MusicBeatState
 
 			#if desktop
 			// Updating Discord Rich Presence
+			#if debug
+			DiscordClient.changePresence("Chart Editor", "NO LEAKS");
+			#else
 			DiscordClient.changePresence("Chart Editor", StringTools.replace(_song.song, '-', ' '));
+			#end
 			#end
 		}
 		super.closeSubState();
