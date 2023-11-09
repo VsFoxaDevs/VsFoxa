@@ -128,7 +128,7 @@ class MainMenuState extends MusicBeatState
 		char.animation.play('idle');//you can rename the anim however you want to
 		char.scrollFactor.set();
 		char.flipX = true;
-		char.antialiasing = ClientPrefs.data.ntialiasing;
+		char.antialiasing = ClientPrefs.data.antialiasing;
 		add(char);
 
 		FlxG.camera.follow(camFollow, null, 0);
