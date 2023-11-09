@@ -26,7 +26,7 @@ class SaveVariables {
 	public var showMsText:Bool = true;
 	public var lowQuality:Bool = false;
 	public var shaders:Bool = true;
-	public var cacheOnGPU:Bool = #if !switch false #else true #end; //From Stilic
+	public var cacheOnGPU:Bool = false; //From Stilic
 	public var framerate:Int = 60;
 	public var hideScoreText:Bool = false;
 	public var camZooms:Bool = true;
