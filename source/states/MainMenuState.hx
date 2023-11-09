@@ -121,9 +121,6 @@ class MainMenuState extends MusicBeatState
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.updateHitbox();
 		}
-		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');//foxa is vibing!
-		gfDance.animation.addByPrefix('danceLeft', 'dance', 24, false);
-		gfDance.animation.addByPrefix('danceRight','dance', 24, false);
 	
 		var char = new FlxSprite(820, 170);
 		char.frames = Paths.getSparrowAtlas('gfDanceTitle');//here put the name of the xml
