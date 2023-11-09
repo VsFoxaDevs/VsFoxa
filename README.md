@@ -26,7 +26,7 @@ with `<target>` being either `windows`, `mac` or `linux`
 
 If the compiler gives an error saying that hxCodec cannot be found read this issue to fix it: ShadowMario/FNF-PsychEngine#12770
 
-If you want to just play the mod and not compile, just use the action builds (either through just Github's Actions tab, which requires a Github account, or use nightly.link)
+If you want to just play the mod and not compile, just use the action builds (either through just Github's Actions tab, which requires a Github account, or use nightly.link) (use flixel 5.3.2 btw, actions don't work rn)
 
 ## Customization:
 
