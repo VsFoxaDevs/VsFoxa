@@ -83,10 +83,7 @@ class SaveVariables {
 	public var guitarHeroSustains:Bool = true;
 	public var discordRPC:Bool = true;
 
-	public function new()
-	{
-		//Why does haxe needs this again?
-	}
+	public function new(){} //Why does haxe needs this again?
 }
 
 class ClientPrefs {
@@ -192,7 +189,7 @@ class ClientPrefs {
 		#if ACHIEVEMENTS_ALLOWED Achievements.load(); #end
 
 		for (key in Reflect.fields(data)) {
-			if (key != 'gameplaySettings' && Reflect.hasField(FlxG.save.data, key)) {
+			if(key != 'gameplaySettings' && Reflect.hasField(FlxG.save.data, key)) {
 				//trace('loaded variable: $key');
 				Reflect.setField(data, key, Reflect.field(FlxG.save.data, key));
 			}
