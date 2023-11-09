@@ -1261,6 +1261,7 @@ class PlayState extends MusicBeatState
 		#else
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength);
 		#end
+		#end
 		setOnScripts('songLength', songLength);
 		callOnScripts('onSongStart');
 	}
