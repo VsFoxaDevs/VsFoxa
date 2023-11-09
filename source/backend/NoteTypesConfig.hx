@@ -38,7 +38,6 @@ class NoteTypesConfig
 				property: arr,
 				value: _interpretValue(line.substr(sep + 1).trim())
 			}
-			//trace('pushing $newProp');
 			parsed.push(newProp);
 		}
 		noteTypesData.set(name, parsed);

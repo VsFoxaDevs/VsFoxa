@@ -190,7 +190,6 @@ class ClientPrefs {
 
 		for (key in Reflect.fields(data)) {
 			if(key != 'gameplaySettings' && Reflect.hasField(FlxG.save.data, key)) {
-				//trace('loaded variable: $key');
 				Reflect.setField(data, key, Reflect.field(FlxG.save.data, key));
 			}
 		}
