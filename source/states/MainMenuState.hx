@@ -114,9 +114,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.scale.set(0.7, 0.7);
-			menuItem.screenCenter(X);
-			menuItem.x -= 270;
+			//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -124,12 +122,14 @@ class MainMenuState extends MusicBeatState
 			menuItem.updateHitbox();
 		}
 	
-		var char = new FlxSprite(780, 120);
-		char.frames = Paths.getSparrowAtlas('gfDanceTitle');//here put the name of the xml
-		char.animation.addByPrefix('idle', 'dance', 24, true);//on 'idle normal' change it to your xml one
-		char.animation.play('idle');//you can rename the anim however you want to
+		/* foxa dance */
+		var char = new FlxSprite(730, 75);
+		char.frames = Paths.getSparrowAtlas('gfDanceTitle');
+		char.animation.addByPrefix('idle', 'dance', 24, true);
+		char.animation.play('idle');
 		char.scrollFactor.set();
 		char.flipX = true;
+		char.screenCenter(Y);
 		char.antialiasing = ClientPrefs.data.antialiasing;
 		add(char);
 
@@ -157,8 +157,7 @@ class MainMenuState extends MusicBeatState
 		#if ACHIEVEMENTS_ALLOWED
 		// Unlocks "Freaky on a Friday Night" achievement if it's a Friday and between 18:00 PM and 23:59 PM
 		var leDate = Date.now();
-		if (leDate.getDay() == 5 && leDate.getHours() >= 18)
-			Achievements.unlock('friday_night_play');
+		if (leDate.getDay() == 5 && leDate.getHours() >= 18) Achievements.unlock('friday_night_play');
 
 		#if MODS_ALLOWED
 		Achievements.reloadList();
@@ -271,6 +270,7 @@ class MainMenuState extends MusicBeatState
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.screenCenter(X);
+			spr.x -= 270;
 		});
 	}
 
