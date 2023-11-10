@@ -91,7 +91,7 @@ class FPS extends TextField
 			#end
 
 			text += '\nPsych Engine 0.7.2';
-			text += '\nFNF Vs. Foxa 3.0';
+			text += '\nFNF Vs. Foxa Ultimate Edition 3.0';
 
 			textColor = 0xFFFFFFFF;
 			if (currentFPS <= ClientPrefs.data.framerate / 2)

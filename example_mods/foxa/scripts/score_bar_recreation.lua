@@ -2,7 +2,7 @@ scoreName = "Score"
 missesName = "Misses"
 ratingNames = "Rating"
 function onCreate()
-    makeLuaText('cornerMark', ('FNF Vs. Foxa 3.0'), 1275, 0, 5)
+    makeLuaText('cornerMark', ('FNF Vs. Foxa Ultimate'), 1275, 0, 5)
   setTextAlignment('cornerMark', 'RIGHT')
   setTextSize('cornerMark', 18)
   if not getPropertyFromClass('backend.ClientPrefs', 'data.hideHud') then 
