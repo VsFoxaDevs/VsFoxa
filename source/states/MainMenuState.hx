@@ -114,7 +114,9 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			//menuItem.screenCenter(X);
+			menuItem.scale.set(0.7, 0.7);
+			menuItem.screenCenter(X);
+			menuItem.x -= 270;
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -122,7 +124,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.updateHitbox();
 		}
 	
-		var char = new FlxSprite(820, 170);
+		var char = new FlxSprite(780, 120);
 		char.frames = Paths.getSparrowAtlas('gfDanceTitle');//here put the name of the xml
 		char.animation.addByPrefix('idle', 'dance', 24, true);//on 'idle normal' change it to your xml one
 		char.animation.play('idle');//you can rename the anim however you want to
