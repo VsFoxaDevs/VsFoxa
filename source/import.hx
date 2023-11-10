@@ -10,6 +10,10 @@ import llua.*;
 import llua.Lua;
 #end
 
+#if flxanimate
+import flxanimate.*;
+#end
+
 #if ACHIEVEMENTS_ALLOWED
 import backend.Achievements;
 #end

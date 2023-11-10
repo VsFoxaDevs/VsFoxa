@@ -338,6 +338,9 @@ class Paths
 
 			if (FileSystem.exists(mods(Mods.currentModDirectory + '/' + key)) || FileSystem.exists(mods(key)))
 				return true;
+
+			if (FileSystem.exists(mods('$key')))
+				return true;
 		}
 		#end
 

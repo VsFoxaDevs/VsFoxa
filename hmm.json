@@ -55,6 +55,13 @@
       "type": "haxelib",
       "version": null
     },
+        {
+      "name": "flxanimate",
+      "type": "git",
+      "dir": null,
+      "ref": "dev",
+      "url": "https://github.com/ShadowMario/flxanimate"
+    },
     {
       "name": "discord_rpc",
       "type": "git",
