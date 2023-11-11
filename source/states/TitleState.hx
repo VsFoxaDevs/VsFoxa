@@ -30,7 +30,8 @@ typedef TitleData =
 	gfx:Float,
 	gfy:Float,
 	backgroundSprite:String,
-	bpm:Float
+	bpm:Float,
+	versiontext:String
 }
 
 class TitleState extends MusicBeatState
@@ -280,6 +281,11 @@ class TitleState extends MusicBeatState
 		logo.antialiasing = ClientPrefs.data.antialiasing;
 		logo.screenCenter();
 		// add(logo);
+
+		var engineversionText:FlxText = new FlxText(5, FlxG.height - 18, 0, titleJSON.versiontext, 12);
+		engineversionText.scrollFactor.set();
+		engineversionText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT);
+		add(engineversionText);
 
 		FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
 		FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});

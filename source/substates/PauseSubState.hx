@@ -403,7 +403,7 @@ class PauseSubState extends MusicBeatSubstate
 				skipTimeText = new FlxText(0, 0, 0, '', 64);
 				skipTimeText.setFormat(Paths.font("vcr.ttf"), 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				skipTimeText.scrollFactor.set();
-				skipTimeText.borderSize = 2;
+				skipTimeText.borderSize = 3.2;
 				skipTimeTracker = item;
 				add(skipTimeText);
 
