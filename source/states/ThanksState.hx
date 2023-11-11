@@ -36,10 +36,17 @@ class ThanksState extends MusicBeatState {
 		grid.alpha = 0;
 		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 
+		#if debug
 		var txt:FlxText = new FlxText(0, 0, FlxG.width,
-			"Thanks for playing Vs. Foxa Ultimate Edition!\nYou are on a Developer Build.\nIf you were given this by someone who isn't a dev/playtester,\nplease contact one of the devs at Foxacord.\n(https://discord.gg/FARpwR9K4k)"
+			"Thanks for playing Vs. Foxa 3.0!\nYou are on a Developer Build.\nIf you were given this by someone who isn't a dev/playtester,\nplease contact one of the devs at Foxacord.\n(https://discord.gg/FARpwR9K4k)"
 			+ "\n\nPress Enter to continue.",
 			32);
+		#else
+		var txt:FlxText = new FlxText(0, 0, FlxG.width,
+			"Thanks for playing Vs. Foxa 3.0!\nWe have worked hard on this for long, and we appreciate you playing the mod!\nAlso, if you want, you can join the official VS.FOXA server.\n(https://discord.gg/FARpwR9K4k)"
+			+ "\n\nPress Enter to continue.",
+			32);
+		#end
 
 		txt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.fromRGB(200, 200, 200), CENTER);
 		txt.borderColor = FlxColor.BLACK;
