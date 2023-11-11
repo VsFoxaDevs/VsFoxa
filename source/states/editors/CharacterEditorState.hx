@@ -59,7 +59,7 @@ class CharacterEditorState extends MusicBeatState
 
 	var cameraFollowPointer:FlxSprite;
 	var healthBar:Bar;
-	//the begining mouse location that all drag movements are in reference of
+	//the beginning mouse location that all drag movements are in reference of
 	private var mouseLocation:FlxPoint;
 
 	override function create()

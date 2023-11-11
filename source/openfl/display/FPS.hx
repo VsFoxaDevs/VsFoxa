@@ -90,8 +90,8 @@ class FPS extends TextField
 			text += '\nMemory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}';
 			#end
 
-			text += '\nPsych Engine 0.7.2';
-			text += '\nFNF Vs. Foxa Ultimate Edition 3.0';
+			text += '\nPsych Engine 0.7.2 Custom Build';
+			text += '\nFNF Vs. Foxa 3.0';
 
 			textColor = 0xFFFFFFFF;
 			if (currentFPS <= ClientPrefs.data.framerate / 2)
