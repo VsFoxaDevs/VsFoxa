@@ -21,8 +21,7 @@ import states.StoryMenuState;
 import states.OutdatedState;
 import states.MainMenuState;
 
-typedef TitleData =
-{
+typedef TitleData = {
 	titlex:Float,
 	titley:Float,
 	startx:Float,
@@ -31,7 +30,10 @@ typedef TitleData =
 	gfy:Float,
 	backgroundSprite:String,
 	bpm:Float,
-	versiontext:String
+	versiontext:String,
+	friday:String,
+	night:String,
+	funkin:String
 }
 
 class TitleState extends MusicBeatState
@@ -577,11 +579,11 @@ class TitleState extends MusicBeatState
 				case 13:
 					deleteCoolText();
 				case 14:
-					addMoreText('FNF');
+					addMoreText(titleJSON.friday);
 				case 15:
-					addMoreText('Vs');
+					addMoreText(titleJSON.night);
 				case 16:
-					addMoreText('Foxa');
+					addMoreText(titleJSON.funkin);
 
 				case 17:
 					skipIntro();

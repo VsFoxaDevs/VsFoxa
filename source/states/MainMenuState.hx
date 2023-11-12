@@ -12,10 +12,23 @@ import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
 
+import tjson.TJSON as Json;
+
+using StringTools;
+
+typedef MainMenuData = {
+	fridayAchieve:String,
+	discordLink:String,
+	checkboard:Bool,
+	versionText:String
+}
+
 class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.7.2-foxa'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
+
+	var menuJunk:MainMenuData;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -23,6 +36,8 @@ class MainMenuState extends MusicBeatState
 	public static var quotes:Array<String> = [
 		#if html5
 		"You're on web. Why the FUCK are you on web? You can't get even decent easter eggs, bitch."
+		#elseif debug
+		"You want logs on debug? I'll give you logs on debug. Out of wood, easter eggs can't display like this."
 		#else
 		"500+  Giftcards! (-CharlesCatYT)",
 		"bro became starfire from teen titans go (-Monomouse)",
@@ -64,6 +79,9 @@ class MainMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Main Menu", null);
 		#end
 
+		// IGNORE THIS!!!
+		menuJunk = Json.parse(Paths.getTextFromFile('images/mainmenu/mainMenuShits.json'));
+
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
 
@@ -91,11 +109,13 @@ class MainMenuState extends MusicBeatState
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 
+		if (menuJunk.checkboard == true){
 		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33525252, 0x0));
 		grid.velocity.set(40, 40);
 		grid.alpha = 0;
 		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 		add(grid);
+		}
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -139,7 +159,7 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Vs. Foxa v3.0", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, menuJunk.versionText, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -157,7 +177,7 @@ class MainMenuState extends MusicBeatState
 		#if ACHIEVEMENTS_ALLOWED
 		// Unlocks "Freaky on a Friday Night" achievement if it's a Friday and between 18:00 PM and 23:59 PM
 		var leDate = Date.now();
-		if (leDate.getDay() == 5 && leDate.getHours() >= 18) Achievements.unlock('friday_night_play');
+		if (leDate.getDay() == 5 && leDate.getHours() >= 18) Achievements.unlock(menuJunk.fridayAchieve);
 
 		#if MODS_ALLOWED
 		Achievements.reloadList();
@@ -202,7 +222,7 @@ class MainMenuState extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 				if (optionShit[curSelected] == 'discord')
-					CoolUtil.browserLoad('https://discord.gg/FARpwR9K4k'); //foxacord
+					CoolUtil.browserLoad(menuJunk.discordLink); //foxacord
 				else
 				{
 					selectedSomethin = true;
