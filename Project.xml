@@ -12,11 +12,12 @@
 	
 	<!-- ______________________ PSYCH ENGINE CUSTOMIZATION ______________________ -->
 
-	<define name="MODS_ALLOWED" if="desktop" />
-	<define name="HSCRIPT_ALLOWED" if="desktop" />
-	<define name="LUA_ALLOWED" if="desktop" />
+	<define name="MODS_ALLOWED" if="desktop || android" />
+	<define name="HSCRIPT_ALLOWED" if="desktop || android" />
+	<define name="LUA_ALLOWED" if="desktop || android" />
+	<define name="CRASH_HANDLER" if="desktop" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
-	<!--<define name="LOADING_SCREEN" />-->
+	<!--<define name="LOADING_SCREEN" />--> <!-- i'll fix later-->
 	<define name="VIDEOS_ALLOWED" if="windows || linux || android" unless="32bits"/> <!-- wait why is there some hints of an official android port wtf -->
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="TITLE_SCREEN_EASTER_EGG"/> <!-- DELETE THE if="officialBuild" for enabling this on an unofficial build -->
@@ -44,9 +45,6 @@
 	<classpath name="source" />
 
 	<!-- __________________________ Game Assets & Etc. __________________________ -->
-	
-	<!-- Turn on Crash Handler -->
-	<define name="CRASH_HANDLER" if="desktop" />
 
 	<!-- Assets -->
 	<assets path="assets/fonts" />
@@ -109,7 +107,7 @@
 	<!--Disable the Flixel core debugger. Automatically gets set whenever you compile in release mode!-->
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 
-	<haxedef name="HXCPP_GC_BIG_BLOCKS" if="cpp" /> <!-- mmmm memory -->
+	<haxedef name="HXCPP_GC_BIG_BLOCKS" if="cpp debug" /> <!-- mmmm memory -->
 
 	<!--Enable this for Nape release builds for a serious peformance improvement-->
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
