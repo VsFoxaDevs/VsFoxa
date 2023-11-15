@@ -8,6 +8,8 @@ import backend.Discord;
 #if LUA_ALLOWED
 import llua.*;
 import llua.Lua;
+import psychlua.*;
+import psychlua.FunkinLua;
 #end
 
 #if flxanimate
