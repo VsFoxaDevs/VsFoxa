@@ -67,6 +67,8 @@ class MainMenuState extends MusicBeatState
 		'options'
 	];
 
+	public var luaArray:Array<FunkinLua> = [];
+
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
@@ -89,6 +91,8 @@ class MainMenuState extends MusicBeatState
 		transOut = FlxTransitionableState.defaultTransOut;
 
 		persistentUpdate = persistentDraw = true;
+
+		PlayState.instance.callOnLuas("createMenu", []);
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
@@ -187,6 +191,36 @@ class MainMenuState extends MusicBeatState
 		#end
 		#end
 
+		// GLOBAL MAIN MENU SCRIPTS
+		#if LUA_ALLOWED
+		var filesPushed:Array<String> = [];
+		var foldersToCheck:Array<String> = [Paths.getPreloadPath('menu_scripts/mainmenu/')];
+
+		#if MODS_ALLOWED
+		foldersToCheck.insert(0, Paths.mods('menu_scripts/mainmenu/'));
+		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/menu_scripts/mainmenu/'));
+
+		for(mod in Paths.getGlobalMods())
+			foldersToCheck.insert(0, Paths.mods(mod + '/menu_scripts/mainmenu/'));
+		#end
+
+		for (folder in foldersToCheck)
+		{
+			if(FileSystem.exists(folder))
+			{
+				for (file in FileSystem.readDirectory(folder))
+				{
+					if(file.endsWith('.lua') && !filesPushed.contains(file))
+					{
+						luaArray.push(new FunkinLua(folder + file));
+						filesPushed.push(file);
+					}
+				}
+			}
+		}
+		#end
+
 		super.create();
 	}
 
@@ -194,6 +228,8 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		PlayState.instance.callOnLuas("updateMenu", [elapsed]);
+
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * elapsed;
@@ -299,6 +335,8 @@ class MainMenuState extends MusicBeatState
 
 	function changeItem(huh:Int = 0)
 	{
+		PlayState.instance.callOnLuas("changeMenuItem", [huh]);
+
 		curSelected += huh;
 
 		if (curSelected >= menuItems.length) curSelected = 0;

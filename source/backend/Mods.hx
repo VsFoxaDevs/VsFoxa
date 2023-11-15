@@ -17,6 +17,7 @@ class Mods
 		'custom_notetypes',
 		'data',
 		'songs',
+		'menu_scripts',
 		'music',
 		'sounds',
 		'shaders',
@@ -64,7 +65,7 @@ class Mods
 			}
 		}
 		#end
-		
+
 		return list;
 	}
 	

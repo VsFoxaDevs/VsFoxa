@@ -50,6 +50,8 @@ class FreeplayState extends MusicBeatState
 	var intendedColor:Int;
 	var colorTween:FlxTween;
 
+	public var luaArray:Array<FunkinLua> = []; // freeplay in lua?!?!? :O
+
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;
 
@@ -68,6 +70,8 @@ class FreeplayState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence("Freeplay Menu", null);
 		#end
+
+		PlayState.instance.callOnLuas("createFreeplay", []);
 
 		for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
@@ -199,6 +203,37 @@ class FreeplayState extends MusicBeatState
 		add(bottomText);
 		
 		updateTexts();
+
+		// GLOBAL FREEPLAY SCRIPTS
+		#if LUA_ALLOWED
+		var filesPushed:Array<String> = [];
+		var foldersToCheck:Array<String> = [Paths.getPreloadPath('menu_scripts/freeplay/')];
+
+		#if MODS_ALLOWED
+		foldersToCheck.insert(0, Paths.mods('menu_scripts/freeplay/'));
+		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/menu_scripts/freeplay/'));
+
+		for(mod in Paths.getGlobalMods())
+			foldersToCheck.insert(0, Paths.mods(mod + '/menu_scripts/freeplay/'));
+		#end
+
+		for (folder in foldersToCheck)
+		{
+			if(FileSystem.exists(folder))
+			{
+				for (file in FileSystem.readDirectory(folder))
+				{
+					if(file.endsWith('.lua') && !filesPushed.contains(file))
+					{
+						luaArray.push(new FunkinLua(folder + file));
+						filesPushed.push(file);
+					}
+				}
+			}
+		}
+		#end
+
 		super.create();
 	}
 
@@ -239,6 +274,8 @@ class FreeplayState extends MusicBeatState
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
+		PlayState.instance.callOnLuas("updateFreeplay", [elapsed]);
+
 		if (FlxG.sound.music.volume < 0.7)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -521,6 +558,8 @@ class FreeplayState extends MusicBeatState
 	}
 
 	function pauseOrResume(resume:Bool = false){
+		PlayState.instance.callOnLuas("pauseFreeplay", [resume]);
+
 		if(resume){
 			FlxG.sound.music.resume();
 			if(vocals != null) vocals.resume();
@@ -553,6 +592,8 @@ class FreeplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
+		PlayState.instance.callOnLuas("changeSelFreeplay", [playSound]);
+
 		if (playingMusic) return;
 
 		_updateSongLastDifficulty();
@@ -635,6 +676,8 @@ class FreeplayState extends MusicBeatState
 	var lastBeatHit:Int = -1;
 
 	override function beatHit() {
+		PlayState.instance.callOnLuas("beatHitFreeplay", []);
+
 		super.beatHit();
 
 		if(lastBeatHit >= curBeat)

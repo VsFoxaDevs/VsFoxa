@@ -136,6 +136,36 @@ class LoadingState extends MusicBeatState
 		add(tipTxt);
 
 		tipTxt.text = tips[FlxG.random.int(0, tips.length - 1)];
+
+		// GLOBAL LOADING SCREEN SCRIPTS
+		#if LUA_ALLOWED
+		var filesPushed:Array<String> = [];
+		var foldersToCheck:Array<String> = [Paths.getPreloadPath('menu_scripts/preloader/')];
+
+		#if MODS_ALLOWED
+		foldersToCheck.insert(0, Paths.mods('menu_scripts/preloader/'));
+		if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/menu_scripts/preloader/'));
+
+		for (mod in Paths.getGlobalMods())
+			foldersToCheck.insert(0, Paths.mods(mod + '/menu_scripts/preloader/'));
+		#end
+
+		for (folder in foldersToCheck)
+		{
+			if (FileSystem.exists(folder))
+			{
+				for (file in FileSystem.readDirectory(folder))
+				{
+					if (file.endsWith('.lua') && !filesPushed.contains(file))
+					{
+						luaArray.push(new FunkinLua(folder + file));
+						filesPushed.push(file);
+					}
+				}
+			}
+		}
+		#end
 		
 		initSongsManifest().onComplete
 		(
@@ -227,6 +257,22 @@ class LoadingState extends MusicBeatState
 		MusicBeatState.switchState(getNextState(target, stopMusic));
 	}
 	
+	function getLoadTextShit():Array<Array<String>>
+	{
+		#if MODS_ALLOWED 
+		var tabArray:Array<String> = Mods.mergeAllTextsNamed('data/preloaderText.txt', Paths.getSharedPath());
+		#else
+		var imFunniText:String = Assets.getText(Paths.txt('preloaderText'));
+		var tabArray:Array<String> = imFunniText.split('\n');
+		#end
+		var arrayMan:Array<Array<String>> = [];
+
+		for (i in tabArray) {
+			arrayMan.push(i.split('--'));
+		}
+		return arrayMan;
+	}
+
 	static function getNextState(target:FlxState, stopMusic = false):FlxState
 	{
 		var directory:String = 'shared';

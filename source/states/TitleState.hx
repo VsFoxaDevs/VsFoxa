@@ -71,6 +71,8 @@ class TitleState extends MusicBeatState
 
 	public static var updateVersion:String = '';
 
+	public var luaArray:Array<FunkinLua> = [];
+
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
@@ -150,6 +152,7 @@ class TitleState extends MusicBeatState
 		}
 
 		FlxG.mouse.visible = false;
+		
 		if(FlxG.save.data.flashing == null && !FlashingState.leftState) {
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
@@ -165,6 +168,35 @@ class TitleState extends MusicBeatState
 				});
 			}
 		}
+		// global title scripts
+		#if LUA_ALLOWED
+		var filesPushed:Array<String> = [];
+		var foldersToCheck:Array<String> = [Paths.getPreloadPath('menu_scripts/titlescreen/')];
+
+		#if MODS_ALLOWED
+		foldersToCheck.insert(0, Paths.mods('menu_scripts/titlescreen/'));
+		if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
+			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/menu_scripts/titlescreen/'));
+
+		for (mod in Paths.getGlobalMods())
+			foldersToCheck.insert(0, Paths.mods(mod + '/menu_scripts/titlescreen/'));
+		#end
+
+		for (folder in foldersToCheck)
+		{
+			if (FileSystem.exists(folder))
+			{
+				for (file in FileSystem.readDirectory(folder))
+				{
+					if (file.endsWith('.lua') && !filesPushed.contains(file))
+					{
+						luaArray.push(new FunkinLua(folder + file));
+						filesPushed.push(file);
+					}
+				}
+			}
+		}
+		#end
 	}
 
 	var logoBl:FlxSprite;
@@ -284,10 +316,10 @@ class TitleState extends MusicBeatState
 		logo.screenCenter();
 		// add(logo);
 
-		var engineversionText:FlxText = new FlxText(5, FlxG.height - 18, 0, titleJSON.versiontext, 12);
-		engineversionText.scrollFactor.set();
-		engineversionText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT);
-		add(engineversionText);
+		var engineVersionText:FlxText = new FlxText(5, FlxG.height - 18, 0, titleJSON.versiontext, 12);
+		engineVersionText.scrollFactor.set();
+		engineVersionText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(engineVersionText);
 
 		FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
 		FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
@@ -317,8 +349,9 @@ class TitleState extends MusicBeatState
 		else
 			initialized = true;
 
+		PlayState.instance.callOnLuas("startIntro", []);
+
 		Paths.clearUnusedMemory();
-		// credGroup.add(credTextShit);
 	}
 
 	function getIntroTextShit():Array<Array<String>>
@@ -347,6 +380,8 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		PlayState.instance.callOnLuas("updateTitle", [elapsed]);
+
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
