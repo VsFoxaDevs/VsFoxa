@@ -77,16 +77,16 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['Fuck you.', 0.2], //From 0% to 19%
+		['You succ!', 0.2], //From 0% to 19%
 		['L Bozo', 0.4], //From 20% to 39%
 		['Skill Issue', 0.5], //From 40% to 49%
-		['Bruh', 0.6], //From 50% to 59%
-		['Ermm', 0.69], //From 60% to 68%
+		['Bruh.', 0.6], //From 50% to 59%
+		['No biggie', 0.69], //From 60% to 68%
 		['Oh boy...', 0.7], //69%
 		['Okay uhh', 0.8], //From 70% to 79%
-		['Peak', 0.9], //From 80% to 89%
+		['You got that right!', 0.9], //From 80% to 89%
 		['Hell yea!', 1], //From 90% to 99%
-		['Wowie!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['WHAT WOW', 1] //The value on this one isn't used actually, since WHAT WOW is always "1"
 	];
 
 	//event variables
@@ -1189,7 +1189,9 @@ class PlayState extends MusicBeatState
 		}
 
 		scoreTxt.text = 'Score: ${songScore}'
+		+ ' | Combos: ${combo}'
 		+ (!instakillOnMiss ? ' | Misses: ${songMisses}' : "")
+		+ ' | Health: ${health}'
 		+ ' | Rating: ${str}';
 
 		if (!miss && !cpuControlled)
@@ -2961,6 +2963,10 @@ class PlayState extends MusicBeatState
 		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('opponentNoteHit', [note]);
 
 		if (!note.isSustainNote)
+			if(note.noteSplashData.disabled && ClientPrefs.data.opponentSplashes) {
+				spawnNoteSplashOnNote(note);
+			}
+
 			invalidateNote(note);
 	}
 
@@ -3061,6 +3067,9 @@ class PlayState extends MusicBeatState
 	public function spawnNoteSplashOnNote(note:Note) {
 		if(note != null) {
 			var strum:StrumNote = playerStrums.members[note.noteData];
+			if(!note.mustPress) {
+				strum = opponentStrums.members[note.noteData];
+			}
 			if(strum != null)
 				spawnNoteSplash(strum.x, strum.y, note.noteData, note);
 		}

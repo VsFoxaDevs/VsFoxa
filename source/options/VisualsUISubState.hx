@@ -102,6 +102,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Opponent Notes',
+			'If checked, opponent notes get note splashes.',
+			'opponentSplashes',
+			'bool');
+		addOption(option);
+		
 		var option:Option = new Option('Camera Zooms',
 			"If unchecked, the camera won't zoom in on a beat hit.",
 			'camZooms',
