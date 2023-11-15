@@ -27,6 +27,8 @@ class LoadingState extends MusicBeatState
 	var callbacks:MultiCallback;
 	var targetShit:Float = 0;
 
+	public var luaArray:Array<FunkinLua> = [];
+
 	var tipTxt:FlxText;
 	var tips:Array<String> = [
 		"Don't spam, it won't work.",
@@ -140,14 +142,14 @@ class LoadingState extends MusicBeatState
 		// GLOBAL LOADING SCREEN SCRIPTS
 		#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('menu_scripts/preloader/')];
+		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/preloader/')];
 
 		#if MODS_ALLOWED
 		foldersToCheck.insert(0, Paths.mods('menu_scripts/preloader/'));
 		if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/menu_scripts/preloader/'));
 
-		for (mod in Paths.getGlobalMods())
+		for (mod in Mods.getGlobalMods())
 			foldersToCheck.insert(0, Paths.mods(mod + '/menu_scripts/preloader/'));
 		#end
 

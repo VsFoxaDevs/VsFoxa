@@ -194,14 +194,14 @@ class MainMenuState extends MusicBeatState
 		// GLOBAL MAIN MENU SCRIPTS
 		#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('menu_scripts/mainmenu/')];
+		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/mainmenu/')];
 
 		#if MODS_ALLOWED
 		foldersToCheck.insert(0, Paths.mods('menu_scripts/mainmenu/'));
 		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/menu_scripts/mainmenu/'));
 
-		for(mod in Paths.getGlobalMods())
+		for(mod in Mods.getGlobalMods())
 			foldersToCheck.insert(0, Paths.mods(mod + '/menu_scripts/mainmenu/'));
 		#end
 

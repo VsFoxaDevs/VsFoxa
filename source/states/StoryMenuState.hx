@@ -183,14 +183,14 @@ class StoryMenuState extends MusicBeatState
 		// GLOBAL STORY MENU SCRIPTS
 		#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('menu_scripts/storymenu/')];
+		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/storymenu/')];
 
 		#if MODS_ALLOWED
 		foldersToCheck.insert(0, Paths.mods('menu_scripts/storymenu/'));
 		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
 			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/menu_scripts/storymenu/'));
 
-		for (mod in Paths.getGlobalMods())
+		for (mod in Mods.getGlobalMods())
 			foldersToCheck.insert(0, Paths.mods(mod + '/menu_scripts/storymenu/'));
 		#end
 
