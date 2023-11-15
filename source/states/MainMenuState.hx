@@ -63,7 +63,7 @@ class MainMenuState extends MusicBeatState
 		#if MODS_ALLOWED 'mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
-		'discord',
+		'donate',
 		'options'
 	];
 
@@ -224,8 +224,8 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == 'discord')
-					CoolUtil.browserLoad(menuJunk.discordLink); //foxacord
+				if (optionShit[curSelected] == 'donate')
+					CoolUtil.browserLoad(menuJunk.discordLink); //foxacord, it's hidden as donate, cuz foxas parents may watch the gameplay footage when released pfffft
 				else
 				{
 					selectedSomethin = true;
