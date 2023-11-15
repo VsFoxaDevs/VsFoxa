@@ -226,8 +226,7 @@ class Main extends Sprite
 		"Skibidy bah mmm dada *explodes* - ShadowMario",
 		"What have you done, you killed it! - BeastlyGhost",
 		"Have you checked if the variable exists? - BeastlyGhost",
-		"Have you even read the wiki before trying that? - BeastlyGhost",
-		"Huh, did I forget something? - Yoshubs (?)"
+		"Have you even read the wiki before trying that? - BeastlyGhost"
 	];
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!

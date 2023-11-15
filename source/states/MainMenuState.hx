@@ -28,7 +28,7 @@ class MainMenuState extends MusicBeatState
 	public static var psychEngineVersion:String = '0.7.2-foxa'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
-	var menuJunk:MainMenuData;
+	public static var menuJunk:MainMenuData;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -42,9 +42,12 @@ class MainMenuState extends MusicBeatState
 		"500+  Giftcards! (-CharlesCatYT)",
 		"bro became starfire from teen titans go (-Monomouse)",
 		"Hi (-ScriptedMar)",
-		"To what? My tits? (-Foxa the Artist)",
+		"Its already been 1 beer... (-cyborg henry)",
+		"this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend! (-Foxa The Artist)",
+		"To what? My tits? (-Foxa The Artist)",
 		"Damn how many fnf mods are ya'll making1?!?! (-ItsToppy)",
 		"Get briccedd (-cyborg henry)",
+		"I like beans (-Foxa The Artist)",
 		"YOUR ARGUMENT, IS NOW INVALID! (-Monomouse)",
 		"when did we start playing freeze tag (-Vencerist)",
 		"top 100 reasons why I won't ask foxa unless she's online (-CharlesCatYT)",

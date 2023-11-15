@@ -182,6 +182,8 @@ class FreeplayState extends MusicBeatState
 
 		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
 		
+		if(playingMusic) iconArray[instPlaying].canBounce = true;
+
 		changeSelection();
 
 		bottomBG = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
@@ -430,6 +432,10 @@ class FreeplayState extends MusicBeatState
 				vocals.looped = true;
 				vocals.volume = 0.7;
 				instPlaying = curSelected;
+				Conductor.set_bpm(PlayState.SONG.bpm);
+				for (i in 0...iconArray.length)
+					iconArray[i].canBounce = false;
+				iconArray[instPlaying].canBounce = true;
 				playingMusic = true;
 				curTime = 0;
 
@@ -624,6 +630,19 @@ class FreeplayState extends MusicBeatState
 		songBG.x = FlxG.width - (songBG.scale.x / 2);
 		timeTxt.x = Std.int(songBG.x + (songBG.width / 2));
 		timeTxt.x -= timeTxt.width / 2;
+	}
+
+	var lastBeatHit:Int = -1;
+
+	override function beatHit() {
+		super.beatHit();
+
+		if(lastBeatHit >= curBeat)
+			return;
+
+		lastBeatHit = curBeat;
+		
+		if (playingMusic) iconArray[instPlaying].bounce();
 	}
 
 	private function switchPlayMusic() {

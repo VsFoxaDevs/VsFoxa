@@ -50,6 +50,7 @@ class MasterEditorMenu extends MusicBeatState
 		for (i in 0...options.length)
 		{
 			var leText:Alphabet = new Alphabet(90, 320, options[i], true);
+			leText.itemType = 'Vertical';
 			leText.isMenuItem = true;
 			leText.targetY = i;
 			grpTexts.add(leText);

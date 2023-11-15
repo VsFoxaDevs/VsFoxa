@@ -1,14 +1,6 @@
 scoreName = "Score"
 missesName = "Misses"
 ratingNames = "Rating"
-function onCreate()
-    makeLuaText('cornerMark', ('FNF Vs. Foxa 3.0'), 1275, 0, 5)
-  setTextAlignment('cornerMark', 'RIGHT')
-  setTextSize('cornerMark', 18)
-  if not getPropertyFromClass('backend.ClientPrefs', 'data.hideHud') then 
-  addLuaText('cornerMark') 
-end
-end
 function onUpdate()
     if not getProperty('ratingName') == '?' then
         setProperty('scoreTxt.text', scoreName .. ': ' .. getProperty('songScore') .. ' // ' .. missesName .. ': ' .. getProperty('songMisses') .. ' //  Accuracy: ' .. floorInDecimal(rating*100, 2) .. ' // ' .. ratingNames .. ': ' .. getProperty('ratingName') .. ' (' .. round(getProperty('ratingPercent') * 100, 2) .. '%) - ' .. getProperty('ratingFC'))

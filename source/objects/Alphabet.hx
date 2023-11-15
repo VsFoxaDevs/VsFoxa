@@ -13,11 +13,14 @@ class Alphabet extends FlxSpriteGroup
 {
 	public var text(default, set):String;
 
+	public var itemType:String = "";
+
 	public var bold:Bool = false;
 	public var letters:Array<AlphaCharacter> = [];
 
 	public var isMenuItem:Bool = false;
 	public var targetY:Int = 0;
+	public var targetX:Float = 0;
 	public var changeX:Bool = true;
 	public var changeY:Bool = true;
 
@@ -163,25 +166,45 @@ class Alphabet extends FlxSpriteGroup
 
 	override function update(elapsed:Float)
 	{
-		if (isMenuItem)
-		{
+		var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
+
+		if(isMenuItem){
 			var lerpVal:Float = FlxMath.bound(elapsed * 9.6, 0, 1);
-			if(changeX)
-				x = FlxMath.lerp(x, (targetY * distancePerItem.x) + startPosition.x, lerpVal);
-			if(changeY)
-				y = FlxMath.lerp(y, (targetY * 1.3 * distancePerItem.y) + startPosition.y, lerpVal);
+			if(changeX) x = FlxMath.lerp(x, (targetY * distancePerItem.x) + startPosition.x, lerpVal);
+			if(changeY) y = FlxMath.lerp(y, (targetY * 1.3 * distancePerItem.y) + startPosition.y, lerpVal);
 		}
+
+		switch (itemType)
+		{
+			case "Classic":
+				y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * 0.48), 0.16/(ClientPrefs.data.framerate/60));
+				x = FlxMath.lerp(x, (targetY * 20) + 90, 0.16/(ClientPrefs.data.framerate/60));
+			case "Vertical":
+				y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * 0.5), 0.16/(ClientPrefs.data.framerate/60));
+				x = FlxMath.lerp(x, (targetY * 0) + 308, 0.16/(ClientPrefs.data.framerate/60));
+				x += targetX/(ClientPrefs.data.framerate/60);
+			case "C-Shape":
+				y = FlxMath.lerp(y, (scaledY * 65) + (FlxG.height * 0.39), 0.16/(ClientPrefs.data.framerate/60));
+
+				x = FlxMath.lerp(x, Math.exp(scaledY * 0.8) * 70 + (FlxG.width * 0.1), 0.16/(ClientPrefs.data.framerate/60));
+				if(scaledY < 0)
+					x = FlxMath.lerp(x, Math.exp(scaledY * -0.8) * 70 + (FlxG.width * 0.1), 0.16/(ClientPrefs.data.framerate/60));
+				if(x > FlxG.width + 30) x = FlxG.width + 30;
+			case "D-Shape":
+				y = FlxMath.lerp(y, (scaledY * 90) + (FlxG.height * 0.45), 0.16/(ClientPrefs.data.framerate/60));
+				x = FlxMath.lerp(x, Math.exp(scaledY * 0.8) * -70 + (FlxG.width * 0.35), 0.16/(ClientPrefs.data.framerate/60));
+				if(scaledY < 0) x = FlxMath.lerp(x, Math.exp(scaledY * -0.8) * -70 + (FlxG.width * 0.35), 0.16/(ClientPrefs.data.framerate/60));
+				if(x < -900) x = -900;
+		}
+
 		super.update(elapsed);
 	}
 
 	public function snapToPosition()
 	{
-		if (isMenuItem)
-		{
-			if(changeX)
-				x = (targetY * distancePerItem.x) + startPosition.x;
-			if(changeY)
-				y = (targetY * 1.3 * distancePerItem.y) + startPosition.y;
+		if (isMenuItem){
+			if(changeX) x = (targetY * distancePerItem.x) + startPosition.x;
+			if(changeY) y = (targetY * 1.3 * distancePerItem.y) + startPosition.y;
 		}
 	}
 
@@ -197,8 +220,7 @@ class Alphabet extends FlxSpriteGroup
 		for (character in newText.split(''))
 		{
 			
-			if(character != '\n')
-			{
+			if(character != '\n'){
 				var spaceChar:Bool = (character == " " || (bold && character == "_"));
 				if (spaceChar) consecutiveSpaces++;
 
@@ -209,8 +231,7 @@ class Alphabet extends FlxSpriteGroup
 					{
 						xPos += 28 * consecutiveSpaces * scaleX;
 						rowData[rows] = xPos;
-						if(!bold && xPos >= FlxG.width * 0.65)
-						{
+						if(!bold && xPos >= FlxG.width * 0.65){
 							xPos = 0;
 							rows++;
 						}
@@ -234,9 +255,7 @@ class Alphabet extends FlxSpriteGroup
 					add(letter);
 					letters.push(letter);
 				}
-			}
-			else
-			{
+			}else{
 				xPos = 0;
 				rows++;
 			}

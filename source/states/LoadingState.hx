@@ -21,10 +21,66 @@ class LoadingState extends MusicBeatState
 	// TO DO: Make this easier, and uhhh fix the load screen so the game doesn't softlock at the end of the point
 	
 	var target:FlxState;
+	public static var globeTrans:Bool = true;
 	var stopMusic = false;
 	var directory:String;
 	var callbacks:MultiCallback;
 	var targetShit:Float = 0;
+
+	var tipTxt:FlxText;
+	var tips:Array<String> = [
+		"Don't spam, it won't work.",
+		"psych engine port\nfatherless behavior",
+		"why am i wasting my\ntime making this mod",
+		"Dave and Bambi came out in September of 2021-\nWait no, I have been misinformed, shit.",
+		"Null Object Reference",
+		"This isn't a kids game.",
+		"I wonder what ethanol tastes like.",
+		"Remember, licking doorknobs is illegal on other planets.",
+		"Psych Engine if it was cooler.",
+		"No tip here.",
+		"I miss FNF's peak.",
+		"Foxa is not a furry!",
+		"discord light mode\nbrighter than the fucking sun",
+		"ALT + Enter for free Week 8 /j",
+		"Funk all the way.",
+		"Friday Night Funkin'\nMic'd Up.",
+		"before psych engine there was kade engine\nthose were the days",
+		"You're currently playing Vs. Foxa.",
+		"Do people actually read these?",
+		"Skill issue.",
+		"Cock joke.",
+		"WHAT",
+		"As long as there's 2 people left on the planet,\nsomeone is gonna want someone dead.",
+		"His name isn't Keith.",
+		"THERES HSCRIPT HERE WHAT?!?!?",
+		"THERE AREN'T COUGARS IN MISSIONS",
+		"Disingenuous dense motherfucker.",
+		"My father is dying.\nPlease stop beatboxing.",
+		"pico funny\nbig ol' bunny",
+		"Joe mama",
+		"Gettin freaky' on a friday night yeah",
+		"This may be based off on a Psych fork,\nbut this is Vs.FOXA, damn it.",
+		"Worjdjhewndjaiqkkwbdjkwqodbdjwoen&:’eked&3rd!2’wonenksiwnwihqbdibejwjebdjjejwjenfjdjejejjwkwiwjnensjsiieejjsjskikdjdnnwjwiwjejdjdjwiejdbdiwjdhehhrifjdnwoqnd",
+		"Oo0ooOoOOo000OOO!!!",
+		"Witness the might\nof the seas!",
+		"KadeDev is best.\nBut his own engine sucks though.",
+		"CARAMEL ARROW SUPREMACY",
+		"I will rip your intestines out.",
+		"flippity floppity",
+		"i'm surprised people might actually\nbe reading this at this point",
+		"potato\nwaterslide",
+		"GingerBrave\nMore like",
+		"CHILD PORN -3D impact text wall",
+		"I love to smash my keyboard.",
+		"there might be someone out there that's thinking about making a mod about you.\nkeep that in mind.",
+		"Funkin' Forever.",
+		"i hope you go mooseing\nand get fucked by a campfire",
+		"Let Hayz cook, damnit.",
+		"WENT BACK TO FREEPLAY??",
+		"Ugh",
+		"Bop beep be be skdoo bep"
+	];
 
 	function new(target:FlxState, stopMusic:Bool, directory:String)
 	{
@@ -38,6 +94,14 @@ class LoadingState extends MusicBeatState
 	var loadBar:FlxSprite;
 	override function create()
 	{
+		flixel.addons.transition.FlxTransitionableState.skipNextTransIn = false;
+		flixel.addons.transition.FlxTransitionableState.skipNextTransOut = false;
+		if(!globeTrans){
+			flixel.addons.transition.FlxTransitionableState.skipNextTransIn = true;
+			flixel.addons.transition.FlxTransitionableState.skipNextTransOut = true;
+		}
+		globeTrans = true;
+
 		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d);
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
@@ -56,9 +120,22 @@ class LoadingState extends MusicBeatState
 		funkay.scrollFactor.set();
 		funkay.screenCenter();
 
-		loadBar = new FlxSprite(0, FlxG.height - 20).makeGraphic(FlxG.width, 10, 0xffff16d2);
+		var bottomPanel:FlxSprite = new FlxSprite(0, FlxG.height - 100).makeGraphic(FlxG.width, 100, 0xFF000000);
+		bottomPanel.alpha = 0.5;
+		add(bottomPanel);
+
+		loadBar = new FlxSprite(10, 0).makeGraphic(FlxG.width, 10, 0xffff16d2);
 		loadBar.screenCenter(X);
+		loadBar.active = false;
 		add(loadBar);
+
+		tipTxt = new FlxText(0, FlxG.height - 80, 1000, "", 26);
+		tipTxt.scrollFactor.set();
+		tipTxt.setFormat(Paths.font("vcr.ttf"), 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		tipTxt.screenCenter(X);
+		add(tipTxt);
+
+		tipTxt.text = tips[FlxG.random.int(0, tips.length - 1)];
 		
 		initSongsManifest().onComplete
 		(
@@ -66,11 +143,11 @@ class LoadingState extends MusicBeatState
 			{
 				callbacks = new MultiCallback(onLoad);
 				var introComplete = callbacks.add("introComplete");
-				if (PlayState.SONG != null) {
+				/*if (PlayState.SONG != null) {
 					checkLoadSong(getSongPath());
 					if (PlayState.SONG.needsVoices)
 						checkLoadSong(getVocalPath());
-				}
+				}*/
 				if(directory != null && directory.length > 0 && directory != 'shared') {
 					checkLibrary('week_assets');
 				}

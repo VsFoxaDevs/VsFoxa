@@ -218,6 +218,8 @@ class PlayState extends MusicBeatState
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
+	public var chartingTxt:FlxText;
+	var versionTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 
@@ -583,7 +585,11 @@ class PlayState extends MusicBeatState
 		else scoreTxt.visible = false;
 		updateScore(false);
 		uiGroup.add(scoreTxt);
-
+		versionTxt = new FlxText(0, FlxG.height - 18, 0, SONG.song + " - " + backend.Difficulty.getString() + " | " + states.MainMenuState.menuJunk.versionText, 16);
+		versionTxt.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionTxt.scrollFactor.set();
+		uiGroup.add(versionTxt);
+	
 		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
@@ -592,6 +598,12 @@ class PlayState extends MusicBeatState
 		uiGroup.add(botplayTxt);
 		if(ClientPrefs.data.downScroll)
 			botplayTxt.y = timeBar.y - 78;
+
+		chartingTxt = new FlxText(400, timeBar.y + 580, FlxG.width - 800, "Player is in Charting Mode, No score will be saved.", 32);//yoshi engine looking ass
+		chartingTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		chartingTxt.scrollFactor.set();
+		chartingTxt.visible = chartingMode;
+		uiGroup.add(chartingTxt);
 
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -638,6 +650,7 @@ class PlayState extends MusicBeatState
 
 		startCallback();
 		RecalculateRating();
+
 
 		//PRECACHING MISS SOUNDS BECAUSE I THINK THEY CAN LAG PEOPLE AND FUCK THEM UP IDK HOW HAXE WORKS
 		if(ClientPrefs.data.hitsoundVolume > 0) precacheList.set('hitsound', 'sound');
@@ -1677,6 +1690,10 @@ class PlayState extends MusicBeatState
 				botplaySine += 180 * elapsed;
 				botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 			}
+			if(chartingTxt != null && chartingTxt.visible){
+				botplaySine += 180 * elapsed;
+				chartingTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
+			}
 		}
 
 		if (controls.PAUSE && startedCountdown && canPause)
@@ -1743,13 +1760,13 @@ class PlayState extends MusicBeatState
 			songPercent = (curTime / songLength);
 
 			var songCalc:Float = (songLength - curTime);
-			if(ClientPrefs.data.timeBarType == 'Time Elapsed') songCalc = curTime;
+			if(ClientPrefs.data.timeBarType.contains('Elapsed')) songCalc = curTime;
 
-			var secondsTotal:Int = Math.floor((songCalc/playbackRate) / 1000);
+			var secondsTotal:Int = Math.floor(songCalc / 1000);
 			if(secondsTotal < 0) secondsTotal = 0;
 
 			if(ClientPrefs.data.timeBarType != 'Song Name')
-				timeTxt.text = FlxStringUtil.formatTime(secondsTotal, false);
+				timeTxt.text = '${FlxStringUtil.formatTime(secondsTotal, false)}${(ClientPrefs.data.timeBarType.contains('/')) ? ' / ${FlxStringUtil.formatTime(songLength / 1000, false)}' : ''}';
 		}
 
 		if (camZooming)
