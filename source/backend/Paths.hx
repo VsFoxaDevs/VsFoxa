@@ -444,7 +444,7 @@ class Paths
 
 	#if MODS_ALLOWED
 	inline static public function mods(key:String = '') {
-		return correctPath(key);
+		return key;
 	}
 
 	inline static public function modsFont(key:String) {
