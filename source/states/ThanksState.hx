@@ -26,7 +26,7 @@ class ThanksState extends MusicBeatState {
     override function create(){
 		#if desktop DiscordClient.changePresence("Thanks Menu", null); #end
 
-		PlayState.instance.callOnLuas("createThanks", []);
+		//PlayState.instance.callOnLuas("createThanks", []);
 
 		bg = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
         bg.antialiasing = ClientPrefs.data.antialiasing;
@@ -72,7 +72,7 @@ class ThanksState extends MusicBeatState {
 		}, 0);
 
 		// GLOBAL THANKS SCRIPTS
-		#if LUA_ALLOWED
+		/*#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/thanks/')];
 
@@ -99,13 +99,13 @@ class ThanksState extends MusicBeatState {
 				}
 			}
 		}
-		#end
+		#end*/
 
         super.create();
 	}
 
 	override function update(elapsed:Float){
-		PlayState.instance.callOnLuas("updateThanks", [elapsed]);
+		//PlayState.instance.callOnLuas("updateThanks", [elapsed]);
 
         if(controls.ACCEPT || controls.BACK){
 			FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);

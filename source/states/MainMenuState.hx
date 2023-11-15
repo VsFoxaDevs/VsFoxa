@@ -92,7 +92,7 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		PlayState.instance.callOnLuas("createMenu", []);
+		//PlayState.instance.callOnLuas("createMenu", []);
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
@@ -192,7 +192,7 @@ class MainMenuState extends MusicBeatState
 		#end
 
 		// GLOBAL MAIN MENU SCRIPTS
-		#if LUA_ALLOWED
+		/*#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/mainmenu/')];
 
@@ -219,7 +219,7 @@ class MainMenuState extends MusicBeatState
 				}
 			}
 		}
-		#end
+		#end*/
 
 		super.create();
 	}
@@ -228,7 +228,7 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		PlayState.instance.callOnLuas("updateMenu", [elapsed]);
+		//PlayState.instance.callOnLuas("updateMenu", [elapsed]);
 
 		if (FlxG.sound.music.volume < 0.8)
 		{
@@ -335,7 +335,7 @@ class MainMenuState extends MusicBeatState
 
 	function changeItem(huh:Int = 0)
 	{
-		PlayState.instance.callOnLuas("changeMenuItem", [huh]);
+		//PlayState.instance.callOnLuas("changeMenuItem", [huh]);
 
 		curSelected += huh;
 

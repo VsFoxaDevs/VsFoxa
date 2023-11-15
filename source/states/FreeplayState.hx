@@ -71,7 +71,7 @@ class FreeplayState extends MusicBeatState
 		DiscordClient.changePresence("Freeplay Menu", null);
 		#end
 
-		PlayState.instance.callOnLuas("createFreeplay", []);
+		//PlayState.instance.callOnLuas("createFreeplay", []);
 
 		for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
@@ -205,7 +205,7 @@ class FreeplayState extends MusicBeatState
 		updateTexts();
 
 		// GLOBAL FREEPLAY SCRIPTS
-		#if LUA_ALLOWED
+		/*#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/freeplay/')];
 
@@ -232,7 +232,7 @@ class FreeplayState extends MusicBeatState
 				}
 			}
 		}
-		#end
+		#end*/
 
 		super.create();
 	}
@@ -274,7 +274,7 @@ class FreeplayState extends MusicBeatState
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
-		PlayState.instance.callOnLuas("updateFreeplay", [elapsed]);
+		//PlayState.instance.callOnLuas("updateFreeplay", [elapsed]);
 
 		if (FlxG.sound.music.volume < 0.7)
 		{
@@ -558,7 +558,7 @@ class FreeplayState extends MusicBeatState
 	}
 
 	function pauseOrResume(resume:Bool = false){
-		PlayState.instance.callOnLuas("pauseFreeplay", [resume]);
+		//PlayState.instance.callOnLuas("pauseFreeplay", [resume]);
 
 		if(resume){
 			FlxG.sound.music.resume();
@@ -592,7 +592,7 @@ class FreeplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
-		PlayState.instance.callOnLuas("changeSelFreeplay", [playSound]);
+		//PlayState.instance.callOnLuas("changeSelFreeplay", [playSound]);
 
 		if (playingMusic) return;
 
@@ -676,7 +676,7 @@ class FreeplayState extends MusicBeatState
 	var lastBeatHit:Int = -1;
 
 	override function beatHit() {
-		PlayState.instance.callOnLuas("beatHitFreeplay", []);
+		//PlayState.instance.callOnLuas("beatHitFreeplay", []);
 
 		super.beatHit();
 

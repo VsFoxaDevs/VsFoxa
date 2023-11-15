@@ -54,7 +54,7 @@ class StoryMenuState extends MusicBeatState
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
 		persistentUpdate = persistentDraw = true;
 
-		PlayState.instance.callOnLuas("createStoryMenu", []);
+		//PlayState.instance.callOnLuas("createStoryMenu", []);
 
 		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
 		scoreText.setFormat("VCR OSD Mono", 32);
@@ -181,7 +181,7 @@ class StoryMenuState extends MusicBeatState
 		changeDifficulty();
 
 		// GLOBAL STORY MENU SCRIPTS
-		#if LUA_ALLOWED
+		/*#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/storymenu/')];
 
@@ -207,7 +207,7 @@ class StoryMenuState extends MusicBeatState
 				}
 			}
 		}
-		#end
+		#end*/
 
 		super.create();
 	}
@@ -220,7 +220,7 @@ class StoryMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		PlayState.instance.callOnLuas("updateStoryMenu", [elapsed]);
+		//PlayState.instance.callOnLuas("updateStoryMenu", [elapsed]);
 
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, FlxMath.bound(elapsed * 30, 0, 1)));
 		if(Math.abs(intendedScore - lerpScore) < 10) lerpScore = intendedScore;

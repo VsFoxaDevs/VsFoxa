@@ -169,7 +169,7 @@ class TitleState extends MusicBeatState
 			}
 		}
 		// global title scripts
-		#if LUA_ALLOWED
+		/*#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
 		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/titlescreen/')];
 
@@ -196,7 +196,7 @@ class TitleState extends MusicBeatState
 				}
 			}
 		}
-		#end
+		#end*/
 	}
 
 	var logoBl:FlxSprite;
@@ -349,7 +349,7 @@ class TitleState extends MusicBeatState
 		else
 			initialized = true;
 
-		PlayState.instance.callOnLuas("startIntro", []);
+		//PlayState.instance.callOnLuas("startIntro", []);
 
 		Paths.clearUnusedMemory();
 	}
@@ -380,7 +380,7 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		PlayState.instance.callOnLuas("updateTitle", [elapsed]);
+		//PlayState.instance.callOnLuas("updateTitle", [elapsed]);
 
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
