@@ -1,12 +1,10 @@
 package states;
 
-class OutdatedState extends MusicBeatState
-{
+class OutdatedState extends MusicBeatState {
 	public static var leftState:Bool = false;
 
 	var warnText:FlxText;
-	override function create()
-	{
+	override function create() {
 		super.create();
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -25,16 +23,13 @@ class OutdatedState extends MusicBeatState
 		add(warnText);
 	}
 
-	override function update(elapsed:Float)
-	{
+	override function update(elapsed:Float) {
 		if(!leftState) {
-			if (controls.ACCEPT) {
+			if(controls.ACCEPT) {
 				leftState = true;
 				CoolUtil.browserLoad("https://github.com/ShadowMario/FNF-PsychEngine/releases");
 			}
-			else if(controls.BACK) {
-				leftState = true;
-			}
+			else if(controls.BACK) leftState = true;
 
 			if(leftState)
 			{

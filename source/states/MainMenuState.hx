@@ -67,7 +67,7 @@ class MainMenuState extends MusicBeatState
 		'options'
 	];
 
-	public var luaArray:Array<FunkinLua> = [];
+	//public var luaArray:Array<FunkinLua> = [];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;

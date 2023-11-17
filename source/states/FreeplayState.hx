@@ -50,7 +50,7 @@ class FreeplayState extends MusicBeatState
 	var intendedColor:Int;
 	var colorTween:FlxTween;
 
-	public var luaArray:Array<FunkinLua> = []; // freeplay in lua?!?!? :O
+	//public var luaArray:Array<FunkinLua> = []; // freeplay in lua?!?!? :O
 
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;

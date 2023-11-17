@@ -277,7 +277,6 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-		//trace('Playback Rate: ' + playbackRate);
 		Paths.clearStoredMemory();
 
 		startCallback = startCountdown;
@@ -326,8 +325,7 @@ class PlayState extends MusicBeatState
 		persistentUpdate = true;
 		persistentDraw = true;
 
-		if (SONG == null)
-			SONG = Song.loadFromJson('tutorial');
+		if(SONG == null) SONG = Song.loadFromJson('tutorial');
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.bpm = SONG.bpm;
@@ -336,10 +334,8 @@ class PlayState extends MusicBeatState
 		storyDifficultyText = Difficulty.getString();
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
-		if (isStoryMode)
-			detailsText = "Story Mode: " + WeekData.getCurrentWeek().weekName;
-		else
-			detailsText = "Freeplay";
+		if(isStoryMode) detailsText = "Story Mode: " + WeekData.getCurrentWeek().weekName;
+		else detailsText = "Freeplay";
 
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
@@ -347,9 +343,7 @@ class PlayState extends MusicBeatState
 
 		GameOverSubstate.resetVariables();
 		songName = Paths.formatToSongPath(SONG.song);
-		if(SONG.stage == null || SONG.stage.length < 1) {
-			SONG.stage = StageData.vanillaSongStage(songName);
-		}
+		if(SONG.stage == null || SONG.stage.length < 1) SONG.stage = StageData.vanillaSongStage(songName);
 		curStage = SONG.stage;
 
 		var stageData:StageFile = StageData.getStageFile(curStage);
@@ -360,11 +354,9 @@ class PlayState extends MusicBeatState
 		defaultCamZoom = stageData.defaultZoom;
 
 		stageUI = "normal";
-		if (stageData.stageUI != null && stageData.stageUI.trim().length > 0)
-			stageUI = stageData.stageUI;
-		else {
-			if (stageData.isPixelStage)
-				stageUI = "pixel";
+		if (stageData.stageUI != null && stageData.stageUI.trim().length > 0) stageUI = stageData.stageUI;
+		else{
+			if (stageData.isPixelStage) stageUI = "pixel";
 		}
 		
 		BF_X = stageData.boyfriend[0];
@@ -374,20 +366,16 @@ class PlayState extends MusicBeatState
 		DAD_X = stageData.opponent[0];
 		DAD_Y = stageData.opponent[1];
 
-		if(stageData.camera_speed != null)
-			cameraSpeed = stageData.camera_speed;
+		if(stageData.camera_speed != null) cameraSpeed = stageData.camera_speed;
 
 		boyfriendCameraOffset = stageData.camera_boyfriend;
-		if(boyfriendCameraOffset == null) //Fucks sake should have done it since the start :rolling_eyes:
-			boyfriendCameraOffset = [0, 0];
+		if(boyfriendCameraOffset == null) boyfriendCameraOffset = [0, 0]; //Fucks sake should have done it since the start :rolling_eyes:
 
 		opponentCameraOffset = stageData.camera_opponent;
-		if(opponentCameraOffset == null)
-			opponentCameraOffset = [0, 0];
+		if(opponentCameraOffset == null) opponentCameraOffset = [0, 0];
 
 		girlfriendCameraOffset = stageData.camera_girlfriend;
-		if(girlfriendCameraOffset == null)
-			girlfriendCameraOffset = [0, 0];
+		if(girlfriendCameraOffset == null) girlfriendCameraOffset = [0, 0];
 
 		boyfriendGroup = new FlxSpriteGroup(BF_X, BF_Y);
 		dadGroup = new FlxSpriteGroup(DAD_X, DAD_Y);
@@ -469,10 +457,9 @@ class PlayState extends MusicBeatState
 			camPos.y += gf.getGraphicMidpoint().y + gf.cameraPosition[1];
 		}
 
-		if(dad.curCharacter.startsWith('gf')) {
+		if(dad.curCharacter.startsWith('gf')){
 			dad.setPosition(GF_X, GF_Y);
-			if(gf != null)
-				gf.visible = false;
+			if(gf != null)gf.visible = false;
 		}
 		stagesFunc(function(stage:BaseStage) stage.createPost());
 	
@@ -515,8 +502,7 @@ class PlayState extends MusicBeatState
 		add(strumLineNotes);
 		add(grpNoteSplashes);
 
-		if(ClientPrefs.data.timeBarType == 'Song Name')
-		{
+		if(ClientPrefs.data.timeBarType == 'Song Name'){
 			timeTxt.size = 24;
 			timeTxt.y += 3;
 		}
@@ -534,8 +520,7 @@ class PlayState extends MusicBeatState
 		camFollow.setPosition(camPos.x, camPos.y);
 		camPos.put();
 				
-		if (prevCamFollow != null)
-		{
+		if(prevCamFollow != null){
 			camFollow = prevCamFollow;
 			prevCamFollow = null;
 		}
@@ -583,7 +568,7 @@ class PlayState extends MusicBeatState
 		uiGroup.add(iconP2);
 
 		msTimeTxt = new FlxText(0, 0, 400, "", 32);
-		msTimeTxt.setFormat(Paths.font('vcr.ttf'), 32, 0xFFFA75FF, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		msTimeTxt.setFormat(Paths.font('vcr.ttf'), 32, 0xFFF7A7FA, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		msTimeTxt.scrollFactor.set();
 		msTimeTxt.alpha = 0;
 		msTimeTxt.visible = true;
@@ -609,8 +594,7 @@ class PlayState extends MusicBeatState
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
 		uiGroup.add(botplayTxt);
-		if(ClientPrefs.data.downScroll)
-			botplayTxt.y = timeBar.y - 78;
+		if(ClientPrefs.data.downScroll) botplayTxt.y = timeBar.y - 78;
 
 		chartingTxt = new FlxText(400, timeBar.y + 580, FlxG.width - 800, "Player is in Charting Mode, No score will be saved.", 32);//yoshi engine looking ass
 		chartingTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -642,8 +626,7 @@ class PlayState extends MusicBeatState
 		noteTypes = null;
 		eventsPushed = null;
 
-		if(eventNotes.length > 1)
-		{
+		if(eventNotes.length > 1){
 			for (event in eventNotes) event.strumTime -= eventEarlyTrigger(event);
 			eventNotes.sort(sortByTime);
 		}
@@ -689,7 +672,6 @@ class PlayState extends MusicBeatState
 		
 		for (key => type in precacheList)
 		{
-			//trace('Key $key is type $type');
 			switch(type)
 			{
 				case 'image':
@@ -710,11 +692,9 @@ class PlayState extends MusicBeatState
 
 	inline function set_songSpeed(value:Float):Float
 	{
-		if(generatedMusic)
-		{
+		if(generatedMusic){
 			var ratio:Float = value / songSpeed; //funny word huh
-			if(ratio != 1)
-			{
+			if(ratio != 1){
 				for (note in notes.members) note.resizeByRatio(ratio);
 				for (note in unspawnNotes) note.resizeByRatio(ratio);
 			}
@@ -726,14 +706,12 @@ class PlayState extends MusicBeatState
 
 	inline function set_playbackRate(value:Float):Float
 	{
-		if(generatedMusic)
-		{
+		if(generatedMusic){
 			if(vocals != null) vocals.pitch = value;
 			FlxG.sound.music.pitch = value;
 
 			var ratio:Float = playbackRate / value; //funny word huh
-			if(ratio != 1)
-			{
+			if(ratio != 1){
 				for (note in notes.members) note.resizeByRatio(ratio);
 				for (note in unspawnNotes) note.resizeByRatio(ratio);
 			}
@@ -764,11 +742,9 @@ class PlayState extends MusicBeatState
 	public function reloadHealthBarColors() {
 		var dadCol = dad.healthColorArray;
 		var bfCol = boyfriend.healthColorArray;
-		if (ClientPrefs.data.coloredHealthBar)
-			healthBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
-		FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
-		else
-			healthBar.setColors(0xFFFF0000, 0xFF66FF33);
+		if(ClientPrefs.data.coloredHealthBar) healthBar.setColors(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
+		      FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+		else healthBar.setColors(0xFFFF0000, 0xFF66FF33);
 	}
 
 	public function addCharacterToList(newCharacter:String, type:Int) {
@@ -818,24 +794,19 @@ class PlayState extends MusicBeatState
 		{
 			luaFile = replacePath;
 			doPush = true;
-		}
-		else
-		{
+		}else{
 			luaFile = Paths.getSharedPath(luaFile);
-			if(FileSystem.exists(luaFile))
-				doPush = true;
+			if(FileSystem.exists(luaFile)) doPush = true;
 		}
 		#else
 		luaFile = Paths.getSharedPath(luaFile);
 		if(Assets.exists(luaFile)) doPush = true;
 		#end
 
-		if(doPush)
-		{
+		if(doPush){
 			for (script in luaArray)
 			{
-				if(script.scriptName == luaFile)
-				{
+				if(script.scriptName == luaFile){
 					doPush = false;
 					break;
 				}
@@ -849,16 +820,12 @@ class PlayState extends MusicBeatState
 		var doPush:Bool = false;
 		var scriptFile:String = 'characters/' + name + '.hx';
 		var replacePath:String = Paths.modFolders(scriptFile);
-		if(FileSystem.exists(replacePath))
-		{
+		if(FileSystem.exists(replacePath)){
 			scriptFile = replacePath;
 			doPush = true;
-		}
-		else
-		{
+		}else{
 			scriptFile = Paths.getSharedPath(scriptFile);
-			if(FileSystem.exists(scriptFile))
-				doPush = true;
+			if(FileSystem.exists(scriptFile)) doPush = true;
 		}
 		
 		if(doPush)

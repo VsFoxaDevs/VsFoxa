@@ -2,8 +2,7 @@ package states;
 
 import objects.AttachedSprite;
 
-class CreditsState extends MusicBeatState
-{
+class CreditsState extends MusicBeatState {
 	var curSelected:Int = -1;
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -18,8 +17,7 @@ class CreditsState extends MusicBeatState
 
 	var offsetThing:Float = -75;
 
-	override function create()
-	{
+	override function create() {
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Credits Menu", null);
@@ -76,8 +74,7 @@ class CreditsState extends MusicBeatState
 			creditsStuff.push(i);
 		}
 	
-		for (i in 0...creditsStuff.length)
-		{
+		for(i in 0...creditsStuff.length) {
 			var isSelectable:Bool = !unselectableCheck(i);
 			var optionText:Alphabet = new Alphabet(FlxG.width / 2, 300, creditsStuff[i][0], !isSelectable);
 			optionText.isMenuItem = true;
@@ -86,15 +83,11 @@ class CreditsState extends MusicBeatState
 			optionText.snapToPosition();
 			grpOptions.add(optionText);
 
-			if(isSelectable) {
-				if(creditsStuff[i][5] != null)
-				{
-					Mods.currentModDirectory = creditsStuff[i][5];
-				}
+			if(isSelectable){
+				if(creditsStuff[i][5] != null) Mods.currentModDirectory = creditsStuff[i][5];
 
 				var str:String = 'credits/missing_icon';
-				if(creditsStuff[i][1] != null && creditsStuff[i][1].length > 0)
-				{
+				if(creditsStuff[i][1] != null && creditsStuff[i][1].length > 0){
 					var fileName = 'credits/' + creditsStuff[i][1];
 					if (Paths.fileExists('images/$fileName.png', IMAGE)) str = fileName;
 					else if (Paths.fileExists('images/$fileName-pixel.png', IMAGE)) str = fileName + '-pixel';
@@ -124,9 +117,9 @@ class CreditsState extends MusicBeatState
 		add(descBox);
 
 		descText = new FlxText(50, FlxG.height + offsetThing - 25, 1180, "", 32);
-		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER/*, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK*/);
+		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		descText.scrollFactor.set();
-		//descText.borderSize = 2.4;
+		descText.borderSize = 2.4;
 		descBox.sprTracker = descText;
 		add(descText);
 
@@ -226,11 +219,8 @@ class CreditsState extends MusicBeatState
 		} while(unselectableCheck(curSelected));
 
 		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
-		//trace('The BG color is: $newColor');
 		if(newColor != intendedColor) {
-			if(colorTween != null) {
-				colorTween.cancel();
-			}
+			if(colorTween != null) colorTween.cancel();
 			intendedColor = newColor;
 			colorTween = FlxTween.color(bg, 1, bg.color, intendedColor, {
 				onComplete: function(twn:FlxTween) {
@@ -248,9 +238,7 @@ class CreditsState extends MusicBeatState
 
 			if(!unselectableCheck(bullShit-1)) {
 				item.alpha = 0.6;
-				if (item.targetY == 0) {
-					item.alpha = 1;
-				}
+				if(item.targetY == 0) item.alpha = 1;
 			}
 		}
 
@@ -271,11 +259,9 @@ class CreditsState extends MusicBeatState
 		if(folder != null && folder.trim().length > 0) creditsFile = Paths.mods(folder + '/data/credits.txt');
 		else creditsFile = Paths.mods('data/credits.txt');
 
-		if (FileSystem.exists(creditsFile))
-		{
+		if(FileSystem.exists(creditsFile)){
 			var firstarray:Array<String> = File.getContent(creditsFile).split('\n');
-			for(i in firstarray)
-			{
+			for(i in firstarray) {
 				var arr:Array<String> = i.replace('\\n', '\n').split("::");
 				if(arr.length >= 5) arr.push(folder);
 				creditsStuff.push(arr);

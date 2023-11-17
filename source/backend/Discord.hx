@@ -14,7 +14,7 @@ class DiscordClient
 		details: "Starting",
 		state: null,
 		largeImageKey: 'icon',
-		largeImageText: "Psych Engine",
+		largeImageText: "Foxa Engine",
 		smallImageKey : null,
 		startTimestamp : null,
 		endTimestamp : null

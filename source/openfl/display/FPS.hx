@@ -67,7 +67,7 @@ class FPS extends TextField
 	@:noCompletion
 	private #if !flash override #end function __enterFrame(deltaTime:Float):Void
 	{
-		if (deltaTimeout > 1000) {
+		if(deltaTimeout > 1000) {
 			// there's no need to update this every frame and it only causes performance losses.
 			deltaTimeout = 0.0;
 			return;
@@ -90,7 +90,7 @@ class FPS extends TextField
 			text += '\nMemory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}';
 			#end
 
-			text += '\nPsych Engine 0.7.2 Custom Build';
+			text += '\nPsych Engine 0.7.2 [CUSTOM BUILD]';
 			text += '\nFNF Vs. Foxa 3.0';
 
 			textColor = 0xFFFFFFFF;
