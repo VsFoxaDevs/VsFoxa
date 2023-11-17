@@ -10,7 +10,7 @@ import states.TitleState;
 class SaveVariables {
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
-	//public var opponentStrums:Bool = true;
+	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = true;
@@ -18,7 +18,7 @@ class SaveVariables {
 	public var antialiasing:Bool = true;
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Psych';
-	public var opponentSplashes:Bool = true;
+	//public var opponentSplashes:Bool = true;
 	public var instantRespawn:Bool = false;
 	public var splashAlpha:Float = 0.6;
 	public var fpsRainbow:Bool = false; // kadedev
