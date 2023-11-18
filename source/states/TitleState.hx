@@ -71,8 +71,6 @@ class TitleState extends MusicBeatState
 
 	public static var updateVersion:String = '';
 
-	public var luaArray:Array<FunkinLua> = [];
-
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
@@ -168,35 +166,6 @@ class TitleState extends MusicBeatState
 				});
 			}
 		}
-		// global title scripts
-		/*#if LUA_ALLOWED
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/titlescreen/')];
-
-		#if MODS_ALLOWED
-		foldersToCheck.insert(0, Paths.mods('menu_scripts/titlescreen/'));
-		if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/menu_scripts/titlescreen/'));
-
-		for (mod in Mods.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/menu_scripts/titlescreen/'));
-		#end
-
-		for (folder in foldersToCheck)
-		{
-			if (FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
-					if (file.endsWith('.lua') && !filesPushed.contains(file))
-					{
-						luaArray.push(new FunkinLua(folder + file));
-						filesPushed.push(file);
-					}
-				}
-			}
-		}
-		#end*/
 	}
 
 	var logoBl:FlxSprite;
@@ -704,6 +673,18 @@ class TitleState extends MusicBeatState
 				}
 				#end
 			}
+			
+			//kade engine moment
+			logoBl.y = titleJSON.titley + 5;
+
+			FlxTween.tween(logoBl, {y: titleJSON.titley}, 1.4, {ease: FlxEase.quartInOut});
+			logoBl.angle = -4;
+			new FlxTimer().start(0.01, function(tmr:FlxTimer)
+			{
+				if(logoBl.angle == -4) FlxTween.angle(logoBl, logoBl.angle, 4, 4, {ease: FlxEase.quartInOut});
+				if(logoBl.angle == 4) FlxTween.angle(logoBl, logoBl.angle, -4, 4, {ease: FlxEase.quartInOut});
+			}, 0);
+
 			skippedIntro = true;
 		}
 	}

@@ -39,6 +39,12 @@ import psychlua.ModchartSprite;
 
 import Sys;
 
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+import sys.io.FileOutput;
+#end
+
 import openfl.display.DisplayObject;
 
 import tjson.TJSON as Json;
@@ -651,6 +657,91 @@ class FunkinLua {
 				}));
 			}
 		});
+		
+		//file functions! (from dragshot's psych engine xt)
+		Lua_helper.add_callback(lua, "folderExists", function(targetFolder:String = null, modOnly:Bool = false) {
+			#if (MODS_ALLOWED && sys)
+			return Paths.foxaFindFolder(targetFolder, modOnly) != null;
+			#else
+			return false;
+			#end
+		});
+		Lua_helper.add_callback(lua, "fileExists", function(targetFile:String = null, modOnly:Bool = false) {
+			#if (MODS_ALLOWED && sys)
+			return Paths.foxaFindFile(targetFile, modOnly) != null;
+			#else
+			return false;
+			#end
+		});
+		Lua_helper.add_callback(lua, "readFile", function(targetFile:String = null, modOnly:Bool = false) {
+			#if (MODS_ALLOWED && sys)
+			var path = Paths.foxaFindFile(targetFile, modOnly);
+			if (path != null) try {
+				return File.getContent(path);
+			} catch (ex:Dynamic) {
+				trace('Error while reading from "$path": $ex');
+			}
+			#end
+			return null;
+		});
+		Lua_helper.add_callback(lua, "readLines", function(targetFile:String = null, modOnly:Bool = false) {
+			var text = Paths.getTextFromFile(targetFile, modOnly);
+			return text == null ? null : CoolUtil.listFromString(text, false);
+		});
+		Lua_helper.add_callback(lua, "writeFile", function(targetFile:String = null, data:String = "", append:Bool = false) {
+			#if (MODS_ALLOWED && sys)
+			var path = Paths.foxaFileWritePath(targetFile);
+			if (path != null) try {
+				var out:FileOutput = append ? File.append(path) : File.write(path);
+				out.writeString(data, haxe.io.Encoding.UTF8);
+				out.close();
+				return true;
+			} catch (ex:Dynamic) {
+				trace('Error while writing into "$path": $ex');
+			}
+			#end
+			return false;
+		});
+		Lua_helper.add_callback(lua, "makeFolder", function(targetFolder:String = null) {
+			#if (MODS_ALLOWED && sys)
+			var path = Paths.foxaFolderCreatePath(targetFolder);
+			if (path != null) try {
+				FileSystem.createDirectory(path);
+				return true;
+			} catch (ex:Dynamic) {
+				trace('Unable to create folder "$path": $ex');
+			}
+			#end
+			return false;
+		});
+		Lua_helper.add_callback(lua, "removeFile", function(targetFile:String = null) {
+			#if (MODS_ALLOWED && sys)
+			if (Mods.currentModDirectory == '') return false;
+			var path = Paths.foxaFindFile(targetFile, true);
+			if (path != null) try {
+				FileSystem.deleteFile(path);
+				return true;
+			} catch (ex:Dynamic) {
+				trace('Unable to delete file "$path": $ex');
+			}
+			#end
+			return false;
+		});
+		Lua_helper.add_callback(lua, "removeFolder", function(targetFolder:String = null) {
+			#if (MODS_ALLOWED && sys)
+			if (Mods.currentModDirectory == '') return false;
+			var path = Paths.foxaFindFolder(targetFolder, true);
+			if (path != null) try {
+				FileSystem.deleteDirectory(path);
+				return true;
+			} catch (ex:Dynamic) {
+				trace('Unable to delete folder "$path": $ex');
+			}
+			#end
+			return false;
+		});
+		//
+
 		Lua_helper.add_callback(lua, "loadMouseImage", function(Graphic:String, Scale:Float = 1, XOffset:Int = 0, YOffset:Int = 0) {
 			return FlxG.mouse.load(Graphic, Scale, XOffset, YOffset);
 		});

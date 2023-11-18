@@ -45,7 +45,7 @@ class ThanksState extends MusicBeatState {
 			32);
 		#else
 		var txt:FlxText = new FlxText(0, 0, FlxG.width,
-			"Thanks for playing Vs. Foxa 3.0!\nWe have worked hard on this for long, and we appreciate you playing the mod!\nAlso, if you want, you can join the official\nVS.FOXA Discord server as well.\n(https://discord.gg/FARpwR9K4k)"
+			"Thanks for playing Vs. Foxa 3.0!\nWe have worked hard on this for long, and we appreciate you playing the mod!"
 			+ "\n\nPress Enter to continue.",
 			32);
 		#end

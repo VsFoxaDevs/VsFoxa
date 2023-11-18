@@ -46,25 +46,19 @@ class CoolUtil
 		return colorNum != null ? colorNum : FlxColor.WHITE;
 	}
 
-	inline public static function listFromString(string:String):Array<String>
+	public static function listFromString(string:String, trimLines:Bool = true):Array<String>
 	{
-		var daList:Array<String> = [];
-		daList = string.trim().split('\n');
-
-		for (i in 0...daList.length)
-			daList[i] = daList[i].trim();
-
+		var daList:Array<String> = string.trim().replace('\r\n', '\n').split('\n');
+		if(trimLines) for (i in 0...daList.length) daList[i] = daList[i].trim();
 		return daList;
 	}
-
+	
 	public static function floorDecimal(value:Float, decimals:Int):Float
 	{
-		if(decimals < 1)
-			return Math.floor(value);
+		if(decimals < 1) return Math.floor(value);
 
 		var tempMult:Float = 1;
-		for (i in 0...decimals)
-			tempMult *= 10;
+		for (i in 0...decimals) tempMult *= 10;
 
 		var newValue:Float = Math.floor(value * tempMult);
 		return newValue / tempMult;
@@ -140,7 +134,7 @@ class CoolUtil
 	**/
 	inline public static function getSavePath(folder:String = 'ShadowMario'):String {
 		@:privateAccess
-		return #if (flixel < "5.0.0") folder #else FlxG.stage.application.meta.get('company')
+		return #if (flixel < "5.0.0") folder #else FlxSave.validate(FlxG.stage.application.meta.get('company'))
 			+ '/'
 			+ FlxSave.validate(FlxG.stage.application.meta.get('file')) #end;
 	}

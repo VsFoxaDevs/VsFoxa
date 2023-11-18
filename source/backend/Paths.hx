@@ -45,7 +45,6 @@ class Paths
 
 	/// haya I love you for the base cache dump I took to the max
 	public static function clearUnusedMemory() {
-		if(ClientPrefs.data.imagesPersist) return;
 		// clear non local assets in the tracked assets list
 		for (key in currentTrackedAssets.keys()) {
 			// if it is not currently contained within the used local assets
@@ -73,7 +72,6 @@ class Paths
 	// define the locally tracked assets
 	public static var localTrackedAssets:Array<String> = [];
 	public static function clearStoredMemory(?cleanUnused:Bool = false) {
-		if(ClientPrefs.data.imagesPersist) return;
 		// clear anything not in the tracked assets list
 		@:privateAccess
 		for (key in FlxG.bitmap._cache.keys())
@@ -135,6 +133,44 @@ class Paths
 
 		return getSharedPath(file);
 	}
+
+	// from dragshots' psych engine XT
+	public static function foxaFindFile(target:String = null, modOnly:Bool = false):String
+	{
+		if(target == null || target.contains("../")) return null;
+		var path = Paths.mods(target);
+		if(Mods.currentModDirectory != '') path = Paths.mods(Mods.currentModDirectory + '/' + target);
+		if (!modOnly && (!FileSystem.exists(path) || FileSystem.isDirectory(path))) path = Paths.mods(target);
+		if (FileSystem.exists(path) && !FileSystem.isDirectory(path)) return path;
+		return null;
+	}
+
+	public static function foxaFindFolder(target:String = null, modOnly:Bool = false):String
+	{
+		if(target == null || target.contains("../")) return null;
+		var path = Paths.mods(target);
+		if(Mods.currentModDirectory != '') path = Paths.mods(Mods.currentModDirectory + '/' + target);
+		if(!modOnly && (!FileSystem.exists(path) || !FileSystem.isDirectory(path))) path = Paths.mods(target);
+		if(FileSystem.exists(path) && FileSystem.isDirectory(path)) return path;
+		return null;
+	}
+
+	public static function foxaFileWritePath(target:String = null):String
+	{
+		if(target == null || target.contains("../") || Mods.currentModDirectory == '') return null;
+		var path = Paths.mods(Mods.currentModDirectory + '/' + target);
+		if(!FileSystem.exists(path) || (FileSystem.exists(path) && !FileSystem.isDirectory(path))) return path;
+		else return null;
+	}
+
+	public static function foxaFolderCreatePath(target:String = null):String
+	{
+		if(target == null || target.contains("../") || Mods.currentModDirectory == '') return null;
+		var path = Paths.mods(Mods.currentModDirectory + '/' + target);
+		if(!FileSystem.exists(path) || (FileSystem.exists(path) && FileSystem.isDirectory(path))) return path;
+		else return null;
+	}
+	//
 
 	static public function getLibraryPath(file:String, library = "shared")
 	{
