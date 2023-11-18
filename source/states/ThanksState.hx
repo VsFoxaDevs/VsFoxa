@@ -54,7 +54,7 @@ class ThanksState extends MusicBeatState {
 
 		txt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.fromRGB(200, 200, 200), CENTER);
 		txt.borderColor = FlxColor.BLACK;
-		txt.borderSize = 3;
+		txt.borderSize = 2.4;
 		txt.borderStyle = FlxTextBorderStyle.OUTLINE;
 		txt.screenCenter();
 

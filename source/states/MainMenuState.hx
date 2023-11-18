@@ -9,6 +9,11 @@ import flixel.effects.FlxFlicker;
 import flixel.input.keyboard.FlxKey;
 import lime.app.Application;
 
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
+
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
 
@@ -27,6 +32,7 @@ class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.7.2-foxa'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
+	private var colorRotation:Int = 1;
 
 	public static var menuJunk:MainMenuData;
 
@@ -42,12 +48,14 @@ class MainMenuState extends MusicBeatState
 		"500+  Giftcards! (-CharlesCatYT)",
 		"bro became starfire from teen titans go (-Monomouse)",
 		"Hi (-ScriptedMar)",
+		"vile fnf (-BambiTGA)",
+		"I'm gonna stop updating Psych Engine soon. (-ShadowMario)",
 		"Its already been 1 beer... (-cyborg henry)",
 		"this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend! (-Foxa The Artist)",
-		"To what? My tits? (-Foxa The Artist)",
+		"sorry i may have taken a bite out of your chicken (-cyborg henry)",
 		"Damn how many fnf mods are ya'll making1?!?! (-ItsToppy)",
 		"Get briccedd (-cyborg henry)",
-		"I like beans (-Foxa The Artist)",
+		"uninstall. (-Darkness Light)",
 		"YOUR ARGUMENT, IS NOW INVALID! (-Monomouse)",
 		"when did we start playing freeze tag (-Vencerist)",
 		"top 100 reasons why I won't ask foxa unless she's online (-CharlesCatYT)",
@@ -67,7 +75,7 @@ class MainMenuState extends MusicBeatState
 		'options'
 	];
 
-	//public var luaArray:Array<FunkinLua> = [];
+	var bgColors:Array<String> = ['#FFFF7CE9', '#FFB2C3C7', '#FFCA4040', '#FFE98706', '#FF40AFCA', '#FFE0CB69'];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -92,17 +100,15 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		//PlayState.instance.callOnLuas("createMenu", []);
-
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
 		bg.updateHitbox();
 		bg.screenCenter();
 		add(bg);
-
+		
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
@@ -116,12 +122,12 @@ class MainMenuState extends MusicBeatState
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 
-		if (menuJunk.checkboard == true){
-		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33525252, 0x0));
-		grid.velocity.set(40, 40);
-		grid.alpha = 0;
-		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-		add(grid);
+		if(menuJunk.checkboard == true){
+			var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33525252, 0x0));
+			grid.velocity.set(40, 40);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
 		}
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
@@ -191,45 +197,23 @@ class MainMenuState extends MusicBeatState
 		#end
 		#end
 
-		// GLOBAL MAIN MENU SCRIPTS
-		/*#if LUA_ALLOWED
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/mainmenu/')];
+		FlxTween.color(bg, 2, bg.color, FlxColor.fromString(bgColors[colorRotation]));
 
-		#if MODS_ALLOWED
-		foldersToCheck.insert(0, Paths.mods('menu_scripts/mainmenu/'));
-		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/menu_scripts/mainmenu/'));
-
-		for(mod in Mods.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/menu_scripts/mainmenu/'));
-		#end
-
-		for (folder in foldersToCheck)
+		new FlxTimer().start(2, function(tmr:FlxTimer)
 		{
-			if(FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
-					if(file.endsWith('.lua') && !filesPushed.contains(file))
-					{
-						luaArray.push(new FunkinLua(folder + file));
-						filesPushed.push(file);
-					}
-				}
-			}
-		}
-		#end*/
+			FlxTween.color(bg, 2, bg.color, FlxColor.fromString(bgColors[colorRotation]));
+			if(colorRotation < (bgColors.length - 1)) colorRotation++;
+			else colorRotation = 0;
+		}, 0);
 
 		super.create();
 	}
 
 	var selectedSomethin:Bool = false;
+	var colorTimer:Float = 0;
 
 	override function update(elapsed:Float)
 	{
-		//PlayState.instance.callOnLuas("updateMenu", [elapsed]);
-
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * elapsed;
@@ -335,8 +319,6 @@ class MainMenuState extends MusicBeatState
 
 	function changeItem(huh:Int = 0)
 	{
-		//PlayState.instance.callOnLuas("changeMenuItem", [huh]);
-
 		curSelected += huh;
 
 		if (curSelected >= menuItems.length) curSelected = 0;
