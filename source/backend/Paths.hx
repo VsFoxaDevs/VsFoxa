@@ -31,10 +31,10 @@ class Paths
 	inline public static final VIDEO_EXT = "mp4";
 
 	public static function excludeAsset(key:String) {
-		if (!dumpExclusions.contains(key))
-			dumpExclusions.push(key);
+		if(!dumpExclusions.contains(key)) dumpExclusions.push(key);
 	}
 
+	// for the menu songs (except the offsetting music)
 	public static var dumpExclusions:Array<String> =
 	[
 		'assets/shared/music/freakyMenu.$SOUND_EXT',
@@ -42,8 +42,10 @@ class Paths
 		'assets/shared/music/ignited-grapes.$SOUND_EXT',
 		'assets/shared/music/tea-time.$SOUND_EXT',
 	];
+
 	/// haya I love you for the base cache dump I took to the max
 	public static function clearUnusedMemory() {
+		if(ClientPrefs.data.imagesPersist) return;
 		// clear non local assets in the tracked assets list
 		for (key in currentTrackedAssets.keys()) {
 			// if it is not currently contained within the used local assets
@@ -71,6 +73,7 @@ class Paths
 	// define the locally tracked assets
 	public static var localTrackedAssets:Array<String> = [];
 	public static function clearStoredMemory(?cleanUnused:Bool = false) {
+		if(ClientPrefs.data.imagesPersist) return;
 		// clear anything not in the tracked assets list
 		@:privateAccess
 		for (key in FlxG.bitmap._cache.keys())

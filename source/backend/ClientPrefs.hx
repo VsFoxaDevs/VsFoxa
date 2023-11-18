@@ -6,7 +6,7 @@ import flixel.input.gamepad.FlxGamepadInputID;
 
 import states.TitleState;
 
-// Add a variable here and it will get automatically saved
+//Add a variable here and it will get automatically saved
 class SaveVariables {
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
@@ -21,9 +21,10 @@ class SaveVariables {
 	//public var opponentSplashes:Bool = true;
 	public var instantRespawn:Bool = false;
 	public var splashAlpha:Float = 0.6;
-	public var fpsRainbow:Bool = false; // kadedev
+	public var fpsRainbow:Bool = false; //kadedev
 	public var laneUnderlay:Float = 0;
 	public var coloredHealthBar = true;
+	public var imagesPersist:Bool = false; //from 0.4.2
 	public var botplaySine:Bool = true;
 	public var showMsText:Bool = true;
 	public var lowQuality:Bool = false;

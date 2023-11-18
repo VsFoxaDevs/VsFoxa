@@ -39,6 +39,8 @@ import psychlua.ModchartSprite;
 
 import Sys;
 
+import openfl.display.DisplayObject;
+
 import tjson.TJSON as Json;
 
 class FunkinLua {
@@ -648,6 +650,15 @@ class FunkinLua {
 					}
 				}));
 			}
+		});
+		Lua_helper.add_callback(lua, "loadMouseImage", function(Graphic:String, Scale:Float = 1, XOffset:Int = 0, YOffset:Int = 0) {
+			return FlxG.mouse.load(Graphic, Scale, XOffset, YOffset);
+		});
+		Lua_helper.add_callback(lua, "resizeGame", function(w:Int, h:Int) {
+			return FlxG.resizeGame(w, h);
+		});
+		Lua_helper.add_callback(lua, "exitWindow", function(code:Int) {
+			return openfl.system.System.exit(code);
 		});
 		Lua_helper.add_callback(lua, "mouseClicked", function(button:String) {
 			var click:Bool = FlxG.mouse.justPressed;
@@ -1313,6 +1324,15 @@ class FunkinLua {
 			if(spr != null) return spr.pixels.getPixel32(x, y);
 			return FlxColor.BLACK;
 		});
+
+		Lua_helper.add_callback(lua, "addChild", function(displayChild:DisplayObject) {
+			return FlxG.stage.addChild(displayChild);
+		});
+
+		Lua_helper.add_callback(lua, "removeChild", function(displayChild:DisplayObject) {
+			return FlxG.stage.removeChild(displayChild);
+		});
+
 		Lua_helper.add_callback(lua, "startDialogue", function(dialogueFile:String, music:String = null) {
 			var path:String;
 			#if MODS_ALLOWED
