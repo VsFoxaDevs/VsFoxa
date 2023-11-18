@@ -542,19 +542,6 @@ class PlayState extends MusicBeatState
 		reloadHealthBarColors();
 		uiGroup.add(healthBar);
 
-		/*healthBarOverlay = new FlxSprite().loadGraphic(Paths.image('healthBarOverlay'));
-		healthBarOverlay.y = FlxG.height * 0.89;
-		healthBarOverlay.screenCenter(X);
-		healthBarOverlay.scrollFactor.set();
-		healthBarOverlay.visible = !ClientPrefs.data.hideHud;
-        healthBarOverlay.color = FlxColor.BLACK;
-		healthBarOverlay.blend = MULTIPLY;
-		healthBarOverlay.x = healthBar.x-1.9;
-	    healthBarOverlay.alpha = ClientPrefs.data.healthBarAlpha;
-		healthBarOverlay.antialiasing = ClientPrefs.data.antialiasing;
-		uiGroup.add(healthBarOverlay); healthBarOverlay.alpha = ClientPrefs.data.healthBarAlpha; if(ClientPrefs.data.downScroll) healthBarOverlay.y = 0.11 * FlxG.height;*/
-		// will test later
-
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
 		iconP1.visible = !ClientPrefs.data.hideHud;
