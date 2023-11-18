@@ -1,6 +1,8 @@
 # Friday Night Funkin' - Vs. Foxa / Foxa Engine
 Not a Psych fork again...
 
+![](https://cdn.discordapp.com/attachments/1110759814256148512/1175503013083873471/image.png)
+
 # Friday Night Funkin' - Psych Engine
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
