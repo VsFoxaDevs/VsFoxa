@@ -75,7 +75,7 @@ class MainMenuState extends MusicBeatState
 		'options'
 	];
 
-	var bgColors:Array<String> = ['#FFFF7CE9', '#FFB2C3C7', '#FFCA4040', '#FFE98706', '#FF40AFCA', '#FFE0CB69'];
+	var bgColors:Array<String> = ['#517bc4', '#eb9bee', '#eb3030', '#eb7e19'];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
