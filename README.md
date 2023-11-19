@@ -1,7 +1,51 @@
 # Friday Night Funkin' - Vs. Foxa / Foxa Engine
 Not a Psych fork again...
 
+You and your girlfriend go down an alleyway, searching for the famous "Whitmore". However, A pink fox blocks your way! She seems to be trying to protect someone... She does not want you to rap battle him! Sing 5 or more songs with her, maybe even a 6th one too? 
+
 ![](https://cdn.discordapp.com/attachments/1110759814256148512/1175503013083873471/image.png)
+
+## License Summary
+
+### Permitted Actions
+
+You are permitted to perform the following actions:
+
+- Download and install/play this modification.
+
+### Required Actions
+
+You must obtain permission to perform the following actions:
+
+- Redistribute the unmodified engine on a website other than GameBanana, GameJolt, or GitHub.
+- Use parts of this modification in another engine or mod and provide credit.
+
+### Permitted Actions with Conditions
+
+You are permitted to perform the following actions under the following conditions:
+
+- Modify this engine and redistribute the modified engine on GameBanana, GameJolt, or GitHub, provided that you offer the same rights to others.
+
+### Prohibited Actions
+
+You are not allowed to perform the following actions under any circumstances:
+
+- Use this modification or parts of this modification for commercial purposes.
+- Use parts of this modification in another engine or mod without providing credit.
+- Publicly distribute malicious or potentially harmful scripts that utilize this engine. 
+
+### Additional Conditions
+
+You agree to the following additional conditions:
+
+- You will not modify this modification in any way that violates the license agreement.
+- You will not distribute any modified versions of this mod that do not comply with the terms of this license agreement.
+
+This license agreement is subject to change at any time, and continued use of the mod constitutes acceptance of any such changes.
+
+***REMEMBER*: This is a *mod*. This is not the vanilla game and should be treated as a *modification*. This is not and probably will never be official, so don't get confused.**
+
+Anyway, back to the original Psych README...
 
 # Friday Night Funkin' - Psych Engine
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
