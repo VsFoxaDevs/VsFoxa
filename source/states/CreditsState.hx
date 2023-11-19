@@ -61,6 +61,7 @@ class CreditsState extends MusicBeatState {
 			['iFlicky',				'flicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',		 'https://twitter.com/flicky_i',		 '9E29CF'],
 			['KadeDev',				'kade',				'Fixed some cool stuff on Chart Editor\nand other PRs',			 'https://twitter.com/kade0912',		 '64A250'],
 			['superpowers04',		'superpowers04',	'LUA JIT Fork',													 'https://twitter.com/superpowers04',	 'B957ED'],
+			['Lego0_77',				'face',					'Stage Editor',		 '',									 'A1A1A1'],
 			['Smokey',				'smokey',			'Sprite Atlas Support',											 'https://twitter.com/Smokey_5_',		 '483D92'],
 			[''],
 			["Funkin' Crew"],

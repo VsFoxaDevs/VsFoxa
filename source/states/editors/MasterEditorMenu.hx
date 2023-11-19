@@ -16,7 +16,8 @@ class MasterEditorMenu extends MusicBeatState
 		'Menu Character Editor',
 		'Dialogue Editor',
 		'Dialogue Portrait Editor',
-		'Note Splash Debug'
+		'Note Splash Editor',
+		'Stage Editor'
 	];
 	private var grpTexts:FlxTypedGroup<Alphabet>;
 	private var directories:Array<String> = [null];
@@ -24,6 +25,8 @@ class MasterEditorMenu extends MusicBeatState
 	private var curSelected = 0;
 	private var curDirectory = 0;
 	private var directoryTxt:FlxText;
+
+	private var s_editor:StageEditorState = new StageEditorState();
 
 	override function create()
 	{
@@ -123,8 +126,10 @@ class MasterEditorMenu extends MusicBeatState
 					LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
 				case 'Dialogue Portrait Editor':
 					LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
-				case 'Note Splash Debug':
+				case 'Note Splash Editor':
 					MusicBeatState.switchState(new NoteSplashDebugState());
+				case 'Stage Editor':
+					LoadingState.loadAndSwitchState(s_editor, true);
 			}
 			FlxG.sound.music.volume = 0;
 			FreeplayState.destroyFreeplayVocals();
@@ -173,12 +178,13 @@ class MasterEditorMenu extends MusicBeatState
 			curDirectory = 0;
 	
 		WeekData.setDirectoryFromWeek();
-		if(directories[curDirectory] == null || directories[curDirectory].length < 1)
-			directoryTxt.text = 'Editors Menu - < No Mod Loaded >';
-		else
-		{
+		if(directories[curDirectory] == null || directories[curDirectory].length < 1) {
+			directoryTxt.text = '< No Mod Directory Loaded >';
+			s_editor.isModFolder = false;
+		}else{
+			s_editor.isModFolder = true;
 			Mods.currentModDirectory = directories[curDirectory];
-			directoryTxt.text = 'Editors Menu - < Selected Mod: ' + Mods.currentModDirectory + ' >';
+			directoryTxt.text = '< Loaded Mod Directory: ' + Mods.currentModDirectory + ' >';
 		}
 		directoryTxt.text = directoryTxt.text.toUpperCase();
 	}
