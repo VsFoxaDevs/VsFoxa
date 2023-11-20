@@ -9,12 +9,16 @@ import states.TitleState;
 //Add a variable here and it will get automatically saved
 class SaveVariables {
 	public var downScroll:Bool = false;
+	// public var sideScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
+	//public var judgementCounter:Bool = false;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = true;
 	public var fullscreen:Bool = false;
+	public var watermark:Bool = true;
+	// public var saveReplay:Bool = true; coming soon?
 	public var antialiasing:Bool = true;
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Psych';
@@ -51,9 +55,9 @@ class SaveVariables {
 	public var noReset:Bool = false;
 	public var healthBarAlpha:Float = 1;
 	public var hitsoundVolume:Float = 0;
-	public var pauseMusic:String = 'Tea Time';
+	public var pauseMusic:String = 'Breakfast';
 	public var checkForUpdates:Bool = true;
-	public var comboStacking:Bool = true;
+	public var comboStacking:Bool = false;
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
