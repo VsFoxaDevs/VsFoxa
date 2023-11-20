@@ -352,7 +352,5 @@ class ButtplugUtils {
             trace("toywebbridge and intiface central running, enabling buttplug support");
             depsRunning = true;
         }
-
     }
-
 }
