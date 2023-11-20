@@ -13,12 +13,12 @@ class SaveVariables {
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
-	//public var judgementCounter:Bool = false;
+	//public var judgementCounter:Bool = true;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = true;
 	public var fullscreen:Bool = false;
-	public var watermark:Bool = true;
-	// public var saveReplay:Bool = true; coming soon?
+	//public var watermark:Bool = true;
+	//public var saveReplay:Bool = true; coming soon?
 	public var antialiasing:Bool = true;
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Psych';
@@ -50,14 +50,14 @@ class SaveVariables {
 		[0xFFFF884E, 0xFFFFFAF5, 0xFF6C0000]];
 
 	public var ghostTapping:Bool = true;
-	public var timeBarType:String = 'Time Left';
+	public var timeBarType:String = 'Time Elapsed / Length';
 	public var scoreZoom:Bool = true;
 	public var noReset:Bool = false;
 	public var healthBarAlpha:Float = 1;
 	public var hitsoundVolume:Float = 0;
 	public var pauseMusic:String = 'Breakfast';
 	public var checkForUpdates:Bool = true;
-	public var comboStacking:Bool = false;
+	public var comboStacking:Bool = true;
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
