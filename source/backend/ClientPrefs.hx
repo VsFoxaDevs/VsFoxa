@@ -9,20 +9,16 @@ import states.TitleState;
 //Add a variable here and it will get automatically saved
 class SaveVariables {
 	public var downScroll:Bool = false;
-	// public var sideScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
 	public var showFPS:Bool = true;
-	//public var judgementCounter:Bool = true;
 	public var flashing:Bool = true;
 	public var autoPause:Bool = true;
 	public var fullscreen:Bool = false;
-	//public var watermark:Bool = true;
-	//public var saveReplay:Bool = true; coming soon?
+	public var showWatermark:Bool = true;
 	public var antialiasing:Bool = true;
 	public var noteSkin:String = 'Default';
 	public var splashSkin:String = 'Psych';
-	//public var opponentSplashes:Bool = true;
 	public var instantRespawn:Bool = false;
 	public var splashAlpha:Float = 0.6;
 	public var fpsRainbow:Bool = false; //kadedev
@@ -142,20 +138,16 @@ class ClientPrefs {
 
 	public static function resetKeys(controller:Null<Bool> = null) //Null = both, False = Keyboard, True = Controller
 	{
-		if(controller != true)
-		{
+		if(controller != true){
 			for (key in keyBinds.keys())
 			{
-				if(defaultKeys.exists(key))
-					keyBinds.set(key, defaultKeys.get(key).copy());
+				if(defaultKeys.exists(key)) keyBinds.set(key, defaultKeys.get(key).copy());
 			}
 		}
-		if(controller != false)
-		{
+		if(controller != false){
 			for (button in gamepadBinds.keys())
 			{
-				if(defaultButtons.exists(button))
-					gamepadBinds.set(button, defaultButtons.get(button).copy());
+				if(defaultButtons.exists(button)) gamepadBinds.set(button, defaultButtons.get(button).copy());
 			}
 		}
 	}
@@ -200,9 +192,7 @@ class ClientPrefs {
 			}
 		}
 		
-		if(Main.fpsVar != null) {
-			Main.fpsVar.visible = data.showFPS;
-		}
+		if(Main.fpsVar != null) Main.fpsVar.visible = data.showFPS;
 
 		#if (!html5 && !switch)
 		FlxG.autoPause = ClientPrefs.data.autoPause;
@@ -211,7 +201,7 @@ class ClientPrefs {
 		if(data.framerate > FlxG.drawFramerate) {
 			FlxG.updateFramerate = data.framerate;
 			FlxG.drawFramerate = data.framerate;
-		} else {
+		}else{
 			FlxG.drawFramerate = data.framerate;
 			FlxG.updateFramerate = data.framerate;
 		}
@@ -223,10 +213,8 @@ class ClientPrefs {
 		}
 		
 		// flixel automatically saves your volume!
-		if(FlxG.save.data.volume != null)
-			FlxG.sound.volume = FlxG.save.data.volume;
-		if (FlxG.save.data.mute != null)
-			FlxG.sound.muted = FlxG.save.data.mute;
+		if(FlxG.save.data.volume != null) FlxG.sound.volume = FlxG.save.data.volume;
+		if(FlxG.save.data.mute != null) FlxG.sound.muted = FlxG.save.data.mute;
 
 		#if desktop
 		DiscordClient.check();
@@ -255,7 +243,7 @@ class ClientPrefs {
 
 	inline public static function getGameplaySetting(name:String, defaultValue:Dynamic = null, ?customDefaultValue:Bool = false):Dynamic {
 		if(!customDefaultValue) defaultValue = defaultData.gameplaySettings.get(name);
-		return /*PlayState.isStoryMode ? defaultValue : */ (data.gameplaySettings.exists(name) ? data.gameplaySettings.get(name) : defaultValue);
+		return (data.gameplaySettings.exists(name) ? data.gameplaySettings.get(name) : defaultValue);
 	}
 
 	public static function reloadVolumeKeys() {

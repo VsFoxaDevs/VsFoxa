@@ -2,6 +2,7 @@ package states;
 
 import backend.WeekData;
 import backend.Highscore;
+import backend.ButtplugUtils;
 
 import flixel.input.keyboard.FlxKey;
 import flixel.addons.transition.FlxTransitionableState;
@@ -28,6 +29,9 @@ typedef TitleData = {
 	starty:Float,
 	gfx:Float,
 	gfy:Float,
+	gfscalex:Float,
+	gfscaley:Float,
+	gfantialiasing:Bool,
 	backgroundSprite:String,
 	bpm:Float,
 	versiontext:String,
@@ -36,8 +40,7 @@ typedef TitleData = {
 	funkin:String
 }
 
-class TitleState extends MusicBeatState
-{
+class TitleState extends MusicBeatState {
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
 	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 	public static var volumeUpKeys:Array<FlxKey> = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
@@ -58,9 +61,7 @@ class TitleState extends MusicBeatState
 	var wackyImage:FlxSprite;
 
 	#if TITLE_SCREEN_EASTER_EGG
-	var easterEggKeys:Array<String> = [
-		'SHADOW', 'RIVER', 'BBPANZU'
-	];
+	var easterEggKeys:Array<String> = ['SHADOW', 'RIVER', 'BBPANZU'];
 	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var easterEggKeysBuffer:String = '';
 	#end
@@ -79,6 +80,9 @@ class TitleState extends MusicBeatState
 		Mods.pushGlobalMods();
 		#end
 		Mods.loadTopMod();
+
+		ButtplugUtils.set_intensity(100);
+		ButtplugUtils.initialise();
 
 		// FlxG.fixedTimestep = false;
 		FlxG.game.focusLostFramerate = 60;
@@ -217,7 +221,8 @@ class TitleState extends MusicBeatState
 
 		if(ClientPrefs.data.shaders) swagShader = new ColorSwap();
 		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);
-		gfDance.antialiasing = ClientPrefs.data.antialiasing;
+		gfDance.scale.set(titleJSON.gfscalex, titleJSON.gfscaley);
+		gfDance.antialiasing = titleJSON.gfantialiasing;
 
 		var easterEgg:String = FlxG.save.data.psychDevsEasterEgg;
 		if(easterEgg == null) easterEgg = ''; //html5 fix
