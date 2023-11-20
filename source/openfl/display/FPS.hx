@@ -4,6 +4,7 @@ import haxe.Timer;
 import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
+import flixel.math.FlxMath;
 #if gl_stats
 import openfl.display._internal.stats.Context3DStats;
 import openfl.display._internal.stats.DrawCallContext;
@@ -33,6 +34,7 @@ class FPS extends TextField
 		The current memory usage.
 	**/
 	public var memoryMegas:Float = 0;
+	public var memoryTotal:Float = 0;
 
 	@:noCompletion private var cacheCount:Int;
 	@:noCompletion private var currentTime:Float;
@@ -83,19 +85,22 @@ class FPS extends TextField
 
 		if (currentCount != cacheCount /*&& visible*/)
 		{
-			text = 'FPS: ${currentFPS}';
+			text = 'FPS: ${currentFPS}\n';
 
 			#if openfl
 			memoryMegas = cast(System.totalMemory, UInt);
-			text += '\nMemory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}';
+			if(memoryMegas > memoryTotal) memoryTotal = memoryMegas;
+
+			text += "RAM: " + memoryMegas + " MB / " + memoryTotal + " MB";
 			#end
 
-			text += '\nPsych Engine 0.7.2 [CUSTOM BUILD]';
+			text += '\nPsych Engine 0.7.2 [CUSTOM BUILD]'; 
 			text += '\nFNF Vs. Foxa 3.0';
 
+			if (text != null || text != '') {if(Main.fpsVar != null) Main.fpsVar.visible = true;}
+
 			textColor = 0xFFFFFFFF;
-			if (currentFPS <= ClientPrefs.data.framerate / 2)
-				textColor = 0xFFFF0000;
+			if(currentFPS <= ClientPrefs.data.framerate / 2) textColor = 0xFFFF0000;
 
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
 			text += "\ntotalDC: " + Context3DStats.totalDrawCalls();

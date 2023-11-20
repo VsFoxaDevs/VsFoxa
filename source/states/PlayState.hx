@@ -14,6 +14,7 @@ import backend.Highscore;
 import backend.StageData;
 import backend.WeekData;
 import backend.Song;
+import backend.ButtplugUtils;
 import backend.Section;
 import backend.Rating;
 
@@ -274,6 +275,9 @@ class PlayState extends MusicBeatState
 	// Callbacks for stages
 	public var startCallback:Void->Void = null;
 	public var endCallback:Void->Void = null;
+
+	//the payload for beat-based buttplug support
+	public var bpPayload:String = "";
 
 	override public function create()
 	{
@@ -570,10 +574,13 @@ class PlayState extends MusicBeatState
 		else scoreTxt.visible = false;
 		updateScore(false);
 		uiGroup.add(scoreTxt);
-		versionTxt = new FlxText(0, FlxG.height - 18, 0, SONG.song + " - " + backend.Difficulty.getString() + " | " + states.MainMenuState.menuJunk.versionText, 16);
-		versionTxt.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		versionTxt.scrollFactor.set();
-		uiGroup.add(versionTxt);
+		
+		if(ClientPrefs.data.showWatermark){
+			versionTxt = new FlxText(0, FlxG.height - 18, 0, SONG.song + " - " + backend.Difficulty.getString() + " | " + states.MainMenuState.menuJunk.versionText, 16);
+			versionTxt.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			versionTxt.scrollFactor.set();
+			uiGroup.add(versionTxt);
+		}
 	
 		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1277,6 +1284,9 @@ class PlayState extends MusicBeatState
 
 		inst = new FlxSound().loadEmbedded(Paths.inst(songData.song));
 		FlxG.sound.list.add(inst);
+
+		//generate the payload for the frontend
+		bpPayload = ButtplugUtils.createPayload(Conductor.crochet);
 
 		notes = new FlxTypedGroup<Note>();
 		add(notes);
@@ -2286,6 +2296,8 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong()
 	{
+		ButtplugUtils.stop();
+
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach((daNote:Note) -> {
@@ -3112,6 +3124,8 @@ class PlayState extends MusicBeatState
 
 		super.beatHit();
 		lastBeatHit = curBeat;
+		//buttplug fuckery
+		ButtplugUtils.sendPayload(bpPayload);
 
 		setOnScripts('curBeat', curBeat);
 		callOnScripts('onBeatHit');

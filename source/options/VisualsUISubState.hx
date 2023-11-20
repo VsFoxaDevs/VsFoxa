@@ -114,6 +114,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Show Watermark',
+			"If you want a watermark on the bottom left during a song,\ngo for it.",
+			'showWatermark',
+			'bool');
+		addOption(option);
+
 		var option:Option = new Option('Score Text Zoom on Hit',
 			"If unchecked, disables the Score text zooming\neverytime you hit a note.",
 			'scoreZoom',
