@@ -172,6 +172,7 @@ class PlayState extends MusicBeatState
 	private var curSong:String = "";
 
 	public var gfSpeed:Int = 1;
+	public var maxHealth:Float = 2;
 	public var health(default, set):Float = 1;
 
 	inline function set_health(value:Float)
@@ -181,6 +182,8 @@ class PlayState extends MusicBeatState
 		return health;
 	}
 	public var combo:Int = 0;
+
+	public var vignette:FlxSprite;
 
 	public var healthBar:Bar;
 	public var timeBar:Bar;
@@ -308,6 +311,7 @@ class PlayState extends MusicBeatState
 		healthLoss = ClientPrefs.getGameplaySetting('healthloss');
 		instakillOnMiss = ClientPrefs.getGameplaySetting('instakill');
 		practiceMode = ClientPrefs.getGameplaySetting('practice');
+		shakeOnMiss = ClientPrefs.getGameplaySetting('missshake');
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay');
 		guitarHeroSustains = ClientPrefs.data.guitarHeroSustains;
 
@@ -596,11 +600,21 @@ class PlayState extends MusicBeatState
 		chartingTxt.visible = chartingMode;
 		uiGroup.add(chartingTxt);
 
+		vignette = new FlxSprite().loadGraphic(Paths.image('vignette'));
+		vignette.width = 1280;
+		vignette.height = 720;
+		vignette.x = 0;
+		vignette.y = 0;
+		vignette.updateHitbox();
+		vignette.alpha = 0;
+		if(ClientPrefs.data.enableVignette) add(vignette);
+
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		uiGroup.cameras = [camHUD];
 		comboGroup.cameras = [camHUD];
+		vignette.cameras = [camOther];
 
 		startingSong = true;
 		
@@ -1703,6 +1717,9 @@ class PlayState extends MusicBeatState
 		}
 		iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
 		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+
+		if(health > maxHealth) health = maxHealth;
+
 		switch (iconP1.animation.numFrames) {
 			case 1:
 				iconP1.animation.curAnim.curFrame = 0;
@@ -1719,6 +1736,8 @@ class PlayState extends MusicBeatState
 			default:
 				iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 1 : 0;
 		}
+
+		if(ClientPrefs.data.enableVignette) vignette.alpha = 0.9 - (health / maxHealth);
 
 		if (controls.justPressed('debug_2') && !endingSong && !inCutscene && !SONG.disableDebugButtons)
 			openCharacterEditor();
@@ -2788,10 +2807,10 @@ class PlayState extends MusicBeatState
 					keyReleased(i);
 	}
 
-	function noteMiss(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
+	function noteMiss(daNote:Note):Void{ // You didn't hit the key and let it go offscreen, also used by Hurt Notes
 		//Dupe note remove
 		notes.forEachAlive(function(note:Note) {
-			if (daNote != note && daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 1)
+			if(daNote != note && daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 1)
 				invalidateNote(note);
 		});
 		
@@ -2811,6 +2830,8 @@ class PlayState extends MusicBeatState
 
 	function noteMissCommon(direction:Int, note:Note = null)
 	{
+		if(shakeOnMiss) FlxG.camera.shake(0.0075, 0.1, null, true, X);
+
 		// score and data
 		var subtract:Float = 0.05;
 		if(note != null) subtract = note.missHealth;
