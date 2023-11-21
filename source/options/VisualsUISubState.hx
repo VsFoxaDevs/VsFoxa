@@ -102,11 +102,11 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
-		/*var option:Option = new Option('Opponent Splashes',
-			'If checked, opponent notes get note splashes.',
-			'opponentSplashes',
-			'bool');
-		addOption(option);*/
+		var option:Option = new Option('Enable Vignette', 
+		"If checked, a vignette effect will appear and change depending on your health.", 
+		'enableVignette',
+		'bool');
+	    addOption(option);
 		
 		var option:Option = new Option('Camera Zooms',
 			"If unchecked, the camera won't zoom in on a beat hit.",
