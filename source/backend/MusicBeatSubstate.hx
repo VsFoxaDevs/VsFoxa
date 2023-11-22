@@ -1,5 +1,10 @@
 package backend;
 
+#if android
+import android.flixel.FlxVirtualPad;
+import flixel.input.actions.FlxActionInput;
+import flixel.util.FlxDestroyUtil;
+#end
 import flixel.FlxSubState;
 
 class MusicBeatSubstate extends FlxSubState
@@ -50,6 +55,34 @@ class MusicBeatSubstate extends FlxSubState
 
 		super.update(elapsed);
 	}
+
+	#if android
+	var virtualPad:FlxVirtualPad;
+	var trackedinputsUI:Array<FlxActionInput> = [];
+
+	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode){
+		virtualPad = new FlxVirtualPad(DPad, Action);
+		add(virtualPad);
+
+		controls.setVirtualPadUI(virtualPad, DPad, Action);
+		trackedinputsUI = controls.trackedinputsUI;
+		controls.trackedinputsUI = [];
+	}
+
+	public function removeVirtualPad(){
+		if(trackedinputsUI != []) controls.removeFlxInput(trackedinputsUI);
+		if(virtualPad != null) remove(virtualPad);
+	}
+
+	public function addPadCamera(){
+		if(virtualPad != null){
+			var camControls = new flixel.FlxCamera();
+			FlxG.cameras.add(camControls, false);
+			camControls.bgColor.alpha = 0;
+			virtualPad.cameras = [camControls];
+		}
+	}
+	#end
 
 	private function updateSection():Void
 	{
