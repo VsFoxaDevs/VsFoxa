@@ -121,7 +121,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Score Text Zoom on Hit',
-			"If unchecked, disables the Score text zooming\neverytime you hit a note.",
+			"If unchecked, disables the Score text zooming\nevery time you hit a note.",
 			'scoreZoom',
 			'bool');
 		addOption(option);
@@ -133,7 +133,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Health Bar Opacity',
-			'How much transparent should the health bar and icons be.',
+			'How much transparent should the health bar and icons be?',
 			'healthBarAlpha',
 			'percent');
 		option.scrollSpeed = 1.6;
@@ -178,7 +178,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		
 		#if CHECK_FOR_UPDATES
 		var option:Option = new Option('Check for Updates',
-			'On Release builds, turn this on to check for updates when you start the game.',
+			'On official Psych builds, turn this on to check for updates when you start the game.',
 			'checkForUpdates',
 			'bool');
 		addOption(option);

@@ -2,12 +2,10 @@ package options;
 
 import objects.Character;
 
-class GraphicsSettingsSubState extends BaseOptionsMenu
-{
+class GraphicsSettingsSubState extends BaseOptionsMenu {
 	var antialiasingOption:Int;
 	var boyfriend:Character = null;
-	public function new()
-	{
+	public function new() {
 		title = 'Graphics';
 		rpcTitle = 'Graphics Settings Menu'; //for Discord Rich Presence
 
@@ -51,7 +49,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
 		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		var option:Option = new Option('Framerate',
-			"Pretty self explanatory, isn't it?",
+			"Pretty self explanatory, isn't it? Sets your FPS rate to the set value.",
 			'framerate',
 			'int');
 		addOption(option);
@@ -79,26 +77,19 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
 	function onChangeFramerate()
 	{
-		if(ClientPrefs.data.framerate > FlxG.drawFramerate)
-		{
+		if(ClientPrefs.data.framerate > FlxG.drawFramerate) {
 			FlxG.updateFramerate = ClientPrefs.data.framerate;
 			FlxG.drawFramerate = ClientPrefs.data.framerate;
-		}
-		else
-		{
+		}else{
 			FlxG.drawFramerate = ClientPrefs.data.framerate;
 			FlxG.updateFramerate = ClientPrefs.data.framerate;
 		}
 	}
 
-	override function changeSelection(change:Int = 0)
-	{
+	override function changeSelection(change:Int = 0) {
 		super.changeSelection(change);
 		boyfriend.visible = (antialiasingOption == curSelected);
 	}
 
-	public static function onChangeFullscreen()
-	{
-		FlxG.fullscreen = ClientPrefs.data.fullscreen;
-	}
+	public static function onChangeFullscreen() FlxG.fullscreen = ClientPrefs.data.fullscreen;
 }

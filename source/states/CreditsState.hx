@@ -83,6 +83,7 @@ class CreditsState extends MusicBeatState {
 			['Tahir',				'face',				'Implementing and mantaining SScript on Psych\nTO DO: Add Icon', 'https://github.com/TahirKarabekiroglu','A1A1A1'],
 			['iFlicky',				'flicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',		 'https://twitter.com/flicky_i',		 '9E29CF'],
 			['superpowers04',		'superpowers04',	'LUA JIT Fork',													 'https://twitter.com/superpowers04',	 'B957ED'],
+			['Lego0_77',				'face',					'Stage Editor',		 '',									 'A1A1A1'],
 			['Smokey',				'smokey',			'Sprite Atlas Support',											 'https://twitter.com/Smokey_5_',		 '483D92'],
 			[''],
 			["Funkin' Crew"],

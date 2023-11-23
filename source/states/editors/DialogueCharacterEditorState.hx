@@ -398,12 +398,9 @@ class DialogueCharacterEditorState extends MusicBeatState
 		rightCheckbox.checked = false;
 
 		switch(character.jsonFile.dialogue_pos) {
-			case 'left':
-				leftCheckbox.checked = true;
-			case 'center':
-				centerCheckbox.checked = true;
-			case 'right':
-				rightCheckbox.checked = true;
+			case 'left': leftCheckbox.checked = true;
+			case 'center': centerCheckbox.checked = true;
+			case 'right': rightCheckbox.checked = true;
 		}
 		reloadCharacter();
 		updateTextBox();
@@ -424,9 +421,7 @@ class DialogueCharacterEditorState extends MusicBeatState
 		character.y = DialogueBoxPsych.DEFAULT_CHAR_Y;
 
 		switch(character.jsonFile.dialogue_pos) {
-			case 'right':
-				character.x = FlxG.width - character.width + DialogueBoxPsych.RIGHT_CHAR_X;
-			
+			case 'right': character.x = FlxG.width - character.width + DialogueBoxPsych.RIGHT_CHAR_X;
 			case 'center':
 				character.x = FlxG.width / 2;
 				character.x -= character.width / 2;

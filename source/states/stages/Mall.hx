@@ -16,7 +16,7 @@ class Mall extends BaseStage
 		add(bg);
 
 		if(!ClientPrefs.data.lowQuality) {
-			upperBoppers = new BGSprite('christmas/upperBop', -240, -90, 0.33, 0.33, ['Upper Crowd Bob']);
+			upperBoppers = new BGSprite('christmas/upperBop', -240, -90, 0.33, 0.33, ['Upper Crowd Bob'], [false]);
 			upperBoppers.setGraphicSize(Std.int(upperBoppers.width * 0.85));
 			upperBoppers.updateHitbox();
 			add(upperBoppers);
@@ -36,7 +36,7 @@ class Mall extends BaseStage
 		var fgSnow:BGSprite = new BGSprite('christmas/fgSnow', -600, 700);
 		add(fgSnow);
 
-		santa = new BGSprite('christmas/santa', -840, 150, 1, 1, ['santa idle in fear']);
+		santa = new BGSprite('christmas/santa', -840, 150, 1, 1, ['santa idle in fear'], [false]);
 		add(santa);
 		precacheSound('Lights_Shut_off');
 		setDefaultGF('gf-christmas');
