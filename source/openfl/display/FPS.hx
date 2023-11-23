@@ -39,8 +39,7 @@ class FPS extends TextField
 	@:noCompletion private var cacheCount:Int;
 	@:noCompletion private var currentTime:Float;
 	@:noCompletion private var times:Array<Float>;
-	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000)
-	{
+	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -76,22 +75,21 @@ class FPS extends TextField
 		}
 		currentTime += deltaTime;
 		times.push(currentTime);
-		while (times[0] < currentTime - 1000)
-			times.shift();
+		while(times[0] < currentTime - 1000) times.shift();
 
 		var currentCount = times.length;
 		currentFPS = Math.round((currentCount + cacheCount) / 2);
-		if (currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
+		if(currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
 
-		if (currentCount != cacheCount /*&& visible*/)
-		{
+		if(currentCount != cacheCount /*&& visible*/) {
 			text = 'FPS: ${currentFPS}\n';
 
 			#if openfl
 			memoryMegas = cast(System.totalMemory, UInt);
-			if(memoryMegas > memoryTotal) memoryTotal = memoryMegas;
+			/*if(memoryMegas > memoryTotal) memoryTotal = memoryMegas;
 
-			text += "RAM: " + memoryMegas + " MB / " + memoryTotal + " MB";
+			text += "RAM: " + memoryMegas + " MB / " + memoryTotal + " MB";*/
+			text += 'Memory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}';
 			#end
 
 			text += '\nPsych Engine 0.7.2 [CUSTOM BUILD]'; 
