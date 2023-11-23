@@ -21,6 +21,17 @@ import tjson.TJSON as Json;
 
 using StringTools;
 
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+// this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
 typedef MainMenuData = {
 	fridayAchieve:String,
 	discordLink:String,
@@ -28,8 +39,7 @@ typedef MainMenuData = {
 	versionText:String
 }
 
-class MainMenuState extends MusicBeatState
-{
+class MainMenuState extends MusicBeatState {
 	public static var psychEngineVersion:String = '0.7.2-foxa'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 	private var colorRotation:Int = 1;

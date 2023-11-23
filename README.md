@@ -45,6 +45,8 @@ This license agreement is subject to change at any time, and continued use of th
 
 ***REMEMBER*: This is a *mod*. This is not the vanilla game and should be treated as a *modification*. This is not and probably will never be official, so don't get confused.**
 
+*Do not look at the MainMenuState file, worst mistake of my life.*
+
 Anyway, back to the original Psych README...
 
 # Friday Night Funkin' - Psych Engine
