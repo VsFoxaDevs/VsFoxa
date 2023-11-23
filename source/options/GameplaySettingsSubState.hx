@@ -15,19 +15,19 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Middlescroll',
-			'If checked, your notes get centered.',
+			'If checked, your strums and notes get centered.',
 			'middleScroll',
 			'bool');
 		addOption(option);
 
 		var option:Option = new Option('Opponent Notes',
-			'If unchecked, opponent notes get hidden.',
+			'If unchecked, both the opponent notes\nand the receptors get hidden.',
 			'opponentStrums',
 			'bool');
 		addOption(option);
 
 		var option:Option = new Option('Ghost Tapping',
-			"If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
+			"If checked, you won't get misses from pressing keys\nwhile there are no notes to hit yet.",
 			'ghostTapping',
 			'bool');
 		addOption(option);
@@ -37,7 +37,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 	    addOption(option);
 
 		var option:Option = new Option('Auto Pause',
-			"If checked, the game automatically pauses if the screen isn't on focus.",
+			"If checked, the game automatically pauses\nwhen you click out of the window.",
 			'autoPause',
 			'bool');
 		addOption(option);
@@ -50,7 +50,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Hitsound Volume',
-			'Funny notes does \"Tick!\" when you hit them."',
+			'Funny notes do \"Tick!\" when you hit them."',
 			'hitsoundVolume',
 			'percent');
 		addOption(option);
