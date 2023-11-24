@@ -42,7 +42,7 @@ class CreditsState extends MusicBeatState {
 		for (mod in Mods.parseList().enabled) pushModCreditsToList(mod);
 		#end
 
-		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link (Optional) - BG Color
 			['Vs. Foxa Devs'],
 			['Foxa The Artist',				'foxa',					'Director of Vs. Foxa\nDid most of the stuff for this mod',		 'https://www.youtube.com/channel/UCu0cMjmyVBgUXSieMwbqyjA',									 'EEABFC'],
 			['Dark',				'dark',					'Charter\nDialogue Writer and Story Helper',		 'https://steamcommunity.com/id/DarknessLight1/',									 'AA00FF'],
@@ -55,7 +55,7 @@ class CreditsState extends MusicBeatState {
 			['GarageBandCoverGuy96',				'face',					'Menu Music\nComposer of Vs. Foxa',		 'https://www.youtube.com/channel/UCspMkVJ4GiIENSgKcoNBZYQ',									 'A1A1A1'],
 			['SugarRatio',				'sugarratio',					'Made Denotator',		 'https://twitter.com/SugarRatio',									 'A1A1A1'],
 			['GsDrunkestDriver',				'gsdd',			'Buttplug Support',											 'https://github.com/GsDrunkestDriver',		 'A1A1A1'],
-			['Lego0_77',				'face',					'Stage Editor',		 '',									 'A1A1A1'],
+			/*['Lego0_77',				'face',					'Stage Editor',		 '',									 'A1A1A1'],*/
 			[''],
 			['Former Foxa Mod Devs'],
 			['JoerOnTheBlower',				'joer',					'Ex-Director of Vs. Foxa\nI don\'t support them.',		 '',									 'A1A1A1'],

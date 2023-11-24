@@ -71,7 +71,6 @@
 		<assets path='example_mods' rename='mods' embed='false'/>
 	</section>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
-	<assets path='docs/Stage Editor Tutorial.md' rename='stageEditorTutorial.txt' />
 	<assets path='art/the rel readme.txt' rename='the REAL readme.txt' />
 
 	<!-- _______________________________ Libraries ______________________________ -->

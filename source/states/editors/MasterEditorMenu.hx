@@ -16,8 +16,8 @@ class MasterEditorMenu extends MusicBeatState {
 		'Dialogue Editor',
 		'Dialogue Portrait Editor',
 		'Credits Editor',
-		'Note Splash Editor',
-		'Stage Editor'
+		'Note Splash Editor'//,
+		//'Stage Editor'
 	];
 	private var grpTexts:FlxTypedGroup<Alphabet>;
 	private var directories:Array<String> = [null];
@@ -26,7 +26,7 @@ class MasterEditorMenu extends MusicBeatState {
 	private var curDirectory = 0;
 	private var directoryTxt:FlxText;
 
-	private var s_editor:StageEditorState = new StageEditorState();
+	//private var s_editor:StageEditorState = new StageEditorState();
 
 	override function create(){
 		FlxG.camera.bgColor = FlxColor.BLACK;
@@ -106,8 +106,8 @@ class MasterEditorMenu extends MusicBeatState {
 					LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
 				case 'Note Splash Editor':
 					MusicBeatState.switchState(new NoteSplashDebugState());
-				case 'Stage Editor':
-					LoadingState.loadAndSwitchState(s_editor, true);
+				/*case 'Stage Editor':
+					LoadingState.loadAndSwitchState(s_editor, true);*/
 			}
 			FlxG.sound.music.volume = 0;
 			FreeplayState.destroyFreeplayVocals();
@@ -144,9 +144,9 @@ class MasterEditorMenu extends MusicBeatState {
 		WeekData.setDirectoryFromWeek();
 		if(directories[curDirectory] == null || directories[curDirectory].length < 1) {
 			directoryTxt.text = 'Editors - < No Mod Loaded >';
-			s_editor.isModFolder = false;
+			//s_editor.isModFolder = false;
 		}else{
-			s_editor.isModFolder = true;
+			//s_editor.isModFolder = true;
 			Mods.currentModDirectory = directories[curDirectory];
 			directoryTxt.text = 'Editors - < Loaded Mod: ' + Mods.currentModDirectory + ' >';
 		}
