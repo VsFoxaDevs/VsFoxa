@@ -53,41 +53,41 @@ Anyway, back to the original Psych README...
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
 ## Installation:
-You must have [Haxe](https://haxe.org/download/), installed in order to move on to these next steps
+You must have [Haxe 4.2.5](https://haxe.org/download/), installed in order to move on to these next steps.
 
 ------------------
 
-Go into your `setup` folder located in the root directory of the source code, and execute the respective script for your operating system
+Go into your `setup` folder located in the root directory of the source code, and execute the respective script for your operating system.
 
 `setup-unix.sh` was designed for Linux and Mac, `setup-windows.bat` was designed for (duh) Windows
 
-for Windows users, double click the `setup-windows.bat` file, and wait until the process of installing the libraries is finished
+For Windows users, double click the `setup-windows.bat` file, and wait until the process of installing the libraries is finished.
 
 ------------------
 
-for Linux and Mac users, often double clicking on `setup-unix.sh` is the solution, but if not, open up a terminal on the script's folder location, and execute the following command:
+For Linux and Mac users, often double clicking on `setup-unix.sh` is the solution, but if not, open up a terminal on the script's folder location, and execute the following command:
 
 `sh setup-unix.sh`
 
 ------------------
 
-once finished, you should be ready to compile, you can open a terminal in the source code folder, and then type `lime test <target>`
+Once finished, you should be ready to compile, you can open a terminal in the source code folder, and then type `lime test <target>`.
 
-with `<target>` being either `windows`, `mac` or `linux`
+With `<target>` being either `windows`, `mac` or `linux`.
 
 If the compiler gives an error saying that hxCodec cannot be found read this issue to fix it: ShadowMario/FNF-PsychEngine#12770
 
-If you want to just play the mod and not compile, just use the action builds (either through just Github's Actions tab, which requires a Github account, or use nightly.link) (use flixel 5.3.2 btw, actions don't work rn)
+If you want to just play the mod and not compile, just use the action builds (either through just Github's Actions tab, which requires a Github account, or use nightly.link). For Linux users though, fuck you, use Wine to play the mod, suckers!!!!!
 
 ## Customization:
 
-if you wish to disable things like *Lua Scripts* or *Video Cutscenes*, you can read over to `Project.xml`
+if you wish to disable things like *Lua & Haxe Scripts* or *Video Cutscenes*, you can read over to `Project.xml`
 
-inside `Project.xml`, you will find several variables to customize Psych Engine to your liking
+inside `Project.xml`, you will find several variables to customize Vs. Foxa to your liking
 
 to start you off, disabling Videos should be simple, simply Delete the line `"VIDEOS_ALLOWED"` or comment it out by wrapping the line in XML-like comments, like this `<!-- YOUR_LINE_HERE -->`
 
-same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, this and other customization options are all available within the `Project.xml` file
+same goes for *Lua & Haxe Scripts*, comment out or delete the line with `LUA_ALLOWED` and `HSCRIPT_ALLOWED`, this and other customization options are all available within the `Project.xml` file
 
 ## Credits:
 * Shadow Mario - Programmer
@@ -95,40 +95,37 @@ same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, 
 
 ### Special Thanks
 * bbpanzu - Ex-Programmer
-* Yoshubs - New Input System
+* Yoshubs - Ex-Programmer, we don't support them anymore.
 * SqirraRNG - Crash Handler and Base code for Chart Editor's Waveform
 * KadeDev - Fixed some cool stuff on Chart Editor and other PRs
 * iFlicky - Composer of Psync and Tea Time, also made the Dialogue Sounds
 * PolybiusProxy - .MP4 Video Loader Library (hxCodec)
 * Keoiki - Note Splash Animations
 * Smokey - Sprite Atlas Support
-* Nebula the Zorua - LUA JIT Fork and some Lua reworks
+* SuperPowers04 - LUA JIT Fork and some Lua reworks
 _____________________________________
 
 # Features
 
 ## Attractive animated dialogue boxes:
-
+(They were planned for the vanilla version once but was scrapped, by the way.)
 ![](https://user-images.githubusercontent.com/44785097/127706669-71cd5cdb-5c2a-4ecc-871b-98a276ae8070.gif)
-
 
 ## Mod Support
 * Probably one of the main points of this engine, you can code in .lua files outside of the source code, making your own weeks without even messing with the source!
 * Comes with a Mod Organizing/Disabling Menu.
 
-
-## Atleast one change to every week:
+## Atleast one change to every week (less Week 7):
 ### Week 1:
   * New Dad Left sing sprite
   * Unused stage lights are now used
   * Dad Battle has a spotlight effect for the breakdown
 ### Week 2:
-  * Both BF and Skid & Pump does "Hey!" animations
+  * Both BF and Skid & Pump do "Hey!" animations
   * Thunders does a quick light flash and zooms the camera in slightly
   * Added a quick transition/cutscene to Monster
 ### Week 3:
-  * BF does "Hey!" during Philly Nice
-  * Blammed has a cool new colors flash during that sick part of the song
+  * BF does "Hey!" during Philly Nice + that one part glows!
 ### Week 4:
   * Better hair physics for Mom/Boyfriend (Maybe even slightly better than Week 7's :eyes:)
   * Henchmen die during all songs. Yeah :(
@@ -142,7 +139,7 @@ _____________________________________
 ## Cool new Chart Editor changes and countless bug fixes
 ![](https://github.com/ShadowMario/FNF-PsychEngine/blob/main/docs/img/chart.png?raw=true)
 * You can now chart "Event" notes, which are bookmarks that trigger specific actions that usually were hardcoded on the vanilla version of the game.
-* Your song's BPM can now have decimal values
+* Your song's BPM can now have decimal values (Like in vanilla Week 7)
 * You can manually adjust a Note's strum time if you're really going for milisecond precision
 * You can change a note's type on the Editor, it comes with five example types:
   * Alt Animation: Forces an alt animation to play, useful for songs like Ugh/Stress
@@ -165,16 +162,17 @@ _____________________________________
 * You can add a head icon, name, description and a Redirect link for when the player presses Enter while the item is currently selected.
 
 ## Awards/Achievements
-* The engine comes with 16 example achievements that you can mess with and learn how it works (Check Achievements.hx and search for "checkForAchievement" on PlayState.hx)
+* The engine comes with 16 example achievements that you can mess with and learn how it works (Check Achievements.hx and search for "checkForAchievement" on PlayState.hx).
+* Supports custom awards without the need of using source code!
 
 ## Options menu:
-* You can change Note colors, Delay and Combo Offset, Controls and Preferences there.
- * On Preferences you can toggle Downscroll, Middlescroll, Anti-Aliasing, Framerate, Low Quality, Note Splashes, Flashing Lights, etc.
+* You can change Note colors, Rating & Audio Offset, Controls and Preferences there.
+* On Preferences, you can toggle Downscroll, Middlescroll, Anti-Aliasing, Framerate, Low Quality, Note Splashes, Flashing Lights, etc.
 
 ## Other gameplay features:
-* When the enemy hits a note, their strum note also glows.
+* When the enemy hits a note, their strum note also glows. (Like in Vanilla Week 7!)
 * Lag doesn't impact the camera movement and player icon scaling anymore.
 * Some stuff based on Week 7's changes has been put in (Background colors on Freeplay, Note splashes)
 * You can reset your Score on Freeplay/Story Mode by pressing Reset button.
-* You can listen to a song or adjust Scroll Speed/Damage taken/etc. on Freeplay by pressing Space.
+* You can listen to a song by pressing Space or adjust Scroll Speed/Damage taken/etc. on Freeplay by pressing Control.
 * You can enable "Combo Stacking" in Gameplay Options. This causes the combo sprites to just be one sprite with an animation rather than sprites spawning each note hit.
