@@ -20,7 +20,7 @@ You are permitted to perform the following actions:
 You must obtain permission to perform the following actions:
 
 - Redistribute the unmodified engine on a website other than GameBanana, GameJolt, or GitHub.
-- Use parts of this modification in another engine or mod and provide credit.
+- Use parts of this modification in another engine or mod and provide credit. (Though, there are things I just took from other engines so you may have to credit for those too.)
 
 ### Permitted Actions with Conditions
 
