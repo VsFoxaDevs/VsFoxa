@@ -28,7 +28,7 @@
 			]
 		]
 	],
-	"hideFreeplay": false,
+	"hideFreeplay": true,
 	"weekBackground": "tank",
 	"weekCharacters": [
 		"tankman",
@@ -42,7 +42,7 @@
 		113,
 		253
 	],
-	"hideStoryMode": false,
+	"hideStoryMode": true,
 	"weekBefore": "week6",
 	"startUnlocked": true
 }
