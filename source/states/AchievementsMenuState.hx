@@ -33,8 +33,7 @@ class AchievementsMenuState extends MusicBeatState
 		for (achievement => data in Achievements.achievements)
 		{
 			var unlocked:Bool = Achievements.isUnlocked(achievement);
-			if(data.hidden != true || unlocked)
-				options.push(makeAchievement(achievement, data, unlocked, data.mod));
+			if(data.hidden != true || unlocked) options.push(makeAchievement(achievement, data, unlocked, data.mod));
 		}
 
 		// TO DO: check for mods
