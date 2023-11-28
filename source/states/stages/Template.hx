@@ -2,33 +2,28 @@ package states.stages;
 
 import states.stages.objects.*;
 
-class Template extends BaseStage
-{
+class Template extends BaseStage {
 	// If you're moving your stage from PlayState to a stage file,
 	// you might have to rename some variables if they're missing, for example: camZooming -> game.camZooming
 
-	override function create()
-	{
+	override function create() {
 		// Spawn your stage sprites here.
 		// Characters are not ready yet on this function, so you can't add things above them yet.
 		// Use createPost() if that's what you want to do.
 	}
 	
-	override function createPost()
-	{
+	override function createPost() {
 		// Use this function to layer things above characters!
 	}
 
-	override function update(elapsed:Float)
-	{
+	override function update(elapsed:Float) {
 		// Code here
 	}
 
 	
 	override function countdownTick(count:BaseStage.Countdown, num:Int)
 	{
-		switch(count)
-		{
+		switch(count) {
 			case THREE: //num 0
 			case TWO: //num 1
 			case ONE: //num 2
@@ -66,8 +61,7 @@ class Template extends BaseStage
 
 	override function openSubState(SubState:flixel.FlxSubState)
 	{
-		if(paused)
-		{
+		if(paused){
 			//timer.active = false;
 			//tween.active = false;
 		}
@@ -76,16 +70,14 @@ class Template extends BaseStage
 	// For events
 	override function eventCalled(eventName:String, value1:String, value2:String, flValue1:Null<Float>, flValue2:Null<Float>, strumTime:Float)
 	{
-		switch(eventName)
-		{
+		switch(eventName){
 			case "My Event":
 		}
 	}
 	override function eventPushed(event:objects.Note.EventNote)
 	{
 		// used for preloading assets used on events that doesn't need different assets based on its values
-		switch(event.event)
-		{
+		switch(event.event) {
 			case "My Event":
 				//precacheImage('myImage') //preloads images/myImage.png
 				//precacheSound('mySound') //preloads sounds/mySound.ogg
@@ -95,11 +87,9 @@ class Template extends BaseStage
 	override function eventPushedUnique(event:objects.Note.EventNote)
 	{
 		// used for preloading assets used on events where its values affect what assets should be preloaded
-		switch(event.event)
-		{
+		switch(event.event) {
 			case "My Event":
-				switch(event.value1)
-				{
+				switch(event.value1) {
 					// If value 1 is "blah blah", it will preload these assets:
 					case 'blah blah':
 						//precacheImage('myImageOne') //preloads images/myImageOne.png

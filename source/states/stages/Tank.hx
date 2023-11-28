@@ -8,15 +8,13 @@ import cutscenes.CutsceneHandler;
 import substates.GameOverSubstate;
 import objects.Character;
 
-class Tank extends BaseStage
-{
+class Tank extends BaseStage {
 	var tankWatchtower:BGSprite;
 	var tankGround:BackgroundTank;
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
-	override function create()
-	{
+	override function create() {
 		var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
 		add(sky);
 
@@ -88,8 +86,7 @@ class Tank extends BaseStage
 			}
 		}
 	}
-	override function createPost()
-	{
+	override function createPost() {
 		add(foregroundSprites);
 
 		if(!ClientPrefs.data.lowQuality)

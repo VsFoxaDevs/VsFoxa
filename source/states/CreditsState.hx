@@ -18,12 +18,10 @@ class CreditsState extends MusicBeatState {
 	var offsetThing:Float = -75;
 
 	override function create() {
-		#if desktop
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Credits Menu", null);
-		#end
+		#if desktop DiscordClient.changePresence("Credits Menu", null); #end // Updating Discord Rich Presence 
 
 		persistentUpdate = true;
+
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
@@ -38,9 +36,7 @@ class CreditsState extends MusicBeatState {
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
-		#if MODS_ALLOWED
-		for (mod in Mods.parseList().enabled) pushModCreditsToList(mod);
-		#end
+		#if MODS_ALLOWED for (mod in Mods.parseList().enabled) pushModCreditsToList(mod); #end
 
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link (Optional) - BG Color
 			['Vs. Foxa Devs'],
@@ -51,16 +47,15 @@ class CreditsState extends MusicBeatState {
 			['Vs. Foxa Contributors'],
 			['TheAnimateMan',				'animate',					'Trolled Foxa Sprites',		 'https://www.youtube.com/channel/UCwsHVR5zkvnW4U4-Uoh118w',									 'A1A1A1'],
 			['MusicBoxMan',				'face',					'Composer(?)',		 '',									 'A1A1A1'],
-			['eeveelover64',				'face',					'Supporter',		 'https://www.youtube.com/channel/UCh17ETeneDIuQD5NndCHpfA',									 'A1A1A1'],
-			['GarageBandCoverGuy96',				'face',					'Menu Music\nComposer of Vs. Foxa',		 'https://www.youtube.com/channel/UCspMkVJ4GiIENSgKcoNBZYQ',									 'A1A1A1'],
-			['SugarRatio',				'sugarratio',					'Made Denotator',		 'https://twitter.com/SugarRatio',									 'A1A1A1'],
+			['eeveelover64',				'eeveelover',					'Supporter',		 'https://www.youtube.com/channel/UCh17ETeneDIuQD5NndCHpfA',									 'A1A1A1'],
+			['GarageBandCoverGuy96',				'gbcg',					'Menu Music\nEx-Composer of Vs. Foxa',		 'https://www.youtube.com/channel/UCspMkVJ4GiIENSgKcoNBZYQ',									 'A1A1A1'],
+			//['SugarRatio',				'sugarratio',					'Made Denotator',		 'https://twitter.com/SugarRatio',									 'A1A1A1'],
 			['GsDrunkestDriver',				'gsdd',			'Buttplug Support',											 'https://github.com/GsDrunkestDriver',		 'A1A1A1'],
-			/*['Lego0_77',				'face',					'Stage Editor',		 '',									 'A1A1A1'],*/
 			[''],
 			['Former Foxa Mod Devs'],
 			['JoerOnTheBlower',				'joer',					'Ex-Director of Vs. Foxa\nI don\'t support them.',		 '',									 'A1A1A1'],
 			['FellowIdiot',				'fbiguy',					'Ex-Programmer of Vs. Foxa',		 'https://twitter.com/YFIdiot',									 'A1A1A1'],
-			['Monomouse',				'face',					'Ex-Programmer of Vs. Foxa',		 '',									 'A1A1A1'],
+			['Monomouse',				'mono',					'Ex-Programmer of Vs. Foxa',		 '',									 'A1A1A1'],
 			[''],
 			['Vs. Whitty Devs'],
 			['sock.clip',			'sock',				'Creator of Vs. Whitty',								 'https://www.instagram.com/sock.clip/?hl=en',			 '9DD9F3'],
@@ -93,9 +88,7 @@ class CreditsState extends MusicBeatState {
 			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								 'https://twitter.com/kawaisprite',		 '378FC7']
 		];
 		
-		for(i in defaultList) {
-			creditsStuff.push(i);
-		}
+		for(i in defaultList) creditsStuff.push(i);
 	
 		for(i in 0...creditsStuff.length) {
 			var isSelectable:Bool = !unselectableCheck(i);
@@ -121,7 +114,6 @@ class CreditsState extends MusicBeatState {
 				icon.xAdd = optionText.width + 10;
 				icon.sprTracker = optionText;
 	
-				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
 				add(icon);
 				Mods.currentModDirectory = '';
@@ -154,91 +146,65 @@ class CreditsState extends MusicBeatState {
 
 	var quitting:Bool = false;
 	var holdTime:Float = 0;
-	override function update(elapsed:Float)
-	{
-		if (FlxG.sound.music.volume < 0.7)
-		{
-			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-		}
-
-		if(!quitting)
-		{
-			if(creditsStuff.length > 1)
-			{
+	override function update(elapsed:Float) {
+		if(FlxG.sound.music.volume < 0.7) FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
+		if(!quitting){
+			if(creditsStuff.length > 1){
 				var shiftMult:Int = 1;
 				if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
 
 				var upP = controls.UI_UP_P;
 				var downP = controls.UI_DOWN_P;
 
-				if (upP)
-				{
+				if(upP){
 					changeSelection(-shiftMult);
 					holdTime = 0;
 				}
-				if (downP)
-				{
+				if(downP){
 					changeSelection(shiftMult);
 					holdTime = 0;
 				}
 
-				if(controls.UI_DOWN || controls.UI_UP)
-				{
+				if(controls.UI_DOWN || controls.UI_UP) {
 					var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);
 					holdTime += elapsed;
 					var checkNewHold:Int = Math.floor((holdTime - 0.5) * 10);
 
 					if(holdTime > 0.5 && checkNewHold - checkLastHold > 0)
-					{
 						changeSelection((checkNewHold - checkLastHold) * (controls.UI_UP ? -shiftMult : shiftMult));
-					}
 				}
 			}
 
-			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
+			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4))
 				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
-			}
-			if (controls.BACK)
-			{
-				if(colorTween != null) {
-					colorTween.cancel();
-				}
+			if(controls.BACK){
+				if(colorTween != null) colorTween.cancel();
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
 				quitting = true;
 			}
 		}
 		
-		for (item in grpOptions.members)
-		{
-			if(!item.bold)
-			{
+		for (item in grpOptions.members){
+			if(!item.bold){
 				var lerpVal:Float = FlxMath.bound(elapsed * 12, 0, 1);
-				if(item.targetY == 0)
-				{
+				if(item.targetY == 0) {
 					var lastX:Float = item.x;
 					item.screenCenter(X);
 					item.x = FlxMath.lerp(lastX, item.x - 70, lerpVal);
-				}
-				else
-				{
-					item.x = FlxMath.lerp(item.x, 200 + -40 * Math.abs(item.targetY), lerpVal);
-				}
+				}else item.x = FlxMath.lerp(item.x, 200 + -40 * Math.abs(item.targetY), lerpVal);
 			}
 		}
 		super.update(elapsed);
 	}
 
 	var moveTween:FlxTween = null;
-	function changeSelection(change:Int = 0)
-	{
+	function changeSelection(change:Int = 0) {
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		do {
 			curSelected += change;
-			if (curSelected < 0)
-				curSelected = creditsStuff.length - 1;
-			if (curSelected >= creditsStuff.length)
-				curSelected = 0;
+			if(curSelected < 0) curSelected = creditsStuff.length - 1;
+			if(curSelected >= creditsStuff.length) curSelected = 0;
 		} while(unselectableCheck(curSelected));
 
 		var newColor:FlxColor = CoolUtil.colorFromString(creditsStuff[curSelected][4]);
@@ -254,12 +220,11 @@ class CreditsState extends MusicBeatState {
 
 		var bullShit:Int = 0;
 
-		for (item in grpOptions.members)
-		{
+		for (item in grpOptions.members) {
 			item.targetY = bullShit - curSelected;
 			bullShit++;
 
-			if(!unselectableCheck(bullShit-1)) {
+			if(!unselectableCheck(bullShit-1)){
 				item.alpha = 0.6;
 				if(item.targetY == 0) item.alpha = 1;
 			}
@@ -276,8 +241,7 @@ class CreditsState extends MusicBeatState {
 	}
 
 	#if MODS_ALLOWED
-	function pushModCreditsToList(folder:String)
-	{
+	function pushModCreditsToList(folder:String) {
 		var creditsFile:String = null;
 		if(folder != null && folder.trim().length > 0) creditsFile = Paths.mods(folder + '/data/credits.txt');
 		else creditsFile = Paths.mods('data/credits.txt');
