@@ -1,0 +1,78 @@
+name: Release from Build
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/main.yml
+    # with:
+      # buildFlags: officialBuild
+
+  release-windows:
+    name: Release Windows Build
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Windows artifact
+      uses: actions/download-artifact@v3
+      with:
+        path: build
+        name: windowsBuild
+    - uses: montudor/action-zip@v1
+      with:
+        args: zip -qq -r build.zip . -i build/*
+    - name: Upload Windows Build to Release
+      uses: svenstaro/upload-release-action@2.5.0
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+        file: build.zip
+        asset_name: FoxaWindows64.zip
+        overwrite: false
+
+  release-linux:
+    name: Release Linux Build
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Linux artifact
+      uses: actions/download-artifact@v3
+      with:
+        path: build
+        name: linuxBuild
+    - uses: montudor/action-zip@v1
+      with:
+        args: zip -qq -r build.zip . -i build/*
+    - name: Upload Windows Build to Release
+      uses: svenstaro/upload-release-action@2.5.0
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+        file: build.zip
+        asset_name: FoxaLinux64.zip
+        overwrite: false
+
+  release-mac:
+    name: Release Mac Build
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download Mac artifact
+      uses: actions/download-artifact@v3
+      with:
+        path: build
+        name: macBuild
+    - uses: montudor/action-zip@v1
+      with:
+        args: zip -qq -r build.zip . -i build/*
+    - name: Upload Mac Build to Release
+      uses: svenstaro/upload-release-action@2.5.0
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ github.ref_name }}
+        file: build.zip
+        asset_name: FoxaMac64.zip
+        overwrite: false
