@@ -49,6 +49,8 @@ This license agreement is subject to change at any time, and continued use of th
 
 *Do not look at the MainMenuState file, worst mistake of my life.*
 
+Oh and right now, HTML5 ports may not work, we are not responible for them, nor do we maintain them at all.
+
 Anyway, back to the original Psych README...
 
 # Friday Night Funkin' - Psych Engine

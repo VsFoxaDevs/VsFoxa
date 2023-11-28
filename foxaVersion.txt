@@ -1,0 +1,10 @@
+3.0 - 0.7.2-foxa
+- BUTTPLUG SUPPORT
+- MORE OPTIONS + new useless gameplay changer that should've been a real option instead.
+- watermark ew
+- most menus changed to have the checkboard backdrop and main menu has changed!
+- credits editor and a few character editor & charter tweaks 
+- thanks menu
+- title menu change
+- seperate preferences menu
+- other changes i dont feel like mentioning
