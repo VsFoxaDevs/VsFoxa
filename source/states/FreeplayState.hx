@@ -554,10 +554,7 @@ class FreeplayState extends MusicBeatState
 	function changeDiff(change:Int = 0) {
 		if(playingMusic) return;
 
-		curDifficulty += change;
-
-		if (curDifficulty < 0) curDifficulty = Difficulty.list.length-1;
-		if (curDifficulty >= Difficulty.list.length) curDifficulty = 0;
+		curDifficulty = FlxMath.wrap(curDifficulty + change, 0, Difficulty.list.length - 1);
 
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
 		intendedRating = Highscore.getRating(songs[curSelected].songName, curDifficulty);
@@ -579,11 +576,8 @@ class FreeplayState extends MusicBeatState
 		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 		var lastList:Array<String> = Difficulty.list;
-		curSelected += change;
+		curSelected = FlxMath.wrap(curSelected + change, 0, songs.length - 1);
 
-		if(curSelected < 0) curSelected = songs.length - 1;
-		if(curSelected >= songs.length) curSelected = 0;
-			
 		var newColor:Int = songs[curSelected].color;
 		if(newColor != intendedColor) {
 			if(colorTween != null) {

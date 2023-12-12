@@ -38,6 +38,11 @@ typedef AnimArray = {
 
 class Character extends FlxSprite
 {
+	/**
+	 * In case a character is missing, it will use this on its place
+	**/
+	inline public static final DEFAULT_CHARACTER:String = 'bf';
+
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
 
@@ -51,7 +56,7 @@ class Character extends FlxSprite
 	public var animationNotes:Array<Dynamic> = [];
 	public var stunned:Bool = false;
 	public var singDuration:Float = 4; //Multiplier of how long a character holds the sing pose
-	public var idleSuffix:String = '';
+	public var idleSuffix(default, set):String = '';
 	public var danceIdle:Bool = false; //Character use "danceLeft" and "danceRight" instead of "idle"
 	public var skipDance:Bool = false;
 
@@ -70,8 +75,7 @@ class Character extends FlxSprite
 	public var originalFlipX:Bool = false;
 	public var healthColorArray:Array<Int> = [255, 0, 0];
 
-	public static var DEFAULT_CHARACTER:String = 'bf'; //In case a character is missing, it will use BF on its place
-	public function new(x:Float, y:Float, ?character:String = 'bf', ?isPlayer:Bool = false)
+	public function new(x:Float, y:Float, ?character:String = DEFAULT_CHARACTER, ?isPlayer:Bool = false)
 	{
 		super(x, y);
 
@@ -173,7 +177,12 @@ class Character extends FlxSprite
 		}
 		originalFlipX = flipX;
 
-		if(animOffsets.exists('singLEFTmiss') || animOffsets.exists('singDOWNmiss') || animOffsets.exists('singUPmiss') || animOffsets.exists('singRIGHTmiss')) hasMissAnimations = true;
+		for (name => offset in animOffsets)
+			if (name.startsWith('sing') && name.contains('miss'))
+			{ // includes alt miss animations now (idk why but whatever)
+				hasMissAnimations = true;
+				break;
+			}
 		recalculateDanceIdle();
 		dance();
 
@@ -213,61 +222,64 @@ class Character extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-		if(!debugMode && animation.curAnim != null)
+		if(debugMode || animation.curAnim == null)
 		{
-			if(heyTimer > 0)
-			{
-				heyTimer -= elapsed * PlayState.instance.playbackRate;
-				if(heyTimer <= 0)
-				{
-					if(specialAnim && animation.curAnim.name == 'hey' || animation.curAnim.name == 'cheer')
-					{
-						specialAnim = false;
-						dance();
-					}
-					heyTimer = 0;
-				}
-			}
-			else if(specialAnim && animation.curAnim.finished)
-			{
-				specialAnim = false;
-				dance();
-			}
-			else if (animation.curAnim.name.endsWith('miss') && animation.curAnim.finished)
-			{
-				dance();
-				animation.finish();
-			}
-
-			switch(curCharacter)
-			{
-				case 'pico-speaker':
-					if(animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0])
-					{
-						var noteData:Int = 1;
-						if(animationNotes[0][1] > 2) noteData = 3;
-
-						noteData += FlxG.random.int(0, 1);
-						playAnim('shoot' + noteData, true);
-						animationNotes.shift();
-					}
-					if(animation.curAnim.finished) playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
-			}
-
-			if (animation.curAnim.name.startsWith('sing'))
-				holdTimer += elapsed;
-			else if(isPlayer)
-				holdTimer = 0;
-
-			if (!isPlayer && holdTimer >= Conductor.stepCrochet * (0.0011 / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1)) * singDuration)
-			{
-				dance();
-				holdTimer = 0;
-			}
-
-			if(animation.curAnim.finished && animation.getByName(animation.curAnim.name + '-loop') != null)
-				playAnim(animation.curAnim.name + '-loop');
+			super.update(elapsed);
+			return;
 		}
+
+		if(heyTimer > 0)
+		{
+			var rate:Float = (PlayState.instance != null ? PlayState.instance.playbackRate : 1.0);
+			heyTimer -= elapsed * rate;
+			if(heyTimer <= 0)
+			{
+				if(specialAnim && animation.curAnim.name == 'hey' || animation.curAnim.name == 'cheer')
+				{
+					specialAnim = false;
+					dance();
+				}
+				heyTimer = 0;
+			}
+		}
+		else if(specialAnim && animation.curAnim.finished){
+			specialAnim = false;
+			dance();
+		}
+		else if(animation.curAnim.name.endsWith('miss') && animation.curAnim.finished){
+			dance();
+			animation.finish();
+		}
+
+		switch (curCharacter)
+		{
+			case 'pico-speaker':
+				if(animationNotes.length > 0 && Conductor.songPosition > animationNotes[0][0]) {
+					var noteData:Int = 1;
+					if (animationNotes[0][1] > 2)
+						noteData = 3;
+
+					noteData += FlxG.random.int(0, 1);
+					playAnim('shoot' + noteData, true);
+					animationNotes.shift();
+				}
+				if(animation.curAnim.finished)
+					playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
+		}
+
+		if(animation.curAnim.name.startsWith('sing')) holdTimer += elapsed;
+		else if(isPlayer) holdTimer = 0;
+
+		if(!isPlayer
+			&& holdTimer >= Conductor.stepCrochet * (0.0011 #if FLX_PITCH / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1) #end) * singDuration)
+		{
+			dance();
+			holdTimer = 0;
+		}
+
+		if(animation.curAnim.finished && animation.getByName(animation.curAnim.name + '-loop') != null)
+			playAnim(animation.curAnim.name + '-loop');
+
 		super.update(elapsed);
 	}
 
@@ -276,23 +288,17 @@ class Character extends FlxSprite
 	/**
 	 * FOR GF DANCING SHIT
 	 */
-	public function dance()
+	public function dance(?Force:Bool = false) // actually usefull
 	{
-		if (!debugMode && !skipDance && !specialAnim)
-		{
-			if(danceIdle)
-			{
-				danced = !danced;
+		if(debugMode || skipDance || specialAnim) return;
 
-				if (danced)
-					playAnim('danceRight' + idleSuffix);
-				else
-					playAnim('danceLeft' + idleSuffix);
-			}
-			else if(animation.getByName('idle' + idleSuffix) != null) {
-					playAnim('idle' + idleSuffix);
-			}
+		var danceAnim:String = 'idle$idleSuffix';
+		if(danceIdle)
+		{
+			danced = !danced;
+			danceAnim = 'dance' + (danced ? 'Right' : 'Left') + '$idleSuffix';
 		}
+		playAnim(danceAnim, Force);
 	}
 
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
@@ -300,32 +306,27 @@ class Character extends FlxSprite
 		specialAnim = false;
 		animation.play(AnimName, Force, Reversed, Frame);
 
-		var daOffset = animOffsets.get(AnimName);
-		if (animOffsets.exists(AnimName))
+		if(animOffsets.exists(AnimName))
 		{
+			final daOffset = animOffsets.get(AnimName);
 			offset.set(daOffset[0], daOffset[1]);
 		}
-		else
-			offset.set(0, 0);
+		else offset.set();
 
-		if (curCharacter.startsWith('gf'))
+		if (curCharacter.startsWith('gf') || danceIdle) // idk
 		{
-			if (AnimName == 'singLEFT')
+			switch (AnimName)
 			{
-				danced = true;
-			}
-			else if (AnimName == 'singRIGHT')
-			{
-				danced = false;
-			}
-
-			if (AnimName == 'singUP' || AnimName == 'singDOWN')
-			{
-				danced = !danced;
+				case 'singLEFT':
+					danced = true;
+				case 'singRIGHT':
+					danced = false;
+				case 'singUP' | 'singDOWN':
+					danced = !danced;
 			}
 		}
 	}
-	
+
 	function loadMappedAnims():Void
 	{
 		var noteData:Array<SwagSection> = Song.loadFromJson('picospeaker', Paths.formatToSongPath(PlayState.SONG.song)).notes;
@@ -346,8 +347,8 @@ class Character extends FlxSprite
 	public var danceEveryNumBeats:Int = 2;
 	private var settingCharacterUp:Bool = true;
 	public function recalculateDanceIdle() {
-		var lastDanceIdle:Bool = danceIdle;
-		danceIdle = (animation.getByName('danceLeft' + idleSuffix) != null && animation.getByName('danceRight' + idleSuffix) != null);
+		final lastDanceIdle:Bool = danceIdle;
+		danceIdle = (animation.exists('danceLeft' + idleSuffix) && animation.exists('danceRight' + idleSuffix));
 
 		if(settingCharacterUp)
 		{
@@ -364,6 +365,15 @@ class Character extends FlxSprite
 			danceEveryNumBeats = Math.round(Math.max(calc, 1));
 		}
 		settingCharacterUp = false;
+	}
+
+	function set_idleSuffix(newSuffix:String):String
+	{
+		if(idleSuffix == newSuffix) return newSuffix;
+
+		idleSuffix = newSuffix;
+		recalculateDanceIdle();
+		return idleSuffix;
 	}
 
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)

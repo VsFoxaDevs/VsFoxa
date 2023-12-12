@@ -1,5 +1,7 @@
 package backend;
 
+
+import flixel.FlxBasic;
 import flixel.util.FlxSave;
 
 import openfl.utils.Assets;
@@ -10,8 +12,8 @@ class CoolUtil
 {
 	inline public static function quantize(f:Float, snap:Float){
 		// changed so this actually works lol
-		var m:Float = Math.fround(f * snap);
-		trace(snap);
+		final m:Float = Math.fround(f * snap);
+		#if debug trace(snap); #end
 		return (m / snap);
 	}
 
@@ -32,7 +34,7 @@ class CoolUtil
 		#else
 		if(Assets.exists(path)) daList = Assets.getText(path);
 		#end
-		return daList != null ? listFromString(daList) : [];
+		return daList == null ? [] : listFromString(daList);
 	}
 
 	inline public static function colorFromString(color:String):FlxColor
@@ -48,7 +50,7 @@ class CoolUtil
 
 	public static function listFromString(string:String, trimLines:Bool = true):Array<String>
 	{
-		var daList:Array<String> = string.trim().replace('\r\n', '\n').split('\n');
+		final daList:Array<String> = string.trim().replace('\r\n', '\n').split('\n');
 		if(trimLines) for (i in 0...daList.length) daList[i] = daList[i].trim();
 		return daList;
 	}
@@ -60,16 +62,16 @@ class CoolUtil
 		var tempMult:Float = 1;
 		for (i in 0...decimals) tempMult *= 10;
 
-		var newValue:Float = Math.floor(value * tempMult);
+		final newValue:Float = Math.floor(value * tempMult);
 		return newValue / tempMult;
 	}
 	
 	inline public static function dominantColor(sprite:flixel.FlxSprite):Int
 	{
-		var countByColor:Map<Int, Int> = [];
+		final countByColor:Map<Int, Int> = [];
 		for(col in 0...sprite.frameWidth) {
 			for(row in 0...sprite.frameHeight) {
-				var colorOfThisPixel:Int = sprite.pixels.getPixel32(col, row);
+				final colorOfThisPixel:Int = sprite.pixels.getPixel32(col, row);
 				if(colorOfThisPixel != 0) {
 					if(countByColor.exists(colorOfThisPixel))
 						countByColor[colorOfThisPixel] = countByColor[colorOfThisPixel] + 1;
@@ -88,7 +90,7 @@ class CoolUtil
 				maxKey = key;
 			}
 		}
-		countByColor = [];
+		countByColor.clear();
 		return maxKey;
 	}
 
@@ -125,6 +127,10 @@ class CoolUtil
 		#else
 			FlxG.error("Platform is not supported for CoolUtil.openFolder");
 		#end
+	}
+
+	inline public static function sortByID(i:Int, basic1:FlxBasic, basic2:FlxBasic):Int {
+		return basic1.ID > basic2.ID ? -i : basic2.ID > basic1.ID ? i : 0;
 	}
 
 	/** Quick Function to Fix Save Files for Flixel 5

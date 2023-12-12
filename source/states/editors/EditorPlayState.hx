@@ -810,8 +810,7 @@ class EditorPlayState extends MusicBeatSubstate
 
 		if (!note.isSustainNote)
 		{
-			combo++;
-			if(combo > 9999) combo = 9999;
+			if(++combo > 9999) combo = 9999;
 			popUpScore(note);
 		}
 
