@@ -190,11 +190,18 @@ class TitleState extends MusicBeatState {
 		Conductor.bpm = titleJSON.bpm;
 		persistentUpdate = true;
 
-		if(titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none"){
-			final bg:FlxSprite = new FlxSprite(Paths.image(titleJSON.backgroundSprite));
-			bg.antialiasing = ClientPrefs.data.antialiasing;
-			add(bg);
+		var bg:FlxSprite = new FlxSprite();
+		bg.antialiasing = ClientPrefs.data.antialiasing;
+
+		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none"){
+			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
+		}else{
+			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		}
+
+		// bg.setGraphicSize(Std.int(bg.width * 0.6));
+		// bg.updateHitbox();
+		add(bg);
 
 		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x4DDB5BEC, 0x0));
 		grid.velocity.set(40, 40);
@@ -209,6 +216,8 @@ class TitleState extends MusicBeatState {
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
+		// logoBl.screenCenter();
+		// logoBl.color = FlxColor.BLACK;
 
 		if(ClientPrefs.data.shaders) swagShader = new ColorSwap();
 		gfDance = new FlxSprite(titleJSON.gfx, titleJSON.gfy);

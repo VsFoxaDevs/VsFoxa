@@ -36,6 +36,7 @@ class FPS extends TextField
 	public var memoryMegas:Float = 0;
 	public var memoryTotal:Float = 0;
 
+	@:noCompletion private var cacheCount:Int;
 	@:noCompletion private var currentTime:Float;
 	@:noCompletion private var times:Array<Float>;
 	public function new(x:Float = 10, y:Float = 10, color:Int = 0x000000) {
@@ -49,6 +50,7 @@ class FPS extends TextField
 		autoSize = LEFT;
 		multiline = true;
 		text = "FPS: ";
+		cacheCount = 0;
 		currentTime = 0;
 		times = [];
 		#if flash
@@ -75,15 +77,11 @@ class FPS extends TextField
 		times.push(currentTime);
 		while(times[0] < currentTime - 1000) times.shift();
 
-		currentFPS = currentFPS < FlxG.updateFramerate ? times.length : FlxG.updateFramerate;
+		var currentCount = times.length;
+		currentFPS = Math.round((currentCount + cacheCount) / 2);
 		if(currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
 
-		updateText();
-		deltaTimeout += deltaTime;
-	}
-
-	private dynamic function updateText():Void
-		{
+		if(currentCount != cacheCount /*&& visible*/) {
 			text = 'FPS: ${currentFPS}\n';
 
 			#if openfl
@@ -109,4 +107,8 @@ class FPS extends TextField
 			#end
 			text += "\n";
 		}
+
+		cacheCount = currentCount;
+		deltaTimeout += deltaTime;
+	}
 }

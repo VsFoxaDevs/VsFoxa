@@ -930,23 +930,25 @@ class CharacterEditorState extends MusicBeatState
 	}
 
 	function updatePointerPos() {
-		final mid:flixel.math.FlxPoint = char.getMidpoint();
-		var x:Float = mid.x;
-		var y:Float = mid.y;
-		if(char.isPlayer) x -= 100 + char.cameraPosition[0];
-		else x += 150 + char.cameraPosition[0];
-
+		var x:Float = char.getMidpoint().x;
+		var y:Float = char.getMidpoint().y;
+		if(!char.isPlayer) {
+			x += 150 + char.cameraPosition[0];
+		} else {
+			x -= 100 + char.cameraPosition[0];
+		}
 		y -= 100 - char.cameraPosition[1];
 
 		x -= cameraFollowPointer.width / 2;
 		y -= cameraFollowPointer.height / 2;
 		cameraFollowPointer.setPosition(x, y);
-		mid.put();
 	}
 
 	function findAnimationByName(name:String):AnimArray {
 		for (anim in char.animationsArray) {
-			if(anim.anim == name) return anim;
+			if(anim.anim == name) {
+				return anim;
+			}
 		}
 		return null;
 	}
@@ -1019,7 +1021,8 @@ class CharacterEditorState extends MusicBeatState
 		#if MODS_ALLOWED
 		characterList = [];
 		var directories:Array<String> = [Paths.mods('characters/'), Paths.mods(Mods.currentModDirectory + '/characters/'), Paths.getSharedPath('characters/')];
-		for(mod in Mods.getGlobalMods()) directories.push(Paths.mods(mod + '/characters/'));
+		for(mod in Mods.getGlobalMods())
+			directories.push(Paths.mods(mod + '/characters/'));
 		for (i in 0...directories.length) {
 			var directory:String = directories[i];
 			if(FileSystem.exists(directory)) {
@@ -1064,7 +1067,9 @@ class CharacterEditorState extends MusicBeatState
 			textAnim.text = char.animationsArray[curAnim].anim;
 
 			var curAnim:FlxAnimation = char.animation.getByName(char.animationsArray[curAnim].anim);
-			if(curAnim == null || curAnim.frames.length < 1) textAnim.text += ' (ERROR!)';
+			if(curAnim == null || curAnim.frames.length < 1) {
+				textAnim.text += ' (ERROR!)';
+			}
 		} else {
 			textAnim.text = '';
 		}
@@ -1091,33 +1096,43 @@ class CharacterEditorState extends MusicBeatState
 				return;
 			}
 
-			if(FlxG.keys.justPressed.R) FlxG.camera.zoom = 1;
+			if (FlxG.keys.justPressed.R) {
+				FlxG.camera.zoom = 1;
+			}
 
-			if(FlxG.keys.pressed.E && FlxG.camera.zoom < 3) {
+			if (FlxG.keys.pressed.E && FlxG.camera.zoom < 3) {
 				FlxG.camera.zoom += elapsed * FlxG.camera.zoom;
 				if(FlxG.camera.zoom > 3) FlxG.camera.zoom = 3;
 			}
-			if(FlxG.keys.pressed.Q && FlxG.camera.zoom > 0.1) {
+			if (FlxG.keys.pressed.Q && FlxG.camera.zoom > 0.1) {
 				FlxG.camera.zoom -= elapsed * FlxG.camera.zoom;
 				if(FlxG.camera.zoom < 0.1) FlxG.camera.zoom = 0.1;
 			}
 
-			if(FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L)
+			if (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L)
 			{
 				var addToCam:Float = 500 * elapsed;
-				if(FlxG.keys.pressed.SHIFT) addToCam *= 4;
+				if (FlxG.keys.pressed.SHIFT) addToCam *= 4;
 
-				if(FlxG.keys.pressed.I) camFollow.y -= addToCam;
-				else if(FlxG.keys.pressed.K) camFollow.y += addToCam;
+				if (FlxG.keys.pressed.I)
+					camFollow.y -= addToCam;
+				else if (FlxG.keys.pressed.K)
+					camFollow.y += addToCam;
 
-				if(FlxG.keys.pressed.J) camFollow.x -= addToCam;
-				else if(FlxG.keys.pressed.L) camFollow.x += addToCam;
+				if (FlxG.keys.pressed.J)
+					camFollow.x -= addToCam;
+				else if (FlxG.keys.pressed.L)
+					camFollow.x += addToCam;
 			}
 
 			if(char.animationsArray.length > 0) {
-				if (FlxG.keys.justPressed.W) curAnim -= 1;
+				if (FlxG.keys.justPressed.W){
+					curAnim -= 1;
+				}
 
-				if (FlxG.keys.justPressed.S) curAnim += 1;
+				if (FlxG.keys.justPressed.S){
+					curAnim += 1;
+				}
 
 				if (curAnim < 0) curAnim = char.animationsArray.length - 1;
 
@@ -1128,7 +1143,8 @@ class CharacterEditorState extends MusicBeatState
 					char.playAnim(char.animationsArray[curAnim].anim, true);
 					genBoyOffsets();
 				}
-				if (FlxG.keys.justPressed.T) {
+				if (FlxG.keys.justPressed.T)
+				{
 					char.animationsArray[curAnim].offsets = [0, 0];
 
 					char.addOffset(char.animationsArray[curAnim].anim, char.animationsArray[curAnim].offsets[0], char.animationsArray[curAnim].offsets[1]);
