@@ -27,6 +27,11 @@ import sys.io.*;
 import js.html.*;
 #end
 
+import math.*;
+import math.Vector3;
+import math.VectorHelpers;
+//import extraflixel.FlxSprite3D;
+
 import backend.Paths;
 import backend.Controls;
 import backend.CoolUtil;

@@ -3,17 +3,46 @@ package backend;
 import flixel.FlxBasic;
 import flixel.util.FlxSave;
 
+import flixel.math.FlxPoint;
+
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 
+using StringTools;
+
 class CoolUtil
 {
+	public static function makeOutlinedGraphic(Width:Int, Height:Int, Color:Int, LineThickness:Int, OutlineColor:Int){
+		var rectangle = flixel.graphics.FlxGraphic.fromRectangle(Width, Height, OutlineColor, true);
+		rectangle.bitmap.fillRect(new openfl.geom.Rectangle(LineThickness, LineThickness, Width - LineThickness * 2, Height - LineThickness * 2), Color);
+		return rectangle;
+	};
+
+	inline public static function scale(x:Float, l1:Float, h1:Float, l2:Float, h2:Float):Float
+		return ((x - l1) * (h2 - l2) / (h1 - l1) + l2);
+
+	inline public static function clamp(n:Float, l:Float, h:Float) {
+		if(n > h) n = h;
+		if(n < l) n = l;
+		return n;
+	}
+
+		
 	inline public static function quantize(f:Float, snap:Float){
 		// changed so this actually works lol
 		final m:Float = Math.fround(f * snap);
 		#if debug trace(snap); #end
 		return (m / snap);
 	}
+
+	public static function rotate(x:Float, y:Float, angle:Float, ?point:FlxPoint):FlxPoint
+	{
+		var p = point == null ? FlxPoint.weak() : point;
+		return p.set((x * Math.cos(angle)) - (y * Math.sin(angle)), (x * Math.sin(angle)) + (y * Math.cos(angle)));
+	}
+	
+	inline public static function quantizeAlpha(f:Float, interval:Float)
+		return Std.int((f+interval/2)/interval)*interval;
 
 	inline public static function capitalize(text:String)
 		return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();

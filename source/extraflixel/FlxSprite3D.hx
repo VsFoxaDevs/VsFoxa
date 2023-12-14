@@ -6,6 +6,7 @@ import math.VectorHelpers;
 import math.Vector3;
 import flixel.graphics.frames.FlxFrame.FlxFrameType;
 import openfl.Vector;
+import #if FLX_DRAW_QUADS flixel.graphics.tile.FlxDrawQuadsItem; #else flixel.graphics.tile.FlxDrawTilesItem; #end
 import openfl.geom.ColorTransform;
 import openfl.display.Shader;
 import flixel.system.FlxAssets.FlxShader;
@@ -113,12 +114,10 @@ class FlxSprite3D extends FlxSprite {
 			]);
 
 			var shader = this.shader != null ? this.shader : new FlxShader();
-			if (this.shader != shader)
-				this.shader = shader;
+			if(this.shader != shader) this.shader = shader;
 
 			shader.bitmap.input = graphic.bitmap;
 			shader.bitmap.filter = antialiasing ? LINEAR : NEAREST;
-
 
 			var transforms:Array<ColorTransform> = [];
             var transfarm:ColorTransform = new ColorTransform();

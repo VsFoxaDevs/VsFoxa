@@ -76,6 +76,9 @@ class HScript extends SScript
 		set('FlxColor', CustomFlxColor.instance);
 		set('Countdown', backend.BaseStage.Countdown);
 		set('PlayState', PlayState);
+		set('Vector3', Vector3);
+		set('VectorHelpers', VectorHelpers);
+		//set('FlxSprite3D', FlxSprite3D);
 		set('Paths', Paths);
 		set('Conductor', Conductor);
 		set('ClientPrefs', ClientPrefs);

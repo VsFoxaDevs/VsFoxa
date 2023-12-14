@@ -8,6 +8,12 @@ import states.TitleState;
 
 //Add a variable here and it will get automatically saved
 class SaveVariables {
+	/* 
+	options i probably may implement soon :)
+	public var judgementCounter:Bool = false;
+	public var middleScroll:Bool = false;
+	public var opponentStrums:Bool = true;
+	*/
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
