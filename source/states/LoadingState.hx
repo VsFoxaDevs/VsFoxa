@@ -75,6 +75,8 @@ class LoadingState extends MusicBeatState
 		"potato\nwaterslide",
 		"GingerBrave\nMore like",
 		"Foxa hates Twilight Sparkle :D",
+		"I just wanna warn you, we're always fashionably early.",
+		"Please stand by.",
 		"I love to smash my keyboard.",
 		"There might be someone out there that's thinking about making a mod about you.\nKeep that in mind.",
 		"Funkin' Forever.",

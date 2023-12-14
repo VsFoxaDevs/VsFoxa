@@ -1,4 +1,3 @@
-
 package openfl.display;
 
 import haxe.Timer;
@@ -99,7 +98,11 @@ class FPS extends TextField
 			#end
 
 			text += '\nPsych Engine 0.7.2 [CUSTOM BUILD]'; 
+			#if STORY_EDITION
+			text += '\nFNF Vs. Foxa 3.0: Story Edition';
+			#else
 			text += '\nFNF Vs. Foxa 3.0';
+			#end
 
 			if (text != null || text != '') {if(Main.fpsVar != null) Main.fpsVar.visible = true;}
 

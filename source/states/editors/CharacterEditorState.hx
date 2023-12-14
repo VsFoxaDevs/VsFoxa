@@ -49,11 +49,14 @@ class CharacterEditorState extends MusicBeatState
 	var UI_box:FlxUITabMenu;
 	var UI_characterbox:FlxUITabMenu;
 
+	var testMode:Bool = false;
+
 	private var camEditor:FlxCamera;
 	private var camHUD:FlxCamera;
 	private var camMenu:FlxCamera;
 
 	var changeBGbutton:FlxButton;
+	var testModeButton:FlxButton;
 	var leHealthIcon:HealthIcon;
 	var characterList:Array<String> = [];
 
@@ -90,7 +93,13 @@ class CharacterEditorState extends MusicBeatState
 		cameraFollowPointer.color = FlxColor.WHITE;
 		add(cameraFollowPointer);
 
-		changeBGbutton = new FlxButton(FlxG.width - 360, 25, "", function()
+		testModeButton = new FlxButton(FlxG.width - 360, 25, "Test OFF", () -> 
+		{
+			testMode = !testMode;
+			testModeButton.text = (testMode = !testMode) ? "Test ON" : "Test OFF";
+		});
+		testModeButton.cameras = [camMenu]; 
+		changeBGbutton = new FlxButton(FlxG.width - 360, 25, "", () ->
 		{
 			onPixelBG = !onPixelBG;
 			reloadBGs();
@@ -175,6 +184,7 @@ class CharacterEditorState extends MusicBeatState
 		add(UI_characterbox);
 		add(UI_box);
 		add(changeBGbutton);
+		add(testModeButton);
 
 		//addOffsetsUI();
 		addSettingsUI();
@@ -1084,8 +1094,14 @@ class CharacterEditorState extends MusicBeatState
 		}
 		ClientPrefs.toggleVolumeKeys(true);
 
-		if(!charDropDown.dropPanel.visible) {
-			if (FlxG.keys.justPressed.ESCAPE) {
+		if(testMode) {
+			if(controls.NOTE_LEFT_P) char.playAnim("singLEFT", true);
+			if(controls.NOTE_RIGHT_P)char.playAnim("singRIGHT", true);
+			if (controls.NOTE_DOWN_P)char.playAnim("singDOWN", true);
+			if(controls.NOTE_UP_P) char.playAnim("singUP", true);
+		}
+		else if(!charDropDown.dropPanel.visible) {
+			if(FlxG.keys.justPressed.ESCAPE) {
 				if(goToPlayState) {
 					MusicBeatState.switchState(new PlayState());
 				} else {
