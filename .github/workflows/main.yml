@@ -41,9 +41,10 @@ jobs:
           sudo apt-get install libvlccore-dev
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null --quiet
-          haxelib git systools https://github.com/haya3218/retools
+          haxelib install lime
           haxelib install format > nul
           haxe -cp ./setup -D analyzer-optimize -main Main --interp
+          haxelib git systools https://github.com/haya3218/retools
       - name: Skip SScript setup mode
         run: echo 'oy9:showMacroty8:loopCosti25y10:includeAllfg' >> ~/settings.cocoa
       - name: Rebuild systools
@@ -72,9 +73,10 @@ jobs:
         run: |
           haxelib setup C:/haxelib
           haxelib install hxcpp > /dev/null --quiet
-          haxelib git systools https://github.com/haya3218/retools
+          haxelib install lime
           haxelib install format > nul
           haxe -cp ./setup -D analyzer-optimize -main Main --interp
+          haxelib git systools https://github.com/haya3218/retools
         shell: cmd
       - name: Skip SScript setup mode
         run: echo 'oy9:showMacroty8:loopCosti25y10:includeAllfg' >> %USERPROFILE%/settings.cocoa
@@ -105,9 +107,10 @@ jobs:
         run: |
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null --quiet
-          haxelib git systools https://github.com/haya3218/retools
+          haxelib install lime
           haxelib install format > nul
           haxe -cp ./setup -D analyzer-optimize -main Main --interp
+          haxelib git systools https://github.com/haya3218/retools
       - name: Skip SScript setup mode
         run: echo 'oy9:showMacroty8:loopCosti25y10:includeAllfg' >> ~/settings.cocoa
       - name: Rebuild systools
