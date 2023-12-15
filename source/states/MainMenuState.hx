@@ -243,7 +243,7 @@ class MainMenuState extends MusicBeatState {
 			for (item in menuItems.members) {
 				final itemIndex:Int = menuItems.members.indexOf(item);
 
-				if (FlxG.mouse.overlaps(item) && curSelected != itemIndex) {
+				if(FlxG.mouse.overlaps(item) && curSelected != itemIndex) {
 					curSelected = itemIndex;
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					changeItem();
@@ -251,13 +251,13 @@ class MainMenuState extends MusicBeatState {
 				}
 			}
 
-			if (controls.BACK) {
+			if(controls.BACK) {
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
 			}
 
-			if (controls.ACCEPT || (FlxG.mouse.overlaps(menuItems.members[curSelected]) && FlxG.mouse.justPressed)) {
+			if(controls.ACCEPT || (FlxG.mouse.overlaps(menuItems.members[curSelected]) && FlxG.mouse.justPressed)) {
 				if(optionShit[curSelected] == 'donate') CoolUtil.browserLoad(menuJunk.discordLink); //foxacord, it's hidden as donate, cuz foxas parents may watch the gameplay footage when released pfffft, lets hope they wont see this line of code :)
 				else {
 					selectedSomethin = true;
