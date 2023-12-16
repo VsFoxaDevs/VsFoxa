@@ -1,7 +1,7 @@
 package backend;
 
 import flixel.FlxBasic;
-import flixel.util.FlxSave;
+//import flixel.util.FlxSave;
 
 import flixel.math.FlxPoint;
 
@@ -162,14 +162,16 @@ class CoolUtil
 
 	/**
 		Helper Function to Fix Save Files for Flixel 5
-		[november 29, 2023 EDIT]
+		-- EDIT: [November 29, 2023] --
 		this function is used to get the save path, period.
 		since newer flixel versions are being enforced anyways.
 		@crowplexus
 	**/
+	@:access(flixel.util.FlxSave.validate)
 	inline public static function getSavePath():String {
 		final company:String = FlxG.stage.application.meta.get('company');
-		@:privateAccess final file:String = flixel.util.FlxSave.validate(FlxG.stage.application.meta.get('file'));
-		return '${company}/${file}';
+		// #if (flixel < "5.0.0") return company; #else
+		return '${company}/${flixel.util.FlxSave.validate(FlxG.stage.application.meta.get('file'))}';
+		// #end
 	}
 }
