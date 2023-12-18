@@ -175,12 +175,6 @@ class PlayState extends MusicBeatState
 	public var maxHealth:Float = 2;
 	public var health(default, set):Float = 1;
 
-	inline function set_health(value:Float)
-	{
-		health = value > 2 ? 2 : value;
-		doDeathCheck(value < health);
-		return health;
-	}
 	public var combo:Int = 0;
 
 	public var vignette:FlxSprite;
@@ -1693,7 +1687,7 @@ class PlayState extends MusicBeatState
 			if(ret != FunkinLua.Function_Stop) openPauseMenu();
 		}
 
-        if(!endingSong && !inCutscene && !SONG.disableDebugButton)
+        if(!endingSong && !inCutscene && !SONG.disableDebugButtons)
 		{
 			if (controls.justPressed('debug_1'))
 				openChartEditor();
@@ -1860,7 +1854,7 @@ class PlayState extends MusicBeatState
 
 	// You can alter how icon animations work here
 	var iconsAnimations:Bool = true;
-	function set_health(value:Float):Float
+	inline function set_health(value:Float):Float
 	{
 		if(!iconsAnimations || healthBar == null || !healthBar.enabled || healthBar.valueFunction == null)
 		{
