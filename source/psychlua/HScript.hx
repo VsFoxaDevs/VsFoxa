@@ -164,8 +164,8 @@ class HScript extends SScript
 		set('parentLua', parentLua);
 		set('this', this);
 		set('game', PlayState.instance);
-		if (PlayState.instance != null)
-			setSpecialObject(PlayState.instance, false, PlayState.instance.instancesExclude);
+		/*if (PlayState.instance != null)
+			setSpecialObject(PlayState.instance, false, PlayState.instance.instancesExclude);*/
 		set('buildTarget', FunkinLua.getBuildTarget());
 		set('customSubstate', CustomSubstate.instance);
 		set('customSubstateName', CustomSubstate.name);
@@ -176,12 +176,12 @@ class HScript extends SScript
 		set('Function_StopHScript', FunkinLua.Function_StopHScript);
 		set('Function_StopAll', FunkinLua.Function_StopAll);
 		
-		set('add', function(obj:FlxBasic) PlayState.instance.add(obj));
-		set('addBehindGF', function(obj:FlxBasic) PlayState.instance.addBehindGF(obj));
-		set('addBehindDad', function(obj:FlxBasic) PlayState.instance.addBehindDad(obj));
-		set('addBehindBF', function(obj:FlxBasic) PlayState.instance.addBehindBF(obj));
-		set('insert', function(pos:Int, obj:FlxBasic) PlayState.instance.insert(pos, obj));
-		set('remove', function(obj:FlxBasic, splice:Bool = false) PlayState.instance.remove(obj, splice));
+		set('add', function(obj:FlxBasic) PlayState.instance.add);
+		set('addBehindGF', function(obj:FlxBasic) PlayState.instance.addBehindGF);
+		set('addBehindDad', function(obj:FlxBasic) PlayState.instance.addBehindDad);
+		set('addBehindBF', function(obj:FlxBasic) PlayState.instance.addBehindBF);
+		set('insert', function(pos:Int, obj:FlxBasic) PlayState.instance.insert);
+		set('remove', function(obj:FlxBasic, splice:Bool = false) PlayState.instance.remove);
 
 		if(varsToBring != null)
 		{

@@ -13,7 +13,7 @@ using StringTools;
 class ThanksState extends MusicBeatState {
     var bg:FlxSprite;
     var grid:FlxBackdrop;
-    final colorRotation:Int = 1;
+    var colorRotation:Int = 1;
     private var colors:Array<String> = [
 		'#314d7f',
 		'#4e7093',
