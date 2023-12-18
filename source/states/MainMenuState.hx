@@ -177,8 +177,6 @@ class MainMenuState extends MusicBeatState {
 		char.antialiasing = ClientPrefs.data.antialiasing;
 		add(char);
 
-		FlxG.camera.follow(camFollow, null, 0);
-
 		final versionShit1:FlxText = new FlxText(12, FlxG.height - 84, 0, 'Psych Engine v$psychEngineVersion', 12);
 		versionShit1.active = false;
 		versionShit1.scrollFactor.set();
@@ -222,6 +220,8 @@ class MainMenuState extends MusicBeatState {
 		}, 0);
 
 		super.create();
+
+		FlxG.camera.follow(camFollow, null, 0.15);
 	}
 
 	var selectedSomethin:Bool = false;
@@ -232,7 +232,7 @@ class MainMenuState extends MusicBeatState {
 			FlxG.sound.music.volume += 0.5 * elapsed;
 			if(FreeplayState.vocals != null) FreeplayState.vocals.volume += 0.5 * elapsed;
 		}
-		FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 * (FlxG.updateFramerate / 60), 0, 1);
+		//FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 * (FlxG.updateFramerate / 60), 0, 1);
 
 		if (!selectedSomethin) {
 			if (controls.UI_UP_P || controls.UI_DOWN_P) {

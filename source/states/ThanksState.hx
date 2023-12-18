@@ -13,15 +13,13 @@ using StringTools;
 class ThanksState extends MusicBeatState {
     var bg:FlxSprite;
     var grid:FlxBackdrop;
-    private var colorRotation:Int = 1;
+    final colorRotation:Int = 1;
     private var colors:Array<String> = [
 		'#314d7f',
 		'#4e7093',
 		'#70526e',
 		'#594465'
     ];
-
-	public var luaArray:Array<FunkinLua> = [];
 
     override function create(){
 		#if desktop DiscordClient.changePresence("Thanks Menu", null); #end

@@ -3,7 +3,7 @@ package backend;
 import flixel.FlxBasic;
 //import flixel.util.FlxSave;
 
-import flixel.math.FlxPoint;
+//import flixel.math.FlxPoint;
 
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
@@ -127,6 +127,15 @@ class CoolUtil
 		for (i in min...max) dumbArray.push(i);
 
 		return dumbArray;
+	}
+
+	public static function setTextBorderFromString(text:FlxText, border:String) {
+		switch (border.toLowerCase().trim()){
+			case 'shadow': text.borderStyle = SHADOW;
+			case 'outline': text.borderStyle = OUTLINE;
+			case 'outline_fast', 'outlinefast': text.borderStyle = OUTLINE_FAST;
+			default: text.borderStyle = NONE;
+		}
 	}
 
 	inline public static function browserLoad(site:String) {

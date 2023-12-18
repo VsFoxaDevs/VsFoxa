@@ -280,13 +280,9 @@ class StoryMenuState extends MusicBeatState {
 			if(stopspamming == false) {
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
-				grpWeekText.members[curWeek].startFlashing();
+				grpWeekText.members[curWeek].isFlashing = true;
 
-				for (char in grpWeekCharacters.members) {
-					if(char.character != '' && char.hasConfirmAnimation){
-						char.animation.play('confirm');
-					}
-				}
+				for (char in grpWeekCharacters.members) if(char.character != '' && char.hasConfirmAnimation) char.animation.play('confirm');
 				stopspamming = true;
 			}
 
@@ -364,11 +360,8 @@ class StoryMenuState extends MusicBeatState {
 
 		bgSprite.visible = true;
 		var assetName:String = leWeek.weekBackground;
-		if(assetName == null || assetName.length < 1) {
-			bgSprite.visible = false;
-		}else{
-			bgSprite.loadGraphic(Paths.image('menubackgrounds/menu_' + assetName));
-		}
+		if(assetName == null || assetName.length < 1) bgSprite.visible = false;
+		else bgSprite.loadGraphic(Paths.image('menubackgrounds/menu_' + assetName));
 		PlayState.storyWeek = curWeek;
 
 		Difficulty.loadFromWeek();

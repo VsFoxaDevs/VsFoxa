@@ -27,8 +27,6 @@ class LoadingState extends MusicBeatState
 	var callbacks:MultiCallback;
 	var targetShit:Float = 0;
 
-	//public var luaArray:Array<FunkinLua> = [];
-
 	var tipTxt:FlxText;
 	var tips:Array<String> = [
 		"Don't spam, it won't work.",
@@ -141,36 +139,6 @@ class LoadingState extends MusicBeatState
 		add(tipTxt);
 
 		tipTxt.text = tips[FlxG.random.int(0, tips.length - 1)];
-
-		// GLOBAL LOADING SCREEN SCRIPTS
-		/*#if LUA_ALLOWED
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getSharedPath('menu_scripts/preloader/')];
-
-		#if MODS_ALLOWED
-		foldersToCheck.insert(0, Paths.mods('menu_scripts/preloader/'));
-		if (Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Mods.currentModDirectory + '/menu_scripts/preloader/'));
-
-		for (mod in Mods.getGlobalMods())
-			foldersToCheck.insert(0, Paths.mods(mod + '/menu_scripts/preloader/'));
-		#end
-
-		for (folder in foldersToCheck)
-		{
-			if (FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
-					if (file.endsWith('.lua') && !filesPushed.contains(file))
-					{
-						luaArray.push(new FunkinLua(folder + file));
-						filesPushed.push(file);
-					}
-				}
-			}
-		}
-		#end*/
 		
 		initSongsManifest().onComplete
 		(

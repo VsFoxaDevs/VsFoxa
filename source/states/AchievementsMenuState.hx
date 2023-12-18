@@ -5,8 +5,7 @@ import flixel.util.FlxSort;
 import objects.Bar;
 
 #if ACHIEVEMENTS_ALLOWED
-class AchievementsMenuState extends MusicBeatState
-{
+class AchievementsMenuState extends MusicBeatState {
 	public var curSelected:Int = 0;
 
 	public var options:Array<Dynamic> = [];
@@ -20,8 +19,7 @@ class AchievementsMenuState extends MusicBeatState
 
 	var MAX_PER_ROW:Int = 4;
 
-	override function create()
-	{
+	override function create() {
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
@@ -29,19 +27,19 @@ class AchievementsMenuState extends MusicBeatState
 		DiscordClient.changePresence("Achievements Menu", null);
 		#end
 
-		// prepare achievement list
+		//prepare achievement list
 		for (achievement => data in Achievements.achievements)
 		{
 			var unlocked:Bool = Achievements.isUnlocked(achievement);
 			if(data.hidden != true || unlocked) options.push(makeAchievement(achievement, data, unlocked, data.mod));
 		}
 
-		// TO DO: check for mods
+		//TO DO: check for mods
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
-		FlxG.camera.follow(camFollow, null, 0);
-		FlxG.camera.scroll.y = -FlxG.height;
+		//FlxG.camera.follow(camFollow, null, 0);
+		//FlxG.camera.scroll.y = -FlxG.height;
 
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
 		menuBG.antialiasing = ClientPrefs.data.antialiasing;
@@ -65,12 +63,10 @@ class AchievementsMenuState extends MusicBeatState
 		{
 			var hasAntialias:Bool = ClientPrefs.data.antialiasing;
 			var graphic = null;
-			if(option.unlocked)
-			{
+			if(option.unlocked){
 				#if MODS_ALLOWED Mods.currentModDirectory = option.mod; #end
 				var image:String = 'achievements/' + option.name;
-				if(Paths.fileExists('images/$image-pixel.png', IMAGE))
-				{
+				if(Paths.fileExists('images/$image-pixel.png', IMAGE)){
 					graphic = Paths.image('$image-pixel');
 					hasAntialias = false;
 				}
@@ -131,6 +127,9 @@ class AchievementsMenuState extends MusicBeatState
 		
 		_changeSelection();
 		super.create();
+
+		FlxG.camera.follow(camFollow, null, 0.15);
+		FlxG.camera.scroll.y = -FlxG.height;
 	}
 
 	function makeAchievement(achievement:String, data:Achievement, unlocked:Bool, mod:String = null)
@@ -201,7 +200,7 @@ class AchievementsMenuState extends MusicBeatState
 			}
 		}
 
-		FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 * (FlxG.updateFramerate / 60), 0, 1);
+		//FlxG.camera.followLerp = FlxMath.bound(elapsed * 9 * (FlxG.updateFramerate / 60), 0, 1);
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));

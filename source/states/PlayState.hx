@@ -22,7 +22,7 @@ import flixel.FlxBasic;
 import flixel.FlxObject;
 import flixel.FlxSubState;
 import flixel.addons.transition.FlxTransitionableState;
-import flixel.math.FlxPoint;
+//import flixel.math.FlxPoint;
 import flixel.util.FlxSort;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxSave;
@@ -317,7 +317,7 @@ class PlayState extends MusicBeatState
 		guitarHeroSustains = ClientPrefs.data.guitarHeroSustains;
 
 		// var gameCam:FlxCamera = FlxG.camera;
-		camGame = new FlxCamera();
+		camGame = initPsychCamera();
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
@@ -1292,7 +1292,8 @@ class PlayState extends MusicBeatState
 		curSong = songData.song;
 
 		vocals = new FlxSound();
-		if (songData.needsVoices) vocals.loadEmbedded(Paths.voices(songData.song));
+		try {if(songData.needsVoices) vocals.loadEmbedded(Paths.voices(songData.song));}
+		catch(e:Dynamic) {}
 
 		vocals.pitch = playbackRate;
 		FlxG.sound.list.add(vocals);
@@ -1652,18 +1653,12 @@ class PlayState extends MusicBeatState
 	public var canReset:Bool = true;
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
+	var freezeCamera:Bool = false;
 
 	override public function update(elapsed:Float)
 	{
-		/*if (FlxG.keys.justPressed.NINE)
-		{
-			iconP1.swapOldIcon();
-		}*/
-		callOnScripts('onUpdate', [elapsed]);
-
-		FlxG.camera.followLerp = 0;
-		if(!inCutscene && !paused) {
-			FlxG.camera.followLerp = FlxMath.bound(elapsed * 2.4 * cameraSpeed * playbackRate * (FlxG.updateFramerate / 60), 0, 1);
+		if(!inCutscene && !paused && !freezeCamera) {
+			FlxG.camera.followLerp = 0.04 * cameraSpeed * playbackRate;
 			if(!startingSong && !endingSong && boyfriend.animation.curAnim != null && boyfriend.animation.curAnim.name.startsWith('idle')) {
 				boyfriendIdleTime += elapsed;
 				if(boyfriendIdleTime >= 0.15) { // Kind of a mercy thing for making the achievement easier to get as it's apparently frustrating to some playerss
@@ -1673,6 +1668,8 @@ class PlayState extends MusicBeatState
 				boyfriendIdleTime = 0;
 			}
 		}
+		else FlxG.camera.followLerp = 0;
+		callOnScripts('onUpdate', [elapsed]);
 
 		super.update(elapsed);
 
@@ -1690,61 +1687,24 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (controls.PAUSE && startedCountdown && canPause)
+		if(controls.PAUSE && startedCountdown && canPause)
 		{
 			var ret:Dynamic = callOnScripts('onPause', null, true);
-			if(ret != FunkinLua.Function_Stop) {
-				openPauseMenu();
-			}
+			if(ret != FunkinLua.Function_Stop) openPauseMenu();
 		}
 
-		if (controls.justPressed('debug_1') && !endingSong && !inCutscene && !SONG.disableDebugButtons)
-			openChartEditor();
-
-		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, FlxMath.bound(1 - (elapsed * 9 * playbackRate), 0, 1));
-		iconP1.scale.set(mult, mult);
-		iconP1.updateHitbox();
-
-		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, FlxMath.bound(1 - (elapsed * 9 * playbackRate), 0, 1));
-		iconP2.scale.set(mult, mult);
-		iconP2.updateHitbox();
-
-		var iconOffset:Int = 26;
-		/*if (healthBar.bounds.max != null) {
-			if (health > healthBar.bounds.max) health = healthBar.bounds.max;
-		} else {
-			// Old system for safety?? idk
-			if (health > 2) health = 2;
-		}*/ 
-
-                health = FlxMath.bound(health, 0, (healthBar.bounds.max != null ? healthBar.bounds.max : 2));
-
-		iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
-		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
-
-		if(health > maxHealth) health = maxHealth;
-
-		switch (iconP1.animation.numFrames) {
-			case 1:
-				iconP1.animation.curAnim.curFrame = 0;
-			case 3:
-				iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 1 : (healthBar.percent > 80) ? 2 : 0;
-			default:
-				iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 1 : 0;
-		}
-		switch (iconP2.animation.numFrames) {
-			case 1:
-				iconP2.animation.curAnim.curFrame = 0;
-			case 3:
-				iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 1 : (healthBar.percent < 20) ? 2 : 0;
-			default:
-				iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 1 : 0;
+        if(!endingSong && !inCutscene && !SONG.disableDebugButton)
+		{
+			if (controls.justPressed('debug_1'))
+				openChartEditor();
+			else if (controls.justPressed('debug_2'))
+				openCharacterEditor();
 		}
 
-		if(ClientPrefs.data.enableVignette) vignette.alpha = 0.9 - (health / maxHealth);
+		if (healthBar.bounds.max != null && health > healthBar.bounds.max)
+			health = healthBar.bounds.max;
 
-		if (controls.justPressed('debug_2') && !endingSong && !inCutscene && !SONG.disableDebugButtons)
-			openCharacterEditor();
+		updateIcons(elapsed);
 		
 		if (startedCountdown && !paused)
 			Conductor.songPosition += FlxG.elapsed * 1000 * playbackRate;
@@ -1882,6 +1842,49 @@ class PlayState extends MusicBeatState
 		setOnScripts('cameraY', camFollow.y);
 		setOnScripts('botPlay', cpuControlled);
 		callOnScripts('onUpdatePost', [elapsed]);
+	}
+
+	public dynamic function updateIcons(elapsed:Float){
+		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, FlxMath.bound(1 - (elapsed * 9 * playbackRate), 0, 1));
+		iconP1.scale.set(mult, mult);
+		iconP1.updateHitbox();
+
+		var mult:Float = FlxMath.lerp(1, iconP2.scale.x, FlxMath.bound(1 - (elapsed * 9 * playbackRate), 0, 1));
+		iconP2.scale.set(mult, mult);
+		iconP2.updateHitbox();
+
+		var iconOffset:Int = 26;
+		iconP1.x = healthBar.barCenter + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+		iconP2.x = healthBar.barCenter - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+	}
+
+	// You can alter how icon animations work here
+	var iconsAnimations:Bool = true;
+	function set_health(value:Float):Float
+	{
+		if(!iconsAnimations || healthBar == null || !healthBar.enabled || healthBar.valueFunction == null)
+		{
+			health = value;
+			return health;
+		}
+
+		// update health bar
+		health = value;
+		var newPercent:Null<Float> = FlxMath.remapToRange(FlxMath.bound(healthBar.valueFunction(), healthBar.bounds.min, healthBar.bounds.max), healthBar.bounds.min, healthBar.bounds.max, 0, 100);
+		healthBar.percent = (newPercent != null ? newPercent : 0);
+
+		switch (iconP1.animation.numFrames) {
+			case 1: iconP1.animation.curAnim.curFrame = 0;
+			case 3: iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 1 : (healthBar.percent > 80) ? 2 : 0;
+			default: iconP1.animation.curAnim.curFrame = (healthBar.percent < 20) ? 1 : 0;
+		}
+		switch (iconP2.animation.numFrames) {
+			case 1: iconP2.animation.curAnim.curFrame = 0;
+			case 3: iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 1 : (healthBar.percent < 20) ? 2 : 0;
+			default: iconP2.animation.curAnim.curFrame = (healthBar.percent > 80) ? 1 : 0;
+		}
+
+		return health;
 	}
 
 	function openPauseMenu()

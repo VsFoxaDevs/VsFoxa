@@ -6,7 +6,7 @@ import flash.events.KeyboardEvent;
 import flash.geom.Rectangle;
 import flixel.addons.ui.FlxUI.NamedString;
 
-import flixel.math.FlxPoint;
+//import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
 
 import flixel.util.FlxDestroyUtil;

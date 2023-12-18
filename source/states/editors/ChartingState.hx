@@ -15,7 +15,7 @@ import flixel.addons.ui.FlxUINumericStepper;
 import flixel.addons.ui.FlxUISlider;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.group.FlxGroup;
-import flixel.math.FlxPoint;
+//import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
 
 import flixel.util.FlxSort;
@@ -612,7 +612,7 @@ class ChartingState extends MusicBeatState
 
 		UI_box.addGroup(tab_group_song);
 
-		FlxG.camera.follow(camPos);
+		initPsychCamera().follow(camPos);
 	}
 
 	var stepperBeats:FlxUINumericStepper;
@@ -1388,22 +1388,25 @@ class ChartingState extends MusicBeatState
 
 	function loadSong():Void
 	{
-		if (FlxG.sound.music != null) FlxG.sound.music.stop();
+		if(FlxG.sound.music != null) FlxG.sound.music.stop();
 
-		var file:Dynamic = Paths.voices(currentSongName);
 		vocals = new FlxSound();
-		if (Std.isOfType(file, Sound) || OpenFlAssets.exists(file)) {
-			vocals.loadEmbedded(file);
-			vocals.autoDestroy = false;
-			FlxG.sound.list.add(vocals);
+		try {
+			var file:Dynamic = Paths.voices(currentSongName);
+			if((Std.isOfType(file, Sound) || OpenFlAssets.exists(file)) && file != null){
+				vocals.loadEmbedded(file);
+				vocals.autoDestroy = false;
+				FlxG.sound.list.add(vocals);
+			}
 		}
+		catch(e:Dynamic) {}
 		generateSong();
 		FlxG.sound.music.pause();
 		Conductor.songPosition = sectionStartTime();
 		FlxG.sound.music.time = Conductor.songPosition;
 
 		var curTime:Float = 0;
-		//trace(_song.notes.length);
+		
 		if(_song.notes.length <= 1) //First load ever
 		{
 			trace('first load ever!!');

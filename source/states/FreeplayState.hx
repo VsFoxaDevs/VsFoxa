@@ -427,7 +427,7 @@ class FreeplayState extends MusicBeatState
 				destroyFreeplayVocals();
 				FlxG.sound.music.volume = 0;
 				Mods.currentModDirectory = songs[curSelected].folder;
-				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
+				final poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
 				if(PlayState.SONG.needsVoices) vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 				else{
@@ -450,7 +450,7 @@ class FreeplayState extends MusicBeatState
 				playingMusic = true;
 				curTime = 0;
 
-				var poop = Paths.formatToSongPath(songs[curSelected].songName);
+				final poop = Paths.formatToSongPath(songs[curSelected].songName);
 				if(playbackRates.exists(poop)) playbackRate = Std.parseFloat(playbackRates.get(poop));
 
 				setPlaybackRate();
@@ -476,7 +476,7 @@ class FreeplayState extends MusicBeatState
 		else if(controls.ACCEPT && !playingMusic){
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
-			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
+			final poop:String = Highscore.formatSong(songLowercase, curDifficulty);
 			trace(poop);
 
 			try {

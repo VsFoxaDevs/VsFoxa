@@ -1,6 +1,6 @@
 package states.stages;
 
-import flixel.math.FlxPoint;
+//import flixel.math.FlxPoint;
 
 class Spooky extends BaseStage
 {

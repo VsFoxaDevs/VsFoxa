@@ -1,6 +1,6 @@
 package states.stages;
 
-import flixel.math.FlxPoint;
+//import flixel.math.FlxPoint;
 import animateatlas.AtlasFrameMaker;
 
 import states.stages.objects.*;

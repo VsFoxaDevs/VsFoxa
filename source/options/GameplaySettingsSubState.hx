@@ -50,7 +50,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Hitsound Volume',
-			'Funny notes do \"Tick!\" when you hit them."',
+		'Funny notes does \"Tick!\" when you hit them.',
 			'hitsoundVolume',
 			'percent');
 		addOption(option);

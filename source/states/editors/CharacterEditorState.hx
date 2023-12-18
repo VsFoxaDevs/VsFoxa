@@ -17,7 +17,7 @@ import flixel.ui.FlxButton;
 import openfl.net.FileReference;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
-import flixel.math.FlxPoint;
+//import flixel.math.FlxPoint;
 import lime.system.Clipboard;
 import tjson.TJSON as Json;
 
