@@ -70,6 +70,12 @@ class HScript extends SScript
 		set('FlxGradient', flixel.util.FlxGradient);
 		set('FlxCamera', flixel.FlxCamera);
 		set('PsychCamera', backend.PsychCamera);
+		set('FlxPoint', flixel.math.FlxPoint);
+		set('FlxText', flixel.text.FlxText);
+		set('FlxSave', flixel.util.FlxSave);
+		set('FlxButton', flixel.ui.FlxButton);
+		set('FlxStringUtil', flixel.util.FlxStringUtil);
+		set('FlxAngle', flixel.math.FlxAngle);
 		set('FlxTimer', flixel.util.FlxTimer);
 		set('FlxTween', flixel.tweens.FlxTween);
 		set('FlxBasic', flixel.FlxBasic);
@@ -176,12 +182,12 @@ class HScript extends SScript
 		set('Function_StopHScript', FunkinLua.Function_StopHScript);
 		set('Function_StopAll', FunkinLua.Function_StopAll);
 		
-		set('add', function(obj:FlxBasic) PlayState.instance.add);
-		set('addBehindGF', function(obj:FlxBasic) PlayState.instance.addBehindGF);
-		set('addBehindDad', function(obj:FlxBasic) PlayState.instance.addBehindDad);
-		set('addBehindBF', function(obj:FlxBasic) PlayState.instance.addBehindBF);
-		set('insert', function(pos:Int, obj:FlxBasic) PlayState.instance.insert);
-		set('remove', function(obj:FlxBasic, splice:Bool = false) PlayState.instance.remove);
+		set('add', function(obj:FlxBasic) PlayState.instance.add(obj));
+		set('addBehindGF', function(obj:FlxBasic) PlayState.instance.addBehindGF(obj));
+		set('addBehindDad', function(obj:FlxBasic) PlayState.instance.addBehindDad(obj));
+		set('addBehindBF', function(obj:FlxBasic) PlayState.instance.addBehindBF(obj));
+		set('insert', function(pos:Int, obj:FlxBasic) PlayState.instance.insert(pos, obj));
+		set('remove', function(obj:FlxBasic, ?splice:Bool = false) PlayState.instance.remove(obj, splice));
 
 		if(varsToBring != null)
 		{
@@ -189,7 +195,6 @@ class HScript extends SScript
 			{
 				key = key.trim();
 				var value = Reflect.field(varsToBring, key);
-				//trace('Key $key: $value');
 				set(key, Reflect.field(varsToBring, key));
 			}
 			varsToBring = null;
@@ -198,7 +203,7 @@ class HScript extends SScript
 
 	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):TeaCall
 	{
-		if (funcToRun == null) return null;
+		if(funcToRun == null) return null;
 
 		if(!exists(funcToRun))
 		{
@@ -207,8 +212,7 @@ class HScript extends SScript
 		}
 
 		var callValue = call(funcToRun, funcArgs);
-		if (!callValue.succeeded)
-		{
+		if(!callValue.succeeded){
 			var e = callValue.exceptions[0];
 			if (e != null)
 			{

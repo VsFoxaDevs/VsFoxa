@@ -1,6 +1,5 @@
 package extraflixel;
 
-//import flixel.math.FlxPoint;
 import flixel.math.FlxAngle;
 import math.VectorHelpers;
 import math.Vector3;
