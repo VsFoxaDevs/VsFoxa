@@ -742,7 +742,7 @@ class CharacterEditorState extends MusicBeatState
 		}
 		var anims:Array<AnimArray> = character.animationsArray.copy();
 		if(Paths.fileExists('images/' + character.imageFile + '/Animation.json', TEXT)) {
-			//character.frames = AtlasFrameMaker.construct(character.imageFile); //TO DO: Animate Atlas
+			//character.frames = AtlasFrameMaker.construct(character.imageFile); //TO DO: Animate Atlas, jk were not revamping animate atlas (yet)
 		} else if(Paths.fileExists('images/' + character.imageFile + '.txt', TEXT)) {
 			character.frames = Paths.getPackerAtlas(character.imageFile);
 		} else {
@@ -945,7 +945,7 @@ class CharacterEditorState extends MusicBeatState
 			}
 
 			txt = 'Frames: ( ${character.animation.curAnim.curFrame} / ${character.animation.curAnim.numFrames-1} )';
-			//if(character.animation.curAnim.paused) txt += ' - PAUSED';
+			if(character.animation.curAnim.paused) txt += ' - PAUSED'; //idk
 			clr = FlxColor.WHITE;
 		}
 		if(txt != frameAdvanceText.text) frameAdvanceText.text = txt;
