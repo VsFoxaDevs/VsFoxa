@@ -24,7 +24,7 @@
 	<define name="GITHUB_ALLOWED" />
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="LOADING_SCREEN" /> <!-- i'll fix later-->
-	<define name="VIDEOS_ALLOWED" if="desktop || android" unless="32bits"/><!-- wait why is there some hints of an official android port wtf -->
+	<define name="VIDEOS_ALLOWED" if="windows || linux || android" unless="32bits"/><!-- wait why is there some hints of an official android port wtf -->
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="TITLE_SCREEN_EASTER_EGG"/> <!-- DELETE THE if="officialBuild" for enabling this on an unofficial build -->
 

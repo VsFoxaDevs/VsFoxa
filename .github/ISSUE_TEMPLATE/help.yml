@@ -16,6 +16,18 @@ body:
       options:
         - Lua
         - Source
+        - Lua and Source
+        - I am not modding
+    validations:
+      required: true
+
+  - type: dropdown
+    id: psychversion
+    attributes:
+      label: "Which branch of the engine are you using?"
+      options:
+        - Latest (main)
+        - Unstable (experimental)
     validations:
       required: true
 
@@ -24,11 +36,10 @@ body:
     attributes:
       label: "What is your build target?"
       options:
-        - "Windows x64"
-        - "Windows x86/x32"
+        - "Windows"
         - "Linux"
         - "Mac"
-        - "HTML5/Browser"
+        - "HTML5"
         - "Flash/Air-based target"
         - "Neko, HashLink, or other build system"
     validations:

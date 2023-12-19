@@ -13,14 +13,15 @@ art/test_x64-debug-officialrelease.bat
 export/*
 .haxelib/
 
-### VS Code
-
+### Visual Studio
 .vscode/*
 *.code-workspace
 vs_Community.exe
+
 # Local history which shouldn't be shared.
 .history
 .ionide
+
 # ! means a file should be added regardless of it it gets ignored prior.
 # Including to allow others to use already set-up configuration tweaked for the project.
 !.vscode/settings.json
