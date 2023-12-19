@@ -71,7 +71,7 @@ class HScript extends SScript
 		set('FlxGradient', flixel.util.FlxGradient);
 		set('FlxCamera', flixel.FlxCamera);
 		set('PsychCamera', backend.PsychCamera);
-		set('FlxPoint', flixel.math.FlxPoint);
+		//set('FlxPoint', flixel.math.FlxPoint);
 		set('FlxText', flixel.text.FlxText);
 		set('FlxSave', flixel.util.FlxSave);
 		set('FlxButton', flixel.ui.FlxButton);
