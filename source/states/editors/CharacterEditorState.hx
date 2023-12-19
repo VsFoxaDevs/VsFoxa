@@ -34,6 +34,8 @@ class CharacterEditorState extends MusicBeatState
 	var cameraZoomText:FlxText;
 	var frameAdvanceText:FlxText;
 
+	var testModeButton:FlxButton;
+
 	var healthBar:Bar;
 	var healthIcon:HealthIcon;
 
@@ -50,6 +52,8 @@ class CharacterEditorState extends MusicBeatState
 	
 	var UI_box:FlxUITabMenu;
 	var UI_characterbox:FlxUITabMenu;
+
+	var testMode:Bool = false;
 
 	public function new(char:String = null, goToPlayState:Bool = true)
 	{
@@ -140,11 +144,20 @@ class CharacterEditorState extends MusicBeatState
 		frameAdvanceText.cameras = [camHUD];
 		add(frameAdvanceText);
 
+		testModeButton = new FlxButton(FlxG.width - 360, 25, "Test OFF", () -> 
+		{
+			testMode = !testMode;
+			testModeButton.text = (testMode = !testMode) ? "Test ON" : "Test OFF";
+		});
+		testModeButton.cameras = [camMenu]; 
+
 		addHelpScreen();
 		FlxG.mouse.visible = true;
 		FlxG.camera.zoom = 1;
 
 		makeUIMenu();
+
+		add(testModeButton);
 
 		updatePointerPos();
 		updateHealthBar();
@@ -942,7 +955,13 @@ class CharacterEditorState extends MusicBeatState
 		if(FlxG.keys.justPressed.F12)
 			silhouettes.visible = !silhouettes.visible;
 
-		if(FlxG.keys.justPressed.F1 || (helpBg.visible && FlxG.keys.justPressed.ESCAPE))
+		if(testMode) {
+			if(controls.NOTE_LEFT_P) char.playAnim("singLEFT", true);
+			if(controls.NOTE_RIGHT_P)char.playAnim("singRIGHT", true);
+			if (controls.NOTE_DOWN_P)char.playAnim("singDOWN", true);
+			if(controls.NOTE_UP_P) char.playAnim("singUP", true);
+		}
+		else if(FlxG.keys.justPressed.F1 || (helpBg.visible && FlxG.keys.justPressed.ESCAPE))
 		{
 			helpBg.visible = !helpBg.visible;
 			helpTexts.visible = helpBg.visible;
