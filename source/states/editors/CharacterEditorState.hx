@@ -149,7 +149,7 @@ class CharacterEditorState extends MusicBeatState
 			testMode = !testMode;
 			testModeButton.text = (testMode = !testMode) ? "Test ON" : "Test OFF";
 		});
-		testModeButton.cameras = [camMenu]; 
+		testModeButton.cameras = [camHUD]; 
 
 		addHelpScreen();
 		FlxG.mouse.visible = true;
@@ -956,10 +956,10 @@ class CharacterEditorState extends MusicBeatState
 			silhouettes.visible = !silhouettes.visible;
 
 		if(testMode) {
-			if(controls.NOTE_LEFT_P) char.playAnim("singLEFT", true);
-			if(controls.NOTE_RIGHT_P)char.playAnim("singRIGHT", true);
-			if (controls.NOTE_DOWN_P)char.playAnim("singDOWN", true);
-			if(controls.NOTE_UP_P) char.playAnim("singUP", true);
+			if(controls.NOTE_LEFT_P) character.playAnim("singLEFT", true);
+			if(controls.NOTE_RIGHT_P)character.playAnim("singRIGHT", true);
+			if (controls.NOTE_DOWN_P)character.playAnim("singDOWN", true);
+			if(controls.NOTE_UP_P) character.playAnim("singUP", true);
 		}
 		else if(FlxG.keys.justPressed.F1 || (helpBg.visible && FlxG.keys.justPressed.ESCAPE))
 		{
