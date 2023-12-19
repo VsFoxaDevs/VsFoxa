@@ -101,8 +101,8 @@
 	<haxelib name="hxcpp-debug-server" if="debug"/>
 	<haxedef name="HXC_LIBVLC_LOGGING" if="VIDEOS_ALLOWED debug" />
 
-	<haxelib name="systools" />
-	<ndll name="systools" haxelib="systools" />
+	<haxelib name="systools" unless="mac" />
+	<ndll name="systools" haxelib="systools" unless="mac" />
 	
 	<!-- ______________________________ Haxedefines _____________________________ -->
 

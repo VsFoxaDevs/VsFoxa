@@ -32,6 +32,9 @@ using StringTools;
 // this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
 // this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
 // this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend!
+
+// actually dont read this, its no longer funny./.,/./,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,.;.
+
 typedef MainMenuData = {
 	fridayAchieve:String,
 	discordLink:String,
