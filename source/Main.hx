@@ -217,6 +217,8 @@ class Main extends Sprite
 		"old was better - TheAnimateMan",
 		"what the actual fuck - cyborg henry stickmin",
 		"L - Dark",
+		"fix your grammer - SLB7",
+		"fuck why is it down - SLB7",
 		"You did something, didn't you? - LightyStarOfficial",
 		"HA! - Dark",
 		"j- NOOO - Vencerist",
