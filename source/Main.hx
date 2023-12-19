@@ -209,24 +209,23 @@ class Main extends Sprite
 	}
 
 	static final quotes:Array<String> = [
-		"Blueballed. - gedehari",
-		"tony crashed my power - CharlesCatYT",
-		"We have come for your errors. GET THE FUCK OUT OF MY CODE - CharlesCatYT",
+		//"Blueballed. - gedehari",
+		"bruh lmfao - CharlesCatYT",
+		"We have come for your errors- GET THE FUCK OUT OF MY CODE - CharlesCatYT",
 		"i hope you go mooseing and get fucked by a campfire - cyborg henry stickmin",
 		"Goodbye cruel world - ShadowMario",
 		"old was better - TheAnimateMan",
 		"what the actual fuck - cyborg henry stickmin",
 		"L - Dark",
-		"fuck why is it down - SLB7",
-		"grits is funni - Grits",
-		"fix your grammer - SLB7",
+		"You did something, didn't you? - LightyStarOfficial",
+		"HA! - Dark",
 		"j- NOOO - Vencerist",
 		"I did but error oof - Vencerist",
 		"Ah bueno adios master - ShadowMario",
 		"Skibidy bah mmm dada *explodes* - ShadowMario",
-		"What have you done, you killed it! - BeastlyGhost",
-		"Have you checked if the variable exists? - BeastlyGhost",
-		"Have you even read the wiki before trying that? - BeastlyGhost"
+		"What have you done, you killed it! - crowplexus",
+		"Have you checked if the variable exists? - crowplexus",
+		"Have you even read the wiki before trying that? - crowplexus"
 	];
 
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
@@ -255,7 +254,7 @@ class Main extends Sprite
 			}
 		}
 
-		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/ShadowMario/FNF-PsychEngine\n\n> Crash Handler written by: sqirra-rng";
+		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/TheBeepSheepTeam/VsFoxa\n\n> Crash Handler written by: sqirra-rng";
 
 		if (!FileSystem.exists("./crash/"))
 			FileSystem.createDirectory("./crash/");
