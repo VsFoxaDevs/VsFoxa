@@ -71,5 +71,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 
+import cppthing.CppApi;
+
 using StringTools;
 #end

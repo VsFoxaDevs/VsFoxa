@@ -2,10 +2,15 @@ package cppthing;
 
 #if windows
 @:buildXml('
+<compilerflag value="/DelayLoad:ComCtl32.dll"/>
+
 <target id="haxe">
     <lib name="dwmapi.lib" if="windows" />
+    <lib name="shell32.lib" if="windows" />
+    <lib name="gdi32.lib" if="windows" />
 </target>
 ')
+
 @:headerCode('
 #include <Windows.h>
 #include <cstdio>
@@ -13,6 +18,9 @@ package cppthing;
 #include <tchar.h>
 #include <dwmapi.h>
 #include <winuser.h>
+#include <Shlobj.h>
+#include <wingdi.h>
+#include <shellapi.h>
 ')
 #elseif linux
 @:headerCode("#include <stdio.h>")
@@ -62,18 +70,14 @@ class WindowsData
         UpdateWindow(window);
     ')
 	@:noCompletion
-	public static function _setWindowColorMode(mode:Int)
-	{
-	}
+	public static function _setWindowColorMode(mode:Int) {}
 
 	public static function setWindowColorMode(mode:WindowColorMode)
 	{
 		var darkMode:Int = cast(mode, Int);
 
-		if (darkMode > 1 || darkMode < 0)
-		{
+		if(darkMode > 1 || darkMode < 0){
 			trace("WindowColorMode Not Found...");
-
 			return;
 		}
 
@@ -85,9 +89,28 @@ class WindowsData
 	SetWindowLong(window, GWL_EXSTYLE, GetWindowLong(window, GWL_EXSTYLE) ^ WS_EX_LAYERED);
 	')
 	@:noCompletion
-	public static function _setWindowLayered()
-	{
-	}
+	public static function _setWindowLayered() {}
+
+    #if windows
+    @:functionCode('
+        HWND window = GetActiveWindow();
+
+        if (transparencyEnabled) {
+            SetWindowLong(window, GWL_EXSTYLE, GetWindowLong(window, GWL_EXSTYLE) ^ WS_EX_LAYERED);
+            SetLayeredWindowAttributes(window, RGB(0, 0, 0), 255, LWA_COLORKEY | LWA_ALPHA);
+        }
+        // make window layered
+        int result = SetWindowLong(window, GWL_EXSTYLE, GetWindowLong(window, GWL_EXSTYLE) | WS_EX_LAYERED);
+        if (alpha > 255) alpha = 255;
+        if (alpha < 0) alpha = 0;
+        SetLayeredWindowAttributes(window, RGB(red, green, blue), alpha, LWA_COLORKEY | LWA_ALPHA);
+        alpha = result;
+        transparencyEnabled = true;
+    ')
+    #end
+    public static function setWindowTransparencyColor(red:Int, green:Int, blue:Int, alpha:Int = 255) {
+        return alpha;
+    }
 
 	@:functionCode('
         HWND window = GetActiveWindow();
@@ -105,7 +128,7 @@ class WindowsData
 
     ')
 	/**
-	 * Set Whole Window's Opacity
+	 * Set the whole window's opacity
 	 * ! MAKE SURE TO CALL CppAPI._setWindowLayered(); BEFORE RUNNING THIS
 	 * @param alpha 
 	 */
@@ -114,6 +137,57 @@ class WindowsData
 		return alpha;
 	}
 	#end
+
+    #if windows
+    @:functionCode('
+        if (!transparencyEnabled) return false;
+        
+        HWND window = GetActiveWindow();
+        SetWindowLong(window, GWL_EXSTYLE, GetWindowLong(window, GWL_EXSTYLE) ^ WS_EX_LAYERED);
+        SetLayeredWindowAttributes(window, RGB(0, 0, 0), 255, LWA_COLORKEY | LWA_ALPHA);
+        transparencyEnabled = false;
+    ')
+    #end
+    public static function disableWindowTransparency(result:Bool = true) {
+        return result;
+    }
+
+    #if windows
+    @:functionCode('
+        // https://stackoverflow.com/questions/4308503/how-to-enable-visual-styles-without-a-manifest
+        // dumbass windows
+
+        TCHAR dir[MAX_PATH];
+        ULONG_PTR ulpActivationCookie = FALSE;
+        ACTCTX actCtx =
+        {
+            sizeof(actCtx),
+            ACTCTX_FLAG_RESOURCE_NAME_VALID
+                | ACTCTX_FLAG_SET_PROCESS_DEFAULT
+                | ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID,
+            TEXT("manifesthelper.dll"), 0, 0, dir, (LPCTSTR)2
+        };
+        UINT cch = GetCurrentDirectory(sizeof(dir) / sizeof(*dir), (LPSTR) &dir);
+        if (cch >= sizeof(dir) / sizeof(*dir)) { return FALSE; /*shouldn\'t happen*/ }
+        dir[cch] = TEXT(\'\\0\');
+        ActivateActCtx(CreateActCtx(&actCtx), &ulpActivationCookie);
+        return ulpActivationCookie;
+    ')
+    #end
+    public static function enableVisualStyles() {
+        return false;
+    }
+
+    #if windows
+    @:functionCode('
+    HWND window = GetActiveWindow();
+    HICON smallIcon = (HICON) LoadImage(NULL, path, IMAGE_ICON, 16, 16, LR_LOADFROMFILE);
+    HICON icon = (HICON) LoadImage(NULL, path, IMAGE_ICON, 0, 0, LR_LOADFROMFILE | LR_DEFAULTSIZE);
+    SendMessage(window, WM_SETICON, ICON_SMALL, (LPARAM)smallIcon);
+    SendMessage(window, WM_SETICON, ICON_BIG, (LPARAM)icon);
+    ')
+    #end
+    public static function setWindowIcon(path:String) {}
 }
 
 @:enum abstract WindowColorMode(Int)
