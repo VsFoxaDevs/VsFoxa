@@ -76,10 +76,10 @@ class NoteSplashDebugState extends MusicBeatState {
 		var txtx = 60;
 		var txty = 640;
 
-		var imageName:FlxText = new FlxText(txtx, txty + 10, 'Image Name:', 16);
+		var imageName:FlxText = new FlxText(txtx, txty - 120, 'Image Name:', 16);
 		add(imageName);
 
-		imageInputText = new FlxInputText(txtx, txty - 10, 360, defaultTexture, 16);
+		imageInputText = new FlxInputText(txtx, txty - 100, 360, defaultTexture, 16);
 		imageInputText.callback = function(text:String, action:String)
 		{
 			switch(action) {
@@ -133,12 +133,12 @@ class NoteSplashDebugState extends MusicBeatState {
 		};
 		add(nameInputText);
 		
-		add(new FlxText(txtx, txty - 45, 0, 'Min/Max Framerate:', 16));
-		stepperMinFps = new FlxUINumericStepper(txtx, txty - 60, 1, 22, 1, 60, 0);
+		add(new FlxText(txtx, txty - 50, 0, 'Min/Max Framerate:', 16));
+		stepperMinFps = new FlxUINumericStepper(txtx, txty - 30, 1, 22, 1, 60, 0);
 		stepperMinFps.name = 'min_fps';
 		add(stepperMinFps);
 
-		stepperMaxFps = new FlxUINumericStepper(txtx + 60, txty - 60, 1, 26, 1, 60, 0);
+		stepperMaxFps = new FlxUINumericStepper(txtx + 60, txty - 30, 1, 26, 1, 60, 0);
 		stepperMaxFps.name = 'max_fps';
 		add(stepperMaxFps);
 

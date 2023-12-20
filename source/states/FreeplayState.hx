@@ -8,6 +8,7 @@ import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 
 import objects.HealthIcon;
+import objects.MusicPlayer;
 import states.editors.ChartingState;
 
 import substates.GameplayChangersSubstate;
@@ -37,16 +38,6 @@ class FreeplayState extends MusicBeatState
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
 
-	var songBG:FlxSprite;
-	var songTxt:FlxText;
-	var timeTxt:FlxText;
-	var progressBar:FlxBar;
-	var playbackBG:FlxSprite;
-	var playbackSymbols:Array<FlxText> = [];
-	var playbackTxt:FlxText;
-
-	var curTime:Float;
-
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
@@ -63,7 +54,7 @@ class FreeplayState extends MusicBeatState
 	var bottomText:FlxText;
 	var bottomBG:FlxSprite;
 
-	var playingMusic:Bool;
+	var player:MusicPlayer;
 
 	override function create() {
 		persistentUpdate = true;
@@ -137,29 +128,11 @@ class FreeplayState extends MusicBeatState
 		scoreBG.alpha = 0.6;
 		add(scoreBG);
 
-		songBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 100, 0xFF000000);
-		songBG.alpha = 0.6;
-		add(songBG);
-
-		playbackBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 100, 0xFF000000);
-		playbackBG.alpha = 0.6;
-		add(playbackBG);
-
 		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
 		diffText.font = scoreText.font;
 		add(diffText);
 
 		add(scoreText);
-
-		songTxt = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		songTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
-		songTxt.visible = false;
-		add(songTxt);
-
-		timeTxt = new FlxText(FlxG.width * 0.7, songTxt.y + 60, 0, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
-		timeTxt.visible = false;
-		add(timeTxt);
 
 		for (i in 0...2) {
 			var text:FlxText = new FlxText();
@@ -167,19 +140,8 @@ class FreeplayState extends MusicBeatState
 			text.text = '^';
 			if(i == 1) text.flipY = true;
 			text.visible = false;
-			playbackSymbols.push(text);
 			add(text);
 		}
-
-		progressBar = new FlxBar(timeTxt.x, timeTxt.y + timeTxt.height, LEFT_TO_RIGHT, Std.int(timeTxt.width), 8, null, "", 0, Math.POSITIVE_INFINITY);
-		progressBar.createFilledBar(FlxColor.WHITE, FlxColor.BLACK);
-		progressBar.visible = false;
-		add(progressBar);
-
-		playbackTxt = new FlxText(FlxG.width * 0.6, 20, 0, "", 32);
-		playbackTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE);
-		playbackTxt.visible = false;
-		add(playbackTxt);
 
 		missingTextBG = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		missingTextBG.alpha = 0.6;
@@ -199,9 +161,7 @@ class FreeplayState extends MusicBeatState
 
 		curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(lastDifficultyName)));
 		
-		if(playingMusic) iconArray[instPlaying].canBounce = true;
-
-		changeSelection();
+		if(!player.playingMusic) iconArray[instPlaying].canBounce = true;
 
 		bottomBG = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
 		bottomBG.alpha = 0.6;
@@ -215,7 +175,11 @@ class FreeplayState extends MusicBeatState
 		bottomText.scrollFactor.set();
 		add(bottomText);
 		
-		switchPlayMusic();
+
+		player = new MusicPlayer(this);
+		add(player);
+
+		changeSelection();
 		updateTexts();
 
 		super.create();
@@ -265,7 +229,7 @@ class FreeplayState extends MusicBeatState
 		var shiftMult:Int = 1;
 		if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
 
-		if (!playingMusic) {
+		if (!player.playingMusic){
 			scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 			positionHighscore();
 
@@ -312,104 +276,18 @@ class FreeplayState extends MusicBeatState
 				changeDiff(1);
 				_updateSongLastDifficulty();
 			}
-		}else {
-			@:privateAccess
-			if (FlxG.sound.music._paused && !wasPlaying) songTxt.text = 'PLAYING: ' + songs[curSelected].songName + ' (PAUSED)';
-			else songTxt.text = 'PLAYING: ' + songs[curSelected].songName;
-
-			positionSong();
-
-			var timee:Float = FlxG.sound.music.time;
-			if(controls.UI_LEFT_P){ 
-				if (FlxG.sound.music.playing)wasPlaying = true;
-				pauseOrResume();
-				curTime = FlxG.sound.music.time - 1000;
-				holdTime = 0;
-				if(curTime < 0) curTime = 0;
-				FlxG.sound.music.time = curTime;
-				if(vocals != null) vocals.time = curTime;
-			}
-			if(controls.UI_RIGHT_P){
-				if(FlxG.sound.music.playing) wasPlaying = true;
-
-				pauseOrResume();
-
-				curTime = FlxG.sound.music.time + 1000;
-				holdTime = 0;
-
-				if(curTime > FlxG.sound.music.length) curTime = FlxG.sound.music.length;
-
-				FlxG.sound.music.time = curTime;
-				if(vocals != null) vocals.time = curTime;
-			}
-			updateTimeTxt();
-
-			if(controls.UI_LEFT || controls.UI_RIGHT){
-				holdTime += elapsed;
-				if(holdTime > 0.5) curTime += 40000 * elapsed * (controls.UI_LEFT ? -1 : 1);
-
-				var difference:Float = Math.abs(curTime - FlxG.sound.music.time);
-				if(curTime + difference > FlxG.sound.music.length) curTime = FlxG.sound.music.length;
-				else if(curTime - difference < 0) curTime = 0;
-
-				FlxG.sound.music.time = curTime;
-				vocals.time = curTime;
-			}
-			updateTimeTxt();
-			if(controls.UI_LEFT_R || controls.UI_RIGHT_R){
-				FlxG.sound.music.time = curTime;
-				if(vocals != null) vocals.time = curTime;
-			}
-			updateTimeTxt();
-			if(controls.UI_LEFT_R || controls.UI_RIGHT_R)
-			{
-				FlxG.sound.music.time = curTime;
-				if(vocals != null) vocals.time = curTime;
-
-				if(wasPlaying){
-					pauseOrResume(true);
-					wasPlaying = false;
-				}
-			}
-			updateTimeTxt();
-			if(controls.UI_UP_P){
-				holdPitchTime = 0;
-				playbackRate += 0.05;
-				setPlaybackRate();
-			}else if(controls.UI_DOWN_P){
-				holdPitchTime = 0;
-				playbackRate -= 0.05;
-				setPlaybackRate();
-			}
-			if(controls.UI_DOWN || controls.UI_UP){
-				holdPitchTime += elapsed;
-				if(holdPitchTime > 0.6){
-					playbackRate += 0.05 * (controls.UI_UP ? 1 : -1);
-					setPlaybackRate();
-				}
-			}
-			if(vocals != null){
-				var difference:Float = Math.abs(FlxG.sound.music.time - vocals.time);
-				@:privateAccess
-				if (difference >= 5 && !FlxG.sound.music._paused){
-					pauseOrResume();
-					vocals.time = FlxG.sound.music.time;
-					pauseOrResume(true);
-				}
-			}
-			updatePlaybackTxt();
-			playbackRates[Paths.formatToSongPath(songs[curSelected].songName)] = Std.string(playbackRate);
 		}
 
 		if(controls.BACK){
-			if(playingMusic){
+			if(player.playingMusic)
+			{
 				FlxG.sound.music.stop();
 				destroyFreeplayVocals();
 				FlxG.sound.music.volume = 0;
 				instPlaying = -1;
 
-				playingMusic = false;
-				switchPlayMusic();
+				player.playingMusic = false;
+				player.switchPlayMusic();
 			}else{
 				persistentUpdate = false;
 				if(colorTween != null) colorTween.cancel();
@@ -418,54 +296,48 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 
-		if(FlxG.keys.justPressed.CONTROL && !playingMusic){
+		if(FlxG.keys.justPressed.CONTROL && !player.playingMusic){
 			persistentUpdate = false;
 			openSubState(new GameplayChangersSubstate());
 		}
 		else if(FlxG.keys.justPressed.SPACE){
-			if(instPlaying != curSelected && !playingMusic){
+			if(instPlaying != curSelected && !player.playingMusic){
 				destroyFreeplayVocals();
 				FlxG.sound.music.volume = 0;
 				Mods.currentModDirectory = songs[curSelected].folder;
 				final poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
 				if(PlayState.SONG.needsVoices) vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
+				else if(instPlaying == curSelected && player.playingMusic){
+					player.pauseOrResume(player.paused);
+				}
 				else{
-					if(vocals != null) {
-						vocals.stop();
-						vocals.destroy();
+					{
+						if(vocals != null) {
+							vocals.stop();
+							vocals.destroy();
+						}
+						vocals = null;
 					}
-					vocals = null;
-				}
-				if(PlayState.SONG.needsVoices){
-					FlxG.sound.list.add(vocals);
-					vocals.play();
-					vocals.persist = true;
-					vocals.looped = true;
-					vocals.volume = 0.7;
-				}
-				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
-
-				instPlaying = curSelected;
-				playingMusic = true;
-				curTime = 0;
-
-				final poop = Paths.formatToSongPath(songs[curSelected].songName);
-				if(playbackRates.exists(poop)) playbackRate = Std.parseFloat(playbackRates.get(poop));
-
-				setPlaybackRate();
-				switchPlayMusic();
-			}
-			else if(instPlaying == curSelected && playingMusic){
-				@:privateAccess
-				if(FlxG.sound.music._paused){
-					pauseOrResume(true);
-				}else {
-					pauseOrResume(false);
+					if(PlayState.SONG.needsVoices)
+					{
+						FlxG.sound.list.add(vocals);
+						vocals.play();
+						vocals.persist = true;
+						vocals.looped = true;
+						vocals.volume = 0.7;
+					}
+					FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
+	
+					instPlaying = curSelected;
+	
+					player.playingMusic = true;
+					player.curTime = 0;
+					player.switchPlayMusic();
 				}
 			}
 		}
-		else if(FlxG.keys.pressed.R && playingMusic){
+		else if(FlxG.keys.pressed.R && player.playingMusic){
 			playbackRate = 1;
 			playbackRates.set(Paths.formatToSongPath(songs[curSelected].songName), "1");
 			setPlaybackRate();
@@ -473,7 +345,7 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.music.time = 0;
 			if(vocals != null) vocals.time = 0;
 		}
-		else if(controls.ACCEPT && !playingMusic){
+		else if(controls.ACCEPT && !player.playingMusic){
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
 			final poop:String = Highscore.formatSong(songLowercase, curDifficulty);
@@ -540,19 +412,8 @@ class FreeplayState extends MusicBeatState
 		if(vocals != null) vocals.pitch = playbackRate;
 	}
 
-	function pauseOrResume(resume:Bool = false){
-		if(resume){
-			FlxG.sound.music.resume();
-			if(vocals != null) vocals.resume();
-		}else{
-			FlxG.sound.music.pause();
-			if(vocals != null) vocals.pause();
-		}
-		positionSong();
-	}
-
 	function changeDiff(change:Int = 0) {
-		if(playingMusic) return;
+		if(player.playingMusic) return;
 
 		curDifficulty += change;
 
@@ -573,7 +434,7 @@ class FreeplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
-		if(playingMusic) return;
+		if(player.playingMusic) return;
 
 		_updateSongLastDifficulty();
 		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
@@ -639,39 +500,6 @@ class FreeplayState extends MusicBeatState
 		diffText.x -= diffText.width / 2;
 	}
 
-	private function positionSong() {
-		var shortName:Bool = songs[curSelected].songName.trim().length < 5; // Fix for song names like Ugh, Guns
-		songTxt.x = FlxG.width - songTxt.width - 6;
-		if(shortName) songTxt.x -= 10;
-		songBG.scale.x = FlxG.width - songTxt.x + 12;
-		if(shortName) songBG.scale.x += 20;
-		songBG.x = FlxG.width - (songBG.scale.x / 2);
-		timeTxt.x = Std.int(songBG.x + (songBG.width / 2));
-		timeTxt.x -= timeTxt.width / 2;
-		if(shortName) timeTxt.x -= 10;
-
-		playbackBG.scale.x = playbackTxt.width + 30;
-		playbackBG.x = songBG.x - (songBG.scale.x / 2);
-		playbackBG.x -= playbackBG.scale.x;
-
-		playbackTxt.x = playbackBG.x - playbackTxt.width / 2;
-		playbackTxt.y = playbackTxt.height;
-
-		progressBar.setGraphicSize(Std.int(songTxt.width), 5);
-		progressBar.y = songTxt.y + songTxt.height + 10;
-		progressBar.x = songTxt.x + songTxt.width / 2 - 15;
-		if(shortName) progressBar.x -= 10;
-
-		for (i in 0...2){
-			var text = playbackSymbols[i];
-			text.x = playbackTxt.x + playbackTxt.width / 2 - 10;
-			text.y = playbackTxt.y;
-
-			if(i == 0) text.y -= playbackTxt.height;
-			else text.y += playbackTxt.height;
-		}
-	}
-
 	var lastBeatHit:Int = -1;
 
 	override function beatHit() {
@@ -681,76 +509,7 @@ class FreeplayState extends MusicBeatState
 
 		lastBeatHit = curBeat;
 		
-		if(playingMusic) iconArray[instPlaying].bounce();
-	}
-
-	private function switchPlayMusic() {
-		if(playingMusic){
-			scoreBG.visible = false;
-			diffText.visible = false;
-			scoreText.visible = false;
-			songTxt.visible = true;
-			timeTxt.visible = true;
-			songBG.visible = true;
-			playbackTxt.visible = true;
-			playbackBG.visible = true;
-
-			bottomText.text = "Press SPACE to Pause / Press ESCAPE to Exit / Press R to Reset the Song";
-			positionSong();
-
-			progressBar.setRange(0, FlxG.sound.music.length);
-			progressBar.setParent(FlxG.sound.music, "time");
-			progressBar.numDivisions = 1600;
-			progressBar.visible = true;
-			progressBar.updateBar();
-
-			for(i in playbackSymbols) i.visible = true;
-
-			FlxG.autoPause = false;
-		}else{
-			holdPitchTime = 0;
-			holdTime = 0;
-			playbackRate = 1;
-
-			scoreBG.visible = true;
-			diffText.visible = true;
-			scoreText.visible = true;
-
-			songTxt.visible = false;
-			timeTxt.visible = false;
-			songBG.visible = false;
-			playbackTxt.visible = false;
-			playbackBG.visible = false;
-
-			progressBar.setRange(0, Math.POSITIVE_INFINITY);
-			progressBar.setParent(null, "");
-			progressBar.numDivisions = 0;
-			progressBar.visible = false;
-			progressBar.updateBar();
-
-			for(i in playbackSymbols) i.visible = false;
-
-			bottomText.text = bottomString;
-			positionHighscore();
-
-			FlxG.autoPause = true;
-		}
-	}
-
-	function updatePlaybackTxt() {
-		var text = "";
-		if(playbackRate is Int) text = playbackRate + '.00';
-		else{
-			var playbackRate = Std.string(playbackRate);
-			if(playbackRate.split('.')[1].length < 2) playbackRate += '0'; // Playback rates for like 1.1, 1.2 etc
-			text = playbackRate;
-		}
-		playbackTxt.text = text + 'x';
-	}
-
-	function updateTimeTxt() {
-		var text = FlxStringUtil.formatTime(FlxG.sound.music.time / 1000, false) + ' / ' + FlxStringUtil.formatTime(FlxG.sound.music.length / 1000, false);
-		timeTxt.text = '< ' + text + ' >';
+		if(player.playingMusic) iconArray[instPlaying].bounce();
 	}
 
 	var _drawDistance:Int = 4;
@@ -778,13 +537,14 @@ class FreeplayState extends MusicBeatState
 		}
 	}
 
-	override function destroy():Void {
+    override function destroy():Void
+	{
 		super.destroy();
 
-		if(playingMusic) FlxG.autoPause = false;
+		if(player.playingMusic) FlxG.autoPause = false;
 		else FlxG.autoPause = ClientPrefs.data.autoPause;
 		if(!FlxG.sound.music.playing) FlxG.sound.playMusic(Paths.music('freakyMenu'));
-	}
+	}	
 
 	function set_playbackRate(value:Float):Float {
 		var value = FlxMath.roundDecimal(value, 2);

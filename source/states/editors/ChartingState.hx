@@ -1175,7 +1175,7 @@ class ChartingState extends MusicBeatState
 		check_mute_inst.checked = false;
 		check_mute_inst.callback = function()
 		{
-			var vol:Float = 1;
+			var vol:Float = instVolume.value;
 
 			if (check_mute_inst.checked)
 				vol = 0;
@@ -1218,7 +1218,7 @@ class ChartingState extends MusicBeatState
 		check_mute_vocals.callback = function()
 		{
 			if(vocals != null) {
-				var vol:Float = 1;
+				var vol:Float = voicesVolume.value;
 
 				if (check_mute_vocals.checked)
 					vol = 0;
