@@ -1,5 +1,7 @@
 package states;
 
+import cppthing.WindowsData;
+
 import backend.WeekData;
 import backend.Highscore;
 import backend.ButtplugUtils;
@@ -9,12 +11,15 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
+import flixel.tweens.misc.NumTween;
 import flixel.input.gamepad.FlxGamepad;
 import tjson.TJSON as Json;
 
 import openfl.Assets;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
+
+import lime.tools.WindowData;
 
 import shaders.ColorSwap;
 
@@ -363,10 +368,28 @@ class TitleState extends MusicBeatState {
 
 		if (FlxG.keys.justPressed.ESCAPE && !pressedEnter){
 			FlxG.sound.music.fadeOut(0.3);
+			#if cpp
+			CppAPI._setWindowLayered();
+
+			var numTween:NumTween = FlxTween.num(1, 0, 1, {
+				onComplete: function(twn:FlxTween)
+				{
+					Sys.exit(0);
+				}
+			});
+
+			numTween.onUpdate = function(twn:FlxTween)
+			{
+				#if windows
+				CppAPI.setWindowOpacity(numTween.value);
+				#end
+			}
+			#else
 			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
 			{
 				Sys.exit(0);
 			}, false);
+			#end
 	}
 
 		#if mobile
