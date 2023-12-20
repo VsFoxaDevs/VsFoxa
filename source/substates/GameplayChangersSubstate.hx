@@ -13,6 +13,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 	private var checkboxGroup:FlxTypedGroup<CheckboxThingie>;
 	private var grpTexts:FlxTypedGroup<AttachedText>;
 
+	public var isHealthDrainOn:Bool = ClientPrefs.getGameplaySetting('healthDrain', false);
+
 	function getOptions()
 	{
 		var goption:GameplayOption = new GameplayOption('Scroll Type', 'scrolltype', 'string', 'multiplicative', ["multiplicative", "constant"]);
@@ -66,6 +68,13 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		optionsArray.push(new GameplayOption('Practice Mode', 'practice', 'bool', false));
 		optionsArray.push(new GameplayOption('Botplay', 'botplay', 'bool', false));
 		optionsArray.push(new GameplayOption('Shake on Miss', 'missshake', 'bool', false));
+		optionsArray.push(new GameplayOption('Health Drain', 'healthDrain', 'bool', false));
+		optionsArray.push(new GameplayOption('Heal on Sustain Note', 'sustainHeal', 'bool', true));
+		if(isHealthDrainOn){
+			optionsArray.push(new GameplayOption('Drain Amount', 'drainAmount', 'float', 0.039));
+			optionsArray.push(new GameplayOption('Sustain Note Drain Amount', 'sustainDrainAmt', 'float', 0.025));
+			optionsArray.push(new GameplayOption('Cannot Lower Than', 'cannotLowerThan', 'float', 0.25));
+		}
 	}
 
 	public function getOptionByName(name:String)

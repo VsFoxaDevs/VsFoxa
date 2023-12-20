@@ -202,6 +202,11 @@ class PlayState extends MusicBeatState
 	public var cpuControlled:Bool = false;
 	public var practiceMode:Bool = false;
 	public var shakeOnMiss:Bool = false;
+	public var healthDrain:Bool = false;
+	public var drainAmt:Float = 0.039;
+	public var sustainNoteDrainAmt:Float = 0.025;
+	public var cannotLowerThan:Float = 0.25;
+	public var sustainNoteHeal:Bool = true;
 
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
@@ -309,6 +314,11 @@ class PlayState extends MusicBeatState
 	    shakeOnMiss = ClientPrefs.getGameplaySetting('missshake');
 		cpuControlled = ClientPrefs.getGameplaySetting('botplay');
 		guitarHeroSustains = ClientPrefs.data.guitarHeroSustains;
+		healthDrain = ClientPrefs.getGameplaySetting('healthDrain', false);
+		drainAmt = ClientPrefs.getGameplaySetting('drainAmount', 0.039);
+		sustainNoteDrainAmt = ClientPrefs.getGameplaySetting('sustainDrainAmt', 0.025);
+		cannotLowerThan = ClientPrefs.getGameplaySetting('cannotLowerThan', 0.25);
+		sustainNoteHeal = ClientPrefs.getGameplaySetting('sustainHeal', true);
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = initPsychCamera();
@@ -646,6 +656,14 @@ class PlayState extends MusicBeatState
 					initHScript(folder + file);
 			}
 		#end
+
+		var daSong:String = Paths.formatToSongPath(curSong); //daSong create
+
+		switch(daSong) //song
+		{
+			case 'tutorial':
+				healthDrain = false;
+		}
 
 		startCallback();
 		RecalculateRating();
@@ -2913,6 +2931,16 @@ class PlayState extends MusicBeatState
 
 	function opponentNoteHit(note:Note):Void
 	{
+		if (healthDrain && health > cannotLowerThan && !note.isSustainNote && sustainNoteHeal) {
+			health -= drainAmt;
+		} else if (healthDrain && health > cannotLowerThan && note.isSustainNote && sustainNoteHeal) {
+			health -= sustainNoteDrainAmt;
+		}
+
+	    if (healthDrain && health > cannotLowerThan && !sustainNoteHeal && !note.isSustainNote) {
+			health -= drainAmt;
+		}
+
 		if (Paths.formatToSongPath(SONG.song) != 'tutorial')
 			camZooming = true;
 
@@ -2952,9 +2980,9 @@ class PlayState extends MusicBeatState
 		var result:Dynamic = callOnLuas('opponentNoteHitPost', [notes.members.indexOf(note), Math.abs(note.noteData), note.noteType, note.isSustainNote]);
 		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('opponentNoteHitPost', [note]);
 
-		if (!note.isSustainNote)
-			invalidateNote(note);
+		if(!note.isSustainNote) invalidateNote(note);
 	}
+	
 	public function goodNoteHit(note:Note):Void
 	{
 		if(note.wasGoodHit) return;
@@ -2986,8 +3014,7 @@ class PlayState extends MusicBeatState
 			var animToPlay:String = singAnimations[Std.int(Math.abs(Math.min(singAnimations.length-1, note.noteData)))];
 			var char:Character = boyfriend;
 			var animCheck:String = 'hey';
-			if(note.gfNote)
-			{
+			if(note.gfNote){
 				char = gf;
 				animCheck = 'cheer';
 			}
@@ -3012,14 +3039,16 @@ class PlayState extends MusicBeatState
 		else strumPlayAnim(false, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 		vocals.volume = 1;
 
-		if (!note.isSustainNote)
-		{
-			combo++;
-			if(combo > 9999) combo = 9999;
-			popUpScore(note);
-			var gainHealth:Bool = true; // prevent health gain, as sustains are threated as a singular note
-			if (guitarHeroSustains && note.isSustainNote) gainHealth = false;
-			if (gainHealth) health += note.hitHealth * healthGain;
+
+		if(sustainNoteHeal == true){
+			if(!note.isSustainNote){
+				combo++;
+				if(combo > 9999) combo = 9999;
+				popUpScore(note);
+				var gainHealth:Bool = true; // prevent health gain, as sustains are threated as a singular note
+				if(guitarHeroSustains && note.isSustainNote) gainHealth = false;
+				if(gainHealth) health += note.hitHealth * healthGain;
+			}
 		}
 
 		var result:Dynamic = callOnLuas('goodNoteHitPost', [notes.members.indexOf(note), leData, leType, isSus]);
