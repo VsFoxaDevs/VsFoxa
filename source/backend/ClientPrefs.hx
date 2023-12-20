@@ -6,8 +6,8 @@ import flixel.input.gamepad.FlxGamepadInputID;
 
 import states.TitleState;
 
-//Add a variable here and it will get automatically saved
-class SaveVariables {
+// Add a variable here and it will get automatically saved
+@:structInit class SaveVariables {
 	/* 
 	options i probably may implement soon :)
 	public var judgementCounter:Bool = false;
@@ -92,13 +92,11 @@ class SaveVariables {
 	public var safeFrames:Float = 10;
 	public var guitarHeroSustains:Bool = true;
 	public var discordRPC:Bool = true;
-
-	public function new(){} //Why does haxe needs this again?
 }
 
 class ClientPrefs {
-	public static var data:SaveVariables = null;
-	public static var defaultData:SaveVariables = null;
+	public static var data:SaveVariables = {};
+	public static var defaultData:SaveVariables = {};
 
 	//Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
@@ -190,8 +188,6 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
-		if(data == null) data = new SaveVariables();
-		if(defaultData == null) defaultData = new SaveVariables();
 		#if ACHIEVEMENTS_ALLOWED Achievements.load(); #end
 
 		for (key in Reflect.fields(data)) {
@@ -202,9 +198,7 @@ class ClientPrefs {
 		
 		if(Main.fpsVar != null) Main.fpsVar.visible = data.showFPS;
 
-		#if (!html5 && !switch)
-		FlxG.autoPause = ClientPrefs.data.autoPause;
-		#end
+		#if (!html5 && !switch) FlxG.autoPause = ClientPrefs.data.autoPause; #end
 
 		if(data.framerate > FlxG.drawFramerate) {
 			FlxG.updateFramerate = data.framerate;
@@ -260,18 +254,10 @@ class ClientPrefs {
 		TitleState.volumeUpKeys = keyBinds.get('volume_up').copy();
 		toggleVolumeKeys(true);
 	}
-	public static function toggleVolumeKeys(turnOn:Bool) {
-		if(turnOn)
+	public static function toggleVolumeKeys(?turnOn:Bool = true)
 		{
-			FlxG.sound.muteKeys = TitleState.muteKeys;
-			FlxG.sound.volumeDownKeys = TitleState.volumeDownKeys;
-			FlxG.sound.volumeUpKeys = TitleState.volumeUpKeys;
+			FlxG.sound.muteKeys = turnOn ? TitleState.muteKeys : [];
+			FlxG.sound.volumeDownKeys = turnOn ? TitleState.volumeDownKeys : [];
+			FlxG.sound.volumeUpKeys = turnOn ? TitleState.volumeUpKeys : [];
 		}
-		else
-		{
-			FlxG.sound.muteKeys = [];
-			FlxG.sound.volumeDownKeys = [];
-			FlxG.sound.volumeUpKeys = [];
-		}
-	}
 }
