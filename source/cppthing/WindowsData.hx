@@ -91,27 +91,6 @@ class WindowsData
 	@:noCompletion
 	public static function _setWindowLayered() {}
 
-    #if windows
-    @:functionCode('
-        HWND window = GetActiveWindow();
-
-        if (transparencyEnabled) {
-            SetWindowLong(window, GWL_EXSTYLE, GetWindowLong(window, GWL_EXSTYLE) ^ WS_EX_LAYERED);
-            SetLayeredWindowAttributes(window, RGB(0, 0, 0), 255, LWA_COLORKEY | LWA_ALPHA);
-        }
-        // make window layered
-        int result = SetWindowLong(window, GWL_EXSTYLE, GetWindowLong(window, GWL_EXSTYLE) | WS_EX_LAYERED);
-        if (alpha > 255) alpha = 255;
-        if (alpha < 0) alpha = 0;
-        SetLayeredWindowAttributes(window, RGB(red, green, blue), alpha, LWA_COLORKEY | LWA_ALPHA);
-        alpha = result;
-        transparencyEnabled = true;
-    ')
-    #end
-    public static function setWindowTransparencyColor(red:Int, green:Int, blue:Int, alpha:Int = 255) {
-        return alpha;
-    }
-
 	@:functionCode('
         HWND window = GetActiveWindow();
 
