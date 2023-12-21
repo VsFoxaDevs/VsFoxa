@@ -93,6 +93,9 @@ class MainMenuState extends MusicBeatState {
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
+	public static var firstStart:Bool = true;
+	public static var finishedFunnyMove:Bool = false;
+
 	override function create() {
 		#if MODS_ALLOWED
 		Mods.pushGlobalMods();
@@ -167,6 +170,12 @@ class MainMenuState extends MusicBeatState {
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.updateHitbox();
+			if(firstStart)
+				FlxTween.tween(menuItem, {y: 60 + (i * 160)}, 1 + (i * 0.25), {ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween){
+					finishedFunnyMove = true;
+					changeItem();}
+				});
+			else menuItem.y = 60 + (i * 160);
 		}
 	
 		/* foxa dance */
@@ -310,8 +319,7 @@ class MainMenuState extends MusicBeatState {
 
 		super.update(elapsed);
 
-		menuItems.forEach(function(spr:FlxSprite)
-		{
+		menuItems.forEach(function(spr:FlxSprite) {
 			spr.screenCenter(X);
 			spr.x -= 270;
 		});
