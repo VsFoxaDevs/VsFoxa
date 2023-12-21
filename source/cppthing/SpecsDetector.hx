@@ -1,6 +1,6 @@
 package cppthing;
 
-#if cpp
+/*#if cpp
 import cpp.ConstCharStar;
 import cpp.Native;
 import cpp.UInt64;
@@ -59,4 +59,4 @@ class SpecsDetector extends MusicBeatState {
 		return true;
 		#end
 	}
-}
+}*/
