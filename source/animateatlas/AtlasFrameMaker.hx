@@ -1,7 +1,7 @@
 package animateatlas;
 import flixel.util.FlxDestroyUtil;
 import openfl.geom.Rectangle;
-//import flixel.math.FlxPoint;
+import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
 import openfl.Assets;
 import tjson.TJSON as Json;
@@ -13,6 +13,14 @@ import animateatlas.displayobject.SpriteMovieClip;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxFramesCollection;
 import flixel.graphics.frames.FlxFrame;
+
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+#else
+import js.html.FileSystem;
+import js.html.File;
+#end
 
 class AtlasFrameMaker extends FlxFramesCollection
 {

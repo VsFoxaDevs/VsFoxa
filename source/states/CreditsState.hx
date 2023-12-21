@@ -79,10 +79,11 @@ class CreditsState extends MusicBeatState {
 			['Tahir', 'tahir', 'Implementing & maintaining SScript and other PRs', 'https://github.com/TahirKarabekiroglu','A04397'],
 			['iFlicky',				'flicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',		 'https://twitter.com/flicky_i',		 '9E29CF'],
 			['superpowers04',		'superpowers04',	'LUA JIT Fork',													 'https://twitter.com/superpowers04',	 'B957ED'],
-			['Smokey',				'smokey',			'Sprite Atlas Support',											 'https://twitter.com/Smokey_5_',		 '483D92'],
+			['Smokey',				'smokey',			'Sprite Atlas Support (Only for Week 7 Pico!)',											 'https://twitter.com/Smokey_5_',		 '483D92'],
+			['CheemsAndFriends', 'face', 'Creator of FlxAnimate\n(Icon will be added later, merry christmas!)', 'https://twitter.com/CheemsnFriendos', 'A1A1A1'],
 			[''],
 			["Funkin' Crew"],
-			['ninjamuffin99',		'ninjamuffin99',	"Programmer of Friday Night Funkin'",							 'https://twitter.com/ninja_muffin99',	 'CF2D2DFF800080'],
+			['ninjamuffin99',		'ninjamuffin99',	"Ex-Programmer of Friday Night Funkin'",							 'https://twitter.com/ninja_muffin99',	 'CF2D2DFF800080'],
 			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",								 'https://twitter.com/PhantomArcade3K',	 'FADC45'],
 			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",								 'https://twitter.com/evilsk8r',		 '5ABD4B'],
 			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								 'https://twitter.com/kawaisprite',		 '378FC7']
