@@ -1685,8 +1685,7 @@ class ChartingState extends MusicBeatState
 			dummyArrow.visible = false;
 		}
 
-		if (FlxG.mouse.justPressed)
-		{
+		if(FlxG.mouse.justPressed){
 			if (FlxG.mouse.overlaps(curRenderedNotes))
 			{
 				curRenderedNotes.forEachAlive(function(note:Note)
@@ -1699,24 +1698,15 @@ class ChartingState extends MusicBeatState
 							curSelectedNote[3] = curNoteTypes[currentType];
 							updateGrid();
 						}
-						else
-						{
-							//trace('tryin to delete note...');
-							deleteNote(note);
-						}
+						else deleteNote(note);
 					}
 				});
-			}
-			else
-			{
+			}else{
 				if (FlxG.mouse.x > gridBG.x
 					&& FlxG.mouse.x < gridBG.x + gridBG.width
 					&& FlxG.mouse.y > gridBG.y
 					&& FlxG.mouse.y < gridBG.y + (GRID_SIZE * getSectionBeats() * 4) * zoomList[curZoom])
-				{
-					FlxG.log.add('added note');
-					addNote();
-				}
+				{addNote();}
 			}
 		}
 		else if(FlxG.mouse.justPressedRight){
@@ -1866,10 +1856,7 @@ class ChartingState extends MusicBeatState
 
 			if (!FlxG.keys.pressed.ALT && FlxG.keys.justPressed.R)
 			{
-				if (FlxG.keys.pressed.SHIFT)
-					resetSection(true);
-				else
-					resetSection();
+				resetSection(FlxG.keys.pressed.SHIFT);
 			}
 
 			if (FlxG.mouse.wheel != 0)
