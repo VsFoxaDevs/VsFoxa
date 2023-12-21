@@ -21,7 +21,7 @@ class Template extends BaseStage {
 	}
 
 	
-	override function countdownTick(count:BaseStage.Countdown, num:Int)
+	override function countdownTick(count:Countdown, num:Int)
 	{
 		switch(count) {
 			case THREE: //num 0
