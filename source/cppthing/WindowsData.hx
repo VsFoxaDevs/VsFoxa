@@ -140,20 +140,6 @@ class WindowsData
 
     #if windows
     @:functionCode('
-        if (!transparencyEnabled) return false;
-        
-        HWND window = GetActiveWindow();
-        SetWindowLong(window, GWL_EXSTYLE, GetWindowLong(window, GWL_EXSTYLE) ^ WS_EX_LAYERED);
-        SetLayeredWindowAttributes(window, RGB(0, 0, 0), 255, LWA_COLORKEY | LWA_ALPHA);
-        transparencyEnabled = false;
-    ')
-    #end
-    public static function disableWindowTransparency(result:Bool = true) {
-        return result;
-    }
-
-    #if windows
-    @:functionCode('
         // https://stackoverflow.com/questions/4308503/how-to-enable-visual-styles-without-a-manifest
         // dumbass windows
 

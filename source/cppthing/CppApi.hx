@@ -23,9 +23,6 @@ class CppAPI
 	public static function enableVisualStyles()
 		WindowsData.enableVisualStyles();
 
-	public static function disableWindowOpacity()
-		WindowsData.disableWindowTransparency();
-
 	public static function _setWindowLayered()
 		WindowsData._setWindowLayered();
 	#end
