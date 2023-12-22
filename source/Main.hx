@@ -116,10 +116,8 @@ class Main extends Sprite
 		Controls.instance = new Controls();
 		ClientPrefs.loadDefaultKeys();
 		#if ACHIEVEMENTS_ALLOWED Achievements.load(); #end
-		#if (cpp && windows)
-		CppAPI.darkMode(); 
-		#end
-		addChild(new FlxGame(game.width, game.height, initialState /*cppthing.SpecsDetector*/, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
+		#if (cpp && windows) CppAPI.darkMode(); #end
+		addChild(new FlxGame(game.width, game.height, initialState/*cppthing.SpecsDetector*/, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
 		#if !mobile
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
