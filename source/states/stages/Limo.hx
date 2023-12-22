@@ -2,8 +2,7 @@ package states.stages;
 
 import states.stages.objects.*;
 
-enum HenchmenKillState
-{
+enum HenchmenKillState {
 	WAIT;
 	KILLING;
 	SPEEDING_OFFSCREEN;
@@ -11,8 +10,7 @@ enum HenchmenKillState
 	STOPPING;
 }
 
-class Limo extends BaseStage
-{
+class Limo extends BaseStage {
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
 	var fastCar:BGSprite;
 	var fastCarCanDrive:Bool = true;
@@ -122,10 +120,8 @@ class Limo extends BaseStage
 									particle.flipX = true;
 									particle.angle = -57.5;
 									grpLimoParticles.add(particle);
-								case 1:
-									limoCorpse.visible = true;
-								case 2:
-									limoCorpseTwo.visible = true;
+								case 1: limoCorpse.visible = true;
+								case 2: limoCorpseTwo.visible = true;
 							} //Note: Nobody cares about the fifth dancer because he is mostly hidden offscreen :(
 							dancers[i].x += FlxG.width * 2;
 						}
@@ -157,7 +153,7 @@ class Limo extends BaseStage
 					dancersParenting();
 
 				case STOPPING:
-					bgLimo.x = FlxMath.lerp(bgLimo.x, -150, FlxMath.bound(elapsed * 9, 0, 1));
+					bgLimo.x = FlxMath.lerp(-150, bgLimo.x, Math.exp(-elapsed * 9));
 					if(Math.round(bgLimo.x) == -150) {
 						bgLimo.x = -150;
 						limoKillingState = WAIT;

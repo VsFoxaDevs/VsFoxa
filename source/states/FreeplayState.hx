@@ -208,8 +208,8 @@ class FreeplayState extends MusicBeatState
 
 	override function update(elapsed:Float) {
 		if(FlxG.sound.music.volume < 0.7) FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, FlxMath.bound(elapsed * 24, 0, 1)));
-		lerpRating = FlxMath.lerp(lerpRating, intendedRating, FlxMath.bound(elapsed * 12, 0, 1));
+		lerpScore = Math.floor(FlxMath.lerp(intendedScore, lerpScore, Math.exp(-elapsed * 24)));
+		lerpRating = FlxMath.lerp(intendedRating, lerpRating, Math.exp(-elapsed * 12));
 
 		if (Math.abs(lerpScore - intendedScore) <= 10) lerpScore = intendedScore;
 		if(Math.abs(lerpRating - intendedRating) <= 0.01) lerpRating = intendedRating;
@@ -330,14 +330,6 @@ class FreeplayState extends MusicBeatState
 				player.curTime = 0;
 				player.switchPlayMusic();
 			}
-		}else if(FlxG.keys.pressed.R && player.playingMusic){
-			playbackRate = 1;
-			playbackRates.set(Paths.formatToSongPath(songs[curSelected].songName), "1");
-			setPlaybackRate();
-
-			FlxG.sound.music.time = 0;
-			if(vocals != null) vocals.time = 0;
-		}
 		else if(controls.ACCEPT && !player.playingMusic){
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
@@ -508,7 +500,7 @@ class FreeplayState extends MusicBeatState
 	var _drawDistance:Int = 4;
 	var _lastVisibles:Array<Int> = [];
 	public function updateTexts(elapsed:Float = 0.0) {
-		lerpSelected = FlxMath.lerp(lerpSelected, curSelected, FlxMath.bound(elapsed * 9.6, 0, 1));
+		lerpSelected = FlxMath.lerp(curSelected, lerpSelected, Math.exp(-elapsed * 9.6));
 		for (i in _lastVisibles){
 			grpSongs.members[i].visible = grpSongs.members[i].active = false;
 			iconArray[i].visible = iconArray[i].active = false;

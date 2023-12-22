@@ -199,14 +199,12 @@ class MusicPlayer extends FlxGroup
 		}
 		updatePlaybackTxt();
 	
-		if (FlxG.keys.pressed.R)
-		{
+		if(instance.controls.RESET){
 			playbackRate = 1;
 			setPlaybackRate();
 
 			FlxG.sound.music.time = 0;
-			if (FreeplayState.vocals != null)
-				FreeplayState.vocals.time = 0;
+			if(FreeplayState.vocals != null) FreeplayState.vocals.time = 0;
 
 			updateTimeTxt();
 		}
