@@ -93,9 +93,6 @@ class MainMenuState extends MusicBeatState {
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
-	public static var firstStart:Bool = true;
-	public static var finishedFunnyMove:Bool = false;
-
 	override function create() {
 		#if MODS_ALLOWED
 		Mods.pushGlobalMods();
@@ -165,19 +162,14 @@ class MainMenuState extends MusicBeatState {
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
+			menuItem.visible = true;
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.updateHitbox();
-			if(firstStart)
-				FlxTween.tween(menuItem, {y: 60 + (i * 160)}, 1 + (i * 0.25), {ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween){
-					finishedFunnyMove = true;
-					changeItem();}
-				});
-			else menuItem.y = 60 + (i * 160);
 		}
-	
+
 		/* foxa dance */
 		var char = new FlxSprite(730, 75);
 		char.frames = Paths.getSparrowAtlas('gfDanceTitle');
@@ -293,7 +285,7 @@ class MainMenuState extends MusicBeatState {
 									case 'story_mode': MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay': MusicBeatState.switchState(new FreeplayState());
 									#if MODS_ALLOWED case 'mods': MusicBeatState.switchState(new ModsMenuState()); #end
-									case 'awards': MusicBeatState.switchState(new AchievementsMenuState());
+									#if ACHIEVEMENTS_ALLOWED case 'awards': MusicBeatState.switchState(new AchievementsMenuState()); #end
 									case 'credits': MusicBeatState.switchState(new CreditsState());
 									case 'options':
 										MusicBeatState.switchState(new OptionsState());
