@@ -226,7 +226,7 @@ class FreeplayState extends MusicBeatState
 		var shiftMult:Int = 1;
 		if(FlxG.keys.pressed.SHIFT) shiftMult = 3;
 
-		if (!player.playingMusic){
+		if(!player.playingMusic){
 			scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 			positionHighscore();
 
@@ -320,7 +320,7 @@ class FreeplayState extends MusicBeatState
 				}
 
 				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.8);
-				if (vocals != null){ // Sync vocals to Inst
+				if(vocals != null){ // Sync vocals to Inst
 					vocals.play();
 					vocals.volume = 0.8;
 				}
@@ -330,6 +330,7 @@ class FreeplayState extends MusicBeatState
 				player.curTime = 0;
 				player.switchPlayMusic();
 			}
+		}
 		else if(controls.ACCEPT && !player.playingMusic){
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
