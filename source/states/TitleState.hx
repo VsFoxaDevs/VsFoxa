@@ -368,7 +368,7 @@ class TitleState extends MusicBeatState {
 
 		if (FlxG.keys.justPressed.ESCAPE && !pressedEnter){
 			FlxG.sound.music.fadeOut(0.3);
-			#if cpp
+			#if (cpp && windows)
 			CppAPI._setWindowLayered();
 
 			var numTween:NumTween = FlxTween.num(1, 0, 1, {
@@ -380,9 +380,7 @@ class TitleState extends MusicBeatState {
 
 			numTween.onUpdate = function(twn:FlxTween)
 			{
-				#if windows
 				CppAPI.setWindowOpacity(numTween.value);
-				#end
 			}
 			#else
 			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
