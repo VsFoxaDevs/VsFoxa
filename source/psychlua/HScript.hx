@@ -59,8 +59,11 @@ class HScript extends SScript
 		{
 			this.origin = scriptFile;
 			var myFolder:Array<String> = scriptFile.split('/');
+			#if MODS_ALLOWED
+			var myFolder:Array<String> = scriptFile.split('/');
 			if(myFolder[0] + '/' == Paths.mods() && (Mods.currentModDirectory == myFolder[1] || Mods.getGlobalMods().contains(myFolder[1]))) //is inside mods folder
 				this.modFolder = myFolder[1];
+			#end
 		}
 		preset();
 		execute();
@@ -100,7 +103,9 @@ class HScript extends SScript
 		set('Conductor', Conductor);
 		set('ClientPrefs', ClientPrefs);
 		set('CoolUtil', CoolUtil);
+		#if ACHIEVEMENTS_ALLOWED
 		set('Achievements', Achievements);
+		#end
 		set('Character', Character);
 		set('Alphabet', Alphabet);
 		set('Note', objects.Note);

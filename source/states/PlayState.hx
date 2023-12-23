@@ -264,8 +264,8 @@ class PlayState extends MusicBeatState
 	// Lua shit
 	public static var instance:PlayState;
 	public var luaArray:Array<FunkinLua> = [];
-	#if LUA_ALLOWED
-	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
+	#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+	private var luaDebugGroup:FlxTypedGroup<psychlua.DebugLuaText>;
 	#end
 	public var introSoundsSuffix:String = '';
 
@@ -746,21 +746,23 @@ class PlayState extends MusicBeatState
 		return value;
 	}
 
+	#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 	public function addTextToDebug(text:String, color:FlxColor) {
-		#if LUA_ALLOWED
-		var newText:DebugLuaText = luaDebugGroup.recycle(DebugLuaText);
+		var newText:psychlua.DebugLuaText = luaDebugGroup.recycle(psychlua.DebugLuaText);
 		newText.text = text;
 		newText.color = color;
 		newText.disableTime = 6;
 		newText.alpha = 1;
 		newText.setPosition(10, 8 - newText.height);
 
-		luaDebugGroup.forEachAlive(function(spr:DebugLuaText) {
+		luaDebugGroup.forEachAlive(function(spr:psychlua.DebugLuaText) {
 			spr.y += newText.height + 2;
 		});
 		luaDebugGroup.add(newText);
-		#end
+
+		Sys.println(text);
 	}
+	#end
 
 	public function reloadHealthBarColors() {
 		var dadCol = dad.healthColorArray;
@@ -1676,15 +1678,12 @@ class PlayState extends MusicBeatState
 		else allowDebugKeys = false;
 
 		if(!inCutscene && !paused && !freezeCamera) {
-			FlxG.camera.followLerp = 0.04 * cameraSpeed * playbackRate;
+			FlxG.camera.followLerp = 2.4 * cameraSpeed * playbackRate;
 			if(!startingSong && !endingSong && boyfriend.getAnimationName().startsWith('idle')) {
 				boyfriendIdleTime += elapsed;
-				if(boyfriendIdleTime >= 0.15) { // Kind of a mercy thing for making the achievement easier to get as it's apparently frustrating to some playerss
+				if(boyfriendIdleTime >= 0.15) // Kind of a mercy thing for making the achievement easier to get as it's apparently frustrating to some playerss
 					boyfriendIdled = true;
-				}
-			} else {
-				boyfriendIdleTime = 0;
-			}
+			} else boyfriendIdleTime = 0;
 		}
 		else FlxG.camera.followLerp = 0;
 		callOnScripts('onUpdate', [elapsed]);
@@ -2247,7 +2246,11 @@ class PlayState extends MusicBeatState
 				{
 					var len:Int = e.message.indexOf('\n') + 1;
 					if(len <= 0) len = e.message.length;
+					#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 					addTextToDebug('ERROR ("Set Property" Event) - ' + e.message.substr(0, len), FlxColor.RED);
+					#else
+					FlxG.log.warn('ERROR ("Set Property" Event) - ' + e.message.substr(0, len));
+					#end
 				}
 			
 			case 'Play Sound':
@@ -3048,11 +3051,11 @@ class PlayState extends MusicBeatState
 				combo++;
 				if(combo > 9999) combo = 9999;
 				popUpScore(note);
-				var gainHealth:Bool = true; // prevent health gain, as sustains are threated as a singular note
-				if(guitarHeroSustains && note.isSustainNote) gainHealth = false;
-				if(gainHealth) health += note.hitHealth * healthGain;
 			}
 		}
+		var gainHealth:Bool = true; // prevent health gain, *if* sustains are treated as a singular note
+		if (guitarHeroSustains && note.isSustainNote) gainHealth = false;
+		if (gainHealth) health += note.hitHealth * healthGain;
 
 		var result:Dynamic = callOnLuas('goodNoteHitPost', [notes.members.indexOf(note), leData, leType, isSus]);
 		if(result != FunkinLua.Function_Stop && result != FunkinLua.Function_StopHScript && result != FunkinLua.Function_StopAll) callOnHScript('goodNoteHitPost', [note]);

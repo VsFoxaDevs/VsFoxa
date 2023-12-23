@@ -84,8 +84,10 @@ class FunkinLua {
 		game.luaArray.push(this);
 
 		var myFolder:Array<String> = this.scriptName.split('/');
+		#if MODS_ALLOWED
 		if(myFolder[0] + '/' == Paths.mods() && (Mods.currentModDirectory == myFolder[1] || Mods.getGlobalMods().contains(myFolder[1]))) //is inside mods folder
 			this.modFolder = myFolder[1];
+		#end
 
 		// Lua shit
 		set('Function_StopLua', Function_StopLua);
@@ -1599,6 +1601,7 @@ class FunkinLua {
 		});
 
 		// mod settings
+		#if MODS_ALLOWED
 		addLocalCallback("getModSetting", function(saveTag:String, ?modName:String = null) {
 			if(modName == null){
 				if(this.modFolder == null){
@@ -1609,6 +1612,7 @@ class FunkinLua {
 			}
 			return LuaUtils.getModSetting(saveTag, modName);
 		});
+		#end
 		//
 
 		Lua_helper.add_callback(lua, "debugPrint", function(text:Dynamic = '', color:String = 'WHITE') PlayState.instance.addTextToDebug(text, CoolUtil.colorFromString(color)));
