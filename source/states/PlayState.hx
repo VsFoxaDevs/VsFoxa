@@ -1294,27 +1294,30 @@ class PlayState extends MusicBeatState
 		// FlxG.log.add(ChartParser.parse());
 		songSpeed = PlayState.SONG.speed;
 		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype');
-		switch(songSpeedType)
-		{
-			case "multiplicative":
-				songSpeed = SONG.speed * ClientPrefs.getGameplaySetting('scrollspeed');
-			case "constant":
-				songSpeed = ClientPrefs.getGameplaySetting('scrollspeed');
+		switch(songSpeedType){
+			case "multiplicative": songSpeed = SONG.speed * ClientPrefs.getGameplaySetting('scrollspeed');
+			case "constant": songSpeed = ClientPrefs.getGameplaySetting('scrollspeed');
 		}
 
 		var songData = SONG;
 		Conductor.bpm = songData.bpm;
-
 		curSong = songData.song;
 
 		vocals = new FlxSound();
 		try {if(songData.needsVoices) vocals.loadEmbedded(Paths.voices(songData.song));}
-		catch(e:Dynamic) {}
-
+		catch(e:Dynamic) {
+			#if debug trace('IS THAT A LEAK REFERENCE'); #end
+		}
 		vocals.pitch = playbackRate;
 		FlxG.sound.list.add(vocals);
 
-		inst = new FlxSound().loadEmbedded(Paths.inst(songData.song));
+		inst = new FlxSound();
+		try {
+			inst.loadEmbedded(Paths.inst(songData.song));
+		}
+		catch(e:Dynamic) {
+			#if debug trace('ok not seperated, welp good luck.'); #end
+		}
 		FlxG.sound.list.add(inst);
 
 		//generate the payload for the frontend
@@ -1330,14 +1333,13 @@ class PlayState extends MusicBeatState
 
 		var file:String = Paths.json(songName + '/events');
 		#if MODS_ALLOWED
-		if (FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(file)) {
+		if(FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(file)) {
 		#else
-		if (OpenFlAssets.exists(file)) {
+		if(OpenFlAssets.exists(file)) {
 		#end
 			var eventsData:Array<Dynamic> = Song.loadFromJson('events', songName).events;
 			for (event in eventsData) //Event Notes
-				for (i in 0...event[1].length)
-					makeEvent(event, i);
+				for (i in 0...event[1].length) makeEvent(event, i);
 		}
 
 		for (section in noteData)
@@ -1348,16 +1350,11 @@ class PlayState extends MusicBeatState
 				var daNoteData:Int = Std.int(songNotes[1] % 4);
 				var gottaHitNote:Bool = section.mustHitSection;
 
-				if (songNotes[1] > 3)
-				{
-					gottaHitNote = !section.mustHitSection;
-				}
+				if(songNotes[1] > 3) gottaHitNote = !section.mustHitSection;
 
 				var oldNote:Note;
-				if (unspawnNotes.length > 0)
-					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
-				else
-					oldNote = null;
+				if(unspawnNotes.length > 0) oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
+				else oldNote = null;
 
 				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
 				swagNote.mustPress = gottaHitNote;
@@ -1397,11 +1394,8 @@ class PlayState extends MusicBeatState
 								oldNote.updateHitbox();
 							}
 
-							if(ClientPrefs.data.downScroll)
-								sustainNote.correctionOffset = 0;
-						}
-						else if(oldNote.isSustainNote)
-						{
+							if(ClientPrefs.data.downScroll) sustainNote.correctionOffset = 0;
+						}else if(oldNote.isSustainNote){
 							oldNote.scale.y /= playbackRate;
 							oldNote.updateHitbox();
 						}
@@ -1416,12 +1410,9 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				if (swagNote.mustPress)
-				{
+				if(swagNote.mustPress){
 					swagNote.x += FlxG.width / 2; // general offset
-				}
-				else if(ClientPrefs.data.middleScroll)
-				{
+				}else if(ClientPrefs.data.middleScroll){
 					swagNote.x += 310;
 					if(daNoteData > 1) //Up and Right
 					{
@@ -1429,14 +1420,11 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				if(!noteTypes.contains(swagNote.noteType)) {
-					noteTypes.push(swagNote.noteType);
-				}
+				if(!noteTypes.contains(swagNote.noteType)) noteTypes.push(swagNote.noteType);
 			}
 		}
 		for (event in songData.events) //Event Notes
-			for (i in 0...event[1].length)
-				makeEvent(event, i);
+			for (i in 0...event[1].length) makeEvent(event, i);
 
 		unspawnNotes.sort(sortByTime);
 		generatedMusic = true;
@@ -1445,9 +1433,7 @@ class PlayState extends MusicBeatState
 	// called only once per different event (Used for precaching)
 	function eventPushed(event:EventNote) {
 		eventPushedUnique(event);
-		if(eventsPushed.contains(event.event)) {
-			return;
-		}
+		if(eventsPushed.contains(event.event)) return;
 
 		stagesFunc(function(stage:BaseStage) stage.eventPushed(event));
 		eventsPushed.push(event.event);
@@ -1459,19 +1445,16 @@ class PlayState extends MusicBeatState
 			case "Change Character":
 				var charType:Int = 0;
 				switch(event.value1.toLowerCase()) {
-					case 'gf' | 'girlfriend' | '1':
-						charType = 2;
-					case 'dad' | 'opponent' | '0':
-						charType = 1;
+					case 'gf' | 'girlfriend' | '1': charType = 2;
+					case 'dad' | 'opponent' | '0': charType = 1;
 					default:
 						var val1:Int = Std.parseInt(event.value1);
 						if(Math.isNaN(val1)) val1 = 0;
-						charType = val1;
+						charType = val1; // just pretend its bf okay?
 				}
 
 				var newCharacter:String = event.value2;
 				addCharacterToList(newCharacter, charType);
-			
 			case 'Play Sound':
 				precacheList.set(event.value1, 'sound');
 				Paths.sound(event.value1);
@@ -1486,6 +1469,7 @@ class PlayState extends MusicBeatState
 		}
 
 		switch(event.event) {
+			//WAAAAAAAAAAAAAAAAAA NO MORE HENCHMEN
 			case 'Kill Henchmen': //Better timing so that the kill sound matches the beat intended
 				return 280; //Plays 280ms before the actual position
 		}
@@ -1515,7 +1499,6 @@ class PlayState extends MusicBeatState
 		var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 50;
 		for (i in 0...4)
 		{
-			// FlxG.log.add(i);
 			var targetAlpha:Float = 1;
 			if (player < 1)
 			{
@@ -1525,19 +1508,14 @@ class PlayState extends MusicBeatState
 
 			var babyArrow:StrumNote = new StrumNote(strumLineX, strumLineY, i, player);
 			babyArrow.downScroll = ClientPrefs.data.downScroll;
-			if (!isStoryMode && !skipArrowStartTween)
-			{
-				//babyArrow.y -= 10;
+			if(!isStoryMode && !skipArrowStartTween){
 				babyArrow.alpha = 0;
-				FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
+				FlxTween.tween(babyArrow, {alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
 			}
-			else
-				babyArrow.alpha = targetAlpha;
+			elsebabyArrow.alpha = targetAlpha;
 
-			if (player == 1)
-				playerStrums.add(babyArrow);
-			else
-			{
+			if(player == 1) playerStrums.add(babyArrow);
+			else{
 				if(ClientPrefs.data.middleScroll)
 				{
 					babyArrow.x += 310;
@@ -2687,58 +2665,56 @@ class PlayState extends MusicBeatState
 
 	private function keyPressed(key:Int)
 	{
-		if(cpuControlled || paused || key < 0) return;
-		if(!generatedMusic || endingSong || boyfriend.stunned) return;
+		if(cpuControlled || paused || inCutscene || key < 0 || key >= playerStrums.length || !generatedMusic || endingSong || boyfriend.stunned) return;
 
-		// had to name it like this else it'd break older scripts lol
-		var ret:Dynamic = callOnScripts('preKeyPress', [key], true);
+		var ret:Dynamic = callOnScripts('onKeyPressPre', [key]);
 		if(ret == FunkinLua.Function_Stop) return;
 
-        // obtain notes that the player can hit
-		final inputNotes:Array<Note> = notes.members.filter(function(n:Note):Bool {
-			final isInputNote:Bool = !strumsBlocked[n.noteData] && n.canBeHit && n.mustPress && !n.isSustainNote;
-			return n != null && isInputNote && !n.wasGoodHit && !n.blockHit && !n.tooLate && n.noteData == key;
+		// more accurate hit time for the ratings?
+		var lastTime:Float = Conductor.songPosition;
+		if(Conductor.songPosition >= 0) Conductor.songPosition = FlxG.sound.music.time;
+		// obtain notes that the player can hit
+		var plrInputNotes:Array<Note> = notes.members.filter(function(n:Note):Bool {
+			var canHit:Bool = !strumsBlocked[n.noteData] && n.canBeHit && n.mustPress && !n.tooLate && !n.wasGoodHit && !n.blockHit;
+			return n != null && canHit && !n.isSustainNote && n.noteData == key;
 		});
+		plrInputNotes.sort(sortHitNotes);
+		shouldMiss = !ClientPrefs.data.ghostTapping;
+		if (plrInputNotes.length != 0) { // slightly faster than doing `> 0` lol
+			var funnyNote:Note = plrInputNotes[0]; // front note
+			// trace('✡⚐🕆☼ 💣⚐💣');
+			if (plrInputNotes.length > 1) {
+				var doubleNote:Note = plrInputNotes[1];
+				if (doubleNote.noteData == funnyNote.noteData) {
+					// if the note has a 0ms distance (is on top of the current note), kill it
+					if (Math.abs(doubleNote.strumTime - funnyNote.strumTime) < 1.0)
+						invalidateNote(doubleNote);
+					else if (doubleNote.strumTime < funnyNote.strumTime)
+					{
+						// replace the note if its ahead of time (or at least ensure "doubleNote" is ahead)
+						funnyNote = doubleNote;
+					}
+				}
+			}
+			goodNoteHit(funnyNote);
+		}
+		else if(shouldMiss)
+		{
+			callOnScripts('onGhostTap', [key]);
+			noteMissPress(key);
+		}
 
-		final spr:StrumNote = playerStrums.members[key];
+		// Needed for the  "Just the Two of Us" achievement.
+		//									- Shadow Mario
+		if(!keysPressed.contains(key)) keysPressed.push(key);
+		//more accurate hit time for the ratings? part 2 (Now that the calculations are done, go back to the time it was before for not causing a note stutter)
+		Conductor.songPosition = lastTime;
+		var spr:StrumNote = playerStrums.members[key];
 		if(strumsBlocked[key] != true && spr != null && spr.animation.curAnim.name != 'confirm')
 		{
 			spr.playAnim('pressed');
 			spr.resetAnim = 0;
 		}
-
-		if(inputNotes.length == 0) {
-			if (ClientPrefs.data.ghostTapping && !boyfriend.stunned) {
-				callOnScripts('onGhostTap', [key]);
-				noteMissPress(key);
-			}
-		}
-		else {
-			while (inputNotes.length != 0) {
-				var funnyNote:Note = inputNotes[0]; // front note
-				// trace('✡⚐🕆☼ 💣⚐💣');
-				if(inputNotes.length > 1) {
-					inputNotes.sort(sortHitNotes);
-
-					final doubleNote:Note = inputNotes[1];
-					if(doubleNote.noteData == funnyNote.noteData) {
-						// if the note has a 0ms distance (is on top of the current note), kill it
-						if (Math.abs(doubleNote.strumTime - funnyNote.strumTime) < 1.0)
-							invalidateNote(doubleNote);
-						else if (doubleNote.strumTime < funnyNote.strumTime) {
-							// replace the note if its ahead of time (or at least ensure "doubleNote" is ahead)
-							funnyNote = doubleNote;
-						}
-					}
-				}
-				goodNoteHit(funnyNote);
-				break;
-			}
-		}
-
-		// Needed for the  "Just the Two of Us" achievement.
-		//									 - Shadow Mario
-		if(!keysPressed.contains(key)) keysPressed.push(key);
 		callOnScripts('onKeyPress', [key]);
 	}
 
@@ -2748,7 +2724,6 @@ class PlayState extends MusicBeatState
 			return 1;
 		else if (!a.lowPriority && b.lowPriority)
 			return -1;
-
 		return FlxSort.byValues(FlxSort.ASCENDING, a.strumTime, b.strumTime);
 	}
 
@@ -2761,16 +2736,18 @@ class PlayState extends MusicBeatState
 
 	private function keyReleased(key:Int)
 	{
-		if(!cpuControlled && startedCountdown && !paused)
+		if(cpuControlled || !startedCountdown || paused || key < 0 || key >= playerStrums.length) return;
+
+		var ret:Dynamic = callOnScripts('onKeyReleasePre', [key]);
+		if(ret == FunkinLua.Function_Stop) return;
+
+		var spr:StrumNote = playerStrums.members[key];
+		if(spr != null)
 		{
-			var spr:StrumNote = playerStrums.members[key];
-			if(spr != null)
-			{
-				spr.playAnim('static');
-				spr.resetAnim = 0;
-			}
-			callOnScripts('onKeyRelease', [key]);
+			spr.playAnim('static');
+			spr.resetAnim = 0;
 		}
+		callOnScripts('onKeyRelease', [key]);
 	}
 
 	public static function getKeyFromEvent(arr:Array<String>, key:FlxKey):Int
@@ -2804,14 +2781,12 @@ class PlayState extends MusicBeatState
 				releaseArray.push(controls.justReleased(key));
 			}
 		}
-
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if(controls.controllerMode && pressArray.contains(true))
 			for (i in 0...pressArray.length)
-				if(pressArray[i] && strumsBlocked[i] != true)
-					keyPressed(i);
+				if(pressArray[i] && strumsBlocked[i] != true)keyPressed(i);
 
-		if (startedCountdown && !boyfriend.stunned && generatedMusic)
+		if (startedCountdown && !inCutscene && !boyfriend.stunned && generatedMusic)
 		{
 			if (notes.length > 0) {
 				for (n in notes) { // I can't do a filter here, that's kinda awesome
@@ -2829,20 +2804,14 @@ class PlayState extends MusicBeatState
 					}
 				}
 			}
-
-			if (!holdArray.contains(true) || endingSong)
-				playerDance();
-
-			#if ACHIEVEMENTS_ALLOWED
-			else checkForAchievement(['oversinging']);
-			#end
+			if(!holdArray.contains(true) || endingSong) playerDance();
+			#if ACHIEVEMENTS_ALLOWED else checkForAchievement(['oversinging']); #end
 		}
 
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if((controls.controllerMode || strumsBlocked.contains(true)) && releaseArray.contains(true))
 			for (i in 0...releaseArray.length)
-				if(releaseArray[i] || strumsBlocked[i] == true)
-					keyReleased(i);
+				if(releaseArray[i] || strumsBlocked[i] == true) keyReleased(i);
 	}
 
 	function noteMiss(daNote:Note):Void{ // You didn't hit the key and let it go offscreen, also used by Hurt Notes

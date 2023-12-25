@@ -99,7 +99,11 @@ class Character extends FlxSprite {
 				}
 
 				try {
-					#if MODS_ALLOWED loadCharacterFile(cast Json.parse(File.getContent(path))); #else loadCharacterFile(cast Json.parse(Assets.getText(path))); #end
+					#if MODS_ALLOWED
+					loadCharacterFile(Json.parse(File.getContent(path)));
+					#else
+					loadCharacterFile(Json.parse(Assets.getText(path)));
+					#end
 				}
 				catch(e:Dynamic) {
 					trace('Error loading character file of "$character": $e');
@@ -119,7 +123,7 @@ class Character extends FlxSprite {
 		}
 	}
 
-	public function loadCharacterFile(json:CharacterFile)
+	public function loadCharacterFile(json:Dynamic)
 	{
 		isAnimateAtlas = false;
 
