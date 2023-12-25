@@ -198,7 +198,14 @@ class ClientPrefs {
 		
 		if(Main.fpsVar != null) Main.fpsVar.visible = data.showFPS;
 
-		#if (!html5 && !switch) FlxG.autoPause = ClientPrefs.data.autoPause; #end
+		#if (!html5 && !switch)
+		FlxG.autoPause = ClientPrefs.data.autoPause;
+
+		if(FlxG.save.data.framerate == null) {
+			final refreshRate:Int = FlxG.stage.application.window.displayMode.refreshRate;
+			data.framerate = Std.int(FlxMath.bound(refreshRate, 60, 240));
+		}
+		#end
 
 		if(data.framerate > FlxG.drawFramerate) {
 			FlxG.updateFramerate = data.framerate;

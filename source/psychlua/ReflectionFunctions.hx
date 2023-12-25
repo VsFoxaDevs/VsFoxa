@@ -12,6 +12,8 @@ import substates.GameOverSubstate;
 
 class ReflectionFunctions
 {
+	static final instanceStr:Dynamic = "##PSYCHLUA_STRINGTOOBJ";
+
 	public static function implement(funk:FunkinLua)
 	{
 		var lua:State = funk.lua;
@@ -132,11 +134,11 @@ class ReflectionFunctions
 		});
 		
 		Lua_helper.add_callback(lua, "callMethod", function(funcToRun:String, ?args:Array<Dynamic> = null) {
-			return callMethodFromObject(PlayState.instance, funcToRun, args);
-			
+			return callMethodFromObject(PlayState.instance, funcToRun, parseInstances(args));
+
 		});
 		Lua_helper.add_callback(lua, "callMethodFromClass", function(className:String, funcToRun:String, ?args:Array<Dynamic> = null) {
-			return callMethodFromObject(Type.resolveClass(className), funcToRun, args);
+			return callMethodFromObject(Type.resolveClass(className), funcToRun, parseInstances(args));
 		});
 
 		Lua_helper.add_callback(lua, "createInstance", function(variableToSave:String, className:String, ?args:Array<Dynamic> = null) {
@@ -179,6 +181,39 @@ class ReflectionFunctions
 			}
 			else FunkinLua.luaTrace('addInstance: Can\'t add what doesn\'t exist~ ($objectName)', false, false, FlxColor.RED);
 		});
+	    Lua_helper.add_callback(lua, "instanceArg", function(instanceName:String, ?className:String = null) {
+			var retStr:String ='$instanceStr::$instanceName';
+			if(className != null) retStr += '::$className';
+			return retStr;
+		});
+	}
+
+	static function parseInstances(args:Array<Dynamic>)
+	{
+		for (i in 0...args.length)
+		{
+			var myArg:String = cast args[i];
+			if(myArg != null && myArg.length > instanceStr.length)
+			{
+				var index:Int = myArg.indexOf('::');
+				if(index > -1)
+				{
+					myArg = myArg.substring(index+2);
+					//trace('Op1: $myArg');
+					var lastIndex:Int = myArg.lastIndexOf('::');
+
+					var split:Array<String> = myArg.split('.');
+					args[i] = (lastIndex > -1) ? Type.resolveClass(myArg.substring(0, lastIndex)) : PlayState.instance; //substring not substr
+					for (j in 0...split.length)
+					{
+						//trace('Op2: ${Type.getClass(args[i])}, ${split[j]}');
+						args[i] = LuaUtils.getVarInArray(args[i], split[j].trim());
+						//trace('Op3: ${args[i] != null ? Type.getClass(args[i]) : null}');
+					}
+				}
+			}
+		}
+		return args;
 	}
 
 	static function callMethodFromObject(classObj:Dynamic, funcStr:String, args:Array<Dynamic> = null)

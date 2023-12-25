@@ -3,7 +3,6 @@ package states;
 import backend.WeekData;
 import backend.Mods;
 
-//import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
 import flixel.FlxBasic;
 import flixel.graphics.FlxGraphic;
@@ -15,6 +14,8 @@ import flixel.util.FlxSpriteUtil;
 import objects.AttachedSprite;
 import options.ModSettingsSubstate;
 import flixel.addons.transition.FlxTransitionableState;
+
+import backend.StageData; // Custom
 
 class ModsMenuState extends MusicBeatState
 {
@@ -49,6 +50,8 @@ class ModsMenuState extends MusicBeatState
 
 	var _lastControllerMode:Bool = false;
 	var startMod:String = null;
+
+	public static var onPlayState:Bool = false; // Custom
 	public function new(startMod:String = null)
 	{
 		this.startMod = startMod;
@@ -139,7 +142,7 @@ class ModsMenuState extends MusicBeatState
 		});
 		buttonEnableAll.bg.color = FlxColor.GREEN;
 		buttonEnableAll.focusChangeCallback = function(focus:Bool) if(!focus) buttonEnableAll.bg.color = FlxColor.GREEN;
-		add(buttonEnableAll);
+		if(!onPlayState) add(buttonEnableAll);
 
 		buttonDisableAll = new MenuButton(buttonX, myY, buttonWidth, buttonHeight, "DISABLE ALL", function() {
 			buttonDisableAll.ignoreCheck = false;
@@ -159,7 +162,7 @@ class ModsMenuState extends MusicBeatState
 		});
 		buttonDisableAll.bg.color = 0xFFFF6666;
 		buttonDisableAll.focusChangeCallback = function(focus:Bool) if(!focus) buttonDisableAll.bg.color = 0xFFFF6666;
-		add(buttonDisableAll);
+		if(!onPlayState) add(buttonDisableAll); // Custom
 		checkToggleButtons();
 
 		if(modsList.all.length < 1)
@@ -218,19 +221,19 @@ class ModsMenuState extends MusicBeatState
 		var buttonsX = bgButtons.x + 320;
 		var buttonsY = bgButtons.y + 10;
 
-		var button = new MenuButton(buttonsX, buttonsY, 80, 80, Paths.image('modsMenuButtons'), function() moveModToPosition(0), 54, 54); //Move to the top
+		var button = new MenuButton(/*Custom*/onPlayState ? buttonsX + 100 : buttonsX, buttonsY, 80, 80, Paths.image('modsMenuButtons'), function() moveModToPosition(0), 54, 54); //Move to the top
 		button.icon.animation.add('icon', [0]);
 		button.icon.animation.play('icon', true);
 		add(button);
 		buttons.push(button);
 
-		var button = new MenuButton(buttonsX + 100, buttonsY, 80, 80, Paths.image('modsMenuButtons'), function() moveModToPosition(curSelectedMod - 1), 54, 54); //Move up
+		var button = new MenuButton(/*Custom*/onPlayState ? buttonsX + 200 : buttonsX + 100, buttonsY, 80, 80, Paths.image('modsMenuButtons'), function() moveModToPosition(curSelectedMod - 1), 54, 54); //Move up
 		button.icon.animation.add('icon', [1]);
 		button.icon.animation.play('icon', true);
 		add(button);
 		buttons.push(button);
 
-		var button = new MenuButton(buttonsX + 200, buttonsY, 80, 80, Paths.image('modsMenuButtons'), function() moveModToPosition(curSelectedMod + 1), 54, 54); //Move down
+		var button = new MenuButton(/*Custom*/onPlayState ? buttonsX + 300 : buttonsX + 200, buttonsY, 80, 80, Paths.image('modsMenuButtons'), function() moveModToPosition(curSelectedMod + 1), 54, 54); //Move down
 		button.icon.animation.add('icon', [2]);
 		button.icon.animation.play('icon', true);
 		add(button);
@@ -242,7 +245,7 @@ class ModsMenuState extends MusicBeatState
 				button.enabled = false;
 		}
 
-		settingsButton = new MenuButton(buttonsX + 300, buttonsY, 80, 80, Paths.image('modsMenuButtons'), function() //Settings
+		settingsButton = new MenuButton(/*Custom*/onPlayState ? buttonsX + 400 : buttonsX + 300, buttonsY, 80, 80, Paths.image('modsMenuButtons'), function() //Settings
 		{
 			var curMod:ModItem = modsGroup.members[curSelectedMod];
 			if(curMod != null && curMod.settings != null && curMod.settings.length > 0)
@@ -283,7 +286,7 @@ class ModsMenuState extends MusicBeatState
 		}, 54, 54);
 		button.icon.animation.add('icon', [4]);
 		button.icon.animation.play('icon', true);
-		add(button);
+		if(!onPlayState) add(button); // Custom
 		buttons.push(button);
 		button.focusChangeCallback = function(focus:Bool) {
 			if(!focus)
@@ -334,7 +337,17 @@ class ModsMenuState extends MusicBeatState
 					FreeplayState.vocals = null;
 				}
 				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
+				
 			}
+			else MusicBeatState.switchState(new MainMenuState());
+
+			if(onPlayState) // Custom
+				{
+					StageData.loadDirectory(PlayState.SONG);
+					MusicBeatState.switchState(new PlayState());
+					FlxG.sound.music.volume = 0;
+					onPlayState = false;
+				}
 			else MusicBeatState.switchState(new MainMenuState());
 
 			persistentUpdate = false;
@@ -787,8 +800,7 @@ class ModsMenuState extends MusicBeatState
 		MusicBeatState.switchState(new ModsMenuState(curMod != null ? curMod.folder : null));
 	}
 	
-	function saveTxt()
-	{
+	function saveTxt(){
 		var fileStr:String = '';
 		for (mod in modsList.all)
 		{
@@ -806,8 +818,7 @@ class ModsMenuState extends MusicBeatState
 	}
 }
 
-class ModItem extends FlxSpriteGroup
-{
+class ModItem extends FlxSpriteGroup {
 	public var selectBg:FlxSprite;
 	public var icon:FlxSprite;
 	public var text:FlxText;
@@ -823,29 +834,22 @@ class ModItem extends FlxSpriteGroup
 	public var mustRestart:Bool = false;
 	public var settings:Array<Dynamic> = null;
 
-	public function new(folder:String)
-	{
+	public function new(folder:String){
 		super();
 
 		this.folder = folder;
 		pack = Mods.getPack(folder);
 
 		var path:String = Paths.mods('$folder/data/settings.json');
-		if(FileSystem.exists(path))
-		{
+		if(FileSystem.exists(path)){
 			var data:String = File.getContent(path);
 			try
-			{
-				//trace('trying to load settings: $folder');
-				settings = Json.parse(data);
-			}
+			{settings = Json.parse(data);}
 			catch(e:Dynamic)
 			{
 				var errorTitle = 'Mod name: ' + Mods.currentModDirectory;
 				var errorMsg = 'An error occurred: $e';
-				#if windows
-				lime.app.Application.current.window.alert(errorMsg, errorTitle);
-				#end
+				#if windows lime.app.Application.current.window.alert(errorMsg, errorTitle); #end
 				trace('$errorTitle - $errorMsg');
 			}
 		}
@@ -867,14 +871,12 @@ class ModItem extends FlxSpriteGroup
 
 		var isPixel = false;
 		var bmp = Paths.cacheBitmap(Paths.mods('$folder/pack.png'));
-		if(bmp == null)
-		{
+		if(bmp == null){
 			bmp = Paths.cacheBitmap(Paths.mods('$folder/pack-pixel.png'));
 			isPixel = true;
 		}
 
-		if(bmp != null)
-		{
+		if(bmp != null){
 			icon.loadGraphic(bmp, true, 150, 150);
 			if(isPixel) icon.antialiasing = false;
 		}
@@ -883,13 +885,11 @@ class ModItem extends FlxSpriteGroup
 		icon.updateHitbox();
 		
 		this.name = folder;
-		if(pack != null)
-		{
+		if(pack != null){
 			if(pack.name != null) this.name = pack.name;
 			if(pack.description != null) this.desc = pack.description;
 			if(pack.iconFramerate != null) this.iconFps = pack.iconFramerate;
-			if(pack.color != null)
-			{
+			if(pack.color != null){
 				this.bgColor = FlxColor.fromRGB(pack.color[0] != null ? pack.color[0] : 170,
 											  pack.color[1] != null ? pack.color[1] : 0,
 											  pack.color[2] != null ? pack.color[2] : 255);
@@ -909,24 +909,21 @@ class ModItem extends FlxSpriteGroup
 	}
 }
 
-class MenuButton extends FlxSpriteGroup
-{
+class MenuButton extends FlxSpriteGroup {
 	public var bg:FlxSprite;
 	public var textOn:Alphabet;
 	public var textOff:Alphabet;
 	public var icon:FlxSprite;
 	public var onClick:Void->Void = null;
 	public var enabled(default, set):Bool = true;
-	public function new(x:Float, y:Float, width:Int, height:Int, ?text:String = null, ?img:FlxGraphic = null, onClick:Void->Void = null, animWidth:Int = 0, animHeight:Int = 0)
-	{
+	public function new(x:Float, y:Float, width:Int, height:Int, ?text:String = null, ?img:FlxGraphic = null, onClick:Void->Void = null, animWidth:Int = 0, animHeight:Int = 0){
 		super(x, y);
 		
 		bg = FlxSpriteUtil.drawRoundRect(new FlxSprite().makeGraphic(width, height, FlxColor.TRANSPARENT), 0, 0, width, height, 15, 15, FlxColor.WHITE);
 		bg.color = FlxColor.BLACK;
 		add(bg);
 
-		if(text != null)
-		{
+		if(text != null){
 			textOn = new Alphabet(0, 0, "", false);
 			textOn.setScale(0.6);
 			textOn.text = text;
@@ -960,8 +957,7 @@ class MenuButton extends FlxSpriteGroup
 	public var onFocus(default, set):Bool = false;
 	public var ignoreCheck:Bool = false;
 	private var _needACheck:Bool = false;
-	override function update(elapsed:Float)
-	{
+	override function update(elapsed:Float){
 		super.update(elapsed);
 
 		if(!enabled)
@@ -973,8 +969,7 @@ class MenuButton extends FlxSpriteGroup
 		if(!ignoreCheck && !Controls.instance.controllerMode && FlxG.mouse.justMoved && FlxG.mouse.visible)
 			onFocus = FlxG.mouse.overlaps(this);
 
-		if(onFocus && onClick != null && FlxG.mouse.justPressed)
-			onClick();
+		if(onFocus && onClick != null && FlxG.mouse.justPressed) onClick();
 
 		if(_needACheck)
 		{
@@ -984,16 +979,14 @@ class MenuButton extends FlxSpriteGroup
 		}
 	}
 
-	function set_onFocus(newValue:Bool)
-	{
+	function set_onFocus(newValue:Bool){
 		var lastFocus:Bool = onFocus;
 		onFocus = newValue;
 		if(onFocus != lastFocus && enabled) setButtonVisibility(onFocus);
 		return newValue;
 	}
 
-	function set_enabled(newValue:Bool)
-	{
+	function set_enabled(newValue:Bool){
 		enabled = newValue;
 		setButtonVisibility(false);
 		alpha = enabled ? 1 : 0.4;
@@ -1002,8 +995,7 @@ class MenuButton extends FlxSpriteGroup
 		return newValue;
 	}
 
-	public function setButtonVisibility(focusVal:Bool)
-	{
+	public function setButtonVisibility(focusVal:Bool){
 		alpha = 1;
 		bg.color = focusVal ? FlxColor.WHITE : FlxColor.BLACK;
 		bg.alpha = focusVal ? 0.8 : 0.6;
@@ -1025,8 +1017,7 @@ class MenuButton extends FlxSpriteGroup
 		if(focusChangeCallback != null) focusChangeCallback(focusVal);
 	}
 
-	public function centerOnBg(spr:FlxSprite)
-	{
+	public function centerOnBg(spr:FlxSprite){
 		spr.x = bg.width/2 - spr.width/2;
 		spr.y = bg.height/2 - spr.height/2;
 	}

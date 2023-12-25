@@ -1932,6 +1932,19 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
+	public function openChangersMenu()
+	{
+		persistentUpdate = false;
+		persistentDraw = true;
+		paused = true;
+
+		if(FlxG.sound.music != null) {
+			FlxG.sound.music.pause();
+			vocals.pause();
+		}
+		openSubState(new substates.GameplayChangersSubstate());
+	}
+
 	function openChartEditor()
 	{
 		FlxG.camera.followLerp = 0;

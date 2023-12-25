@@ -61,7 +61,7 @@ class LoadingState extends MusicBeatState
 		"pico funny\nbig ol' bunny",
 		"Joe mama",
 		"Gettin freaky' on a friday night yeah",
-		"This may be based off on a Psych fork,\nbut this is Vs.FOXA, damn it.",
+		"This may be based off on a Psych fork,\nbut this is VS.FOXA, damn it.",
 		"Worjdjhewndjaiqkkwbdjkwqodbdjwoen&:’eked&3rd!2’wonenksiwnwihqbdibejwjebdjjejwjenfjdjejejjwkwiwjnensjsiieejjsjskikdjdnnwjwiwjejdjdjwiejdbdiwjdhehhrifjdnwoqnd",
 		"Oo0ooOoOOo000OOO!!!",
 		"Witness the might\nof the seas!",
