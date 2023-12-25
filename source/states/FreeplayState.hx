@@ -20,8 +20,7 @@ import flixel.util.FlxStringUtil;
 
 @:access(flixel.sound.FlxSound)
 
-class FreeplayState extends MusicBeatState
-{
+class FreeplayState extends MusicBeatState {
 	var songs:Array<SongMetadata> = [];
 
 	var selector:FlxText;

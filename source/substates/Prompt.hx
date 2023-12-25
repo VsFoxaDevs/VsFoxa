@@ -11,7 +11,7 @@ import openfl.geom.Rectangle;
 
 /**
  * ...
- * @author 
+ * @author bbpanzu/ShadowMario
  */
 class Prompt extends MusicBeatSubstate
 {
