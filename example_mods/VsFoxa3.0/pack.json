@@ -1,0 +1,9 @@
+{
+	"name": "Vs. Foxa 3.0",
+	"description": "The original VS.Foxa mod. Now with another update!",
+	"restart":true,
+	"runsGlobally": true,
+	"color": [170, 0, 255],
+	"discordRPC": "1187152981037170768",
+	"iconFramerate": 10
+}
