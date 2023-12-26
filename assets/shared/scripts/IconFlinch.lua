@@ -1,5 +1,5 @@
 settings = {
-	DenpaMiss = true,
+	DenpaMiss = false,
 }
 function onUpdatePost(elapsed)
 	if settings.DenpaMiss then

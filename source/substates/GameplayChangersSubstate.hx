@@ -71,9 +71,9 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		optionsArray.push(new GameplayOption('Health Drain', 'healthDrain', 'bool', false));
 		optionsArray.push(new GameplayOption('Heal on Sustain Note', 'sustainHeal', 'bool', true));
 		if(isHealthDrainOn){
-			optionsArray.push(new GameplayOption('Drain Amount', 'drainAmount', 'float', 0.039));
-			optionsArray.push(new GameplayOption('Sustain Note Drain Amount', 'sustainDrainAmt', 'float', 0.025));
-			optionsArray.push(new GameplayOption('Cannot Lower Than', 'cannotLowerThan', 'float', 0.25));
+			optionsArray.push(new GameplayOption('Drain Amount', 'drainAmount', 'float', 115.0));
+			optionsArray.push(new GameplayOption('Sustain Note Drain Amount', 'sustainDrainAmt', 'float', 50.0));
+			optionsArray.push(new GameplayOption('Cannot Lower Than', 'cannotLowerThan', 'float', 60.0));
 		}
 	}
 
@@ -331,8 +331,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		curSelected += change;
 		if (curSelected < 0)
 			curSelected = optionsArray.length - 1;
-		if (curSelected >= optionsArray.length)
-			curSelected = 0;
+		if (curSelected >= optionsArray.length) curSelected = 0;
 
 		var bullShit:Int = 0;
 
@@ -341,9 +340,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 			bullShit++;
 
 			item.alpha = 0.6;
-			if (item.targetY == 0) {
-				item.alpha = 1;
-			}
+			if(item.targetY == 0) item.alpha = 1;
 		}
 		for (text in grpTexts) {
 			text.alpha = 0.6;
