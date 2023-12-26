@@ -68,12 +68,12 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		optionsArray.push(new GameplayOption('Practice Mode', 'practice', 'bool', false));
 		optionsArray.push(new GameplayOption('Botplay', 'botplay', 'bool', false));
 		optionsArray.push(new GameplayOption('Shake on Miss', 'missshake', 'bool', false));
-		optionsArray.push(new GameplayOption('Health Drain', 'healthDrain', 'bool', false));
+		optionsArray.push(new GameplayOption('Health Drain', 'healthDrain', 'bool', true));
 		optionsArray.push(new GameplayOption('Heal on Sustain Note', 'sustainHeal', 'bool', true));
 		if(isHealthDrainOn){
-			optionsArray.push(new GameplayOption('Drain Amount', 'drainAmount', 'float', 115.0));
-			optionsArray.push(new GameplayOption('Sustain Note Drain Amount', 'sustainDrainAmt', 'float', 50.0));
-			optionsArray.push(new GameplayOption('Cannot Lower Than', 'cannotLowerThan', 'float', 60.0));
+			optionsArray.push(new GameplayOption('Drain Amount', 'drainAmount', 'float', 150.0));
+			optionsArray.push(new GameplayOption('Sustain Note Drain Amount', 'sustainDrainAmt', 'float', 600.0));
+			optionsArray.push(new GameplayOption('Cannot Lower Than', 'cannotLowerThan', 'float', 70.0));
 		}
 	}
 
