@@ -68,16 +68,21 @@ class FPS extends TextField
 	@:noCompletion
 	private #if !flash override #end function __enterFrame(deltaTime:Float):Void
 	{
-		if(deltaTimeout > 1000) {
-			// there's no need to update this every frame and it only causes performance losses.
+		// prevents the overlay from updating every frame, why would you need to anyways
+		if (deltaTimeout > 1000) {
 			deltaTimeout = 0.0;
 			return;
 		}
-		currentTime += deltaTime;
-		times.push(currentTime);
-		while(times[0] < currentTime - 1000) times.shift();
 
-		currentFPS = currentFPS < FlxG.updateFramerate ? times.length : FlxG.updateFramerate;
+		var now:Float = haxe.Timer.stamp();
+		final now:Float = haxe.Timer.stamp() * 1000;
+		times.push(now);
+		while (times[0] < now - 1000)
+			times.shift();
+		while (times[0] < now - 1000) times.shift();
+
+		currentFPS = currentFPS < FlxG.updateFramerate ? times.length : FlxG.updateFramerate;		
+		currentFPS = times.length < FlxG.updateFramerate ? times.length : FlxG.updateFramerate;		
 
 		if(currentFPS > ClientPrefs.data.framerate) currentFPS = ClientPrefs.data.framerate;
 
