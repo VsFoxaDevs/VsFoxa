@@ -1,0 +1,155 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				107,
+				410
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Foxa idle dance",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				96,
+				418
+			],
+			"anim": "deathLoop",
+			"fps": 24,
+			"name": "Foxa Dead Loop",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				131,
+				369
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Foxa NOTE DOWN0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				115,
+				458
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Foxa NOTE UP0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				98,
+				432
+			],
+			"anim": "deathConfirm",
+			"fps": 24,
+			"name": "Foxa Dead confirm",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				118,
+				341
+			],
+			"anim": "singDOWNmiss",
+			"fps": 24,
+			"name": "Foxa NOTE DOWN MISS",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				116,
+				436
+			],
+			"anim": "singUPmiss",
+			"fps": 24,
+			"name": "Foxa NOTE UP MISS",
+			"indices": []
+		},
+		{
+			"offsets": [
+				98,
+				422
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "firstDeath",
+			"indices": [],
+			"name": "Foxa dies"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				119,
+				394
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Foxa NOTE LEFT0",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				122,
+				424
+			],
+			"anim": "singLEFTmiss",
+			"fps": 24,
+			"name": "Foxa NOTE RIGHT MISS",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				79,
+				370
+			],
+			"anim": "singRIGHTmiss",
+			"fps": 24,
+			"name": "Foxa NOTE LEFT MISS",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				130,
+				440
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Foxa NOTE RIGHT0",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/playable-foxa",
+	"position": [
+		-90,
+		550
+	],
+	"healthicon": "foxa",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		175,
+		255
+	],
+	"camera_position": [
+		40,
+		-240
+	],
+	"sing_duration": 4,
+	"scale": 0.9
+}

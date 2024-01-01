@@ -1,0 +1,102 @@
+{
+	"dialogue": [
+		{
+			"speed": 0.05,
+			"portrait": "whittysmirk",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Hey, you ain't bad for a beginner. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "Happytalk",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "You really think so?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "HappyWhit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "yeah, nice job. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "happyfox",
+			"boxState": "normal",
+			"expression": "pissed",
+			"text": "could we do another? "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "ShockedWhit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "What now?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "Flushedwhit2",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "another one?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "gleefox",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Yeah! It might be fun, and i could learn more!"
+		},
+		{
+			"speed": 0.195,
+			"portrait": "FlushedWhit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "..."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "gleefox",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "you might like it! "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "FlushedWhit2",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "...Ah whatever."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "Flushedwhit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Fine. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "happytalk",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": ""
+		},
+		{
+			"speed": 0.05,
+			"portrait": "Neutralwhit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Get ready though, cuz this next one is going to be faster."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "Whittysmirk",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "I'll start us off this time."
+		}
+	]
+}

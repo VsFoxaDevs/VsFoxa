@@ -1,0 +1,59 @@
+{
+	"song": {
+		"speed": 2.9,
+		"stage": "whitt",
+		"player1": "bf",
+		"player2": "foxa",
+		"player3": null,
+		"events": [
+			[
+				127071.428571428,
+				[
+					[
+						"Change Character",
+						"1",
+						"foxa-angy"
+					]
+				]
+			],
+			[
+				130500,
+				[
+					[
+						"Change Character",
+						"1",
+						"foxa"
+					]
+				]
+			],
+			[
+				133714.285714286,
+				[
+					[
+						"Change Character",
+						"1",
+						"foxa-pissed"
+					]
+				]
+			],
+			[
+				136500,
+				[
+					[
+						"Change Character",
+						"1",
+						"foxa"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "Gf-whit",
+		"bpm": 140,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "angy-fox"
+	}
+}

@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 15,
+			"anim": "firstDeath",
+			"indices": [],
+			"name": "BF Death First Death"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": true,
+			"fps": 12,
+			"anim": "deathLoop",
+			"indices": [],
+			"name": "BF Death Idle"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 15,
+			"anim": "deathConfirm",
+			"indices": [],
+			"name": "BF Death Confirm"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/BF NEW/BF Death",
+	"position": [
+		10,
+		400
+	],
+	"healthicon": "bf",
+	"flip_x": true,
+	"healthbar_colors": [
+		49,
+		176,
+		209
+	],
+	"camera_position": [
+		370,
+		-90
+	],
+	"sing_duration": 4,
+	"scale": 0.8
+}

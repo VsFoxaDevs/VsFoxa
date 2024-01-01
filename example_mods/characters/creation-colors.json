@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				-45,
+				224
+			],
+			"anim": "singRIGHT",
+			"fps": 15,
+			"name": "CREATION Right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-32,
+				223
+			],
+			"anim": "singLEFT",
+			"fps": 15,
+			"name": "CREATION Left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-51,
+				214
+			],
+			"anim": "singUP",
+			"fps": 15,
+			"name": "CREATION Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				210
+			],
+			"anim": "singDOWN",
+			"fps": 15,
+			"name": "CREATION Down",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				-39,
+				212
+			],
+			"anim": "idle",
+			"fps": 60,
+			"name": "CREATION Idle",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/CREATION/CREATION-colored",
+	"position": [
+		-130,
+		110
+	],
+	"healthicon": "foxa-mad",
+	"flip_x": false,
+	"healthbar_colors": [
+		115,
+		0,
+		0
+	],
+	"camera_position": [
+		220,
+		70
+	],
+	"sing_duration": 4.50000000000001,
+	"scale": 0.5
+}

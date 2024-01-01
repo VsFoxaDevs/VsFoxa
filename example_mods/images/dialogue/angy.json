@@ -1,0 +1,50 @@
+{
+	"dialogue_pos": "left",
+	"position": [
+		-270,
+		30
+	],
+	"scale": 1.95,
+	"animations": [
+		{
+			"idle_offsets": [
+				0,
+				0
+			],
+			"anim": "talk 2",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Angy Fox Left0003",
+			"loop_name": "Angy Fox Left0"
+		},
+		{
+			"idle_offsets": [
+				0,
+				0
+			],
+			"anim": "talk 1",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Angy Fox Up 0003",
+			"loop_name": "Angy Fox Up0"
+		},
+		{
+			"idle_offsets": [
+				0,
+				0
+			],
+			"anim": "talk 3",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"idle_name": "Angy Fox Right0003",
+			"loop_name": "Angy Fox Right0"
+		}
+	],
+	"image": "Angy Fox"
+}

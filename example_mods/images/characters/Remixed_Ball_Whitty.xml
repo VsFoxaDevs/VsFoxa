@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="RWhitty.png">
+	<!-- Created with Adobe Animate version 21.0.9.42677 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Whitty Sing Note DOWN0000" x="0" y="0" width="759" height="656" frameX="0" frameY="-15" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0001" x="0" y="0" width="759" height="656" frameX="0" frameY="-15" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0002" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0003" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0004" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0005" x="1564" y="0" width="745" height="630" frameX="-7" frameY="-13" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0006" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0007" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0008" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0009" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0010" x="2339" y="0" width="745" height="654" frameX="-7" frameY="0" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0011" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0012" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0013" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0014" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note DOWN0015" x="789" y="0" width="745" height="653" frameX="-7" frameY="-6" frameWidth="759" frameHeight="671"/>
+	<SubTexture name="Whitty Sing Note LEFT0000" x="3114" y="0" width="672" height="772" frameX="0" frameY="-1" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0001" x="3114" y="0" width="672" height="772" frameX="0" frameY="-1" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0002" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0003" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0004" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0005" x="4502" y="0" width="645" height="773" frameX="-32" frameY="0" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0006" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0007" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0008" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0009" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0010" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0011" x="5177" y="0" width="669" height="759" frameX="-3" frameY="-14" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0012" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0013" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0014" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note LEFT0015" x="3816" y="0" width="656" height="766" frameX="-18" frameY="-7" frameWidth="677" frameHeight="773"/>
+	<SubTexture name="Whitty Sing Note UP0000" x="5876" y="0" width="602" height="858"/>
+	<SubTexture name="Whitty Sing Note UP0001" x="5876" y="0" width="602" height="858"/>
+	<SubTexture name="Whitty Sing Note UP0002" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0003" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0004" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0005" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0006" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0007" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0008" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0009" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0010" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0011" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0012" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0013" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0014" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0015" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0016" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0017" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0018" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0019" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0020" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0021" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0022" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0023" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0024" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0025" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0026" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0027" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0028" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0029" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0030" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0031" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0032" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0033" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0034" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0035" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0036" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0037" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0038" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0039" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0040" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0041" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0042" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0043" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0044" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0045" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0046" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0047" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0048" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0049" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0050" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0051" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0052" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0053" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0054" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0055" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0056" x="0" y="888" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0057" x="629" y="888" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0058" x="6508" y="0" width="599" height="849" frameX="-1" frameY="-9" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty Sing Note UP0059" x="7137" y="0" width="595" height="848" frameX="-1" frameY="-10" frameWidth="602" frameHeight="858"/>
+	<SubTexture name="Whitty idle dance0000" x="1254" y="888" width="578" height="741" frameX="-8" frameY="-1" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0001" x="1254" y="888" width="578" height="741" frameX="-8" frameY="-1" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0002" x="1862" y="888" width="595" height="727" frameX="0" frameY="-15" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0003" x="1862" y="888" width="595" height="727" frameX="0" frameY="-15" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0004" x="2487" y="888" width="593" height="714" frameX="-1" frameY="-28" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0005" x="2487" y="888" width="593" height="714" frameX="-1" frameY="-28" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0006" x="3110" y="888" width="591" height="720" frameX="-2" frameY="-22" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0007" x="3110" y="888" width="591" height="720" frameX="-2" frameY="-22" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0008" x="3731" y="888" width="588" height="735" frameX="-3" frameY="-7" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0009" x="4349" y="888" width="588" height="731" frameX="-3" frameY="-11" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0010" x="4967" y="888" width="586" height="734" frameX="-4" frameY="-8" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0011" x="4967" y="888" width="586" height="734" frameX="-4" frameY="-8" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="Whitty idle dance0012" x="5583" y="888" width="583" height="742" frameX="-6" frameY="0" frameWidth="595" frameHeight="742"/>
+	<SubTexture name="whitty sing note right0000" x="6196" y="888" width="785" height="689" frameX="-1" frameY="0" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0001" x="6196" y="888" width="785" height="689" frameX="-1" frameY="0" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0002" x="7011" y="888" width="781" height="685" frameX="0" frameY="-4" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0003" x="0" y="1767" width="781" height="687" frameX="0" frameY="-2" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0004" x="7011" y="888" width="781" height="685" frameX="0" frameY="-4" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0005" x="0" y="1767" width="781" height="687" frameX="0" frameY="-2" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0006" x="7011" y="888" width="781" height="685" frameX="0" frameY="-4" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0007" x="0" y="1767" width="781" height="687" frameX="0" frameY="-2" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0008" x="7011" y="888" width="781" height="685" frameX="0" frameY="-4" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0009" x="0" y="1767" width="781" height="687" frameX="0" frameY="-2" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0010" x="7011" y="888" width="781" height="685" frameX="0" frameY="-4" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0011" x="811" y="1767" width="781" height="685" frameX="0" frameY="-4" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0012" x="1622" y="1767" width="781" height="687" frameX="0" frameY="-2" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0013" x="811" y="1767" width="781" height="685" frameX="0" frameY="-4" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0014" x="1622" y="1767" width="781" height="687" frameX="0" frameY="-2" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0015" x="811" y="1767" width="781" height="685" frameX="0" frameY="-4" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0016" x="1622" y="1767" width="781" height="687" frameX="0" frameY="-2" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0017" x="811" y="1767" width="781" height="685" frameX="0" frameY="-4" frameWidth="786" frameHeight="689"/>
+	<SubTexture name="whitty sing note right0018" x="1622" y="1767" width="781" height="687" frameX="0" frameY="-2" frameWidth="786" frameHeight="689"/>
+</TextureAtlas>

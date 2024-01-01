@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="remorse-foxa.png">
+	<!-- Created with Adobe Animate version 20.0.0.17400 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Foxa idle dance0000" x="5" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0001" x="5" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0002" x="438" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0003" x="438" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0004" x="871" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0005" x="871" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0006" x="1304" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0007" x="1304" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0008" x="1737" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0009" x="1737" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0010" x="5" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0011" x="5" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle dance0012" x="5" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa NOTE DOWN0000" x="2170" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0001" x="2170" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0002" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0003" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0004" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0005" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0006" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0007" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0008" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0009" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0010" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0011" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0012" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0013" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0014" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0015" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0016" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0017" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0018" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0019" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0020" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0021" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0022" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN0023" x="2640" y="5" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE LEFT0000" x="3110" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0001" x="3110" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0002" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0003" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0004" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0005" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0006" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0007" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0008" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0009" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0010" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0011" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0012" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0013" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0014" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0015" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0016" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0017" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0018" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0019" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0020" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0021" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0022" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT0023" x="3495" y="5" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE RIGHT0000" x="5" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0001" x="5" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0002" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0003" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0004" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0005" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0006" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0007" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0008" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0009" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0010" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0011" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0012" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0013" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0014" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0015" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0016" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0017" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0018" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0019" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0020" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0021" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0022" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT0023" x="464" y="778" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE UP0000" x="923" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0001" x="923" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0002" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0003" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0004" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0005" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0006" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0007" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0008" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0009" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0010" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0011" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0012" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0013" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0014" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0015" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0016" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0017" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0018" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0019" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0020" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0021" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0022" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP0023" x="1341" y="778" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0000" x="2170" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0001" x="2170" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0002" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0003" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0004" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0005" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0006" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0007" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0008" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0009" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0010" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0011" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0012" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0013" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0014" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0015" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0016" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0017" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0018" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0019" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0020" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0021" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0022" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE DOWN MISS0023" x="2640" y="866" width="460" height="705"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0000" x="3110" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0001" x="3110" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0002" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0003" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0004" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0005" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0006" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0007" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0008" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0009" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0010" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0011" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0012" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0013" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0014" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0015" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0016" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0017" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0018" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0019" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0020" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0021" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0022" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE LEFT MISS0023" x="3495" y="866" width="375" height="743"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0000" x="5" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0001" x="5" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0002" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0003" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0004" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0005" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0006" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0007" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0008" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0009" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0010" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0011" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0012" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0013" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0014" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0015" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0016" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0017" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0018" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0019" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0020" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0021" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0022" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE RIGHT MISS0023" x="464" y="1638" width="449" height="789"/>
+	<SubTexture name="Foxa NOTE UP MISS0000" x="923" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0001" x="923" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0002" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0003" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0004" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0005" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0006" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0007" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0008" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0009" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0010" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0011" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0012" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0013" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0014" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0015" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0016" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0017" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0018" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0019" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0020" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0021" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0022" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa NOTE UP MISS0023" x="1341" y="1638" width="408" height="816"/>
+	<SubTexture name="Foxa HEY!!0000" x="5" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa dies0000" x="5" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0000" x="5" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0001" x="5" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0002" x="438" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0003" x="438" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0004" x="871" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0005" x="871" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0006" x="1304" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0007" x="1304" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0008" x="1737" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0009" x="1737" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0010" x="5" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0011" x="5" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead Loop0012" x="5" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa Dead confirm0000" x="5" y="2705" width="423" height="763"/>
+	<SubTexture name="Foxa idle shaking0000" x="5" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle shaking0001" x="5" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle shaking0002" x="438" y="5" width="423" height="763"/>
+	<SubTexture name="Foxa idle shaking0003" x="438" y="5" width="423" height="763"/>>
+</TextureAtlas>

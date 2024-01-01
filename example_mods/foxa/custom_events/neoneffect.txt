@@ -1,5 +1,0 @@
-UHHHH COOL NEON THINGY
-
-Value 1: in or out
-Value 2: Fade In/Out Time
-

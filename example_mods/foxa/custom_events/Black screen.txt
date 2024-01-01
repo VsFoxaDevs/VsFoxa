@@ -1,3 +1,0 @@
-Blacks out the screen.
-
-Type "off" in Value 1 to remove the black screen

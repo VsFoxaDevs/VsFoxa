@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				27,
+				309
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Whitty idle dance"
+		},
+		{
+			"offsets": [
+				109,
+				196
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Whitty Sing Note DOWN"
+		},
+		{
+			"offsets": [
+				21,
+				411
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Whitty Sing Note UP"
+		},
+		{
+			"offsets": [
+				65,
+				243
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "whitty sing note right"
+		},
+		{
+			"offsets": [
+				80,
+				340
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Whitty Sing Note LEFT"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Remixed_Ball_Whitty",
+	"position": [
+		0,
+		350
+	],
+	"healthicon": "BallisticWhitty",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		0,
+		50
+	],
+	"camera_position": [
+		-230,
+		-220
+	],
+	"sing_duration": 4,
+	"scale": 0.9
+}

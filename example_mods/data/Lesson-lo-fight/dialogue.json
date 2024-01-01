@@ -1,0 +1,172 @@
+{
+	"dialogue": [
+		{
+			"expression": "talk",
+			"text": "...Huh?",
+			"boxState": "angry",
+			"speed": 0.06,
+			"portrait": "ShockedWhit"
+		},
+		{
+			"expression": "talk",
+			"text": "Hey Whitty!",
+			"boxState": "normal",
+			"speed": 0.05,
+			"portrait": "happytalk"
+		},
+		{
+			"expression": "talk",
+			"text": " sorry if i startled you. ",
+			"boxState": "normal",
+			"portrait": "Happyfox",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "Oh. um...",
+			"boxState": "normal",
+			"portrait": "FlushedWhit",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "It's fine i guess. ",
+			"boxState": "normal",
+			"portrait": "FlushedWhit2",
+			"speed": 0.05
+		},
+		{
+			"expression": "confused",
+			"text": "Anyway, what's up? ",
+			"boxState": "normal",
+			"portrait": "PuzzledWhit",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "Well...",
+			"boxState": "normal",
+			"portrait": "HappyFox",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": " There's something i would like to ask you.",
+			"boxState": "normal",
+			"portrait": "HappyTalk",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "Yeah?",
+			"boxState": "normal",
+			"portrait": "PuzzledWhit",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "What is it? ",
+			"boxState": "normal",
+			"portrait": "NeutralWhit",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "you see, i was wondering if you could teach me how to sing.",
+			"boxState": "normal",
+			"portrait": "Happytalk",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "Oh? ",
+			"boxState": "normal",
+			"portrait": "PuzzledWhit",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "I had a troubled past before meeting you and was never able to understand. ",
+			"boxState": "normal",
+			"portrait": "HappyTalk",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "I mean, i am an EX-rockstar...",
+			"boxState": "normal",
+			"portrait": "FlushedWhit2",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": " But I might not be as good as I used to be... ",
+			"boxState": "normal",
+			"portrait": "FlushedWhit",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "Oh, i'm sure you are!",
+			"boxState": "normal",
+			"portrait": "GleeFox",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "C'mon, Whit...",
+			"boxState": "normal",
+			"portrait": "HappyFox",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "Can you please teach me? ",
+			"boxState": "normal",
+			"portrait": "HappyTalk",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "...",
+			"boxState": "normal",
+			"portrait": "FlushedWhit",
+			"speed": 0.21
+		},
+		{
+			"expression": "talk",
+			"text": "...I suppose I could try. ",
+			"boxState": "normal",
+			"portrait": "FlushedWhit2",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "Really?!",
+			"boxState": "normal",
+			"portrait": "GleeFox",
+			"speed": 0.05
+		},
+		{
+			"expression": "talk",
+			"text": "Yeah. ",
+			"boxState": "normal",
+			"portrait": "FlushedWhit",
+			"speed": 0.075
+		},
+		{
+			"speed": 0.05,
+			"portrait": "FlushedWhit2",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "But you try to start us off, okay?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "GleeFox",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "I'll do my best, Whit!"
+		}
+	]
+}

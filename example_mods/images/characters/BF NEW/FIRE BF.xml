@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="FIRE BF.png">
+<SubTexture name="FIRE BF Idle0000" x="1067" y="1803" width="542" height="570" frameX="-330" frameY="-102" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Idle0001" x="533" y="1803" width="534" height="575" frameX="-336" frameY="-97" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Idle0002" x="0" y="1803" width="533" height="581" frameX="-341" frameY="-91" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Idle0003" x="2178" y="0" width="532" height="587" frameX="-347" frameY="-85" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Idle0004" x="545" y="1208" width="527" height="594" frameX="-352" frameY="-78" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Left0000" x="0" y="609" width="505" height="599" frameX="-349" frameY="-81" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Left0001" x="505" y="609" width="503" height="597" frameX="-354" frameY="-83" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Left0002" x="1648" y="1208" width="499" height="592" frameX="-363" frameY="-88" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Left0003" x="2178" y="587" width="490" height="586" frameX="-380" frameY="-94" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Down0000" x="2710" y="0" width="555" height="561" frameX="-325" frameY="-112" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Down0001" x="2144" y="1803" width="542" height="564" frameX="-333" frameY="-109" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Down0002" x="1609" y="1803" width="535" height="567" frameX="-340" frameY="-106" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Down0003" x="2178" y="1173" width="529" height="569" frameX="-346" frameY="-104" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Up0000" x="0" y="0" width="546" height="609" frameX="-335" frameY="-76" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Up0001" x="546" y="0" width="534" height="605" frameX="-346" frameY="-80" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Up0002" x="1080" y="0" width="533" height="603" frameX="-353" frameY="-82" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Up0003" x="1008" y="609" width="530" height="597" frameX="-362" frameY="-88" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Right0000" x="1072" y="1208" width="576" height="594" frameX="-343" frameY="-78" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Right0001" x="1613" y="0" width="565" height="595" frameX="-347" frameY="-77" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Right0002" x="1613" y="595" width="555" height="595" frameX="-353" frameY="-77" frameWidth="1280" frameHeight="720" />
+<SubTexture name="FIRE BF Right0003" x="0" y="1208" width="545" height="595" frameX="-356" frameY="-77" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>

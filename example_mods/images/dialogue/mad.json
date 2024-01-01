@@ -1,0 +1,76 @@
+{
+	"position": [
+		130,
+		80
+	],
+	"dialogue_pos": "left",
+	"scale": 1.45,
+	"image": "port_mad",
+	"animations": [
+		{
+			"idle_offsets": [
+				-1,
+				-12
+			],
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "talk",
+			"idle_name": "portrait0017",
+			"loop_name": "portrait"
+		},
+		{
+			"loop_offsets": [
+				0,
+				0
+			],
+			"anim": "",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"loop_name": "",
+			"idle_name": ""
+		},
+		{
+			"idle_offsets": [
+				0,
+				0
+			],
+			"anim": "ang",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"idle_name": "portrait0017",
+			"loop_name": "portrait"
+		},
+		{
+			"idle_offsets": [
+				0,
+				0
+			],
+			"anim": "portrait0017",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"idle_name": "portrait0017",
+			"loop_name": "portrait"
+		},
+		{
+			"idle_offsets": [
+				0,
+				0
+			],
+			"anim": "portrait",
+			"loop_offsets": [
+				0,
+				0
+			],
+			"idle_name": "portrait0017",
+			"loop_name": "portrait"
+		}
+	]
+}

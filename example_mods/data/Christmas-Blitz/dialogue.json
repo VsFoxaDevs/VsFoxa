@@ -1,0 +1,123 @@
+{
+	"dialogue": [
+		{
+			"speed": 0.05,
+			"portrait": "festive-whittySmirk",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "How'd you like that one? "
+		},
+		{
+			"speed": 0.045,
+			"portrait": "festive-foxa3",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "That was delightful, Whitmore!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-whittyGlee",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "I hope so."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-foxa3",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Yeah! It really was!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-whittyGlee",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "You made your own little twists and\\neverything. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-foxa",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "In fact, That gave me an idea for another song!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-whitty1",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Oh? Did it now? "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-foxa3",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Yeah!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-whittyGlee",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Well, Let's hear it. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-foxa1",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "This is gonna be our last song before we open our gifts, Okay? "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-whit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Sounds like a plan to me."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-foxa3",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Merry Christmas, Whitmore!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-whittyGlee",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Merry Christmas. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-whitty1",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "And hey-"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-foxaCurious",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "yes??"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-whittySmirk",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "how about we get those donuts tomorrow?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "festive-foxa3",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "you bet!"
+		}
+	]
+}

@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				151,
+				47
+			],
+			"loop": true,
+			"fps": 240,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Mad Sing Note LEFT"
+		},
+		{
+			"offsets": [
+				150,
+				137
+			],
+			"loop": true,
+			"fps": 240,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Mad Sing Note UP"
+		},
+		{
+			"offsets": [
+				109,
+				35
+			],
+			"loop": true,
+			"fps": 240,
+			"anim": "idle",
+			"indices": [],
+			"name": "Mad idle dance"
+		},
+		{
+			"offsets": [
+				231,
+				-78
+			],
+			"loop": true,
+			"fps": 220,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Mad Sing Note DOWN"
+		},
+		{
+			"loop": true,
+			"offsets": [
+				290,
+				-53
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Mad sing note right",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Foxa_mad_whitty",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "foxa-mad",
+	"flip_x": false,
+	"healthbar_colors": [
+		95,
+		0,
+		0
+	],
+	"camera_position": [
+		-110,
+		130
+	],
+	"sing_duration": 6.1,
+	"scale": 1
+}

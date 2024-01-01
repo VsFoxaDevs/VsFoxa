@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [
+				290,
+				-53
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "Mad sing note right",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				109,
+				35
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Mad idle dance",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				231,
+				-78
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "Mad Sing Note DOWN",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				151,
+				47
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Mad Sing Note LEFT",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				150,
+				137
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "Mad Sing Note UP",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/WhittyCrazy",
+	"position": [
+		110,
+		60
+	],
+	"healthicon": "ballisticwhitty",
+	"flip_x": false,
+	"healthbar_colors": [
+		235,
+		0,
+		40
+	],
+	"camera_position": [
+		-110,
+		130
+	],
+	"sing_duration": 6.1,
+	"scale": 0.8
+}

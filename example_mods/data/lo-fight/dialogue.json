@@ -1,0 +1,74 @@
+{
+	"dialogue": [
+		{
+			"speed": 0.05,
+			"portrait": "whit",
+			"boxState": "angry",
+			"expression": "talk",
+			"text": "who-"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "bop boop skep!"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "whit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "oh...it's you two..."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "bep boop."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "whit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Would you kindly leave me alone? "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "confused",
+			"text": "Beep bope??"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "whit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "I don't want any trouble. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "whit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Just leave me alone, and it'll be cool. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "",
+			"boxState": "normal",
+			"expression": "pissed",
+			"text": "bohp behp skeep. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "annoyedwhit",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "..."
+		}
+	]
+}

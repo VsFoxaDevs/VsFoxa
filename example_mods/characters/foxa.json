@@ -1,0 +1,144 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				230,
+				2
+			],
+			"loop": false,
+			"fps": 15,
+			"anim": "idle",
+			"indices": [],
+			"name": "Foxa Idle"
+		},
+		{
+			"offsets": [
+				228,
+				2
+			],
+			"loop": false,
+			"fps": 15,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Foxa Down"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				225,
+				4
+			],
+			"anim": "singRIGHT",
+			"fps": 12,
+			"name": "Foxa Right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				228,
+				3
+			],
+			"anim": "singLEFT",
+			"fps": 12,
+			"name": "Foxa Left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				228,
+				4
+			],
+			"anim": "singUP",
+			"fps": 12,
+			"name": "Foxa Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				230,
+				3
+			],
+			"anim": "singDOWN-alt",
+			"fps": 15,
+			"name": "Foxa ALT Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				230,
+				0
+			],
+			"anim": "singUP-alt",
+			"fps": 12,
+			"name": "Foxa ALT Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				230,
+				0
+			],
+			"anim": "idle-alt",
+			"fps": 15,
+			"name": "Foxa ALT Idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				230,
+				0
+			],
+			"anim": "singLEFT-alt",
+			"fps": 12,
+			"name": "Foxa ALT Left",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				230,
+				0
+			],
+			"anim": "singRIGHT-alt",
+			"fps": 12,
+			"name": "Foxa ALT Right",
+			"indices": []
+		},
+		{
+			"offsets": [
+				231,
+				1
+			],
+			"indices": [],
+			"fps": 12,
+			"anim": "SPEAK",
+			"loop": false,
+			"name": "Foxa SPEAK"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/Foxa/Foxa",
+	"position": [
+		-210,
+		-10
+	],
+	"healthicon": "foxa",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		209,
+		255
+	],
+	"camera_position": [
+		-430,
+		-130
+	],
+	"sing_duration": 4.50000000000001,
+	"scale": 1.2
+}
