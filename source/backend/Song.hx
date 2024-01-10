@@ -65,18 +65,15 @@ class Song
 		if(songJson.events == null)
 		{
 			songJson.events = [];
-			for (secNum in 0...songJson.notes.length)
-			{
+			for (secNum in 0...songJson.notes.length) {
 				var sec:SwagSection = songJson.notes[secNum];
 
 				var i:Int = 0;
 				var notes:Array<Dynamic> = sec.sectionNotes;
 				var len:Int = notes.length;
-				while(i < len)
-				{
+				while(i < len) {
 					var note:Array<Dynamic> = notes[i];
-					if(note[1] < 0)
-					{
+					if(note[1] < 0){
 						songJson.events.push([note[0], [[note[2], note[3], note[4]]]]);
 						notes.remove(note);
 						len = notes.length;
@@ -111,34 +108,15 @@ class Song
 			var path:String = Paths.json(formattedFolder + '/' + formattedSong);
 
 			#if sys
-			if(FileSystem.exists(path))
-				rawJson = File.getContent(path).trim();
+			if(FileSystem.exists(path)) rawJson = File.getContent(path).trim();
 			else
 			#end
 				rawJson = Assets.getText(Paths.json(formattedFolder + '/' + formattedSong)).trim();
 		}
 
-		while (!rawJson.endsWith("}"))
-		{
+		while (!rawJson.endsWith("}")){
 			rawJson = rawJson.substr(0, rawJson.length - 1);
-			// LOL GOING THROUGH THE BULLSHIT TO CLEAN IDK WHATS STRANGE
 		}
-
-		// FIX THE CASTING ON WINDOWS/NATIVE
-		// Windows???
-		// trace(songData);
-
-		// trace('LOADED FROM JSON: ' + songData.notes);
-		/* 
-			for (i in 0...songData.notes.length)
-			{
-				trace('LOADED FROM JSON: ' + songData.notes[i].sectionNotes);
-				// songData.notes[i].sectionNotes = songData.notes[i].sectionNotes
-			}
-
-				daNotes = songData.notes;
-				daSong = songData.song;
-				daBpm = songData.bpm; */
 
 		var songJson:Dynamic = parseJSONshit(rawJson);
 		if(jsonInput != 'events') StageData.loadDirectory(songJson);
@@ -147,7 +125,5 @@ class Song
 	}
 
 	public static function parseJSONshit(rawJson:String):SwagSong
-	{
 		return cast Json.parse(rawJson).song;
-	}
 }

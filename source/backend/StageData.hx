@@ -48,7 +48,7 @@ class StageData {
 		if(SONG.stage != null) {
 			stage = SONG.stage;
 		} else if(SONG.song != null) {
-			switch (SONG.song.toLowerCase().replace(' ', '-'))
+			switch (SONG.song.toLowerCase().replace(' ', '-')) // backwards compat ig
 			{
 				case 'spookeez' | 'south' | 'monster':
 					stage = 'spooky';

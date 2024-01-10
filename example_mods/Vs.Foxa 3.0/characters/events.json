@@ -1,0 +1,164 @@
+{
+	"song": {
+		"speed": 2,
+		"stage": "foxa",
+		"player1": "BF",
+		"player2": "foxa",
+		"player3": null,
+		"events": [
+			[
+				0,
+				[
+					[
+						"whiteflash",
+						"",
+						""
+					]
+				]
+			],
+			[
+				8000,
+				[
+					[
+						"whiteflash",
+						"",
+						""
+					]
+				]
+			],
+			[
+				22000,
+				[
+					[
+						"Play Animation",
+						"Dad",
+						"SPEAK"
+					]
+				]
+			],
+			[
+				24000,
+				[
+					[
+						"CameraZoom",
+						"1",
+						"2"
+					],
+					[
+						"whiteflash",
+						"",
+						""
+					],
+					[
+						"Better Cinematics",
+						"0.2",
+						"120"
+					],
+					[
+						"Lyrics",
+						"",
+						""
+					]
+				]
+			],
+			[
+				32875,
+				[
+					[
+						"Better Cinematics",
+						"0.2",
+						"0"
+					]
+				]
+			],
+			[
+				64000,
+				[
+					[
+						"Lyrics",
+						"3",
+						"FFFFFF"
+					]
+				]
+			],
+			[
+				64500,
+				[
+					[
+						"Lyrics",
+						"3-2",
+						"FFFFFF"
+					]
+				]
+			],
+			[
+				65000,
+				[
+					[
+						"Lyrics",
+						"3-2-1",
+						"FFFFFF"
+					]
+				]
+			],
+			[
+				65500,
+				[
+					[
+						"Lyrics",
+						"GO!",
+						"FFFFFF"
+					]
+				]
+			],
+			[
+				66000,
+				[
+					[
+						"whiteflash",
+						"",
+						""
+					],
+					[
+						"Lyrics",
+						"",
+						""
+					]
+				]
+			],
+			[
+				82000,
+				[
+					[
+						"CameraZoom",
+						"2",
+						"2"
+					],
+					[
+						"Better Cinematics",
+						"0.2",
+						"110"
+					]
+				]
+			],
+			[
+				85250,
+				[
+					[
+						"Better Cinematics",
+						"0.2",
+						"0"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "GF",
+		"bpm": 120,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "Bubbles"
+	}
+}

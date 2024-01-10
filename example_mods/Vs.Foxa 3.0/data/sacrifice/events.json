@@ -1,0 +1,59 @@
+{
+	"song": {
+		"speed": 2.1,
+		"stage": "foxa",
+		"player1": "bf",
+		"player2": "foxa",
+		"player3": null,
+		"events": [
+			[
+				40000,
+				[
+					[
+						"badapplelol",
+						"a",
+						"0.2"
+					]
+				]
+			],
+			[
+				56000,
+				[
+					[
+						"badapplelol",
+						"b",
+						"0.2"
+					]
+				]
+			],
+			[
+				71000,
+				[
+					[
+						"badapplelol",
+						"a",
+						"0.2"
+					]
+				]
+			],
+			[
+				72000,
+				[
+					[
+						"badapplelol",
+						"b",
+						"0.2"
+					]
+				]
+			]
+		],
+		"notes": [],
+		"splashSkin": null,
+		"validScore": false,
+		"gfVersion": "invisible",
+		"bpm": 120,
+		"arrowSkin": null,
+		"needsVoices": true,
+		"song": "Sacrifice"
+	}
+}

@@ -289,7 +289,7 @@ class PlayState extends MusicBeatState
 		startCallback = startCountdown;
 		endCallback = endSong;
 
-		// for lua
+		// for lua and maybe hscript
 		instance = this;
 
 		PauseSubState.songName = null; //Reset to default
@@ -303,7 +303,7 @@ class PlayState extends MusicBeatState
 			'note_right'
 		];
 
-		FlxG.sound.music?.stop();
+		if(FlxG.sound.music != null) FlxG.sound.music.stop();
 
 		// Gameplay settings
 		healthGain = ClientPrefs.getGameplaySetting('healthgain');
@@ -1598,6 +1598,7 @@ class PlayState extends MusicBeatState
 			callOnScripts('onResume');
 			resetRPC(startTimer != null && startTimer.finished);
 		}
+	}
 
 	override public function onFocus():Void
 	{

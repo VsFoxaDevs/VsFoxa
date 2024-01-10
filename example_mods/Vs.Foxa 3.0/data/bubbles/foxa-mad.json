@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [
+				151,
+				47
+			],
+			"anim": "singLEFT",
+			"fps": 240,
+			"name": "Mad Sing Note LEFT",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				150,
+				137
+			],
+			"anim": "singUP",
+			"fps": 240,
+			"name": "Mad Sing Note UP",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				109,
+				35
+			],
+			"anim": "idle",
+			"fps": 240,
+			"name": "Mad idle dance",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				231,
+				-78
+			],
+			"anim": "singDOWN",
+			"fps": 220,
+			"name": "Mad Sing Note DOWN",
+			"indices": []
+		},
+		{
+			"offsets": [
+				290,
+				-53
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Mad sing note right"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/FoxaMad",
+	"position": [
+		0,
+		40
+	],
+	"healthicon": "foxa-mad",
+	"flip_x": false,
+	"healthbar_colors": [
+		95,
+		0,
+		0
+	],
+	"camera_position": [
+		-110,
+		130
+	],
+	"sing_duration": 6.1,
+	"scale": 0.7
+}

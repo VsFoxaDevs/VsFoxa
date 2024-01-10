@@ -1,9 +1,0 @@
-DARKNESS AHAHAHAHAAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHA
-
-Value 1: "true" For Darkness, "false" to Normal.
-
-Value 2: Fade in Duration.
-
-Ex: If you put "1" it'll take a sec till Darkness or Normal
-
-By Dark

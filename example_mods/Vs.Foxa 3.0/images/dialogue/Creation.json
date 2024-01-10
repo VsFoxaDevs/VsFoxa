@@ -1,0 +1,63 @@
+{
+	"position": [
+		-80,
+		-130
+	],
+	"dialogue_pos": "left",
+	"scale": 1.1,
+	"image": "creation",
+	"animations": [
+		{
+			"loop_name": "CREATION Idle",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "CREATION Idle0003",
+			"anim": "Talk",
+			"loop_offsets": [
+				0,
+				0
+			]
+		},
+		{
+			"loop_name": "CREATION Left",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "CREATION Left0003",
+			"anim": "Talk2",
+			"loop_offsets": [
+				0,
+				0
+			]
+		},
+		{
+			"loop_name": "CREATION Up",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "CREATION Up0003",
+			"anim": "Talk3",
+			"loop_offsets": [
+				0,
+				0
+			]
+		},
+		{
+			"loop_name": "CREATION Right",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "CREATION Right0003",
+			"anim": "Talk4",
+			"loop_offsets": [
+				0,
+				0
+			]
+		}
+	]
+}

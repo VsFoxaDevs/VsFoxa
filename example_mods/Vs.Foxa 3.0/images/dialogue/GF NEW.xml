@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="GF NEW.png">
+<SubTexture name="GF NEW talk normal0000" x="650" y="1232" width="658" height="607" frameX="-94" frameY="-72" frameWidth="1280" frameHeight="720" />
+<SubTexture name="GF NEW talk normal0001" x="1282" y="615" width="650" height="610" frameX="-94" frameY="-69" frameWidth="1280" frameHeight="720" />
+<SubTexture name="GF NEW talk normal0002" x="0" y="617" width="653" height="615" frameX="-94" frameY="-64" frameWidth="1280" frameHeight="720" />
+<SubTexture name="GF NEW talk normal0003" x="0" y="0" width="641" height="617" frameX="-94" frameY="-62" frameWidth="1280" frameHeight="720" />
+<SubTexture name="GF NEW talk worry0000" x="1935" y="0" width="658" height="607" frameX="-94" frameY="-72" frameWidth="1280" frameHeight="720" />
+<SubTexture name="GF NEW talk worry0001" x="0" y="1232" width="650" height="610" frameX="-94" frameY="-69" frameWidth="1280" frameHeight="720" />
+<SubTexture name="GF NEW talk worry0002" x="1282" y="0" width="653" height="615" frameX="-94" frameY="-64" frameWidth="1280" frameHeight="720" />
+<SubTexture name="GF NEW talk worry0003" x="641" y="0" width="641" height="617" frameX="-94" frameY="-62" frameWidth="1280" frameHeight="720" />
+</TextureAtlas>

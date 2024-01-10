@@ -1,0 +1,56 @@
+{
+	"animations": [
+		{
+			"loop": true,
+			"offsets": [
+				512,
+				458
+			],
+			"anim": "deathLoop",
+			"fps": 24,
+			"name": "Foxa Dead Loop",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				518,
+				452
+			],
+			"anim": "deathConfirm",
+			"fps": 24,
+			"name": "Foxa Dead confirm",
+			"indices": []
+		},
+		{
+			"offsets": [
+				518,
+				452
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "firstDeath",
+			"indices": [],
+			"name": "Foxa dies"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/playable-foxa-2",
+	"position": [
+		480,
+		450
+	],
+	"healthicon": "foxa",
+	"flip_x": true,
+	"healthbar_colors": [
+		255,
+		175,
+		255
+	],
+	"camera_position": [
+		-130,
+		-240
+	],
+	"sing_duration": 4,
+	"scale": 0.9
+}

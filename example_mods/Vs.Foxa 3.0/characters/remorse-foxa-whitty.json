@@ -1,0 +1,155 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				107,
+				410
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "idle",
+			"indices": [],
+			"name": "Foxa idle dance"
+		},
+		{
+			"offsets": [
+				96,
+				418
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "deathLoop",
+			"indices": [],
+			"name": "Foxa Dead Loop"
+		},
+		{
+			"offsets": [
+				131,
+				369
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Foxa NOTE DOWN0"
+		},
+		{
+			"offsets": [
+				115,
+				458
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Foxa NOTE UP0"
+		},
+		{
+			"offsets": [
+				98,
+				432
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "deathConfirm",
+			"indices": [],
+			"name": "Foxa Dead confirm"
+		},
+		{
+			"offsets": [
+				118,
+				341
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "Foxa NOTE DOWN MISS"
+		},
+		{
+			"offsets": [
+				116,
+				436
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "Foxa NOTE UP MISS"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				98,
+				422
+			],
+			"anim": "firstDeath",
+			"fps": 24,
+			"name": "Foxa dies",
+			"indices": []
+		},
+		{
+			"offsets": [
+				119,
+				394
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Foxa NOTE LEFT0"
+		},
+		{
+			"offsets": [
+				122,
+				424
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "Foxa NOTE RIGHT MISS"
+		},
+		{
+			"offsets": [
+				79,
+				370
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "Foxa NOTE LEFT MISS"
+		},
+		{
+			"offsets": [
+				130,
+				440
+			],
+			"loop": true,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Foxa NOTE RIGHT0"
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/remorse-foxa-whitty",
+	"position": [
+		110,
+		410
+	],
+	"healthicon": "whitty-foxa",
+	"flip_x": false,
+	"healthbar_colors": [
+		255,
+		175,
+		255
+	],
+	"camera_position": [
+		40,
+		-240
+	],
+	"sing_duration": 4,
+	"scale": 0.9
+}

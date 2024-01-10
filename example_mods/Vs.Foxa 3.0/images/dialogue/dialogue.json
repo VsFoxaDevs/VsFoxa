@@ -1,0 +1,88 @@
+{
+	"dialogue": [
+		{
+			"speed": 0.05,
+			"portrait": "port",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "wha-"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "bidi beep"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "port",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "You're looking for HIM... aren't you?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "beep. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "port",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "...Listen, I know you're here to rap battle him, but I'm afraid I can't let you do that..."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "beepo scap beeboop."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "port",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Would you mind leaving?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "port",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "Sorry if that seems rude to ask..."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "skedeep boop."
+		},
+		{
+			"speed": 0.05,
+			"portrait": "port",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "...Please?"
+		},
+		{
+			"speed": 0.05,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "beep skedee bohp. "
+		},
+		{
+			"speed": 0.05,
+			"portrait": "port",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "..."
+		}
+	]
+}

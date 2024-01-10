@@ -1,0 +1,24 @@
+{
+	"dialogue_pos": "left",
+	"position": [
+		100,
+		-70
+	],
+	"scale": 1,
+	"animations": [
+		{
+			"anim": "talk",
+			"loop_offsets": [
+				-4,
+				-20
+			],
+			"idle_offsets": [
+				-4,
+				-21
+			],
+			"loop_name": "Talkie",
+			"idle_name": "No Talkie"
+		}
+	],
+	"image": "WhiteOG_Balls_dialogue"
+}

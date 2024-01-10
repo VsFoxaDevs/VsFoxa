@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<TextureAtlas imagePath="KILLNOTE_assets.png">
-<SubTexture name="red0000" x="0" y="0" width="156" height="157" frameX="0" frameY="-1" frameWidth="160" frameHeight="160" />
-<SubTexture name="purple0000" x="156" y="0" width="156" height="157" frameX="-4" frameY="-2" frameWidth="160" frameHeight="160" />
-<SubTexture name="green0000" x="312" y="0" width="156" height="156" frameX="-4" frameY="-3" frameWidth="160" frameHeight="160" />
-<SubTexture name="blue0000" x="0" y="157" width="156" height="156" frameX="0" frameY="-1" frameWidth="160" frameHeight="160" />
-</TextureAtlas>

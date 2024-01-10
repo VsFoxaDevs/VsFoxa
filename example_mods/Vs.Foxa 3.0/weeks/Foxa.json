@@ -1,0 +1,67 @@
+{
+	"storyName": "Before The Blitz (Feat. Foxa)",
+	"difficulties": "",
+	"hideFreeplay": false,
+	"weekBackground": "Foxa",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"songs": [
+		[
+			"Bubbles",
+			"foxa",
+			[
+				255,
+				113,
+				253
+			]
+		],
+		[
+			"Keep-Up",
+			"foxa",
+			[
+				255,
+				0,
+				115
+			]
+		],
+		[
+			"Burning Flames",
+			"foxa-angy",
+			[
+				115,
+				40,
+				13
+			]
+		],
+		[
+			"Execution",
+			"foxa-mad",
+			[
+				115,
+				0,
+				0
+			]
+		],
+		[
+			"firestorm",
+			"creation",
+			[
+				35,
+				0,
+				0
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Foxa"
+}

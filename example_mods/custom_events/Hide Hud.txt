@@ -1,3 +1,0 @@
-Toggles HUD
-
-value1: 1 turns HUD off; 2 turns HUD back on (if off)

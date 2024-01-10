@@ -14,11 +14,8 @@ class ModchartSprite extends FlxSprite
 		animation.play(name, forced, reverse, startFrame);
 		
 		var daOffset = animOffsets.get(name);
-		if (animOffsets.exists(name)) offset.set(daOffset[0], daOffset[1]);
+		if(animOffsets.exists(name)) offset.set(daOffset[0], daOffset[1]);
 	}
 
-	public function addOffset(name:String, x:Float, y:Float)
-	{
-		animOffsets.set(name, [x, y]);
-	}
+	public function addOffset(name:String, x:Float, y:Float) animOffsets.set(name, [x, y]);
 }
