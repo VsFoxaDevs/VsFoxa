@@ -1655,13 +1655,9 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 	var freezeCamera:Bool = false;
-	var allowDebugKeys:Bool = true;
 
 	override public function update(elapsed:Float)
 	{
-		if(SONG.disableDebugButtons == false) allowDebugKeys = true;
-		else allowDebugKeys = false;
-
 		if(!inCutscene && !paused && !freezeCamera) {
 			FlxG.camera.followLerp = 2.4 * cameraSpeed * playbackRate;
 			if(!startingSong && !endingSong && boyfriend.getAnimationName().startsWith('idle')) {
@@ -1695,7 +1691,7 @@ class PlayState extends MusicBeatState
 			if(ret != FunkinLua.Function_Stop) openPauseMenu();
 		}
 
-        if(!endingSong && !inCutscene && allowDebugKeys)
+        if(!endingSong && !inCutscene && !SONG.disableDebugButtons)
 		{
 			if (controls.justPressed('debug_1'))
 				openChartEditor();
