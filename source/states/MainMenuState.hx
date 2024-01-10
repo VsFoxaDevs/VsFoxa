@@ -43,7 +43,7 @@ typedef MainMenuData = {
 }
 
 class MainMenuState extends MusicBeatState {
-	public static var psychEngineVersion:String = '0.7.2h-foxa'; //This is also used for Discord RPC
+	public static var psychEngineVersion:String = '0.7.3-foxa'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 	private var colorRotation:Int = 1;
 

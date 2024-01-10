@@ -15,7 +15,7 @@
 	<app preloader="flixel.system.FlxPreloader" />
 	<set name="SWF_VERSION" value="11.8" /> <!-- but this isnt flash :/-->
 	
-	<!-- ______________________ FOXA/PSYCH ENGINE CUSTOMIZATION ______________________ -->
+	<!-- ______________________ ALLEYWAY ENGINE CUSTOMIZATION ______________________ -->
 
 	<define name="MODS_ALLOWED" if="desktop || mobile" />
 	<define name="HSCRIPT_ALLOWED" if="desktop || mobile" />

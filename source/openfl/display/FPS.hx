@@ -102,7 +102,7 @@ class FPS extends TextField
 			text += 'Memory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}';
 			#end
 
-			text += '\nPsych Engine 0.7.2h [CUSTOM BUILD]'; 
+			text += '\nAlleyway Engine (Psych 0.7.3)'; 
 			#if STORY_EDITION
 			text += '\nFNF Vs. Foxa 3.0: Story Edition';
 			#else

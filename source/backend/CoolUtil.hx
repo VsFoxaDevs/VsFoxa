@@ -154,9 +154,9 @@ class CoolUtil
 			if(folder.endsWith('/')) folder.substr(0, folder.length - 1);
 
 			#if linux
-			var command:String = 'explorer.exe';
-			#else
 			var command:String = '/usr/bin/xdg-open';
+			#else
+			var command:String = 'explorer.exe';
 			#end
 			Sys.command(command, [folder]);
 			trace('$command $folder');
