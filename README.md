@@ -1,6 +1,9 @@
 # Friday Night Funkin' - Vs. Foxa / Foxa Engine
 Not a Psych fork again...
 
+
+And no, we will NOT do Story Edition 3.0, since we're already now taking a break from FNF. Cry about it.
+
 ## Story
 You and your girlfriend go down an alleyway, searching for the famous "Whitmore". However, a pink fox blocks your way! She seems to be trying to protect someone... And she does not want you to rap battle him! Sing 5 or more songs with her, maybe even a 6th one too? 
 
