@@ -594,7 +594,7 @@ class PlayState extends MusicBeatState
 			uiGroup.add(versionTxt);
 		}
 	
-		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "BOTPLAY", 32);
+		botplayTxt = new FlxText(400, timeBar.y + 55, FlxG.width - 800, "<BOTPLAY>", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
@@ -602,7 +602,7 @@ class PlayState extends MusicBeatState
 		uiGroup.add(botplayTxt);
 		if(ClientPrefs.data.downScroll) botplayTxt.y = timeBar.y - 78;
 
-		chartingTxt = new FlxText(400, timeBar.y + 580, FlxG.width - 800, "Player is in Charting Mode, No score will be saved.", 32);//yoshi engine looking ass
+		chartingTxt = new FlxText(400, timeBar.y + 580, FlxG.width - 800, "You're in Charting Mode, No score will be saved.", 32);//yoshi engine looking ass
 		chartingTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		chartingTxt.scrollFactor.set();
 		chartingTxt.visible = chartingMode;

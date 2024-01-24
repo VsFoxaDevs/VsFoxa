@@ -264,7 +264,7 @@ class Alphabet extends FlxSpriteGroup
 
 		for (letter in letters)
 		{
-			letter.rowWidth = rowData[letter.row];
+			letter.rowWidth = rowData[letter.row] / scale.x;
 		}
 
 		if(letters.length > 0) rows++;

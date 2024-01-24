@@ -215,7 +215,10 @@ class EditorPlayState extends MusicBeatSubstate
 		}
 		
 		var time:Float = CoolUtil.floorDecimal((Conductor.songPosition - ClientPrefs.data.noteOffset) / 1000, 1);
-		dataTxt.text = 'Time: $time / ${songLength/1000}\nSection: $curSection\nBeat: $curBeat\nStep: $curStep';
+		dataTxt.text = 'Time: $time / ${songLength/1000}
+						\nSection: $curSection
+						\nBeat: $curBeat
+						\nStep: $curStep';
 		super.update(elapsed);
 	}
 	
