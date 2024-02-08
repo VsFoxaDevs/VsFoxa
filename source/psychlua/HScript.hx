@@ -279,6 +279,7 @@ class HScript extends SScript
 		set('parentLua', parentLua);
 		set('this', this);
 		set('game', PlayState.instance);
+		set('controls', Controls.instance);
 		/*if (PlayState.instance != null)
 			setSpecialObject(PlayState.instance, false, PlayState.instance.instancesExclude);*/
 		set('buildTarget', FunkinLua.getBuildTarget());

@@ -71,6 +71,17 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 
+#if VIDEOS_ALLOWED
+import hxvlc.flixel.*;
+import hxvlc.flixel.FlxVideo;
+import hxvlc.openfl.*;
+#end
+
+import flixel.FlxBasic;
+import flixel.util.FlxAxes;
+
+import states.editors.ChartingState;
+
 #if (cpp && windows)
 import cppthing.CppApi;
 #end

@@ -75,13 +75,32 @@ class CoolUtil
 		return colorNum != null ? colorNum : FlxColor.WHITE;
 	}
 
-	public static function listFromString(string:String, trimLines:Bool = true):Array<String>
+	/**
+	 * Returns a `FlxColor` by receiving an array with integer values,
+	 * automatically fixes the array if fields are missing,
+	 * format: [Red, Green, Blue, Alpha].
+	 * @param colors 			Your base color array.
+	 * @param defColors			The default colors that should be used in the event of an error.
+	**/
+	inline public static function colorFromArray(colors: Array<Int>, ?defColors: Array<Int>) {
+		colors = fixRGBColorArray(colors, defColors);
+		return FlxColor.fromRGB(colors[0], colors[1], colors[2], colors[3]);
+	}
+
+	inline public static function fixRGBColorArray(colors: Array<Int>, ?defColors: Array<Int>) {
+		// helper function used on characters n such
+		final endResult: Array<Int> = (defColors != null && defColors.length > 2) ? defColors : [255, 255, 255, 255]; // Red, Green, Blue, Alpha
+		for (i in 0...endResult.length) if (colors[i] > -1) endResult[i] = colors[i];
+		return endResult;
+	}
+
+	inline public static function listFromString(string:String):Array<String>
 	{
-		final daList:Array<String> = string.trim().replace('\r\n', '\n').split('\n');
-		if(trimLines) for (i in 0...daList.length) daList[i] = daList[i].trim();
+		var daList:Array<String> = string.trim().split('\n');
+		for (i in 0...daList.length) daList[i] = daList[i].trim();
 		return daList;
 	}
-	
+
 	public static function floorDecimal(value:Float, decimals:Int):Float
 	{
 		if(decimals < 1) return Math.floor(value);
@@ -130,20 +149,17 @@ class CoolUtil
 	}
 
 	public static function setTextBorderFromString(text:FlxText, border:String) {
-		switch (border.toLowerCase().trim()){
-			case 'shadow': text.borderStyle = SHADOW;
-			case 'outline': text.borderStyle = OUTLINE;
-			case 'outline_fast', 'outlinefast': text.borderStyle = OUTLINE_FAST;
-			default: text.borderStyle = NONE;
+		text.borderStyle = switch(border.toLowerCase().trim())
+		{
+			case 'shadow': SHADOW;
+			case 'outline': OUTLINE;
+			case 'outline_fast', 'outlinefast': OUTLINE_FAST;
+			default: NONE;
 		}
 	}
 
-	inline public static function browserLoad(site:String) {
-		#if linux
-		Sys.command('/usr/bin/xdg-open', [site]);
-		#else
-		FlxG.openURL(site);
-		#end
+	public static function browserLoad(site:String) {
+		#if linux Sys.command('/usr/bin/xdg-open', [site]); #else FlxG.openURL(site); #end
 	}
 
 	inline public static function openFolder(folder:String, absolute:Bool = false) {
@@ -153,11 +169,8 @@ class CoolUtil
 			folder = folder.replace('/', '\\');
 			if(folder.endsWith('/')) folder.substr(0, folder.length - 1);
 
-			#if linux
-			var command:String = '/usr/bin/xdg-open';
-			#else
-			var command:String = 'explorer.exe';
-			#end
+			final command:String = #if linux '/usr/bin/xdg-open' #else 'explorer.exe' #end;
+			
 			Sys.command(command, [folder]);
 			trace('$command $folder');
 		#else

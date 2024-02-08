@@ -2,10 +2,10 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin': Vs. Foxa" packageName="com.shadowmario.psychengine" package="com.shadowmario.psychengine" main="Main" version="0.2.8" company="ShadowMario" />
+	<app packageName="com.vsfoxateam.vsfoxa" package="com.vsfoxateam.vsfoxa" main="Main" version="0.2.8" company="VsFoxaTeam" />
 
-	<app file="VsFoxa" unless="STORY_EDITION" />
-	<app file="VsFoxaStoryEdition" if="STORY_EDITION" />
+	<app title="Friday Night Funkin': Vs. Foxa" file="VsFoxa" unless="STORY_EDITION" />
+	<app title="Friday Night Funkin': Vs. Foxa Story Edition" file="VsFoxaStoryEdition" if="STORY_EDITION" />
 
 	<!--<define name="STORY_EDITION" />-->
 
@@ -25,7 +25,7 @@
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="LOADING_SCREEN" />
 	<define name="VIDEOS_ALLOWED" if="windows || linux || android" unless="32bits" /><!-- wait why is there some hints of an official android port wtf -->
-	<define name="PSYCH_WATERMARKS" /> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
+	<define name="ALLEYWAY_WATERMARKS" /> <!-- DELETE THIS TO REMOVE WATERMARKS/DEV NAMES ON TITLE SCREEN -->
 	<define name="TITLE_SCREEN_EASTER_EGG" /> <!-- DELETE THE if="officialBuild" for enabling this on an unofficial build -->
 
 	<!-- ____________________________ Window Settings ___________________________ -->
@@ -78,7 +78,7 @@
 	</section>
 
 	<section if="MODS_ALLOWED">
-		<assets path="example_mods" rename="mods" embed="false" />
+		<assets path='example_mods' rename='mods' embed='false' type='template'/>
 	</section>
 	
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
@@ -93,7 +93,7 @@
 	<!--Psych stuff needed-->
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
-	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
+	<haxelib name="hxvlc" if="VIDEOS_ALLOWED"/>
 	<haxelib name="discord_rpc" if="desktop"/>
 	<haxelib name="flxanimate"/>
 	<haxelib name="tjson" />
@@ -103,8 +103,6 @@
 
 	<!-- Enables a terminal log prompt on debug builds -->
 	<haxelib name="hxcpp-debug-server" if="debug"/>
-	<haxedef name="HXC_LIBVLC_LOGGING" if="VIDEOS_ALLOWED debug" />
-
 	<haxelib name="systools" unless="mac" />
 	<ndll name="systools" haxelib="systools" unless="mac" />
 
@@ -115,11 +113,6 @@
 
 	<!--Disable the Flixel core focus lost screen-->
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
-
-	<!--Show debug traces for hxCodec-->
-	<section if="VIDEOS_ALLOWED">
-		<haxedef name="HXC_LIBVLC_LOGGING" if="debug" />
-	</section>
 
 	<!--Disable the Flixel core debugger. Automatically gets set whenever you compile in release mode!-->
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
@@ -161,6 +154,15 @@
 	<section if="ios">
 		<!--Dependency--> 
 		<dependency name="Metal.framework" if="${lime &lt; 8.0.0}" />
+	</section>
+
+	<!--hxVLC Defines-->
+	<section if="VIDEOS_ALLOWED">
+		<!--The level of verbosity that is being used for logging-->
+		<haxedef name="HXVLC_VERBOSE" value="2" if="debug" />
+
+		<!--Enable libVLC logging on hxVLC-->
+		<haxedef name="HXVLC_LOGGING" if="debug" />
 	</section>
 
 	<!-- _________________________________ Custom _______________________________ -->

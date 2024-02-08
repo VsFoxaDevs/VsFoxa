@@ -198,7 +198,7 @@ class ClientPrefs {
 		
 		if(Main.fpsVar != null) Main.fpsVar.visible = data.showFPS;
 
-		#if (!html5 && !switch)
+		#if (!html5)
 		FlxG.autoPause = ClientPrefs.data.autoPause;
 
 		if(FlxG.save.data.framerate == null) {

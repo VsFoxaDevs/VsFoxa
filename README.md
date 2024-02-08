@@ -82,8 +82,6 @@ Once finished, you should be ready to compile, you can open a terminal in the so
 
 With `<target>` being either `windows`, `mac` or `linux`.
 
-If the compiler gives an error saying that hxCodec cannot be found read this issue to fix it: ShadowMario/FNF-PsychEngine#12770
-
 If you want to just play the mod and not compile, just use the action builds (either through just Github's Actions tab, which requires a Github account, or use nightly.link). For Linux users though, fuck you, use Wine to play the mod, suckers!!!!!
 
 ## Customization:
@@ -106,7 +104,6 @@ same goes for *Lua & Haxe Scripts*, comment out or delete the line with `LUA_ALL
 * SqirraRNG - Crash Handler and Base code for Chart Editor's Waveform
 * KadeDev - Fixed some cool stuff on Chart Editor and other PRs
 * iFlicky - Composer of Psync and Tea Time, also made the Dialogue Sounds
-* PolybiusProxy - .MP4 Video Loader Library (hxCodec)
 * Keoiki - Note Splash Animations
 * Smokey - Sprite Atlas Support
 * SuperPowers04 - LUA JIT Fork and some Lua reworks

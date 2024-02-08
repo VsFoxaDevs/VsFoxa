@@ -63,6 +63,7 @@ class MainMenuState extends MusicBeatState {
 		"vile fnf (-BambiTGA)",
 		"I'm gonna stop updating Psych Engine soon. (-ShadowMario)",
 		"Its already been 1 beer... (-cyborg henry)",
+		"are you learning about rocks (-TheAmimateMan)",
 		"this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend! (-Foxa The Artist)",
 		"sorry i may have taken a bite out of your chicken (-cyborg henry)",
 		"Damn how many fnf mods are ya'll making1?!?! (-ItsToppy)",
@@ -72,7 +73,6 @@ class MainMenuState extends MusicBeatState {
 		"YOUR ARGUMENT, IS NOW INVALID! (-Monomouse)",
 		"when did we start playing freeze tag (-Vencerist)",
 		"top 100 reasons why I won't ask foxa unless she's online (-CharlesCatYT)",
-		"Lowkey smooth (-TheAnimateMan)",
 		"JHJJTLKGFD WHY IS MILKY SO LOUD IN THE EXPORT (-cyborg henry)",
 		"I like starting a fire (-Vencerist)"
 		#end
@@ -181,7 +181,7 @@ class MainMenuState extends MusicBeatState {
 		char.antialiasing = ClientPrefs.data.antialiasing;
 		add(char);
 
-		final versionShit1:FlxText = new FlxText(12, FlxG.height - 84, 0, 'Psych Engine v$psychEngineVersion', 12);
+		final versionShit1:FlxText = new FlxText(12, FlxG.height - 84, 0, 'Alleyway Engine v$psychEngineVersion', 12);
 		versionShit1.active = false;
 		versionShit1.scrollFactor.set();
 		versionShit1.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

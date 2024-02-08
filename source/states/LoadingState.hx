@@ -76,6 +76,8 @@ class LoadingState extends MusicBeatState
 		"I just wanna warn you, we're always fashionably early.",
 		"Please stand by.",
 		"I love to smash my keyboard.",
+		"Is Week 8 gonna come out anytime soon?",
+		"FIRE IN THE HOLE",
 		"There might be someone out there that's thinking about making a mod about you.\nKeep that in mind.",
 		"Funkin' Forever.",
 		"i hope you go mooseing\nand get fucked by a campfire",

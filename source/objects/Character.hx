@@ -39,7 +39,7 @@ typedef AnimArray = {
 }
 
 class Character extends FlxSprite {
-	public var animOffsets:Map<String, Array<Dynamic>>;
+	public var animOffsets:Map<String, Array<Float>>;
 	public var debugMode:Bool = false;
 
 	public var isPlayer:Bool = false;
@@ -79,7 +79,7 @@ class Character extends FlxSprite {
 	{
 		super(x, y);
 
-		animOffsets = new Map<String, Array<Dynamic>>();
+		animOffsets = new Map<String, Array<Float>>();
 		curCharacter = character;
 		this.isPlayer = isPlayer;
 		var library:String = null;
@@ -345,8 +345,8 @@ class Character extends FlxSprite {
 
 		if (animOffsets.exists(AnimName))
 		{
-			var daOffset = animOffsets.get(AnimName);
-			offset.set(daOffset[0], daOffset[1]);
+			final daOffset = animOffsets.get(AnimName);
+			offset.set(daOffset[0] * scale.x, daOffset[1] * scale.y);
 		}
 		else offset.set(0, 0);
 		if (curCharacter.startsWith('gf-') || curCharacter == 'gf')

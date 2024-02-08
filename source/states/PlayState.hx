@@ -49,13 +49,6 @@ import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
 #end
 
-#if VIDEOS_ALLOWED 
-#if (hxCodec >= "3.0.0") import hxcodec.flixel.FlxVideo as VideoHandler;
-#elseif (hxCodec >= "2.6.1") import hxcodec.VideoHandler as VideoHandler;
-#elseif (hxCodec == "2.6.0") import VideoHandler;
-#else import vlc.MP4Handler as VideoHandler; #end
-#end
-
 import objects.Note.EventNote;
 import objects.*;
 import states.stages.objects.*;
@@ -74,8 +67,8 @@ import tea.SScript;
 
 class PlayState extends MusicBeatState
 {
-	public static var STRUM_X = 48.5; //perfect position for the strums instead of the x pos being 42
-	public static var STRUM_X_MIDDLESCROLL = -278;
+	public static var STRUM_X = 48.5;
+	public static var STRUM_X_MIDDLESCROLL = -271.5;
 
 	public static var ratingStuff:Array<Dynamic> = [
 		['You succ!', 0.2], //From 0% to 19%
@@ -895,39 +888,34 @@ class PlayState extends MusicBeatState
 		#if VIDEOS_ALLOWED
 		inCutscene = true;
 
-		var filepath:String = Paths.video(name);
-		#if sys
-		if(!FileSystem.exists(filepath))
-		#else
-		if(!OpenFlAssets.exists(filepath))
-		#end
+		final filepath:String = Paths.video(name);
+
+		if (#if sys !FileSystem.exists(filepath) #else !OpenFlAssets.exists(filepath) #end)
 		{
-			FlxG.log.warn('Couldnt find video file: ' + name);
+			FlxG.log.warn('Couldnt find video file: $name');
 			startAndEnd();
 			return;
 		}
 
-		var video:VideoHandler = new VideoHandler();
-			#if (hxCodec >= "3.0.0")
-			// Recent versions
-			video.play(filepath);
-			video.onEndReached.add(function()
-			{
-				video.dispose();
-				startAndEnd();
-				return;
-			}, true);
-			#else
-			// Older versions
-			video.playVideo(filepath);
-			video.finishCallback = function()
-			{
-				startAndEnd();
-				return;
-			}
-			#end
+		var video:FlxVideo = new FlxVideo();
+
+		video.onEndReached.add(function():Void
+		{
+			video.dispose();
+			startAndEnd();
+			return;
+		}, true);
+
+		if (video.load(filepath))
+		    video.play();
+		else
+		{
+			video.dispose();
+			startAndEnd();
+			return;
+		}
 		#else
-		FlxG.log.warn('Platform not supported!');
+		FlxG.log.warn('Videos are disabled, or they are not supported in this platform.');
 		startAndEnd();
 		return;
 		#end
@@ -1265,7 +1253,7 @@ class PlayState extends MusicBeatState
 		@:privateAccess
 		FlxG.sound.playMusic(inst._sound, 1, false);
 		FlxG.sound.music.pitch = playbackRate;
-		FlxG.sound.music.onComplete = finishSong.bind();
+		FlxG.sound.music.onComplete = () -> finishSong();
 		vocals.play();
 
 		if(startOnTime > 0) setSongTime(startOnTime - 500);
@@ -1741,7 +1729,8 @@ class PlayState extends MusicBeatState
 
 		// RESET/R Key = Quick Game Over Screen
 		if(!ClientPrefs.data.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong){
-			doDeathCheck(true);
+			//doDeathCheck(true);
+			health = 0;
 			//trace("RESET = True");
 		}
 		doDeathCheck();

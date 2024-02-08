@@ -92,7 +92,7 @@ class StoryMenuState extends MusicBeatState {
 			{
 				loadedWeeks.push(weekFile);
 				WeekData.setDirectoryFromWeek(weekFile);
-				var weekThing:MenuItem = new MenuItem(0, bgSprite.y + 396, WeekData.weeksList[i]);
+				var weekThing:MenuItem = new MenuItem(0, bgSprite.y + 396, WeekData.weeksList[i], weekFile.flashingColor);
 				weekThing.y += ((weekThing.height + 20) * num);
 				weekThing.targetY = num;
 				grpWeekText.add(weekThing);
@@ -280,9 +280,8 @@ class StoryMenuState extends MusicBeatState {
 			if(stopspamming == false) {
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
-				grpWeekText.members[curWeek].isFlashing = true;
-
-				for (char in grpWeekCharacters.members) if(char.character != '' && char.hasConfirmAnimation) char.animation.play('confirm');
+				grpWeekText.members[curWeek].startFlashing();
+				for(char in grpWeekCharacters.members) if(char.character != '' && char.hasConfirmAnimation) char.animation.play('confirm');
 				stopspamming = true;
 			}
 

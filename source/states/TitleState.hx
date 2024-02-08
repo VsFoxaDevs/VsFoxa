@@ -576,22 +576,22 @@ class TitleState extends MusicBeatState {
 					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
-					#if PSYCH_WATERMARKS
-					createCoolText(['Psych Engine by'], 40);
+					#if ALLEYWAY_WATERMARKS
+					createCoolText(['Alleyway Engine', 'by'], 40);
 					#else
 					createCoolText(['phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
 				case 4:
-					#if PSYCH_WATERMARKS
-					addMoreText('Shadow Mario', 40);
-					addMoreText('Riveren', 40);
+					#if ALLEYWAY_WATERMARKS
+					addMoreText('CharlesCatYT', 40);
+					addMoreText('Based on Psych', 40);
 					#else
 					addMoreText('present');
 					#end
 				case 5:
 					deleteCoolText();
 				case 6:
-					#if PSYCH_WATERMARKS
+					#if ALLEYWAY_WATERMARKS
 					createCoolText(['Not associated', 'with'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
