@@ -690,7 +690,7 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "readLines", function(targetFile:String = null, modOnly:Bool = false) {
 			var text = Paths.getTextFromFile(targetFile, modOnly);
-			return text == null ? null : CoolUtil.listFromString(text, false);
+			return text == null ? null : CoolUtil.listFromString(text);
 		});
 		Lua_helper.add_callback(lua, "writeFile", function(targetFile:String = null, data:String = "", append:Bool = false) {
 			#if (MODS_ALLOWED && sys)
