@@ -156,14 +156,14 @@ class FPS extends TextField
 			/*if(memoryMegas > memoryTotal) memoryTotal = memoryMegas;
 
 			text += "RAM: " + memoryMegas + " MB / " + memoryTotal + " MB";*/
-			text += 'Memory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}';
+			text += 'MEM: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}';
 			#end
 
-			text += '\nAlleyway Engine (Psych 0.7.3)'; 
+			text += '\nAlleyway Engine (PE 0.7.3)'; 
 			#if STORY_EDITION
 			text += '\nFNF Vs. Foxa 3.0: Story Edition';
 			#else
-			text += '\nFNF Vs. Foxa 3.0';
+			text += '\nFNF Vs. Foxa 3.0b';
 			#end
 
 			if (text != null || text != '') {if(Main.fpsVar != null) Main.fpsVar.visible = true;}

@@ -69,6 +69,7 @@ class MainMenuState extends MusicBeatState {
 		"Damn how many fnf mods are ya'll making1?!?! (-ItsToppy)",
 		"Get briccedd (-cyborg henry)",
 		"uninstall. (-Darkness Light)",
+		"snap neck (-sandythebestclown)",
 		"business be boomin' (-Foxa The Artist)",
 		"YOUR ARGUMENT, IS NOW INVALID! (-Monomouse)",
 		"when did we start playing freeze tag (-Vencerist)",

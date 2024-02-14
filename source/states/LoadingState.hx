@@ -67,6 +67,7 @@ class LoadingState extends MusicBeatState
 		"Witness the might\nof the seas!",
 		"KadeDev is best.\nBut his own engine sucks though.",
 		"CARAMEL ARROW SUPREMACY",
+		"No, you are not getting 3.5. Get over it.",
 		"I will rip your intestines out.",
 		"flippity floppity",
 		"i'm surprised people might actually\nbe reading this at this point",
