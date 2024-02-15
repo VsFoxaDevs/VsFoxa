@@ -35,10 +35,13 @@ class CharacterSelectionState extends MusicBeatState {
 		["Updike", [["Updike", 'updike'], ["Updike (Static)", 'static-updike']], false],
 	];
 
-	var characterSprite:Character;
+	var boyfriend:Character;
+	var boyfriendGroup:FlxSpriteGroup;
 
 	public static var bgMusic:String = "breakfast";
 	public static var characterFile:String = 'bf';
+
+	final BF_POS:Array<Float> = [770, 100];
 
 	var curSelected:Int = 0;
 	var curSelectedForm:Int = 0;
@@ -50,16 +53,21 @@ class CharacterSelectionState extends MusicBeatState {
 	var previewMode:Bool = false;
 	var unlocked:Bool = true;
 
-	public var camHUD:FlxCamera;
+	var camGame:FlxCamera;
+	var camHUD:FlxCamera;
 
 	override function create() {
-		initPsychCamera();
+		#if DISCORD_ALLOWED DiscordClient.changePresence('Selecting Character'); #end
+
+		persistentUpdate = true;
+
+		camGame = initPsychCamera();
+
 		camHUD = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
-		FlxG.cameras.add(camHUD);
+		FlxG.cameras.add(camHUD, false);
 
-		FlxG.sound.playMusic(Paths.music(bgMusic));
-		Conductor.bpm = 120;
+		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
 		menuBG.antialiasing = ClientPrefs.data.antialiasing;
@@ -69,16 +77,11 @@ class CharacterSelectionState extends MusicBeatState {
 		menuBG.scrollFactor.set();
 		add(menuBG);
 
-		FlxG.camera.zoom = .75;
-		camHUD.zoom = .75;
+		camGame.scroll.set(120, 130);
+		
+		camGame.zoom = 0.75;
+		camHUD.zoom = 0.75;
 
-		spawnSelection();
-		super.create();
-	}
-
-	var selectionStart:Bool = false;
-	function spawnSelection() {
-		selectionStart = true;
 		var tutorialThing:FlxSprite = new FlxSprite(-125, -100).loadGraphic(Paths.image('charSelectGuide'));
 		tutorialThing.setGraphicSize(Std.int(tutorialThing.width * 1.25));
 		tutorialThing.antialiasing = true;
@@ -94,12 +97,17 @@ class CharacterSelectionState extends MusicBeatState {
 		controlsText.size = 20;
         controlsText.scrollFactor.set();
 
-		characterSprite = new Character(0, 0, "bf", true);
-		add(characterSprite);
-		characterSprite.dance();
-		characterSprite.screenCenter().y += 250;
+		boyfriendGroup = new FlxSpriteGroup(BF_POS[0], BF_POS[1]);
 
-		curIcon = new HealthIcon(characterSprite.healthIcon, true);
+		boyfriend = new Character(0, 0, "bf", true);
+		boyfriend.x += boyfriend.positionArray[0];
+		boyfriend.y += boyfriend.positionArray[1];
+		boyfriendGroup.add(boyfriend);
+		boyfriend.dance();
+
+		add(boyfriendGroup);
+
+		curIcon = new HealthIcon(boyfriend.healthIcon, true);
         curIcon.scrollFactor.set();
 		curIcon.camera = camHUD;
 		curIcon.antialiasing = true;
@@ -114,23 +122,39 @@ class CharacterSelectionState extends MusicBeatState {
 
 		curText.screenCenter(X);
 		curIcon.screenCenter(X);
-		changeCharacter(0);
+		changeCharacter();
+
+		FlxG.sound.playMusic(Paths.music(bgMusic));
+		Conductor.bpm = 120;
+		
+		super.create();
+	}
+
+	override public function beatHit() {
+		super.beatHit();
+		if (!entering && camGame.zoom < 1.35) camGame.zoom += 0.0075;
+		if (curBeat % 2 == 0) boyfriend.dance();
 	}
 
 	function checkPreview() {
 		if (previewMode) controlsText.text = "PREVIEW MODE\nPress I to play idle animation.\nPress your controls to play an animation.\n";
 		else {
 			controlsText.text = "Press P to enter preview mode.";
-			characterSprite.playAnim('idle');
+			boyfriend.playAnim('idle');
 		}
 	}
 
 	override function update(elapsed) {
-		if (FlxG.keys.justPressed.P && selectionStart && unlocked && !entering) {
+		Conductor.songPosition = FlxG.sound.music.time;
+		super.update(elapsed);
+
+		camGame.zoom = FlxMath.lerp(0.7, camGame.zoom, Math.exp(-elapsed * 3.125));
+
+		if (FlxG.keys.justPressed.P && unlocked && !entering) {
 			previewMode = !previewMode;
 			checkPreview();
 		}
-		if (selectionStart && !previewMode) {
+		if (!previewMode) {
 			if (controls.UI_RIGHT_P || controls.UI_LEFT_P) changeCharacter(controls.UI_RIGHT_P ? 1 : -1);
 			if ((controls.UI_DOWN_P || controls.UI_UP_P) && unlocked) changeForm(controls.UI_DOWN_P ? 1 : -1);
 			if (controls.ACCEPT && unlocked) acceptCharacter();
@@ -145,24 +169,19 @@ class CharacterSelectionState extends MusicBeatState {
 			}
 			if (curSelected < 0) curSelected = 0;
 			if (curSelected >= 2) curSelected = 0;
-			if (controls.ACCEPT) {
-				switch (curSelected) {
-					case 0:
-						FlxG.sound.music.stop();
-						FlxTween.tween(camHUD, {alpha: 0}, 0.25, {ease: FlxEase.circOut});
+			if (controls.ACCEPT)
+			{
+				FlxG.sound.music.stop();
+				FlxTween.tween(camHUD, {alpha: 0}, 0.25, {ease: FlxEase.circOut});
 
-						LoadingState.loadAndSwitchState(() -> new PlayState());
-					case 1:
-						curSelected = 0;
-						spawnSelection();
-				}
+				LoadingState.loadAndSwitchState(() -> new PlayState());
 			}
 		} else {
-			if (controls.NOTE_LEFT_P) if (characterSprite.animOffsets.exists('singLEFT')) characterSprite.playAnim('singLEFT');
-			if (controls.NOTE_DOWN_P) if (characterSprite.animOffsets.exists('singDOWN')) characterSprite.playAnim('singDOWN');
-			if (controls.NOTE_UP_P) if (characterSprite.animOffsets.exists('singUP')) characterSprite.playAnim('singUP');
-			if (controls.NOTE_RIGHT_P) if (characterSprite.animOffsets.exists('singRIGHT')) characterSprite.playAnim('singRIGHT');
-			if (FlxG.keys.justPressed.I) characterSprite.playAnim('idle');
+			if (controls.NOTE_LEFT_P) if (boyfriend.animOffsets.exists('singLEFT')) boyfriend.playAnim('singLEFT');
+			if (controls.NOTE_DOWN_P) if (boyfriend.animOffsets.exists('singDOWN')) boyfriend.playAnim('singDOWN');
+			if (controls.NOTE_UP_P) if (boyfriend.animOffsets.exists('singUP')) boyfriend.playAnim('singUP');
+			if (controls.NOTE_RIGHT_P) if (boyfriend.animOffsets.exists('singRIGHT')) boyfriend.playAnim('singRIGHT');
+			if (FlxG.keys.justPressed.I) boyfriend.playAnim('idle');
 		}
 
 		if (controls.BACK) {
@@ -170,30 +189,27 @@ class CharacterSelectionState extends MusicBeatState {
 			FlxG.switchState(() -> new FreeplayState());
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 		}
-		super.update(elapsed);
 	}
 
-	function changeCharacter(change:Int, playSound:Bool = true) {
-		if (!entering) {
-			if (playSound) FlxG.sound.play(Paths.sound('scrollMenu'));
-			curSelectedForm = 0;
-            curSelected = FlxMath.wrap(curSelected + change, 0, characterData.length - 1);
-			var unlockedChrs:Array<String> = FlxG.save.data.unlockedCharacters;
-			if (unlockedChrs.contains(characterData[curSelected][0]))
-			unlocked = true /*false*/;
+	function changeCharacter(change:Int = 0, playSound:Bool = true) {
+		if (entering) return;
 
-			characterFile = characterData[curSelected][1][0][1];
+		if (playSound) FlxG.sound.play(Paths.sound('scrollMenu'));
+		curSelectedForm = 0;
+		curSelected = FlxMath.wrap(curSelected + change, 0, characterData.length - 1);
+		var unlockedChrs:Array<String> = FlxG.save.data.unlockedCharacters;
+		if (unlockedChrs.contains(characterData[curSelected][0])) unlocked = true /*false*/;
+		characterFile = characterData[curSelected][1][0][1];
 
-			if (unlocked) {
-				curText.text = characterData[curSelected][1][0][0];
-				reloadCharacter();
-			} else if (!characterData[curSelected][3]) {
-				curText.text = "???";
-				reloadCharacter();
-			} else changeCharacter(change, false);
+		if (unlocked) {
+			curText.text = characterData[curSelected][1][0][0];
+			reloadCharacter();
+		} else if (!characterData[curSelected][3]) {
+			curText.text = "???";
+			reloadCharacter();
+		} else changeCharacter(change, false);
 
-			curText.screenCenter(X);
-		}
+		curText.screenCenter(X);
 	}
 
 	function changeForm(change:Int) {
@@ -210,26 +226,27 @@ class CharacterSelectionState extends MusicBeatState {
 	}
 
 	function reloadCharacter() {
-		characterSprite.destroy();
-		characterSprite = new Character(0, 0, characterFile, true);
-		add(characterSprite);
-		characterSprite.updateHitbox();
-		characterSprite.dance();
+		boyfriend.destroy();
+		boyfriendGroup.remove(boyfriend, true);
+		boyfriend = new Character(0, 0, characterFile, true);
+		boyfriend.x += boyfriend.positionArray[0];
+		boyfriend.y += boyfriend.positionArray[1];
+		boyfriend.dance();
+		boyfriendGroup.add(boyfriend);
 
-		curIcon.changeIcon(characterSprite.healthIcon);
+		curIcon.changeIcon(boyfriend.healthIcon);
 		curIcon.y = (curText.y + curIcon.height) - 100;
 
-		characterSprite.screenCenter().y += 250;
-		if (!unlocked) characterSprite.color = FlxColor.BLACK;
+		if (!unlocked) boyfriend.color = FlxColor.BLACK;
 		curIcon.color = unlocked ? FlxColor.WHITE : FlxColor.BLACK;
 	}
 
 	function acceptCharacter() {
 		if (!entering) {
 			entering = true;
-			if (characterSprite.animOffsets.exists('hey') && characterSprite.animation.getByName('hey') != null)
-				characterSprite.playAnim('hey');
-			// else characterSprite.playAnim('singUP');
+			if (boyfriend.animOffsets.exists('hey') && boyfriend.animation.getByName('hey') != null)
+				boyfriend.playAnim('hey');
+			// else boyfriend.playAnim('singUP');
 
 			FlxG.sound.playMusic(Paths.music('gameOverEnd'));
             new FlxTimer().start(1.5, (tmr:FlxTimer) -> {
