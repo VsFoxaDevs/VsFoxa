@@ -1,114 +1,114 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				228,
 				2
 			],
-			"anim": "singDOWN",
+			"loop": false,
 			"fps": 15,
-			"name": "Angy Fox Down",
-			"indices": []
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Angy Fox Down"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				228,
 				4
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 15,
-			"name": "Angy Fox Up",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "Angy Fox Up"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				228,
 				3
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 15,
-			"name": "Angy Fox Left",
-			"indices": []
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Angy Fox Left"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				155,
 				4
 			],
-			"loop": false,
-			"fps": 15,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "Angy Fox Right"
+			"fps": 15,
+			"name": "Angy Fox Right",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				230,
 				3
 			],
-			"loop": false,
-			"fps": 15,
 			"anim": "singDOWN-alt",
-			"indices": [],
-			"name": "Angy Fox ALT Down"
-		},
-		{
-			"offsets": [
-				230,
-				0
-			],
-			"loop": false,
-			"fps": 12,
-			"anim": "singUP-alt",
-			"indices": [],
-			"name": "Angy Fox ALT Up"
-		},
-		{
-			"offsets": [
-				230,
-				0
-			],
-			"loop": false,
-			"fps": 12,
-			"anim": "singRIGHT-alt",
-			"indices": [],
-			"name": "Angy Fox ALT Right"
-		},
-		{
-			"offsets": [
-				230,
-				0
-			],
-			"loop": false,
-			"fps": 12,
-			"anim": "singLEFT-alt",
-			"indices": [],
-			"name": "Angy Fox ALT Left"
-		},
-		{
-			"loop": true,
-			"offsets": [
-				230,
-				0
-			],
-			"anim": "idle-alt",
 			"fps": 15,
-			"name": "Angy Fox ALT Idle",
+			"name": "Angy Fox ALT Down",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				230,
+				0
+			],
+			"anim": "singUP-alt",
+			"fps": 12,
+			"name": "Angy Fox ALT Up",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				230,
+				0
+			],
+			"anim": "singRIGHT-alt",
+			"fps": 12,
+			"name": "Angy Fox ALT Right",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				230,
+				0
+			],
+			"anim": "singLEFT-alt",
+			"fps": 12,
+			"name": "Angy Fox ALT Left",
 			"indices": []
 		},
 		{
 			"offsets": [
 				230,
+				0
+			],
+			"loop": true,
+			"fps": 15,
+			"anim": "idle-alt",
+			"indices": [],
+			"name": "Angy Fox ALT Idle"
+		},
+		{
+			"loop": true,
+			"offsets": [
+				230,
 				2
 			],
-			"indices": [],
-			"fps": 12,
 			"anim": "idle",
-			"loop": true,
-			"name": "Angy Fox Idle"
+			"fps": 12,
+			"name": "Angy Fox Idle",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -120,14 +120,15 @@
 	"healthicon": "foxa-angy",
 	"flip_x": false,
 	"healthbar_colors": [
-		255,
-		209,
-		255
+		238,
+		171,
+		252
 	],
 	"camera_position": [
 		-430,
 		-130
 	],
 	"sing_duration": 4.50000000000001,
-	"scale": 1.2
+	"scale": 1.2,
+	"_editor_isPlayer": false
 }

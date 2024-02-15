@@ -115,10 +115,10 @@
 				231,
 				1
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 12,
 			"anim": "SPEAK",
-			"loop": false,
+			"indices": [],
 			"name": "Foxa SPEAK"
 		}
 	],
@@ -131,14 +131,15 @@
 	"healthicon": "foxa",
 	"flip_x": false,
 	"healthbar_colors": [
-		255,
-		209,
-		255
+		238,
+		171,
+		252
 	],
 	"camera_position": [
 		-430,
 		-130
 	],
 	"sing_duration": 4.50000000000001,
-	"scale": 1.2
+	"scale": 1.2,
+	"_editor_isPlayer": false
 }

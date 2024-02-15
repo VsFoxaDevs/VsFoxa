@@ -2,6 +2,15 @@
 <TextureAtlas imagePath="FoxaFOF.png">
 	<!-- Created with Adobe Animate version 23.0.1.70 -->
 	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="miss down instance 10000" x="0" y="0" width="2067" height="592" pivotX="854.1" pivotY="-67.3"/>
+	<SubTexture name="miss down instance 10001" x="2067" y="0" width="2067" height="592"/>
+	<SubTexture name="miss down instance 10002" x="2067" y="0" width="2067" height="592"/>
+	<SubTexture name="miss down instance 10003" x="2067" y="0" width="2067" height="592"/>
+	<SubTexture name="miss down instance 10004" x="4134" y="0" width="2067" height="592"/>
+	<SubTexture name="miss down instance 10005" x="4134" y="0" width="2067" height="592"/>
+	<SubTexture name="miss down instance 10006" x="4134" y="0" width="2067" height="592"/>
+	<SubTexture name="miss down instance 10007" x="4134" y="0" width="2067" height="592"/>
+	<SubTexture name="miss down instance 10008" x="4134" y="0" width="2067" height="592"/>
 	<SubTexture name="down instance 10000" x="6201" y="0" width="445" height="595" pivotX="28.15" pivotY="-50.9"/>
 	<SubTexture name="down instance 10001" x="6201" y="0" width="445" height="595"/>
 	<SubTexture name="down instance 10002" x="6646" y="0" width="445" height="595"/>
@@ -25,6 +34,15 @@
 	<SubTexture name="idle instance 10011" x="1266" y="646" width="422" height="646"/>
 	<SubTexture name="idle instance 10012" x="1266" y="646" width="422" height="646"/>
 	<SubTexture name="idle instance 10013" x="1266" y="646" width="422" height="646"/>
+	<SubTexture name="miss left instance 10000" x="1688" y="646" width="1791" height="697" pivotX="1269.55" pivotY="37"/>
+	<SubTexture name="miss left instance 10001" x="3479" y="646" width="1791" height="697"/>
+	<SubTexture name="miss left instance 10002" x="3479" y="646" width="1791" height="697"/>
+	<SubTexture name="miss left instance 10003" x="3479" y="646" width="1791" height="697"/>
+	<SubTexture name="miss left instance 10004" x="5270" y="646" width="1791" height="697"/>
+	<SubTexture name="miss left instance 10005" x="5270" y="646" width="1791" height="697"/>
+	<SubTexture name="miss left instance 10006" x="5270" y="646" width="1791" height="697"/>
+	<SubTexture name="miss left instance 10007" x="5270" y="646" width="1791" height="697"/>
+	<SubTexture name="miss left instance 10008" x="5270" y="646" width="1791" height="697"/>
 	<SubTexture name="left instance 10000" x="7061" y="646" width="399" height="641" pivotX="40.9" pivotY="-4.7"/>
 	<SubTexture name="left instance 10001" x="7061" y="646" width="399" height="641"/>
 	<SubTexture name="left instance 10002" x="7460" y="646" width="399" height="641"/>
@@ -34,6 +52,15 @@
 	<SubTexture name="left instance 10006" x="0" y="1343" width="399" height="641"/>
 	<SubTexture name="left instance 10007" x="0" y="1343" width="399" height="641"/>
 	<SubTexture name="left instance 10008" x="0" y="1343" width="399" height="641"/>
+	<SubTexture name="miss right instance 10000" x="399" y="1343" width="2241" height="697" pivotX="161.95" pivotY="37"/>
+	<SubTexture name="miss right instance 10001" x="2640" y="1343" width="2241" height="697"/>
+	<SubTexture name="miss right instance 10002" x="2640" y="1343" width="2241" height="697"/>
+	<SubTexture name="miss right instance 10003" x="2640" y="1343" width="2241" height="697"/>
+	<SubTexture name="miss right instance 10004" x="4881" y="1343" width="2241" height="697"/>
+	<SubTexture name="miss right instance 10005" x="4881" y="1343" width="2241" height="697"/>
+	<SubTexture name="miss right instance 10006" x="4881" y="1343" width="2241" height="697"/>
+	<SubTexture name="miss right instance 10007" x="4881" y="1343" width="2241" height="697"/>
+	<SubTexture name="miss right instance 10008" x="4881" y="1343" width="2241" height="697"/>
 	<SubTexture name="right instance 10000" x="7122" y="1343" width="415" height="624" pivotX="-64.1" pivotY="-21.35"/>
 	<SubTexture name="right instance 10001" x="7122" y="1343" width="415" height="624"/>
 	<SubTexture name="right instance 10002" x="7537" y="1343" width="415" height="624"/>
@@ -43,6 +70,15 @@
 	<SubTexture name="right instance 10006" x="0" y="2040" width="415" height="624"/>
 	<SubTexture name="right instance 10007" x="0" y="2040" width="415" height="624"/>
 	<SubTexture name="right instance 10008" x="0" y="2040" width="415" height="624"/>
+	<SubTexture name="miss up instance 10000" x="415" y="2040" width="455" height="1448" pivotX="3.3" pivotY="781.25"/>
+	<SubTexture name="miss up instance 10001" x="870" y="2040" width="455" height="1448"/>
+	<SubTexture name="miss up instance 10002" x="870" y="2040" width="455" height="1448"/>
+	<SubTexture name="miss up instance 10003" x="870" y="2040" width="455" height="1448"/>
+	<SubTexture name="miss up instance 10004" x="1325" y="2040" width="455" height="1448"/>
+	<SubTexture name="miss up instance 10005" x="1325" y="2040" width="455" height="1448"/>
+	<SubTexture name="miss up instance 10006" x="1325" y="2040" width="455" height="1448"/>
+	<SubTexture name="miss up instance 10007" x="1325" y="2040" width="455" height="1448"/>
+	<SubTexture name="miss up instance 10008" x="1325" y="2040" width="455" height="1448"/>
 	<SubTexture name="up instance 10000" x="1780" y="2040" width="455" height="668" pivotX="3.3" pivotY="22.15"/>
 	<SubTexture name="up instance 10001" x="1780" y="2040" width="455" height="668"/>
 	<SubTexture name="up instance 10002" x="2235" y="2040" width="455" height="668"/>

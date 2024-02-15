@@ -3,8 +3,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				-91,
-				-30
+				-17,
+				40
 			],
 			"anim": "singUP",
 			"fps": 24,
@@ -12,10 +12,21 @@
 			"indices": []
 		},
 		{
+			"loop": true,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "Idle",
+			"indices": []
+		},
+		{
 			"loop": false,
 			"offsets": [
-				-102,
-				-71
+				-42,
+				-1
 			],
 			"anim": "singLEFT",
 			"fps": 24,
@@ -25,8 +36,8 @@
 		{
 			"loop": false,
 			"offsets": [
-				-78,
-				-33
+				2,
+				37
 			],
 			"anim": "singRIGHT",
 			"fps": 24,
@@ -36,44 +47,32 @@
 		{
 			"loop": false,
 			"offsets": [
-				-92,
-				-117
+				-2,
+				-37
 			],
 			"anim": "singDOWN",
 			"fps": 24,
 			"name": "Sing Down",
 			"indices": []
-		},
-		{
-			"offsets": [
-				-100,
-				-60
-			],
-			"indices": [],
-			"fps": 24,
-			"anim": "idle",
-			"loop": false,
-			"name": "Idle"
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/Whitty/Happywhitty",
+	"image": "characters/FoxaOLD/foxa_old",
 	"position": [
-		80,
-		90
+		0,
+		0
 	],
-	"healthicon": "HappyWhitty",
+	"healthicon": "foxa-old",
 	"flip_x": false,
 	"healthbar_colors": [
-		75,
-		80,
-		115
+		255,
+		209,
+		255
 	],
 	"camera_position": [
-		180,
-		-10
+		150,
+		180
 	],
 	"sing_duration": 6.1,
-	"scale": 0.9,
-	"_editor_isPlayer": false
+	"scale": 0.9
 }

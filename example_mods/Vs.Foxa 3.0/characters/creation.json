@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				-45,
 				224
 			],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 15,
-			"name": "CREATION Right",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "CREATION Right"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-32,
 				223
 			],
-			"anim": "singLEFT",
+			"loop": false,
 			"fps": 15,
-			"name": "CREATION Left",
-			"indices": []
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "CREATION Left"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				-51,
 				214
 			],
-			"anim": "singUP",
-			"fps": 15,
-			"name": "CREATION Up",
-			"indices": []
-		},
-		{
 			"loop": false,
-			"offsets": [
-				0,
-				210
-			],
-			"anim": "singDOWN",
 			"fps": 15,
-			"name": "CREATION Down",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "CREATION Up"
 		},
 		{
-			"loop": true,
 			"offsets": [
 				-39,
 				212
 			],
+			"indices": [],
+			"fps": 32,
 			"anim": "idle",
-			"fps": 60,
-			"name": "CREATION Idle",
-			"indices": []
+			"loop": true,
+			"name": "CREATION Idle"
+		},
+		{
+			"offsets": [
+				0,
+				210
+			],
+			"indices": [],
+			"fps": 15,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "CREATION Down"
 		}
 	],
 	"no_antialiasing": false,
@@ -74,5 +74,6 @@
 		70
 	],
 	"sing_duration": 4.50000000000001,
-	"scale": 0.5
+	"scale": 0.5,
+	"_editor_isPlayer": false
 }

@@ -4,85 +4,93 @@
 			"expression": "Talk2",
 			"text": "WHY...?",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.025,
 			"portrait": "creation",
-			"speed": 0.025
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk2",
 			"text": " WHY COULDN'T YOU JUST LEAVE?...",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.06,
 			"portrait": "creation",
-			"speed": 0.06
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk3",
 			"text": "I GAVE YOU A WARNING.",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.035,
 			"portrait": "creation",
-			"speed": 0.05
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk2",
 			"text": "I ASKED YOU POLITELY.",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.05,
 			"portrait": "creation",
-			"speed": 0.05
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk4",
 			"text": "I EVEN PLAYED YOUR GAMES!",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.05,
 			"portrait": "creation",
-			"speed": 0.05
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk2",
 			"text": "BUT EVEN AFTER THAT...",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.05,
 			"portrait": "creation",
-			"speed": 0.05
+			"sound": "creation"
 		},
 		{
-			"expression": "Talk3",
+			"expression": "Talk4",
 			"text": "YOU STILL REFUSED.",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.05,
 			"portrait": "Creation",
-			"speed": 0.05
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk4",
-			"text": "YOU DON'T UNDERSTAND WHAT DANGER\\nYOU ARE PUTTING YOURSELF INTO.",
+			"text": "YOU DON'T UNDERSTAND WHAT DANGER\\nYOU ARE PUTTING YOURSELF INTO!!!!",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.015,
 			"portrait": "creation",
-			"speed": 0.015
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk4",
-			"text": "WHAT DANGER YOU'RE PUTTING 'ME' INTO!",
+			"text": "WHAT DANGER ARE YOU PUTTING 'ME' INTO?!?",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.025,
 			"portrait": "creation",
-			"speed": 0.025
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk3",
-			"text": "ALL YOU CARE ABOUT IS YOURSELF, AND YOUR GOD DAMN 'RAP BATTLES' TO IMPRESS YOUR LITTLE GIRLFRIEND.",
+			"text": "ALL YOU CARE ABOUT IS YOURSELF, AND YOUR GOD DAMN \"RAP BATTLES\" JUST TO IMPRESS YOUR LITTLE GIRLFRIEND.",
 			"boxState": "angry",
-			"sound": "creation",
+			"portrait": "creation",
 			"speed": 0.04,
-			"portrait": "creation"
+			"sound": "creation"
 		},
 		{
 			"expression": "talk",
 			"text": "I NEVER WANTED THIS TO HAPPEN.",
+			"boxState": "angry",
+			"sound": "creation",
+			"speed": 0.025,
+			"portrait": "creation"
+		},
+		{
+			"expression": "talk",
+			"text": "BUT NOW...",
 			"boxState": "angry",
 			"portrait": "creation",
 			"speed": 0.025,
@@ -90,67 +98,59 @@
 		},
 		{
 			"expression": "talk",
-			"text": "BUT NOW...",
+			"text": "IT DOESN'T EVEN MATTER.",
 			"boxState": "angry",
-			"sound": "creation",
-			"speed": 0.025,
-			"portrait": "creation"
-		},
-		{
-			"expression": "talk",
-			"text": "IT DOESNT EVEN MATTER.",
-			"boxState": "angry",
-			"sound": "creation",
+			"portrait": "creation",
 			"speed": 0.05,
-			"portrait": "creation"
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk4",
-			"text": "I'M NOT GOING TO SIT HERE AND LET YOU RUIN HIS LIFE WITH THE CAREER HE ONCE HAD.",
+			"text": "I'M NOT GOING TO SIT HERE AND LET YOU RUIN HIS LIFE WITH THE CAREER HE ONCE HAD!",
 			"boxState": "angry",
-			"sound": "creation",
+			"portrait": "creation",
 			"speed": 0.01,
-			"portrait": "creation"
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk4",
 			"text": "WITH THE CAREER THAT I ONCE WANTED.",
 			"boxState": "angry",
-			"sound": "creation",
+			"portrait": "creation",
 			"speed": 0.02,
-			"portrait": "creation"
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk4",
-			"text": "EVEN IF IT MEANS THAT I'M THE ONE\\nWHO GETS CAUGHT AND KILLED.",
+			"text": "EVEN IF IT MEANS THAT I'M THE ONE\\nWHO GETS CAUGHT AND KILLED,",
 			"boxState": "angry",
-			"sound": "creation",
+			"portrait": "creation",
 			"speed": 0.05,
-			"portrait": "creation"
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk",
 			"text": "THIS IS WHAT YOU WANTED.",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.05,
 			"portrait": "creation",
-			"speed": 0.05
+			"sound": "creation"
 		},
 		{
 			"expression": "Talk",
-			"text": "AND NOW, 'THIS' IS WHAT YOU'RE GOING\\nTO GET.",
+			"text": "AND NOW, 'THIS' IS WHAT YOU'RE GOING\\nTO GET...",
 			"boxState": "angry",
-			"sound": "creation",
+			"speed": 0.17,
 			"portrait": "creation",
-			"speed": 0.17
+			"sound": "creation"
 		},
 		{
 			"expression": "talk miss 3",
-			"text": " ",
+			"text": "...",
 			"boxState": "normal",
-			"sound": "bf",
+			"speed": 0.05,
 			"portrait": "bfnew",
-			"speed": 0.05
+			"sound": "bf"
 		}
 	]
 }

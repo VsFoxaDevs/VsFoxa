@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				-1,
 				0
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singUP",
-			"fps": 24,
-			"name": "updingdong up note",
-			"indices": []
+			"indices": [],
+			"name": "updingdong up note"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singDOWN",
-			"fps": 24,
-			"name": "updingdong down note",
-			"indices": []
+			"indices": [],
+			"name": "updingdong down note"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singRIGHT",
-			"fps": 24,
-			"name": "updingdong right note",
-			"indices": []
+			"indices": [],
+			"name": "updingdong right note"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "updingdong left note",
-			"indices": []
+			"indices": [],
+			"name": "updingdong left note"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "updingdong idle",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "updingdong idle"
 		}
 	],
 	"no_antialiasing": false,
@@ -65,14 +65,15 @@
 	"healthicon": "updike",
 	"flip_x": false,
 	"healthbar_colors": [
-		0,
-		0,
-		67
+		225,
+		225,
+		225
 	],
 	"camera_position": [
 		0,
 		0
 	],
 	"sing_duration": 4,
-	"scale": 1
+	"scale": 1,
+	"_editor_isPlayer": false
 }

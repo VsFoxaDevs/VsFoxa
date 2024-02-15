@@ -1,13 +1,14 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				285,
 				267
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
+			"fps": 24,
+			"name": "Left",
 			"indices": [
 				0,
 				1,
@@ -19,51 +20,49 @@
 				7,
 				8,
 				9
-			],
-			"name": "Left"
+			]
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-10,
 				175
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "Right"
+			"fps": 24,
+			"name": "Right",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				10,
 				300
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "Up"
+			"fps": 24,
+			"name": "Up",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-30,
 				101
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "Down"
+			"fps": 24,
+			"name": "Down",
+			"indices": []
 		},
 		{
-			"loop": false,
 			"offsets": [
 				0,
 				230
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "Idle",
+			"anim": "idle",
 			"indices": [
 				0,
 				1,
@@ -76,7 +75,8 @@
 				8,
 				9,
 				10
-			]
+			],
+			"name": "Idle"
 		}
 	],
 	"no_antialiasing": false,
@@ -88,14 +88,15 @@
 	"healthicon": "whitty",
 	"flip_x": false,
 	"healthbar_colors": [
-		52,
-		53,
-		76
+		29,
+		30,
+		53
 	],
 	"camera_position": [
 		0,
 		-160
 	],
 	"sing_duration": 4,
-	"scale": 1
+	"scale": 1,
+	"_editor_isPlayer": false
 }

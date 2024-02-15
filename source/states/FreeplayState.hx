@@ -164,7 +164,7 @@ class FreeplayState extends MusicBeatState {
 		bottomBG.alpha = 0.6;
 		add(bottomBG);
 
-		var leText:String = "Press SPACE to listen to the Song / Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
+		var leText:String = "[SPACE] - Listen to the Song / [CTRL] - Open the Modifiers Menu / [RESET] - Reset your Score / [HOLD C] - Enable Character Selector";
 		bottomString = leText;
 		var size:Int = 16;
 		bottomText = new FlxText(bottomBG.x, bottomBG.y + 4, FlxG.width, leText, size);
@@ -365,7 +365,11 @@ class FreeplayState extends MusicBeatState {
 			if (FlxG.keys.pressed.SHIFT){
 				LoadingState.loadAndSwitchState(new ChartingState());
 			}else{
-				LoadingState.loadAndSwitchState(new PlayState());
+				if (FlxG.keys.pressed.C) {
+					states.CharacterSelectionState.characterFile = 'bf';
+					MusicBeatState.switchState(new states.CharacterSelectionState());
+				}
+				else LoadingState.loadAndSwitchState(new PlayState());
 			}
 
 			FlxG.sound.music.volume = 0;

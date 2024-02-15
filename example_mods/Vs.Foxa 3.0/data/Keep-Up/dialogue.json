@@ -4,105 +4,105 @@
 			"expression": "talk 5",
 			"text": "Okay, can you leave now?",
 			"boxState": "normal",
-			"sound": "foxa",
-			"speed": 0.05,
-			"portrait": "Foxa"
+			"portrait": "Foxa",
+			"speed": 0.075,
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk",
 			"text": "bop.",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
-			"expression": "talk 6",
-			"text": "I'm gonna take that as your way of saying ''No.''",
+			"expression": "talk 5",
+			"text": "I'm gonna take that as your way of saying ''No\".",
 			"boxState": "normal",
-			"sound": "foxa",
-			"speed": 0.05,
-			"portrait": "Foxa"
+			"portrait": "Foxa",
+			"speed": 0.065,
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk",
 			"text": "beep bop.",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
 			"expression": "talk 3",
 			"text": "Listen, I'm warning you. He's not the person you'd wanna go against.",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
-			"expression": "talk 5",
-			"text": "and that's a promise.",
+			"expression": "talk 1",
+			"text": "And that's a promise.",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "confused",
 			"text": "Bop.",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
 			"expression": "talk 3",
 			"text": "How about this...",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 6",
 			"text": "I sing another little song with you instead...",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 2",
 			"text": "But after that...",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 4",
-			"text": "you gotta go.",
+			"text": "...you gotta go.",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 2",
 			"text": "bep bope!",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
 			"expression": "talk 3",
 			"text": "Okay.",
 			"boxState": "normal",
-			"sound": "foxa",
-			"speed": 0.05,
-			"portrait": "Foxa"
+			"portrait": "Foxa",
+			"speed": 0.08,
+			"sound": "foxa"
 		}
 	]
 }

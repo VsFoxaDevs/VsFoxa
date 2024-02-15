@@ -149,6 +149,8 @@ class TitleState extends MusicBeatState {
 		if(!initialized)
 		{
 			if (FlxG.save.data != null && ClientPrefs.data.fullscreen) FlxG.fullscreen = ClientPrefs.data.fullscreen;
+			if(FlxG.save.data.weekCompleted != null) states.StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
+			if(FlxG.save.data.unlockedCharacters == null) FlxG.save.data.unlockedCharacters = ["Boyfriend", "Foxa (Lesson)"];
 			persistentUpdate = true;
 			persistentDraw = true;
 		}

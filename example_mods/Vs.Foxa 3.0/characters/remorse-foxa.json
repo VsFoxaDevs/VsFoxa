@@ -1,136 +1,136 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				107,
 				410
 			],
-			"anim": "idle",
+			"loop": false,
 			"fps": 24,
-			"name": "Foxa idle dance",
-			"indices": []
+			"anim": "idle",
+			"indices": [],
+			"name": "Foxa idle dance"
 		},
 		{
-			"loop": true,
 			"offsets": [
 				96,
 				418
 			],
-			"anim": "deathLoop",
+			"loop": true,
 			"fps": 24,
-			"name": "Foxa Dead Loop",
-			"indices": []
+			"anim": "deathLoop",
+			"indices": [],
+			"name": "Foxa Dead Loop"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				131,
 				369
 			],
-			"anim": "singDOWN",
+			"loop": false,
 			"fps": 24,
-			"name": "Foxa NOTE DOWN0",
-			"indices": []
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Foxa NOTE DOWN0"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				115,
 				458
 			],
-			"anim": "singUP",
+			"loop": false,
 			"fps": 24,
-			"name": "Foxa NOTE UP0",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "Foxa NOTE UP0"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				98,
 				432
 			],
-			"anim": "deathConfirm",
+			"loop": false,
 			"fps": 24,
-			"name": "Foxa Dead confirm",
-			"indices": []
+			"anim": "deathConfirm",
+			"indices": [],
+			"name": "Foxa Dead confirm"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				118,
 				341
 			],
-			"anim": "singDOWNmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "Foxa NOTE DOWN MISS",
-			"indices": []
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "Foxa NOTE DOWN MISS"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				116,
 				436
 			],
-			"anim": "singUPmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "Foxa NOTE UP MISS",
-			"indices": []
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "Foxa NOTE UP MISS"
 		},
 		{
+			"loop": false,
 			"offsets": [
 				98,
 				422
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "firstDeath",
-			"indices": [],
-			"name": "Foxa dies"
+			"fps": 24,
+			"name": "Foxa dies",
+			"indices": []
 		},
 		{
-			"loop": false,
 			"offsets": [
 				119,
 				394
 			],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 24,
-			"name": "Foxa NOTE LEFT0",
-			"indices": []
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Foxa NOTE LEFT0"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				122,
 				424
 			],
-			"anim": "singLEFTmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "Foxa NOTE RIGHT MISS",
-			"indices": []
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "Foxa NOTE RIGHT MISS"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				79,
 				370
 			],
-			"anim": "singRIGHTmiss",
+			"loop": false,
 			"fps": 24,
-			"name": "Foxa NOTE LEFT MISS",
-			"indices": []
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "Foxa NOTE LEFT MISS"
 		},
 		{
-			"loop": true,
 			"offsets": [
 				130,
 				440
 			],
-			"anim": "singLEFT",
+			"loop": true,
 			"fps": 24,
-			"name": "Foxa NOTE RIGHT0",
-			"indices": []
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Foxa NOTE RIGHT0"
 		}
 	],
 	"no_antialiasing": false,
@@ -143,7 +143,7 @@
 	"flip_x": false,
 	"healthbar_colors": [
 		255,
-		175,
+		209,
 		255
 	],
 	"camera_position": [
@@ -151,5 +151,6 @@
 		-240
 	],
 	"sing_duration": 4,
-	"scale": 0.9
+	"scale": 0.9,
+	"_editor_isPlayer": false
 }

@@ -1,0 +1,68 @@
+{
+	"dialogue": [
+		{
+			"sound": "",
+			"speed": 0.075,
+			"events": null,
+			"portrait": "tgtfoxa",
+			"boxState": "normal",
+			"expression": "talk 2",
+			"text": "lolol-"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"events": null,
+			"portrait": "bf",
+			"boxState": "normal",
+			"expression": "talk",
+			"text": "(two figures are seen in the shadows walking up to Foxa.)"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"events": null,
+			"portrait": "bf",
+			"boxState": "angry",
+			"expression": "talk",
+			"text": "HAHAHAHAHA look at dat NOOB"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"events": null,
+			"portrait": "tgtfoxa",
+			"boxState": "normal",
+			"expression": "talk 2",
+			"text": "what's That Noise?.?"
+		},
+		{
+			"sound": "",
+			"speed": 0.05,
+			"events": null,
+			"portrait": "bf",
+			"boxState": "angry",
+			"expression": "talk",
+			"text": "PPFFFFFTT HAHAHAWHAHAHAHA"
+		},
+		{
+			"sound": "",
+			"speed": 0.045,
+			"events": null,
+			"portrait": "tgtfoxa",
+			"boxState": "angry",
+			"expression": "talk",
+			"text": "WHOS THERE?!?!?!?!?!??!?!?!??!"
+		},
+		{
+			"sound": "",
+			"speed": 0.06,
+			"events": null,
+			"portrait": "bf",
+			"boxState": "angry",
+			"expression": "talk",
+			"text": ":troll:"
+		}
+	],
+	"bubble": null
+}

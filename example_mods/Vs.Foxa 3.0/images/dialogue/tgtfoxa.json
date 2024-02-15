@@ -1,0 +1,77 @@
+{
+	"dialogue_pos": "left",
+	"position": [
+		90,
+		80
+	],
+	"no_antialiasing": false,
+	"scale": 1.25,
+	"animations": [
+		{
+			"loop_name": "down",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "dowe",
+			"anim": "talk 1",
+			"loop_offsets": [
+				0,
+				0
+			]
+		},
+		{
+			"loop_name": "left",
+			"idle_offsets": [
+				0,
+				31
+			],
+			"idle_name": "lefe",
+			"anim": "talk 2",
+			"loop_offsets": [
+				1,
+				31
+			]
+		},
+		{
+			"loop_name": "up",
+			"idle_offsets": [
+				0,
+				0
+			],
+			"idle_name": "uf",
+			"anim": "talk",
+			"loop_offsets": [
+				0,
+				0
+			]
+		},
+		{
+			"loop_name": "up",
+			"idle_offsets": [
+				0,
+				70
+			],
+			"idle_name": "uf",
+			"anim": "talk 3",
+			"loop_offsets": [
+				0,
+				70
+			]
+		},
+		{
+			"loop_name": "right",
+			"idle_offsets": [
+				-80,
+				28
+			],
+			"idle_name": "righe",
+			"anim": "talk 4",
+			"loop_offsets": [
+				-80,
+				27
+			]
+		}
+	],
+	"image": "FoxaFOF"
+}

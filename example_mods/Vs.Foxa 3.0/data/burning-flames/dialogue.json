@@ -4,201 +4,201 @@
 			"expression": "talk 2",
 			"text": "Alright, we sang your little song.",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 3",
 			"text": "Can you leave now?",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 2",
 			"text": "brep bappity boop.",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
 			"expression": "talk 6",
 			"text": "...",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.06,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 3",
 			"text": "You know...",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 1",
 			"text": "You're REALLY making this difficult.",
-			"boxState": "normal",
-			"sound": "foxa",
+			"boxState": "angry",
+			"portrait": "angy",
 			"speed": 0.05,
-			"portrait": "angy"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk",
 			"text": "bip bep skoo de boop",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
 			"expression": "talk",
 			"text": "bepoobe skoop!!",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
-			"expression": "talk 4",
+			"expression": "talk 2",
 			"text": "I already told you.",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 1",
 			"text": "He's NOT the person you'd want to toy with.",
-			"boxState": "normal",
-			"sound": "foxa",
+			"boxState": "angry",
+			"portrait": "angy",
 			"speed": 0.05,
-			"portrait": "angy"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 3",
 			"text": "Bop Beep.",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
 			"expression": "talk 6",
 			"text": "You just don't get it, do you?",
 			"boxState": "normal",
-			"sound": "foxa",
+			"speed": 0.065,
 			"portrait": "Foxa",
-			"speed": 0.05
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 3",
 			"text": "You're better off going elsewhere!",
-			"boxState": "normal",
-			"sound": "foxa",
-			"speed": 0.05,
-			"portrait": "Angy"
+			"boxState": "angry",
+			"portrait": "Angy",
+			"speed": 0.035,
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 3",
 			"text": "bope bepe!!",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
 			"expression": "talk 1",
-			"text": "Alright, Listen here you Blue-Haired \\nTwit...",
-			"boxState": "normal",
-			"sound": "foxa",
-			"speed": 0.05,
-			"portrait": "angy"
+			"text": "Alright, listen, here you blue-haired twit...",
+			"boxState": "angry",
+			"portrait": "angy",
+			"speed": 0.06,
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 2",
-			"text": "I've had enough of this \"Game\" of yours, Where you don't even speak a language that exists...",
+			"text": "I've had enough of this \"game\" of yours, where you don't even speak a language that exists...",
 			"boxState": "normal",
-			"sound": "foxa",
-			"speed": 0.05,
-			"portrait": "Foxa"
+			"portrait": "Foxa",
+			"speed": 0.06,
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 1",
-			"text": "And there will be yet ANOTHER reason why i'm on the run, if you keep THIS up.",
-			"boxState": "normal",
-			"sound": "foxa",
+			"text": "And there will be yet ANOTHER reason why I'm on the run, if you keep THIS up.",
+			"boxState": "angry",
+			"portrait": "angy",
 			"speed": 0.05,
-			"portrait": "angy"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk miss 2",
-			"text": "  ",
+			"text": "...",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
-			"expression": "talk 1",
+			"expression": "talk 5",
 			"text": "You BOTH best get out of here for your\\nOWN safety.",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "Foxa",
 			"speed": 0.05,
-			"portrait": "Foxa"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 3",
-			"text": " this is your FINAL warning.",
+			"text": "This is your FINAL warning.",
 			"boxState": "angry",
-			"sound": "foxa",
-			"speed": 0.05,
-			"portrait": "Angy"
+			"portrait": "Angy",
+			"speed": 0.055,
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 2",
 			"text": "beep bop bippity boop.",
 			"boxState": "normal",
-			"sound": "bf",
+			"portrait": "bfnew",
 			"speed": 0.05,
-			"portrait": "bfnew"
+			"sound": "bf"
 		},
 		{
 			"expression": "talk 6",
 			"text": "...",
-			"boxState": "angry",
-			"sound": "foxa",
-			"speed": 0.05,
-			"portrait": "Foxa"
+			"boxState": "normal",
+			"portrait": "Foxa",
+			"speed": 0.3,
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 1",
 			"text": "So, It's like that, is it?",
 			"boxState": "normal",
-			"sound": "foxa",
+			"speed": 0.05,
 			"portrait": "Foxa",
-			"speed": 0.05
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 1",
 			"text": "Well, I guess I have no choice then, do I?",
 			"boxState": "normal",
-			"sound": "foxa",
+			"portrait": "angy",
 			"speed": 0.05,
-			"portrait": "angy"
+			"sound": "foxa"
 		},
 		{
 			"expression": "talk 1",
 			"text": "\"Fine\" then.",
 			"boxState": "angry",
-			"portrait": "angy",
+			"sound": "foxa",
 			"speed": 0.05,
-			"sound": "foxa"
+			"portrait": "angy"
 		}
 	]
 }
