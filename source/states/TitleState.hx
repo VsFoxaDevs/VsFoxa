@@ -165,7 +165,7 @@ class TitleState extends MusicBeatState {
 		if(FlxG.save.data.flashing == null && !FlashingState.leftState) {
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
-			MusicBeatState.switchState(new FlashingState());
+			FlxG.switchState(() -> new FlashingState());
 		} else {
 			if (initialized)
 				startIntro();
@@ -445,9 +445,9 @@ class TitleState extends MusicBeatState {
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					if (mustUpdate) {
-						MusicBeatState.switchState(new OutdatedState());
+						FlxG.switchState(() -> new OutdatedState());
 					} else {
-						MusicBeatState.switchState(new ThanksState());
+						FlxG.switchState(() -> new ThanksState());
 					}
 					closedState = true;
 				});
@@ -484,7 +484,7 @@ class TitleState extends MusicBeatState {
 								function(twn:FlxTween) {
 									FlxTransitionableState.skipNextTransIn = true;
 									FlxTransitionableState.skipNextTransOut = true;
-									MusicBeatState.switchState(new TitleState());
+									FlxG.switchState(() -> new TitleState());
 								}
 							});
 							FlxG.sound.music.fadeOut();

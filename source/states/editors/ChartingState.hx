@@ -455,7 +455,7 @@ class ChartingState extends MusicBeatState
 		var loadAutosaveBtn:FlxButton = new FlxButton(reloadSongJson.x, reloadSongJson.y + 30, 'Load Autosave', function()
 		{
 			PlayState.SONG = Song.parseJSONshit(FlxG.save.data.autosave);
-			MusicBeatState.resetState();
+			FlxG.resetState();
 		});
 
 		var loadEventJson:FlxButton = new FlxButton(loadAutosaveBtn.x, loadAutosaveBtn.y + 30, 'Load Events', function()
@@ -1800,7 +1800,7 @@ class ChartingState extends MusicBeatState
 
 				//if(_song.stage == null) _song.stage = stageDropDown.selectedLabel;
 				StageData.loadDirectory(_song);
-				LoadingState.loadAndSwitchState(new PlayState());
+				LoadingState.loadAndSwitchState(() ->new PlayState());
 			}
 
 			if(curSelectedNote != null && curSelectedNote[1] > -1) {
@@ -1833,7 +1833,7 @@ class ChartingState extends MusicBeatState
 				// Protect against lost data when quickly leaving the chart editor.
 				autosaveSong();
 				PlayState.chartingMode = false;
-				MusicBeatState.switchState(new states.editors.MasterEditorMenu());
+				FlxG.switchState(() -> new states.editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				FlxG.mouse.visible = false;
 				return;
@@ -3137,7 +3137,7 @@ class ChartingState extends MusicBeatState
 				}
 			}
 			else PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
-			MusicBeatState.resetState();
+			FlxG.resetState();
 		}
 		catch(e)
 		{

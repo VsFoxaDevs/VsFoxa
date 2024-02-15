@@ -3,7 +3,7 @@ package states;
 import lime.app.Promise;
 import lime.app.Future;
 
-import flixel.FlxState;
+import flixel.util.typeLimit.NextState;
 
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
@@ -20,7 +20,7 @@ class LoadingState extends MusicBeatState
 
 	// TO DO: Make this easier, and uhhh fix the load screen so the game doesn't softlock at the end of the point
 	
-	var target:FlxState;
+	var target:NextState;
 	public static var globeTrans:Bool = true;
 	var stopMusic = false;
 	var directory:String;
@@ -88,7 +88,7 @@ class LoadingState extends MusicBeatState
 		"Bop beep be be skdoo bep"
 	];
 
-	function new(target:FlxState, stopMusic:Bool, directory:String)
+	function new(target:NextState, stopMusic:Bool, directory:String)
 	{
 		super();
 		this.target = target;
@@ -213,16 +213,16 @@ class LoadingState extends MusicBeatState
 	{
 		if(stopMusic && FlxG.sound.music != null) FlxG.sound.music.stop();
 		
-		MusicBeatState.switchState(target);
+		FlxG.switchState(target);
 	}
 	
 	static function getSongPath() return Paths.inst(PlayState.SONG.song);
 	
 	static function getVocalPath() return Paths.voices(PlayState.SONG.song);
 	
-	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)
+	inline static public function loadAndSwitchState(target:NextState, stopMusic = false)
 	{
-		MusicBeatState.switchState(getNextState(target, stopMusic));
+		FlxG.switchState(getNextState(target, stopMusic));
 	}
 	
 	function getLoadTextShit():Array<Array<String>>
@@ -239,7 +239,7 @@ class LoadingState extends MusicBeatState
 		return arrayMan;
 	}
 
-	static function getNextState(target:FlxState, stopMusic = false):FlxState
+	static function getNextState(target:NextState, stopMusic = false):NextState
 	{
 		var directory:String = 'shared';
 		var weekDir:String = StageData.forceNextDirectory;

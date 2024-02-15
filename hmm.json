@@ -3,34 +3,32 @@
     {
       "name": "lime",
       "type": "haxelib",
-      "version": "8.1.1"
+      "version": null
     },
     {
       "name": "openfl",
       "type": "haxelib",
-      "version": "9.3.2"
+      "version": null
     },
     {
       "name": "flixel",
       "type": "haxelib",
-      "version": "5.5.0"
+      "version": null
     },
     {
       "name": "flixel-addons",
-      "type": "git",
-      "dir": null,
-      "ref": 19c2816,
-      "url": "https://github.com/HaxeFlixel/flixel-addons/"
+      "type": "haxelib",
+      "version": null
     },
     {
       "name": "flixel-tools",
       "type": "haxelib",
-      "version": "1.5.1"
+      "version": null
     },
     {
       "name": "flixel-ui",
       "type": "haxelib",
-      "version": "2.5.0"
+      "version": null
     },
     {
       "name": "hxcpp",
@@ -40,7 +38,7 @@
     {
       "name": "hxdiscord_rpc",
       "type": "haxelib",
-      "version": "1.1.1"
+      "version": null
     },
     {
       "name": "tjson",
@@ -50,7 +48,7 @@
     {
       "name": "hxvlc",
       "type": "haxelib",
-      "version": "1.0.2"
+      "version": null
     },
     {
       "name": "SScript",
@@ -60,12 +58,12 @@
     {
       "name": "yaml",
       "type": "haxelib",
-      "version": "2.0.1"
+      "version": null
     },
     {
       "name": "away3d",
       "type": "haxelib",
-      "version": "5.0.9"
+      "version": null
     },
     {
       "name": "hxcpp-debug-server",

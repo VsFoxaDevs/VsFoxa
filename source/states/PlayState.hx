@@ -1929,7 +1929,7 @@ class PlayState extends MusicBeatState
 		DiscordClient.resetClientID();
 		#end
 		
-		MusicBeatState.switchState(new ChartingState());
+		FlxG.switchState(() -> new ChartingState());
 	}
 
 	function openCharacterEditor()
@@ -1939,7 +1939,7 @@ class PlayState extends MusicBeatState
 		paused = true;
 		cancelMusicFadeTween();
 		#if desktop DiscordClient.resetClientID(); #end
-		MusicBeatState.switchState(new CharacterEditorState(SONG.player2));
+		FlxG.switchState(() -> new CharacterEditorState(SONG.player2));
 	}
 
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
@@ -1968,7 +1968,7 @@ class PlayState extends MusicBeatState
 				#end
 				if (!ClientPrefs.data.instantRespawn)
 					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollow.x, camFollow.y));
-				else MusicBeatState.resetState();
+				else FlxG.resetState();
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
@@ -2391,7 +2391,7 @@ class PlayState extends MusicBeatState
 					if(FlxTransitionableState.skipNextTransIn) {
 						CustomFadeTransition.nextCamera = null;
 					}
-					MusicBeatState.switchState(new StoryMenuState());
+					FlxG.switchState(() -> new StoryMenuState());
 
 					// if ()
 					if(!ClientPrefs.getGameplaySetting('practice') && !ClientPrefs.getGameplaySetting('botplay')) {
@@ -2418,7 +2418,7 @@ class PlayState extends MusicBeatState
 					FlxG.sound.music.stop();
 
 					cancelMusicFadeTween();
-					LoadingState.loadAndSwitchState(new PlayState());
+					LoadingState.loadAndSwitchState(() -> new PlayState());
 				}
 			}
 			else
@@ -2431,7 +2431,7 @@ class PlayState extends MusicBeatState
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
 				}
-				MusicBeatState.switchState(new FreeplayState());
+				FlxG.switchState(() -> new FreeplayState());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
 			}

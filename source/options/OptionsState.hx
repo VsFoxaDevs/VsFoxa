@@ -18,9 +18,9 @@ class OptionsState extends MusicBeatState
 			case 'Controls':
 				openSubState(new options.ControlsSubState());
 			case 'Preferences':
-				MusicBeatState.switchState(new options.PrefsMenu());
+				FlxG.switchState(() -> new options.PrefsMenu());
 			case 'Offseting':
-				MusicBeatState.switchState(new options.NoteOffsetState());
+				FlxG.switchState(() -> new options.NoteOffsetState());
 		}
 	}
 
@@ -88,10 +88,10 @@ class OptionsState extends MusicBeatState
 			if(onPlayState)
 			{
 				StageData.loadDirectory(PlayState.SONG);
-				LoadingState.loadAndSwitchState(new PlayState());
+				LoadingState.loadAndSwitchState(() ->new PlayState());
 				FlxG.sound.music.volume = 0;
 			}
-			else MusicBeatState.switchState(new MainMenuState());
+			else FlxG.switchState(() -> new MainMenuState());
 		}
 		else if (controls.ACCEPT) openSelectedSubstate(options[curSelected]);
 	}

@@ -21,6 +21,7 @@ class PauseSubState extends MusicBeatSubstate
 		'Resume',
 		'Restart Song',
 		'Change Difficulty',
+		'Change Character',
 		'Mod Settings',
 		'Gameplay Changers',
 		'Options',
@@ -227,7 +228,7 @@ class PauseSubState extends MusicBeatSubstate
 						final poop = Highscore.formatSong(name, curSelected);
 						PlayState.SONG = Song.loadFromJson(poop, name);
 						PlayState.storyDifficulty = curSelected;
-						MusicBeatState.resetState();
+						FlxG.resetState();
 						FlxG.sound.music.volume = 0;
 						PlayState.changedDifficulty = true;
 						PlayState.chartingMode = false;
@@ -278,6 +279,7 @@ class PauseSubState extends MusicBeatSubstate
 						}
 						close();
 					}
+				case 'Change Character': LoadingState.loadAndSwitchState(() -> new states.CharacterSelectionState());
 				case 'End Song':
 					close();
 					PlayState.instance.notes.clear();
@@ -295,7 +297,7 @@ class PauseSubState extends MusicBeatSubstate
 				case 'Mod Settings':
 					PlayState.instance.paused = true; // For lua
 					PlayState.instance.vocals.volume = 0;
-					MusicBeatState.switchState(new states.ModsMenuState());
+					FlxG.switchState(() -> new states.ModsMenuState());
 					if(ClientPrefs.data.pauseMusic != 'None'){
 						FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
 						FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
@@ -305,7 +307,7 @@ class PauseSubState extends MusicBeatSubstate
 				case 'Options':
 					PlayState.instance.paused = true; // For lua
 					PlayState.instance.vocals.volume = 0;
-					MusicBeatState.switchState(new OptionsState());
+					FlxG.switchState(() -> new OptionsState());
 					if(ClientPrefs.data.pauseMusic != 'None'){
 						FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)), pauseMusic.volume);
 						FlxTween.tween(FlxG.sound.music, {volume: 1}, 0.8);
@@ -319,9 +321,9 @@ class PauseSubState extends MusicBeatSubstate
 
 					Mods.loadTopMod();
 					if(PlayState.isStoryMode){
-						MusicBeatState.switchState(new StoryMenuState());
+						FlxG.switchState(() -> new StoryMenuState());
 					}else{
-						MusicBeatState.switchState(new FreeplayState());
+						FlxG.switchState(() -> new FreeplayState());
 					}
 					PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
@@ -352,7 +354,7 @@ class PauseSubState extends MusicBeatSubstate
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
 		}
-		MusicBeatState.resetState();
+		FlxG.resetState();
 	}
 
 	override function destroy(){

@@ -457,7 +457,7 @@ class FunkinLua {
 		});
 
 		Lua_helper.add_callback(lua, "loadCredits", function(?musicos:String = null, ?funni:Bool) {
-			LoadingState.loadAndSwitchState(new states.CreditsState()); // wowzers!
+			LoadingState.loadAndSwitchState(() ->new states.CreditsState()); // wowzers!
 			FlxG.sound.playMusic(Paths.music(musicos));
 			if(musicos == '') funni = true;
 			if(funni == true) FlxG.sound.playMusic(Paths.music('freakyMenu'));
@@ -473,7 +473,7 @@ class FunkinLua {
 			PlayState.SONG = Song.loadFromJson(poop, name);
 			PlayState.storyDifficulty = difficultyNum;
 			game.persistentUpdate = false;
-			LoadingState.loadAndSwitchState(new PlayState());
+			LoadingState.loadAndSwitchState(() ->new PlayState());
 
 			FlxG.sound.music.pause();
 			FlxG.sound.music.volume = 0;
@@ -942,9 +942,9 @@ class FunkinLua {
 				CustomFadeTransition.nextCamera = null;
 
 			if(PlayState.isStoryMode)
-				MusicBeatState.switchState(new StoryMenuState());
+				FlxG.switchState(() -> new StoryMenuState());
 			else
-				MusicBeatState.switchState(new FreeplayState());
+				FlxG.switchState(() -> new FreeplayState());
 			
 			#if desktop DiscordClient.resetClientID(); #end
 

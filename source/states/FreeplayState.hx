@@ -291,7 +291,7 @@ class FreeplayState extends MusicBeatState {
 				persistentUpdate = false;
 				if(colorTween != null) colorTween.cancel();
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				MusicBeatState.switchState(new MainMenuState());
+				FlxG.switchState(() -> new MainMenuState());
 			}
 		}
 
@@ -363,15 +363,15 @@ class FreeplayState extends MusicBeatState {
 				return;
 			}
 			if (FlxG.keys.pressed.SHIFT){
-				LoadingState.loadAndSwitchState(new ChartingState());
+				LoadingState.loadAndSwitchState(() -> new ChartingState());
 			}else{
 				if (FlxG.keys.pressed.C) {
 					states.CharacterSelectionState.characterFile = 'bf';
-					MusicBeatState.switchState(new states.CharacterSelectionState());
+					LoadingState.loadAndSwitchState(new states.CharacterSelectionState());
 				}
-				else LoadingState.loadAndSwitchState(new PlayState());
+				else LoadingState.loadAndSwitchState(() -> new PlayState());
 			}
-
+	
 			FlxG.sound.music.volume = 0;
 					
 			destroyFreeplayVocals();

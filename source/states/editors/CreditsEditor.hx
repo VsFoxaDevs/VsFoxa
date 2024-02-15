@@ -453,7 +453,7 @@ class CreditsEditor extends MusicBeatState {
 				}
 				FlxG.mouse.visible = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				MusicBeatState.switchState(new MasterEditorMenu());
+				FlxG.switchState(() -> new MasterEditorMenu());
 				quitting = true;
 			}
 

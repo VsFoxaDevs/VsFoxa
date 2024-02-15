@@ -43,14 +43,13 @@ class Main extends Sprite
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
 		zoom: -1.0, // game state bounds
+		initialState: () -> new TitleState(), // initial game state
 		framerate: 60, // default framerate
 		skipSplash: true, // if the default flixel splash screen should be skipped
 		startFullscreen: false // if the game should start at fullscreen mode
 	};
 
 	public static var fpsVar:FPS;
-
-	public static var initialState:Class<FlxState> = TitleState; // so the fps can get the state properly :)
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -117,7 +116,7 @@ class Main extends Sprite
 		ClientPrefs.loadDefaultKeys();
 		#if ACHIEVEMENTS_ALLOWED Achievements.load(); #end
 		#if (cpp && windows) CppAPI.darkMode(); #end
-		addChild(new FlxGame(game.width, game.height, initialState /*cppthing.SpecsDetector*/, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
+		addChild(new FlxGame(game.width, game.height, game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
 		#if !mobile
 		fpsVar = new FPS(10, 3, 0xFFFFFF);

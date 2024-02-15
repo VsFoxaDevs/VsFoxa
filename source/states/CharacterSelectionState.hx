@@ -151,7 +151,7 @@ class CharacterSelectionState extends MusicBeatState {
 						FlxG.sound.music.stop();
 						FlxTween.tween(camHUD, {alpha: 0}, 0.25, {ease: FlxEase.circOut});
 
-						LoadingState.loadAndSwitchState(new PlayState());
+						LoadingState.loadAndSwitchState(() -> new PlayState());
 					case 1:
 						curSelected = 0;
 						spawnSelection();
@@ -167,7 +167,7 @@ class CharacterSelectionState extends MusicBeatState {
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new FreeplayState());
+			FlxG.switchState(() -> new FreeplayState());
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 		}
 		super.update(elapsed);
@@ -197,24 +197,15 @@ class CharacterSelectionState extends MusicBeatState {
 	}
 
 	function changeForm(change:Int) {
-		if (!entering) {
-			if (characterData[curSelected][1].length >= 2) {
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				curSelectedForm += change;
+		var chrData:Array<Array<String>> = characterData[curSelected][1];
+		if (!entering && chrData.length >= 2) {
+			FlxG.sound.play(Paths.sound('scrollMenu'));
+			curSelectedForm = FlxMath.wrap(curSelectedForm + change, 0, chrData.length - 1);
 
-				if (curSelectedForm < 0) {
-					curSelectedForm = characterData[curSelected][1].length;
-					curSelectedForm -= 1;
-				}
-				if (curSelectedForm >= characterData[curSelected][1].length) curSelectedForm = 0;
-
-				curText.text = characterData[curSelected][1][curSelectedForm][0];
-				characterFile = characterData[curSelected][1][curSelectedForm][1];
-
-				reloadCharacter();
-
-				curText.screenCenter(X);
-			}
+			curText.text = chrData[curSelectedForm][0];
+			characterFile = chrData[curSelectedForm][1];
+			reloadCharacter();
+			curText.screenCenter(X);
 		}
 	}
 
@@ -254,7 +245,7 @@ class CharacterSelectionState extends MusicBeatState {
 					case 'execution' | 'firestorm': PlayState.SONG.player1 = 'BF execution';
 					default: PlayState.SONG.player1 = characterFile;
 				}
-                LoadingState.loadAndSwitchState(new PlayState());
+                LoadingState.loadAndSwitchState(() -> new PlayState());
 			});
 		}
 	}

@@ -87,27 +87,27 @@ class MasterEditorMenu extends MusicBeatState {
 		if(controls.UI_LEFT_P) changeDirectory(-1);
 		if(controls.UI_RIGHT_P) changeDirectory(1);
 		#end
-		if(controls.BACK) MusicBeatState.switchState(new MainMenuState());
+		if(controls.BACK) FlxG.switchState(() -> new MainMenuState());
 		if(controls.ACCEPT) {
 			switch(options[curSelected]) {
 				case 'Chart Editor'://felt it would be cool maybe -bbpanzu
-					LoadingState.loadAndSwitchState(new ChartingState(), false);
+					LoadingState.loadAndSwitchState(() ->new ChartingState(), false);
 				case 'Character Editor':
-					LoadingState.loadAndSwitchState(new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
+					LoadingState.loadAndSwitchState(() ->new CharacterEditorState(Character.DEFAULT_CHARACTER, false));
 				case 'Week Editor':
-					MusicBeatState.switchState(new WeekEditorState());
+					FlxG.switchState(() -> new WeekEditorState());
 				case 'Credits Editor': //haoneRG made the credits editor btw lol!!!!
-					LoadingState.loadAndSwitchState(new CreditsEditor(), false);
+					LoadingState.loadAndSwitchState(() ->new CreditsEditor(), false);
 				case 'Menu Character Editor':
-					MusicBeatState.switchState(new MenuCharacterEditorState());
+					FlxG.switchState(() -> new MenuCharacterEditorState());
 				case 'Dialogue Editor':
-					LoadingState.loadAndSwitchState(new DialogueEditorState(), false);
+					LoadingState.loadAndSwitchState(() ->new DialogueEditorState(), false);
 				case 'Dialogue Portrait Editor':
-					LoadingState.loadAndSwitchState(new DialogueCharacterEditorState(), false);
+					LoadingState.loadAndSwitchState(() ->new DialogueCharacterEditorState(), false);
 				case 'Note Splash Editor':
-					MusicBeatState.switchState(new NoteSplashDebugState());
+					FlxG.switchState(() -> new NoteSplashDebugState());
 				/*case 'Stage Editor':
-					LoadingState.loadAndSwitchState(s_editor, true);*/
+					LoadingState.loadAndSwitchState(() ->s_editor, true);*/
 			}
 			FlxG.sound.music.volume = 0;
 			FreeplayState.destroyFreeplayVocals();

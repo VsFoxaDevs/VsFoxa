@@ -82,7 +82,7 @@ class PrefsMenu extends MusicBeatState
 		}
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-            MusicBeatState.switchState(new OptionsState());
+            FlxG.switchState(() -> new OptionsState());
 		}
 		else if (controls.ACCEPT) openSelectedSubstate(options[curSelected]);
 	}
