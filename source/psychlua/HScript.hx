@@ -100,9 +100,12 @@ class HScript extends SScript
 		set('VectorHelpers', VectorHelpers);
 		//set('FlxSprite3D', FlxSprite3D);
 		set('Paths', Paths);
+		set('Bar', objects.Bar);
 		set('Conductor', Conductor);
 		set('ClientPrefs', ClientPrefs);
 		set('CoolUtil', CoolUtil);
+		set('Socket', backend.Socket);
+		set('GitCommitMacro', macro.GitCommitMacro);
 		#if ACHIEVEMENTS_ALLOWED
 		set('Achievements', Achievements);
 		#end
