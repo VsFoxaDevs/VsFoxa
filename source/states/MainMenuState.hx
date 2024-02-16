@@ -284,7 +284,7 @@ class MainMenuState extends MusicBeatState {
 
 								switch (daChoice) {
 									case 'story_mode': FlxG.switchState(() -> new StoryMenuState());
-									case 'freeplay': FlxG.switchState(() -> new FreeplayState());
+									case 'freeplay': FlxG.switchState(() -> new FreeplaySectionState());
 									#if MODS_ALLOWED case 'mods': FlxG.switchState(() -> new ModsMenuState()); #end
 									#if ACHIEVEMENTS_ALLOWED case 'awards': FlxG.switchState(() -> new AchievementsMenuState()); #end
 									case 'credits': FlxG.switchState(() -> new CreditsState());

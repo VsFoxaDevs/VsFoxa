@@ -149,19 +149,17 @@ class FPS extends TextField
 
 	private dynamic function updateText():Void
 		{
-			text = 'FPS: ${currentFPS}\n';
+			text = 'FPS: ${currentFPS} ms\n';
 
 			#if openfl
 			memoryMegas = cast(System.totalMemory, UInt);
-			/*if(memoryMegas > memoryTotal) memoryTotal = memoryMegas;
 
-			text += "RAM: " + memoryMegas + " MB / " + memoryTotal + " MB";*/
 			text += 'MEM: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}';
 			#end
 
 			text += '\nAlleyway Engine (PE 0.7.3)'; 
 			#if STORY_EDITION
-			text += '\nFNF Vs. Foxa 3.0: Story Edition';
+			text += '\nFNF Vs. Foxa 3.0b: Story Edition';
 			#else
 			text += '\nFNF Vs. Foxa 3.0b';
 			#end

@@ -2,7 +2,7 @@
 	"storyName": "this is just a freeplay week",
 	"difficulties": "",
 	"hideFreeplay": false,
-	"weekBackground": "whitty",
+	"weekBackground": "Foxa",
 	"weekBefore": "Foxa",
 	"freeplayColor": [
 		146,
@@ -23,9 +23,10 @@
 		]
 	],
 	"weekCharacters": [
-		"fox",
-		"bf",
-		"gf"
+		"",
+		"",
+		""
 	],
-	"weekName": "Bonus Song"
+	"weekName": "Bonus Song",
+	"sections": ["Foxa"]
 }

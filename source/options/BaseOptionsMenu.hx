@@ -478,8 +478,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			curSelected = 0;
 
 		descText.text = optionsArray[curSelected].description;
-		descText.screenCenter(Y);
-		descText.y += 270;
+		descText.screenCenter(Y).y += 270;
 
 		var bullShit:Int = 0;
 

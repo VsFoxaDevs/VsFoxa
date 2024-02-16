@@ -44,5 +44,6 @@
 	],
 	"hideStoryMode": true,
 	"weekBefore": "week6",
-	"startUnlocked": true
+	"startUnlocked": true,
+	"sections": ["Vanilla"]
 }

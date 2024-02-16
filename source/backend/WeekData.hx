@@ -22,6 +22,7 @@ typedef WeekFile =
 	// -- FREEPLAY MENU SPECIFIC -- //
 	var freeplayColor:Array<Int>;
 	var hideFreeplay:Bool;
+	var sections:Array<String>;
 }
 
 class WeekData {
@@ -45,6 +46,7 @@ class WeekData {
 	// -- FREEPLAY MENU SPECIFIC -- //
 	public var freeplayColor:Array<Int>;
 	public var hideFreeplay:Bool;
+	public var sections:Array<String>;
 
 	public var fileName:String;
 
@@ -66,7 +68,8 @@ class WeekData {
 			hiddenUntilUnlocked: false,
 			hideStoryMode: false,
 			hideFreeplay: false,
-			difficulties: ''
+			difficulties: '',
+			sections: ["Vanilla"]
 		};
 	}
 

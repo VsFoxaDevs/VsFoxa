@@ -1,5 +1,5 @@
 {
-	"storyName": "Before The Blitz (Feat. Foxa)",
+	"storyName": "Before The Blitz (ft. Foxa)",
 	"difficulties": "",
 	"hideFreeplay": false,
 	"weekBackground": "Foxa",
@@ -63,5 +63,6 @@
 		]
 	],
 	"hideStoryMode": false,
-	"weekName": "Foxa"
+	"weekName": "Foxa",
+	"sections": ["Foxa"]
 }

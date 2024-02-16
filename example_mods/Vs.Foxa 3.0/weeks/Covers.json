@@ -42,5 +42,6 @@
 	],
 	"hideStoryMode": true,
 	"weekBefore": "tutorial",
-	"startUnlocked": true
+	"startUnlocked": true,
+	"sections":["Covers"]
 }

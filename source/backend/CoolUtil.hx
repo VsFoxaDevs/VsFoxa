@@ -75,23 +75,9 @@ class CoolUtil
 		return colorNum != null ? colorNum : FlxColor.WHITE;
 	}
 
-	/**
-	 * Returns a `FlxColor` by receiving an array with integer values,
-	 * automatically fixes the array if fields are missing,
-	 * format: [Red, Green, Blue, Alpha].
-	 * @param colors 			Your base color array.
-	 * @param defColors			The default colors that should be used in the event of an error.
-	**/
-	inline public static function colorFromArray(colors: Array<Int>, ?defColors: Array<Int>) {
+	inline public static function colorFromArray(colors:Array<Int>, ?defColors:Array<Int>) {
 		colors = fixRGBColorArray(colors, defColors);
 		return FlxColor.fromRGB(colors[0], colors[1], colors[2], colors[3]);
-	}
-
-	inline public static function fixRGBColorArray(colors: Array<Int>, ?defColors: Array<Int>) {
-		// helper function used on characters n such
-		final endResult: Array<Int> = (defColors != null && defColors.length > 2) ? defColors : [255, 255, 255, 255]; // Red, Green, Blue, Alpha
-		for (i in 0...endResult.length) if (colors[i] > -1) endResult[i] = colors[i];
-		return endResult;
 	}
 
 	inline public static function listFromString(string:String):Array<String>
@@ -99,6 +85,21 @@ class CoolUtil
 		var daList:Array<String> = string.trim().split('\n');
 		for (i in 0...daList.length) daList[i] = daList[i].trim();
 		return daList;
+	}
+
+	public static function removeDuplicates(string:Array<String>):Array<String> {
+		var tempArray:Array<String> = new Array<String>();
+		var lastSeen:String = null;
+		string.sort(function(str1:String, str2:String) {
+		  return (str1 == str2) ? 0 : (str1 > str2) ? 1 : -1; 
+		});
+		for (str in string) {
+		  if (str != lastSeen) {
+			tempArray.push(str);
+		  }
+		  lastSeen = str;
+		}
+		return tempArray;
 	}
 
 	public static function floorDecimal(value:Float, decimals:Int):Float
@@ -112,6 +113,13 @@ class CoolUtil
 		return newValue / tempMult;
 	}
 	
+	inline public static function fixRGBColorArray(colors:Array<Int>, ?defColors:Array<Int>) {
+		// helper function used on characters n such
+		final endResult:Array<Int> = (defColors != null && defColors.length > 2) ? defColors : [255, 255, 255, 255]; // Red, Green, Blue, Alpha
+		for (i in 0...endResult.length) if (colors[i] > -1) endResult[i] = colors[i];
+		return endResult;
+	}
+
 	inline public static function dominantColor(sprite:flixel.FlxSprite):Int
 	{
 		final countByColor:Map<Int, Int> = [];

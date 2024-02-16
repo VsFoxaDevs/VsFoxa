@@ -2,12 +2,12 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app packageName="com.vsfoxateam.vsfoxa" package="com.vsfoxateam.vsfoxa" main="Main" version="0.2.8" company="VsFoxaTeam" />
+	<app file="VsFoxa" packageName="com.vsfoxateam.vsfoxa" package="com.vsfoxateam.vsfoxa" main="Main" version="0.2.8" company="VsFoxaTeam" />
 
-	<app title="Friday Night Funkin': Vs. Foxa" file="VsFoxa" unless="STORY_EDITION" />
-	<app title="Friday Night Funkin': Vs. Foxa Story Edition" file="VsFoxaStoryEdition" if="STORY_EDITION" />
+	<app title="Friday Night Funkin': Vs. Foxa" unless="STORY_EDITION" />
+	<app title="Friday Night Funkin': Vs. Foxa: Story Edition" if="STORY_EDITION" />
 
-	<!--<define name="STORY_EDITION" />-->
+	<define name="STORY_EDITION" />
 
 	<!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND, theres no issues :) -->
 	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB" /> <!-- stable lua -->

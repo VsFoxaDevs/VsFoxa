@@ -37,10 +37,10 @@ class FreeplayState extends MusicBeatState {
 	var intendedScore:Int = 0;
 	var intendedRating:Float = 0;
 
-	private var grpSongs:FlxTypedGroup<Alphabet>;
-	private var curPlaying:Bool = false;
+	var grpSongs:FlxTypedGroup<Alphabet>;
+	var curPlaying:Bool = false;
 
-	private var iconArray:Array<HealthIcon> = [];
+	var iconArray:Array<HealthIcon> = [];
 
 	var bg:FlxSprite;
 	var intendedColor:Int;
@@ -48,6 +48,8 @@ class FreeplayState extends MusicBeatState {
 
 	var missingTextBG:FlxSprite;
 	var missingText:FlxText;
+
+	var section:String = '';
 
 	var bottomString:String;
 	var bottomText:FlxText;
@@ -60,14 +62,25 @@ class FreeplayState extends MusicBeatState {
 		PlayState.isStoryMode = false;
 		WeekData.reloadWeekFiles(false);
 
-		#if desktop
-		DiscordClient.changePresence("Freeplay Menu", null);
-		#end
+		#if desktop DiscordClient.changePresence("Freeplay Menu", null); #end
 
+		section = FreeplaySectionState.daSection;
+
+		var doFunnyContinue = false;
 		for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
 
 			var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[i]);
+
+			if (leWeek.sections != null) {
+				doFunnyContinue = true;
+			} else doFunnyContinue = true;
+
+			if (doFunnyContinue) {
+				doFunnyContinue = false;
+				continue;
+			}
+
 			var leSongs:Array<String> = [];
 			var leChars:Array<String> = [];
 
@@ -291,7 +304,7 @@ class FreeplayState extends MusicBeatState {
 				persistentUpdate = false;
 				if(colorTween != null) colorTween.cancel();
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				FlxG.switchState(() -> new MainMenuState());
+				FlxG.switchState(() -> new FreeplaySectionState());
 			}
 		}
 

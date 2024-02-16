@@ -5,7 +5,6 @@ import android.content.Context;
 #end
 import flixel.graphics.FlxGraphic;
 import flixel.FlxGame;
-import flixel.FlxState;
 import haxe.io.Path;
 import openfl.Assets;
 import openfl.Lib;
@@ -18,6 +17,8 @@ import states.TitleState;
 import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import lime.app.Application;
+import haxe.EnumFlags;
+import haxe.Exception;
 
 #if linux
 import lime.graphics.Image;
@@ -137,8 +138,11 @@ class Main extends Sprite
 		FlxG.mouse.visible = false;
 		#end
 		
-		#if CRASH_HANDLER
+		#if (CRASH_HANDLER && !hl)
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+		#end
+		#if (CRASH_HANDLER && hl)
+		hl.Api.setErrorHandler(onCrash);
 		#end
 
 		#if desktop
@@ -201,7 +205,6 @@ class Main extends Sprite
 		fpsVar.textColor = color;
 	}
 
-		
 	static function resetSpriteCache(sprite:Sprite):Void {
 		@:privateAccess {
 		        sprite.__cacheBitmap = null;
@@ -234,8 +237,13 @@ class Main extends Sprite
 	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
 	// very cool person for real they don't get enough credit for their work
 	#if CRASH_HANDLER
-	function onCrash(e:UncaughtErrorEvent):Void
+	function onCrash(e:Dynamic):Void
 	{
+		var message:String = "";
+		if ((e is UncaughtErrorEvent))
+			message = e.error;
+		else message = try Std.string(e) catch(_:Exception) "Unknown";
+
 		var errMsg:String = "";
 		var path:String;
 		var callStack:Array<StackItem> = CallStack.exceptionStack(true);
@@ -257,7 +265,7 @@ class Main extends Sprite
 			}
 		}
 
-		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/TheBeepSheepTeam/VsFoxa\n\n> Crash Handler written by: sqirra-rng";
+		errMsg += '\nUncaught Error: $message\nPlease report this error to the GitHub page: https://github.com/TheBeepSheepTeam/VsFoxa\n\n> Crash Handler written by: sqirra-rng';
 
 		if (!FileSystem.exists("./crash/"))
 			FileSystem.createDirectory("./crash/");
@@ -267,7 +275,14 @@ class Main extends Sprite
 		Sys.println(errMsg);
 		Sys.println("Crash dump saved in " + Path.normalize(path));
 
-		Application.current.window.alert(errMsg, "Error!");
+		#if hl
+		var flags:EnumFlags<hl.UI.DialogFlags> = new EnumFlags<hl.UI.DialogFlags>();
+		flags.set(IsError);
+		hl.UI.dialog("Vs. Foxa: Error!", errMsg, flags);
+		#else
+		Application.current.window.alert(errMsg, "Vs. Foxa: Error!");
+		#end
+
 		DiscordClient.shutdown();
 		Sys.exit(1);
 	}
