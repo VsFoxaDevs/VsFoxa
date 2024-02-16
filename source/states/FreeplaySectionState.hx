@@ -1,5 +1,5 @@
 package states;
-
+#if FREEPLAY_SECTIONS
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.effects.FlxFlicker;
@@ -198,3 +198,4 @@ class FreeplaySectionState extends MusicBeatState
 		return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!StoryMenuState.weekCompleted.exists(leWeek.weekBefore) || !StoryMenuState.weekCompleted.get(leWeek.weekBefore)));
 	}
 }
+#end
