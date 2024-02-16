@@ -3,11 +3,6 @@
 	"difficulties": "",
 	"hideFreeplay": false,
 	"weekBackground": "Foxa",
-	"freeplayColor": [
-		146,
-		113,
-		253
-	],
 	"weekBefore": "tutorial",
 	"startUnlocked": true,
 	"weekCharacters": [
@@ -64,5 +59,10 @@
 	],
 	"hideStoryMode": false,
 	"weekName": "Foxa",
-	"sections": ["Foxa"]
+	"sections": ["Foxa"],
+        "freeplayColor": [
+		146,
+		113,
+		253
+	]
 }
