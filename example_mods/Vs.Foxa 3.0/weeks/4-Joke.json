@@ -1,0 +1,38 @@
+{
+	"songs": [
+		[
+			"Angy-Fox",
+			"trolledfoxa",
+			[
+				0,
+				113,
+				253
+			]
+		]
+	],
+	"flashingColor": [
+		191,
+		60,
+		140
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "joke",
+	"difficulties": "",
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"storyName": "what?",
+	"weekName": "this joke song",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": true,
+	"weekBefore": "tutorial",
+	"startUnlocked": false,
+	"sections":["Joke"]
+}

@@ -18,7 +18,7 @@ class CreditsState extends MusicBeatState {
 	var offsetThing:Float = -75;
 
 	override function create() {
-		#if desktop DiscordClient.changePresence("Credits Menu", null); #end // Updating Discord Rich Presence 
+		#if desktop DiscordClient.changePresence("Credits Menu", null); #end
 
 		persistentUpdate = true;
 
@@ -40,9 +40,9 @@ class CreditsState extends MusicBeatState {
 
 		var defaultList:Array<Array<String>> = [ //Name - Icon name - Description - Link (Optional) - BG Color
 			['Vs. Foxa Devs'],
-			['Foxa The Artist',				'foxa',					'Director of Vs. Foxa\nDid most of the stuff for this mod',		 'https://www.youtube.com/channel/UCu0cMjmyVBgUXSieMwbqyjA',									 'EEABFC'],
-			['Dark',				'dark',					'Charter\nDialogue Writer and Story Helper',		 'https://steamcommunity.com/id/DarknessLight1/',									 'AA00FF'],
-			['CharlesCatYT',				'venusian',					'Engine Coder,\nAssistant Composer and Artist(?)',		 'https://gamebanana.com/members/2020512',									 'F3FF4A'],
+			['Foxa The Artist',				'foxa',					'Director of Vs. Foxa',		 'https://www.youtube.com/channel/UCu0cMjmyVBgUXSieMwbqyjA',									 'EEABFC'],
+			['Dark',				'dark',					'Charter,\nDialogue Writer and Story Helper',		 'https://steamcommunity.com/id/DarknessLight1/',									 'AA00FF'],
+			['CharlesCatYT',				'venusian',					'Engine Coder,\nAssistant Composer and Artist',		 'https://gamebanana.com/members/2020512',									 'F3FF4A'],
 			[''],
 			['Vs. Foxa Contributors'],
 			['TheAnimateMan',				'animate',					'Trolled Foxa Sprites',		 'https://www.youtube.com/channel/UCwsHVR5zkvnW4U4-Uoh118w',									 'A1A1A1'],
@@ -87,7 +87,7 @@ class CreditsState extends MusicBeatState {
 			['CheemsAndFriends', 'face', 'Creator of FlxAnimate', 'https://twitter.com/CheemsnFriendos', 'A1A1A1'],
 			[''],
 			["Funkin' Crew"],
-			['ninjamuffin99',		'ninjamuffin99',	"Ex-Programmer of Friday Night Funkin'",							 'https://twitter.com/ninja_muffin99',	 'CF2D2DFF800080'],
+			['ninjamuffin99',		'ninjamuffin99',	'Ex-Programmer of Friday Night Funkin\'\nI don\'t support them.',							 'https://twitter.com/ninja_muffin99',	 'CF2D2DFF800080'],
 			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",								 'https://twitter.com/PhantomArcade3K',	 'FADC45'],
 			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",								 'https://twitter.com/evilsk8r',		 '5ABD4B'],
 			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								 'https://twitter.com/kawaisprite',		 '378FC7']
