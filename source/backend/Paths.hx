@@ -286,7 +286,6 @@ class Paths
 
 		if (bitmap != null) return cacheBitmap(file, bitmap, allowGPU);
 
-		trace('oh no its returning null NOOOO');
 		trace('oh no "$key" is returning null NOOOO' + (library == null ? '' : '(library: "$library")') + '! ' + '(${posInfos.fileName}, ${posInfos.lineNumber})');
 		return null;
 	}
