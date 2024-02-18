@@ -2,23 +2,31 @@
   "dependencies": [
     {
       "name": "lime",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "develop",
+      "url": "https://github.com/VsFoxaDevs/lime"
     },
     {
       "name": "openfl",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "develop",
+      "url": "https://github.com/VsFoxaDevs/openfl"
     },
     {
       "name": "flixel",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "dev",
+      "url": "https://github.com/VsFoxaDevs/flixel"
     },
     {
       "name": "flixel-addons",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "dev",
+      "url": "https://github.com/VsFoxaDevs/flixel-addons"
     },
     {
       "name": "flixel-tools",
@@ -27,8 +35,10 @@
     },
     {
       "name": "flixel-ui",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "dev",
+      "url": "https://github.com/VsFoxaDevs/flixel-ui"
     },
     {
       "name": "hxcpp",
@@ -62,8 +72,10 @@
     },
     {
       "name": "away3d",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/VsFoxaDevs/away3d"
     },
     {
       "name": "hxcpp-debug-server",
