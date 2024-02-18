@@ -574,11 +574,9 @@ class TitleState extends MusicBeatState {
 			switch (sickBeats)
 			{
 				case 1:
-					if (!initialized) {
-						if (FlxG.sound.music == null) {
-							FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-							FlxG.sound.music.fadeIn(4, 0, 0.7);
-						}
+					if (FlxG.sound.music == null) {
+						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+						FlxG.sound.music.fadeIn(4, 0, 0.7);
 					}
 				case 2:
 					#if ALLEYWAY_WATERMARKS
