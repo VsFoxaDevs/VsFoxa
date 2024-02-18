@@ -42,6 +42,7 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null --quiet
           haxelib install format > nul --quiet
+          haxelib install hxp
           haxe -cp ./setup -D analyzer-optimize -main Main --interp
           haxelib git systools https://github.com/haya3218/retools
       - name: Skip SScript setup mode
@@ -73,6 +74,7 @@ jobs:
           haxelib setup C:/haxelib
           haxelib install hxcpp > /dev/null --quiet
           haxelib install format > nul --quiet
+          haxelib install hxp
           haxe -cp ./setup -D analyzer-optimize -main Main --interp
           haxelib git systools https://github.com/haya3218/retools
         shell: cmd
@@ -106,6 +108,7 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hxcpp > /dev/null --quiet
           haxelib install format > nul --quiet
+          haxelib install hxp
           haxe -cp ./setup -D analyzer-optimize -main Main --interp
        # haxelib git systools https://github.com/haya3218/retools
       - name: Skip SScript setup mode
