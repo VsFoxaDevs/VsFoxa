@@ -112,8 +112,11 @@
 
 	<!-- Enables a terminal log prompt on debug builds -->
 	<haxelib name="hxcpp-debug-server" if="debug"/>
-	<haxelib name="systools" unless="mac" />
-	<ndll name="systools" haxelib="systools" unless="mac" />
+	
+	<section unless="mac">
+		<haxelib name="systools" />
+		<ndll name="systools" haxelib="systools" />
+	</section>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
@@ -141,7 +144,7 @@
 
 	<!--Disable deprecated warnings-->
 	<haxedef name="no-deprecation-warnings" />
-<!--Avoid memory leaks with for loops in HScript-->
+	<!--Avoid memory leaks with for loops in HScript-->
 <haxedef name="loop_unroll_max_cost" value="25" />
 
 	<!--Macro fixes-->
