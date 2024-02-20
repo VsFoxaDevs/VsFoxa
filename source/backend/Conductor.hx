@@ -14,11 +14,11 @@ typedef BPMChangeEvent =
 
 class Conductor
 {
-	public static var bpm(default, set):Float = 100;
+	public static var bpm(default, set):Float = 100; // current bpm
 	public static var crochet:Float = ((60 / bpm) * 1000); // beats in milliseconds
 	public static var stepCrochet:Float = crochet / 4; // steps in milliseconds
-	public static var songPosition:Float = 0;
-	public static var offset:Float = 0;
+	public static var songPosition:Float = 0; // position of the song
+	public static var offset:Float = 0; // offset of the song
 
 	//public static var safeFrames:Int = 10;
 	public static var safeZoneOffset:Float = 0; // is calculated in create(), is safeFrames in milliseconds

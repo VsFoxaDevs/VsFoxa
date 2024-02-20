@@ -43,7 +43,8 @@ typedef MainMenuData = {
 }
 
 class MainMenuState extends MusicBeatState {
-	public static var psychEngineVersion:String = '0.7.3-foxa'; //This is also used for Discord RPC
+	public static var psychEngineVersion:String = '0.7.3'; //This is also used for Discord RPC
+	public static var alleywayEngineVersion:String = '0.2';
 	public static var curSelected:Int = 0;
 	private var colorRotation:Int = 1;
 
@@ -55,7 +56,7 @@ class MainMenuState extends MusicBeatState {
 		#if html5
 		"You're on web. Why the FUCK are you on web? You can't get even decent easter eggs, bitch."
 		#elseif debug
-		"You want logs on debug? I'll give you logs on debug. Out of wood, easter eggs can't display like this."
+		"You want logs on debug? I'll give you logs on debug. Actually no, we're out of wood, becuz easter eggs can't display like this."
 		#else
 		"500+  Giftcards! (-CharlesCatYT)",
 		"bro became starfire from teen titans go (-Monomouse)",
@@ -182,12 +183,12 @@ class MainMenuState extends MusicBeatState {
 		char.antialiasing = ClientPrefs.data.antialiasing;
 		add(char);
 
-		final versionShit1:FlxText = new FlxText(12, FlxG.height - 84, 0, 'Alleyway Engine v$psychEngineVersion', 12);
+		final versionShit1:FlxText = new FlxText(12, FlxG.height - 84, 0, menuJunk.versionText + ' | Alleyway Engine v$alleywayEngineVersion', 12);
 		versionShit1.active = false;
 		versionShit1.scrollFactor.set();
 		versionShit1.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit1);
-		final versionShit2:FlxText = new FlxText(12, FlxG.height - 64, 0, menuJunk.versionText, 12);
+		final versionShit2:FlxText = new FlxText(12, FlxG.height - 64, 0, 'Based off on Psych Engine v$psychEngineVersion', 12);
 		versionShit2.active = false;
 		versionShit2.scrollFactor.set();
 		versionShit2.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

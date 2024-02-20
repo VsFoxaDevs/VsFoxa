@@ -145,7 +145,8 @@ class FunkinLua {
 		set('ratingName', '');
 		set('ratingFC', '');
 		set('version', MainMenuState.psychEngineVersion.trim());
-		set('foxaVersion', 'v3.0');
+		set('alleywayVersion', MainMenuState.alleywayEngineVersion.trim());
+		set('foxaVersion', 'v3.0-SE');
 
 		set('inGameOver', false);
 		set('mustHitSection', false);
@@ -206,7 +207,7 @@ class FunkinLua {
 		set('splashSkinPostfix', NoteSplash.getSplashSkinPostfix());
 		set('splashAlpha', ClientPrefs.data.splashAlpha);
 
-		// build target (windows, mac, linux, etc.)
+		// build target (windows, mac, linux, android, etc.)
 		set('buildTarget', getBuildTarget());
 
 		for (name => func in customFunctions)

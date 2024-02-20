@@ -8,6 +8,21 @@
       "url": "https://github.com/VsFoxaDevs/lime"
     },
     {
+      "name": "haxeui-core",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "haxeui-openfl",
+      "type": "haxelib",
+      "version": null
+    },
+    {
+      "name": "haxeui-flixel",
+      "type": "haxelib",
+      "version": null
+    },
+    {
       "name": "openfl",
       "type": "git",
       "dir": null,

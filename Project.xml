@@ -20,6 +20,7 @@
 	<define name="MODS_ALLOWED" if="desktop || mobile" />
 	<define name="HSCRIPT_ALLOWED" if="desktop || mobile" />
 	<define name="LUA_ALLOWED" if="desktop || mobile" />
+	
 	<define name="CRASH_HANDLER" if="desktop" />
 	<define name="GITHUB_ALLOWED" />
 	<!--<define name="FREEPLAY_SECTIONS" />-->
@@ -92,6 +93,10 @@
 	<haxelib name="flixel" />
 	<haxelib name="flixel-ui" />
 	<haxelib name="flixel-addons" />
+
+	<haxelib name="haxeui-core" />
+	<haxelib name="haxeui-openfl" />
+	<haxelib name="haxeui-flixel" />
 
 	<!--Psych stuff needed-->
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>

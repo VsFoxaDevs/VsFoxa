@@ -52,6 +52,8 @@ class Main extends Sprite
 
 	public static var fpsVar:FPS;
 
+	public static var instance:Main;
+
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function main():Void
@@ -70,6 +72,8 @@ class Main extends Sprite
 		#elseif ios
 		Sys.setCwd(lime.system.System.applicationStorageDirectory);
 		#end
+		
+		instance = this;
 
 		if (stage != null)
 		{

@@ -37,7 +37,7 @@ class CharacterEditorState extends MusicBeatState
 	var cameraZoomText:FlxText;
 	var frameAdvanceText:FlxText;
 
-	var testModeButton:FlxButton;
+	var scriptingButton:FlxButton;
 
 	var healthBar:Bar;
 	var healthIcon:HealthIcon;
@@ -147,12 +147,11 @@ class CharacterEditorState extends MusicBeatState
 		frameAdvanceText.cameras = [camHUD];
 		add(frameAdvanceText);
 
-		testModeButton = new FlxButton(FlxG.width - 360, 25, "Test OFF", () -> 
+		scriptingButton = new FlxButton(FlxG.width - 360, 25, "Edit Script", () -> 
 		{
-			testMode = !testMode;
-			testModeButton.text = (testMode = !testMode) ? "Test ON" : "Test OFF";
+			openScriptEditor();
 		});
-		testModeButton.cameras = [camHUD]; 
+		scriptingButton.cameras = [camHUD]; 
 
 		addHelpScreen();
 		FlxG.mouse.visible = true;
@@ -160,7 +159,7 @@ class CharacterEditorState extends MusicBeatState
 
 		makeUIMenu();
 
-		add(testModeButton);
+		add(scriptingButton);
 
 		updatePointerPos();
 		updateHealthBar();
@@ -1220,6 +1219,8 @@ class CharacterEditorState extends MusicBeatState
 		animationDropDown.setData(FlxUIDropDownMenu.makeStrIdLabelArray(animList, true));
 	}
 
+	function openScriptEditor() {openSubState(new ScriptEditorSubstate());}
+	
 	// save
 	var _file:FileReference;
 	function onSaveComplete(_):Void

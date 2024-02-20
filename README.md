@@ -1,4 +1,4 @@
-# Friday Night Funkin' - Vs. Foxa / Foxa Engine
+# Friday Night Funkin' - Vs. Foxa / Alleyway Engine
 Not a Psych fork again...
 
 ## Story
@@ -83,9 +83,9 @@ If you want to just play the mod and not compile, just use the action builds (ei
 
 ## Customization:
 
-if you wish to disable things like *Lua & Haxe Scripts* or *Video Cutscenes*, you can read over to `Project.xml`
+if you wish to disable things like *Lua Scripts* or *Video Cutscenes*, you can read over to `Project.xml`
 
-inside `Project.xml`, you will find several variables to customize Vs. Foxa to your liking
+inside `Project.xml`, you will find several variables to customize Vs. Foxa / Alleyway Engine to your liking
 
 to start you off, disabling Videos should be simple, simply Delete the line `"VIDEOS_ALLOWED"` or comment it out by wrapping the line in XML-like comments, like this `<!-- YOUR_LINE_HERE -->`
 
@@ -152,6 +152,9 @@ _____________________________________
 ## Multiple editors to assist you in making your own Mod
 ![Screenshot_3](https://user-images.githubusercontent.com/44785097/144629914-1fe55999-2f18-4cc1-bc70-afe616d74ae5.png)
 * Working both for Source code modding and Downloaded builds!
+
+### Built-in script editor
+* You can now create or edit your Lua/HScript scripts inside the Chart Editor and Character Editor.
 
 ## Story mode menu rework:
 ![](https://i.imgur.com/UB2EKpV.png)

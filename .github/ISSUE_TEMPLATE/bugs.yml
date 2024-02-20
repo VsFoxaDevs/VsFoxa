@@ -25,7 +25,8 @@ body:
         - Lua
         - Source
         - Lua and Source
-        - I am not modding
+        - I was just compiling
+        - Idk.
     validations:
       required: true
 
