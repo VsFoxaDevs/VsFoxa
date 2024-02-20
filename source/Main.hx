@@ -72,7 +72,7 @@ class Main extends Sprite
 		#elseif ios
 		Sys.setCwd(lime.system.System.applicationStorageDirectory);
 		#end
-		
+
 		instance = this;
 
 		if (stage != null)
@@ -123,6 +123,8 @@ class Main extends Sprite
 		#if (cpp && windows) CppAPI.darkMode(); #end
 		addChild(new FlxGame(game.width, game.height, game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
+		cppthing.CppAPI.darkMode();
+		
 		#if !mobile
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
