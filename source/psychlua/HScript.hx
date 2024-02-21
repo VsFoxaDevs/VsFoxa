@@ -75,7 +75,6 @@ class HScript extends SScript
 		super.preset();
 
 		// Some very commonly used classes
-		// oh and should i add away3d support too
 		set('FlxG', flixel.FlxG);
 		set('FlxMath', flixel.math.FlxMath);
 		set('FlxSprite', flixel.FlxSprite);

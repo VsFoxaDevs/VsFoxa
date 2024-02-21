@@ -63,7 +63,7 @@ import psychlua.HScript;
 #end
 
 // 3d shit
-import flx3d.Flx3DView;
+/*import flx3d.Flx3DView;
 import flx3d.Flx3DUtil;
 import away3d.lights.DirectionalLight;
 import away3d.materials.lightpickers.StaticLightPicker;
@@ -73,7 +73,7 @@ import away3d.events.AnimationStateEvent;
 import away3d.core.base.Geometry;
 import away3d.entities.Mesh;
 import away3d.materials.TextureMaterial;
-import away3d.utils.Cast;
+import away3d.utils.Cast;*/
 
 #if SScript
 import tea.SScript;
@@ -286,7 +286,7 @@ class PlayState extends MusicBeatState
 	public var startCallback:Void->Void = null;
 	public var endCallback:Void->Void = null;
 
-	public var cam3D:Flx3DView;
+	//public var cam3D:Flx3DView;
 
 	//the payload for beat-based buttplug support
 	public var bpPayload:String = "";
@@ -404,7 +404,7 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-			case 'test':
+			/*case 'test':
 				// cam3D will already be defined for you, so you can just put it there
 
 				cam3D = new Flx3DView(0, 0, 1600, 900); // make sure to keep width and height as 1600 and 900
@@ -425,7 +425,7 @@ class PlayState extends MusicBeatState
 						System.gc();
 					}
 				}, "assets/shared/models/tex.png", true);
-			// paths for the image do not really work, so we have to do something like "assets/shared/models/texture.png"
+			// paths for the image do not really work, so we have to do something like "assets/shared/models/texture.png"*/
 
 			case 'stage': new states.stages.StageWeek1(); //Week 1
 			case 'spooky': new states.stages.Spooky(); //Week 2
@@ -1683,6 +1683,11 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 	var freezeCamera:Bool = false;
+
+	public var rotY:Float;
+	public var crY:Float;
+	public var crX:Float;
+	public var crZ:Float;
 
 	override public function update(elapsed:Float)
 	{

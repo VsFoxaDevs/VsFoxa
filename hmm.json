@@ -86,13 +86,6 @@
       "version": null
     },
     {
-      "name": "away3d",
-      "type": "git",
-      "dir": null,
-      "ref": "master",
-      "url": "https://github.com/VsFoxaDevs/away3d"
-    },
-    {
       "name": "hxcpp-debug-server",
       "type": "haxelib",
       "version": null

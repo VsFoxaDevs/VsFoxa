@@ -156,11 +156,6 @@ _____________________________________
 ### Built-in script editor
 * You can now create or edit your Lua/HScript scripts inside the Chart Editor and Character Editor.
 
-## 3D Support
-* 3D Support thanks to Away#D, models such as obj, dae, awd, md2, md5 are supported.
-* Adding a 3D model in a stage though is difficult, so I'll show some footage of how it is done
-![](https://streamable.com/zpbmnk)
-
 ## Story mode menu rework:
 ![](https://i.imgur.com/UB2EKpV.png)
 * Added a different BG to every song (less Tutorial)

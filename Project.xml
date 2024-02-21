@@ -106,7 +106,6 @@
 	<haxelib name="discord_rpc" if="desktop"/>
 	<haxelib name="flxanimate"/>
 	<haxelib name="tjson" />
-	<haxelib name="away3d" />
 
 	<!-- Android tools required for external storage access -->
 	<haxelib name="extension-androidtools" if="android" />
