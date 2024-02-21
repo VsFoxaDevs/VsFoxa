@@ -7,7 +7,7 @@ class VideoFunctions
 	public static function implement(funk:FunkinLua)
 	{
 		var lua = funk.lua;
-		Lua_helper.add_callback(lua, "makeLuaVideo", function(tag:String, x:Float = 0, y:Float = 0) {
+		Lua_helper.add_callback(lua, "makeLuaVideo", function(tag:String, x:Int = 0, y:Int = 0) {
 			tag = tag.replace('.', '');
 			LuaUtils.resetVideoTag(tag);
 			var leVid:FlxVideoSprite = new FlxVideoSprite(x, y);
@@ -55,7 +55,8 @@ class VideoFunctions
 			if(psychlua.ScriptHandler.modchartVideos.exists(tag)) {
 				var vid:FlxVideoSprite = psychlua.ScriptHandler.modchartVideos.get(tag);
 				if(path != null && path.length > 0) {
-					vid.play(Paths.video(path), loop);
+					vid.load(Paths.video(path));
+					vid.play();
 				}
 
 				vid.bitmap.onOpening.add(function() {
@@ -73,9 +74,9 @@ class VideoFunctions
 				vid.bitmap.onEndReached.add(function() {
 					psychlua.ScriptHandler.callOnLuas('onVideoEnd', [tag]);
 				}, true);
-				vid.bitmap.onEncounteredError.add(function() {
+				/*vid.bitmap.onEncounteredError.add(function() {
 					psychlua.ScriptHandler.callOnLuas('onVideoError', [tag]);
-				}, true);
+				}, true);*/
 			}
 		});
 		Lua_helper.add_callback(lua, "stopLuaVideo", function(tag:String) {
