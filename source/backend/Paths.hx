@@ -316,6 +316,7 @@ class Paths
 			bitmap.disposeImage();
 			bitmap.image.data = null;
 			bitmap.image = null;
+			bitmap.readable = true;
 		}
 
 		var graph:FlxGraphic = FlxGraphic.fromBitmapData(bitmap, false, file);
