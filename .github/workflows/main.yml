@@ -5,9 +5,9 @@ name: Build Game
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [main, experimental, character-selector]
+    branches: [main, experimental, character-selector, more-lua]
   pull_request:
-    branches: [main, experimental, character-selector]
+    branches: [main, experimental, character-selector, more-lua]
 
   # For release builds
   workflow_call:

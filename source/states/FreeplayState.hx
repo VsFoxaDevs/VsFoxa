@@ -229,6 +229,8 @@ class FreeplayState extends MusicBeatState {
 	var playbackRates:Map<String, String> = new Map();
 
 	override function update(elapsed:Float) {
+		if(FlxG.sound.music != null) Conductor.songPosition = FlxG.sound.music.time;
+
 		if(FlxG.sound.music.volume < 0.7) FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		lerpScore = Math.floor(FlxMath.lerp(intendedScore, lerpScore, Math.exp(-elapsed * 24)));
 		lerpRating = FlxMath.lerp(intendedRating, lerpRating, Math.exp(-elapsed * 12));
@@ -333,6 +335,7 @@ class FreeplayState extends MusicBeatState {
 				Mods.currentModDirectory = songs[curSelected].folder;
 				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
 				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
+				Conductor.bpm = PlayState.SONG.bpm;
 				if(PlayState.SONG.needsVoices){
 					vocals = new FlxSound().loadEmbedded(Paths.voices(PlayState.SONG.song));
 					FlxG.sound.list.add(vocals);
@@ -399,7 +402,7 @@ class FreeplayState extends MusicBeatState {
 				else LoadingState.loadAndSwitchState(() -> new PlayState());
 			}
 	
-			FlxG.sound.music.volume = 0;
+			FlxG.sound.music.pause();
 					
 			destroyFreeplayVocals();
 			#if (MODS_ALLOWED && cpp)
@@ -413,6 +416,7 @@ class FreeplayState extends MusicBeatState {
 
 		updateTexts(elapsed);
 		super.update(elapsed);
+		updateIconsScale(elapsed);
 	}
 
 	public static function destroyFreeplayVocals() {
@@ -518,14 +522,36 @@ class FreeplayState extends MusicBeatState {
 
 	var lastBeatHit:Int = -1;
 
-	override function beatHit() {
+	public dynamic function updateIconsScale(elapsed:Float)
+	{
+		for (i in 0...iconArray.length)
+		{ 
+			var icon:HealthIcon = iconArray[i];
+			var mult:Float = FlxMath.lerp(1, icon.scale.x, Math.exp(-elapsed * 9 * @:privateAccess player.playbackRate));
+			icon.scale.set(mult, mult);
+			icon.updateHitbox();
+		}
+	}
+
+	override function beatHit()
+	{
+		if (player.playingMusic && !player.paused)
+		{
+			var icon:HealthIcon = iconArray[curSelected];
+			icon.scale.set(1.2, 1.2);
+			icon.updateHitbox();
+		}
+
 		super.beatHit();
+	}
 
-		if(lastBeatHit >= curBeat) return;
+	override function sectionHit()
+	{
+		if (PlayState.SONG.notes[curSection] != null)
+			if (PlayState.SONG.notes[curSection].changeBPM)
+				Conductor.bpm = PlayState.SONG.notes[curSection].bpm;
 
-		lastBeatHit = curBeat;
-		
-		if(player.playingMusic) iconArray[instPlaying].bounce();
+		super.sectionHit();
 	}
 
 	var _drawDistance:Int = 4;
