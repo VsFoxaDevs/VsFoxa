@@ -30,6 +30,18 @@ class MusicBeatSubstate extends FlxSubState
 	inline function get_controls():Controls
 		return Controls.instance;
 
+	override function create()
+	{
+		// Moves debug group to front of this substate
+		if (psychlua.ScriptHandler.luaDebugGroup != null)
+		{
+			FlxG.state.remove(psychlua.ScriptHandler.luaDebugGroup);
+			add(psychlua.ScriptHandler.luaDebugGroup);
+		}
+
+		super.create();
+	}
+
 	override function update(elapsed:Float)
 	{
 		//everyStep();
@@ -136,16 +148,30 @@ class MusicBeatSubstate extends FlxSubState
 	{
 		if (curStep % 4 == 0)
 			beatHit();
+
+		if (!FlxG.state.persistentUpdate) // Prevents scripts from being called twice
+		{
+			psychlua.ScriptHandler.setOnScripts('curStep', curStep);
+			psychlua.ScriptHandler.callOnScripts('onStepHit');
+		}
 	}
 
 	public function beatHit():Void
 	{
-		//do literally nothing dumbass
+		if (!FlxG.state.persistentUpdate)
+		{
+			psychlua.ScriptHandler.setOnScripts('curBeat', curBeat);
+			psychlua.ScriptHandler.callOnScripts('onBeatHit');
+		}
 	}
-	
+
 	public function sectionHit():Void
 	{
-		//yep, you guessed it, nothing again, dumbass
+		if (!FlxG.state.persistentUpdate)
+		{
+			psychlua.ScriptHandler.setOnScripts('curSection', curSection);
+			psychlua.ScriptHandler.callOnScripts('onSectionHit');
+		}
 	}
 	
 	function getBeatsOnSection()
@@ -153,5 +179,17 @@ class MusicBeatSubstate extends FlxSubState
 		var val:Null<Float> = 4;
 		if(PlayState.SONG != null && PlayState.SONG.notes[curSection] != null) val = PlayState.SONG.notes[curSection].sectionBeats;
 		return val == null ? 4 : val;
+	}
+
+	override function destroy()
+	{
+		// Moves debug group back to original state
+		if (psychlua.ScriptHandler.luaDebugGroup != null)
+		{
+			remove(psychlua.ScriptHandler.luaDebugGroup);
+			FlxG.state.add(psychlua.ScriptHandler.luaDebugGroup);
+		}
+
+		super.destroy();
 	}
 }

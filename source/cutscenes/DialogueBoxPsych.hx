@@ -68,7 +68,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 	{
 		if (ignoreThisFrame)
 		{
-			PlayState.instance.callOnScripts('onDialogueStart'); // It's here, because scripts might want to access PlayState.instance.psychDialogue (aka this)
+			psychlua.ScriptHandler.callOnScripts('onDialogueStart'); // It's here, because scripts might want to access PlayState.instance.psychDialogue (aka this)
 			startNextDialog();
 
 			ignoreThisFrame = false;
@@ -83,7 +83,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 			if (bgFade.alpha > 0.5)
 				bgFade.alpha = 0.5;
 
-			var ret:Dynamic = PlayState.instance.callOnScripts('onDialogueConfirm', null, false);
+			var ret:Dynamic = psychlua.ScriptHandler.callOnScripts('onDialogueConfirm', null, false);
 			if ((confirmDialogue || Controls.instance.ACCEPT) && ret != FunkinLua.Function_Stop)
 			{
 				if (!typedText.finishedText)
@@ -205,7 +205,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 				var event:DialogueEvent = curDialogue.events[i];
 
 				// Call the current event
-				PlayState.instance.callOnScripts('onDialogueEvent', [event.type, event.arguments]);
+				psychlua.ScriptHandler.callOnScripts('onDialogueEvent', [event.type, event.arguments]);
 			}
 		}
 
@@ -552,7 +552,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		currentCharAlpha = char.alpha;
 
 		// Call Update
-		var ret:Dynamic = PlayState.instance.callOnScripts('onCharacterMove', [tag, char.curCharacter, char.startingPos, offsetPos, elapsed], false);
+		var ret:Dynamic = psychlua.ScriptHandler.callOnScripts('onCharacterMove', [tag, char.curCharacter, char.startingPos, offsetPos, elapsed], false);
 
 		if (ret != FunkinLua.Function_Stop)
 		{
@@ -657,7 +657,7 @@ class DialogueBoxPsych extends FlxSpriteGroup
 		typedText.setScale(0.7);
 		typedText.onUpdate = function(text:String):Void
 		{
-			PlayState.instance.callOnScripts('onDialogueTextUpdate', [text]);
+			psychlua.ScriptHandler.callOnScripts('onDialogueTextUpdate', [text]);
 		};
 		add(typedText);
 	}

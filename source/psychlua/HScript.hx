@@ -6,7 +6,6 @@ import psychlua.FunkinLua;
 import psychlua.CustomSubstate;
 
 #if HSCRIPT_ALLOWED
-import tea.SScript;
 class HScript extends SScript
 {
 	public var parentLua:FunkinLua;
@@ -35,7 +34,7 @@ class HScript extends SScript
 			@:privateAccess
 			if(hs.parsingException != null)
 			{
-				PlayState.instance.addTextToDebug('ERROR ON LOADING (${hs.origin}): ${hs.parsingException.message}', FlxColor.RED);
+				psychlua.ScriptHandler.addTextToDebug('ERROR ON LOADING (${hs.origin}): ${hs.parsingException.message}', FlxColor.RED);
 			}
 		}
 	}
@@ -104,6 +103,7 @@ class HScript extends SScript
 		set('Conductor', Conductor);
 		set('ClientPrefs', ClientPrefs);
 		set('CoolUtil', CoolUtil);
+		set('psychlua.ScriptHandler', psychlua.ScriptHandler);
 		set('Socket', backend.Socket);
 		set('GitCommitMacro', macro.GitCommitMacro);
 		#if ACHIEVEMENTS_ALLOWED
@@ -113,6 +113,7 @@ class HScript extends SScript
 		set('Alphabet', Alphabet);
 		set('Note', objects.Note);
 		set('CustomSubstate', CustomSubstate);
+		set('CustomState', CustomState);
 		#if (!flash && sys)
 		set('FlxRuntimeShader', flixel.addons.display.FlxRuntimeShader);
 		#end
@@ -124,34 +125,43 @@ class HScript extends SScript
 
 		// Functions & Variables
 		set('setVar', function(name:String, value:Dynamic) {
-			PlayState.instance.variables.set(name, value);
+			psychlua.ScriptHandler.variables.set(name, value);
 			return value;
 		});
 		set('getVar', function(name:String)
 		{
 			var result:Dynamic = null;
-			if(PlayState.instance.variables.exists(name)) result = PlayState.instance.variables.get(name);
+			if(psychlua.ScriptHandler.variables.exists(name)) result = psychlua.ScriptHandler.variables.get(name);
 			return result;
 		});
 		set('removeVar', function(name:String)
 		{
-			if(PlayState.instance.variables.exists(name))
-			{
-				PlayState.instance.variables.remove(name);
-				return true;
-			}
-			return false;
+			return psychlua.ScriptHandler.variables.remove(name);
+		});
+		set('setGlobalVar', function(name:String, value:Dynamic, replace:Bool) {
+			if(psychlua.ScriptHandler.globalVariables.get(name) == null || psychlua.ScriptHandler.globalVariables.get(name) != null && replace)
+				psychlua.ScriptHandler.globalVariables.set(name, value);
+			return value;
+		});
+		set('getGlobalVar', function(name:String) {
+			var result:Dynamic = null;
+			if(psychlua.ScriptHandler.globalVariables.exists(name)) result = psychlua.ScriptHandler.globalVariables.get(name);
+			return result;
+		});
+		set('removeGlobalVar', function(name:String)
+		{
+			return psychlua.ScriptHandler.globalVariables.remove(name);
 		});
 		set('debugPrint', function(text:String, ?color:FlxColor = null) {
 			if(color == null) color = FlxColor.WHITE;
-			PlayState.instance.addTextToDebug(text, color);
+			psychlua.ScriptHandler.addTextToDebug(text, color);
 		});
 		set('getModSetting', function(saveTag:String, ?modName:String = null) {
 			if(modName == null)
 			{
 				if(this.modFolder == null)
 				{
-					PlayState.instance.addTextToDebug('getModSetting: Argument #2 is null and script is not inside a packed Mod folder!', FlxColor.RED);
+					psychlua.ScriptHandler.addTextToDebug('getModSetting: Argument #2 is null and script is not inside a packed Mod folder!', FlxColor.RED);
 					return null;
 				}
 				modName = this.modFolder;
@@ -207,33 +217,33 @@ class HScript extends SScript
 		set('keyJustPressed', function(name:String = '') {
 			name = name.toLowerCase();
 			switch(name) {
-				case 'left': return PlayState.instance.controls.NOTE_LEFT_P;
-				case 'down': return PlayState.instance.controls.NOTE_DOWN_P;
-				case 'up': return PlayState.instance.controls.NOTE_UP_P;
-				case 'right': return PlayState.instance.controls.NOTE_RIGHT_P;
-				default: return PlayState.instance.controls.justPressed(name);
+				case 'left': return Controls.instance.NOTE_LEFT_P;
+				case 'down': return Controls.instance.NOTE_DOWN_P;
+				case 'up': return Controls.instance.NOTE_UP_P;
+				case 'right': return Controls.instance.NOTE_RIGHT_P;
+				default: return Controls.instance.justPressed(name);
 			}
 			return false;
 		});
 		set('keyPressed', function(name:String = '') {
 			name = name.toLowerCase();
 			switch(name) {
-				case 'left': return PlayState.instance.controls.NOTE_LEFT;
-				case 'down': return PlayState.instance.controls.NOTE_DOWN;
-				case 'up': return PlayState.instance.controls.NOTE_UP;
-				case 'right': return PlayState.instance.controls.NOTE_RIGHT;
-				default: return PlayState.instance.controls.pressed(name);
+				case 'left': return Controls.instance.NOTE_LEFT;
+				case 'down': return Controls.instance.NOTE_DOWN;
+				case 'up': return Controls.instance.NOTE_UP;
+				case 'right': return Controls.instance.NOTE_RIGHT;
+				default: return Controls.instance.pressed(name);
 			}
 			return false;
 		});
 		set('keyReleased', function(name:String = '') {
 			name = name.toLowerCase();
 			switch(name) {
-				case 'left': return PlayState.instance.controls.NOTE_LEFT_R;
-				case 'down': return PlayState.instance.controls.NOTE_DOWN_R;
-				case 'up': return PlayState.instance.controls.NOTE_UP_R;
-				case 'right': return PlayState.instance.controls.NOTE_RIGHT_R;
-				default: return PlayState.instance.controls.justReleased(name);
+				case 'left': return Controls.instance.NOTE_LEFT_R;
+				case 'down': return Controls.instance.NOTE_DOWN_R;
+				case 'up': return Controls.instance.NOTE_UP_R;
+				case 'right': return Controls.instance.NOTE_RIGHT_R;
+				default: return Controls.instance.justReleased(name);
 			}
 			return false;
 		});
@@ -244,7 +254,7 @@ class HScript extends SScript
 		set('createGlobalCallback', function(name:String, func:Dynamic)
 		{
 			#if LUA_ALLOWED
-			for (script in PlayState.instance.luaArray)
+			for (script in psychlua.ScriptHandler.luaArray)
 				if(script != null && script.lua != null && !script.closed)
 					Lua_helper.add_callback(script.lua, name, func);
 			#end
@@ -288,6 +298,7 @@ class HScript extends SScript
 		set('buildTarget', FunkinLua.getBuildTarget());
 		set('customSubstate', CustomSubstate.instance);
 		set('customSubstateName', CustomSubstate.name);
+		set('gameName', Type.getClassName(Type.getClass(FlxG.state)));
 
 		set('Function_Stop', FunkinLua.Function_Stop);
 		set('Function_Continue', FunkinLua.Function_Continue);
@@ -314,7 +325,7 @@ class HScript extends SScript
 		}
 	}
 
-	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):TeaCall
+	public function executeCode(?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Tea
 	{
 		if(funcToRun == null) return null;
 
@@ -339,7 +350,7 @@ class HScript extends SScript
 		return callValue;
 	}
 
-	public function executeFunction(funcToRun:String = null, funcArgs:Array<Dynamic>):TeaCall
+	public function executeFunction(funcToRun:String = null, funcArgs:Array<Dynamic>):Tea
 	{
 		if (funcToRun == null)
 			return null;
@@ -353,7 +364,7 @@ class HScript extends SScript
 		funk.addLocalCallback("runHaxeCode", function(codeToRun:String, ?varsToBring:Any = null, ?funcToRun:String = null, ?funcArgs:Array<Dynamic> = null):Dynamic {
 			#if SScript
 			initHaxeModuleCode(funk, codeToRun, varsToBring);
-			var retVal:TeaCall = funk.hscript.executeCode(funcToRun, funcArgs);
+			var retVal:Tea = funk.hscript.executeCode(funcToRun, funcArgs);
 			if (retVal != null)
 			{
 				if(retVal.succeeded)

@@ -9,8 +9,17 @@ import backend.Discord;
 import llua.*;
 import llua.Lua;
 import psychlua.*;
+#else
 import psychlua.FunkinLua;
+import psychlua.LuaUtils;
+import psychlua.HScript;
+import psychlua.ScriptHandler;
 #end
+
+#if SScript
+import tea.SScript;
+#end
+
 
 // FlxAnimate
 #if flxanimate

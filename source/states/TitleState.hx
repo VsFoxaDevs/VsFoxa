@@ -46,6 +46,8 @@ typedef TitleData = {
 }
 
 class TitleState extends MusicBeatState {
+	public static var instance:TitleState;
+
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
 	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 	public static var volumeUpKeys:Array<FlxKey> = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
@@ -79,6 +81,8 @@ class TitleState extends MusicBeatState {
 
 	override public function create():Void
 	{
+		instance = this;
+
 		Paths.clearStoredMemory();
 
 		#if LUA_ALLOWED
@@ -92,6 +96,13 @@ class TitleState extends MusicBeatState {
 		// FlxG.fixedTimestep = false;
 		FlxG.game.focusLostFramerate = 60;
 		FlxG.keys.preventDefaultKeys = [TAB];
+
+		// GLOBAL SCRIPTS
+		psychlua.ScriptHandler.startScripts();
+
+		// STATE SCRIPTS
+		#if LUA_ALLOWED psychlua.ScriptHandler.startLuasNamed('states/TitleState.lua'); #end
+		#if HSCRIPT_ALLOWED psychlua.ScriptHandler.startHScriptsNamed('states/TitleState.hx'); #end
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
@@ -177,6 +188,8 @@ class TitleState extends MusicBeatState {
 				});
 			}
 		}
+
+		psychlua.ScriptHandler.callOnScripts('onCreatePost');
 	}
 
 	var logoBl:FlxSprite;
@@ -330,8 +343,6 @@ class TitleState extends MusicBeatState {
 		else
 			initialized = true;
 
-		//PlayState.instance.callOnLuas("startIntro", []);
-
 		Paths.clearUnusedMemory();
 	}
 
@@ -361,8 +372,6 @@ class TitleState extends MusicBeatState {
 
 	override function update(elapsed:Float)
 	{
-		//PlayState.instance.callOnLuas("updateTitle", [elapsed]);
-
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
@@ -515,7 +524,9 @@ class TitleState extends MusicBeatState {
 			if(controls.UI_RIGHT) swagShader.hue += elapsed * 0.1;
 		}
 
+		psychlua.ScriptHandler.callOnScripts('onUpdate', [elapsed]);
 		super.update(elapsed);
+		psychlua.ScriptHandler.callOnScripts('onUpdatePost', [elapsed]);
 	}
 
 	function createCoolText(textArray:Array<String>, ?offset:Float = 0)
@@ -557,6 +568,8 @@ class TitleState extends MusicBeatState {
 	override function beatHit()
 	{
 		super.beatHit();
+
+		psychlua.ScriptHandler.callOnScripts('onBeatHit');
 
 		if(logoBl != null)
 			logoBl.animation.play('bump', true);
@@ -628,6 +641,8 @@ class TitleState extends MusicBeatState {
 	var increaseVolume:Bool = false;
 	function skipIntro():Void
 	{
+		psychlua.ScriptHandler.callOnScripts('onSkipIntro');
+
 		if (!skippedIntro)
 		{
 			if (playJingle) //Ignore deez
@@ -716,5 +731,12 @@ class TitleState extends MusicBeatState {
 
 			skippedIntro = true;
 		}
+	}
+
+	override function destroy()
+	{
+		psychlua.ScriptHandler.destroyScripts();
+		instance = null;
+		super.destroy();
 	}
 }

@@ -31,8 +31,8 @@ class CustomSubstate extends MusicBeatSubstate
 			}
 		}
 		PlayState.instance.openSubState(new CustomSubstate(name));
-		PlayState.instance.setOnHScript('customSubstate', instance);
-		PlayState.instance.setOnHScript('customSubstateName', name);
+		psychlua.ScriptHandler.setOnHScript('customSubstate', instance);
+		psychlua.ScriptHandler.setOnHScript('customSubstateName', name);
 	}
 
 	public static function closeCustomSubstate()
@@ -50,8 +50,8 @@ class CustomSubstate extends MusicBeatSubstate
 	{
 		if(instance != null)
 		{
-			var tagObject:FlxObject = cast (PlayState.instance.variables.get(tag), FlxObject);
-			#if LUA_ALLOWED if(tagObject == null) tagObject = cast (PlayState.instance.modchartSprites.get(tag), FlxObject); #end
+			var tagObject:FlxObject = cast (psychlua.ScriptHandler.variables.get(tag), FlxObject);
+			#if LUA_ALLOWED if(tagObject == null) tagObject = cast (psychlua.ScriptHandler.modchartSprites.get(tag), FlxObject); #end
 
 			if(tagObject != null)
 			{
@@ -67,9 +67,9 @@ class CustomSubstate extends MusicBeatSubstate
 	{
 		instance = this;
 
-		PlayState.instance.callOnScripts('onCustomSubstateCreate', [name]);
+		psychlua.ScriptHandler.callOnScripts('onCustomSubstateCreate', [name]);
 		super.create();
-		PlayState.instance.callOnScripts('onCustomSubstateCreatePost', [name]);
+		psychlua.ScriptHandler.callOnScripts('onCustomSubstateCreatePost', [name]);
 	}
 	
 	public function new(name:String)
@@ -81,18 +81,18 @@ class CustomSubstate extends MusicBeatSubstate
 	
 	override function update(elapsed:Float)
 	{
-		PlayState.instance.callOnScripts('onCustomSubstateUpdate', [name, elapsed]);
+		psychlua.ScriptHandler.callOnScripts('onCustomSubstateUpdate', [name, elapsed]);
 		super.update(elapsed);
-		PlayState.instance.callOnScripts('onCustomSubstateUpdatePost', [name, elapsed]);
+		psychlua.ScriptHandler.callOnScripts('onCustomSubstateUpdatePost', [name, elapsed]);
 	}
 
 	override function destroy()
 	{
-		PlayState.instance.callOnScripts('onCustomSubstateDestroy', [name]);
+		psychlua.ScriptHandler.callOnScripts('onCustomSubstateDestroy', [name]);
 		name = 'unnamed';
 
-		PlayState.instance.setOnHScript('customSubstate', null);
-		PlayState.instance.setOnHScript('customSubstateName', name);
+		psychlua.ScriptHandler.setOnHScript('customSubstate', null);
+		psychlua.ScriptHandler.setOnHScript('customSubstateName', name);
 		super.destroy();
 	}
 }

@@ -132,7 +132,7 @@ class ReflectionFunctions
 		});
 		Lua_helper.add_callback(lua, "removeFromGroup", function(obj:String, index:Int, dontDestroy:Bool = false)
 		{
-			var groupOrArray:Dynamic = Reflect.getProperty(LuaUtils.getTargetInstance(), obj);
+			var groupOrArray:Dynamic = ScriptHandler.modchartGroups.get(obj) != null ? ScriptHandler.modchartGroups.get(obj) : Reflect.getProperty(LuaUtils.getTargetInstance(), obj);
 			if (Std.isOfType(groupOrArray, FlxTypedGroup))
 			{
 				var sex = groupOrArray.members[index];
@@ -158,7 +158,7 @@ class ReflectionFunctions
 		Lua_helper.add_callback(lua, "createInstance", function(variableToSave:String, className:String, ?args:Array<Dynamic> = null)
 		{
 			variableToSave = variableToSave.trim().replace('.', '');
-			if (!PlayState.instance.variables.exists(variableToSave))
+			if (!psychlua.ScriptHandler.variables.exists(variableToSave))
 			{
 				if (args == null)
 					args = [];
@@ -172,7 +172,7 @@ class ReflectionFunctions
 
 				var obj:Dynamic = Type.createInstance(myType, args);
 				if (obj != null)
-					PlayState.instance.variables.set(variableToSave, obj);
+					psychlua.ScriptHandler.variables.set(variableToSave, obj);
 				else
 					FunkinLua.luaTrace('createInstance: Failed to create $variableToSave, arguments are possibly wrong.', false, false, FlxColor.RED);
 
@@ -184,9 +184,9 @@ class ReflectionFunctions
 		});
 		Lua_helper.add_callback(lua, "addInstance", function(objectName:String, ?inFront:Bool = false)
 		{
-			if (PlayState.instance.variables.exists(objectName))
+			if (psychlua.ScriptHandler.variables.exists(objectName))
 			{
-				var obj:Dynamic = PlayState.instance.variables.get(objectName);
+				var obj:Dynamic = psychlua.ScriptHandler.variables.get(objectName);
 				if (inFront)
 					LuaUtils.getTargetInstance().add(obj);
 				else

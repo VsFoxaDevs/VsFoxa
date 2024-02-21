@@ -40,9 +40,9 @@ class LuaUtils
 		if(splitProps.length > 1)
 		{
 			var target:Dynamic = null;
-			if(PlayState.instance.variables.exists(splitProps[0]))
+			if(psychlua.ScriptHandler.variables.exists(splitProps[0]))
 			{
-				var retVal:Dynamic = PlayState.instance.variables.get(splitProps[0]);
+				var retVal:Dynamic = psychlua.ScriptHandler.variables.get(splitProps[0]);
 				if(retVal != null)
 					target = retVal;
 			}
@@ -66,9 +66,9 @@ class LuaUtils
 			return value;
 		}
 
-		if(PlayState.instance.variables.exists(variable))
+		if(psychlua.ScriptHandler.variables.exists(variable))
 		{
-			PlayState.instance.variables.set(variable, value);
+			psychlua.ScriptHandler.variables.set(variable, value);
 			return value;
 		}
 		Reflect.setProperty(instance, variable, value);
@@ -80,9 +80,9 @@ class LuaUtils
 		if(splitProps.length > 1)
 		{
 			var target:Dynamic = null;
-			if(PlayState.instance.variables.exists(splitProps[0]))
+			if(psychlua.ScriptHandler.variables.exists(splitProps[0]))
 			{
-				var retVal:Dynamic = PlayState.instance.variables.get(splitProps[0]);
+				var retVal:Dynamic = psychlua.ScriptHandler.variables.get(splitProps[0]);
 				if(retVal != null)
 					target = retVal;
 			}
@@ -103,9 +103,9 @@ class LuaUtils
 			return instance.get(variable);
 		}
 
-		if(PlayState.instance.variables.exists(variable))
+		if(psychlua.ScriptHandler.variables.exists(variable))
 		{
-			var retVal:Dynamic = PlayState.instance.variables.get(variable);
+			var retVal:Dynamic = psychlua.ScriptHandler.variables.get(variable);
 			if(retVal != null)
 				return retVal;
 		}
@@ -165,7 +165,7 @@ class LuaUtils
 		{
 			FlxG.save.data.modSettings.remove(modName);
 			#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-			PlayState.instance.addTextToDebug('getModSetting: $path could not be found!', FlxColor.RED);
+			psychlua.ScriptHandler.addTextToDebug('getModSetting: $path could not be found!', FlxColor.RED);
 			#else
 			FlxG.log.warn('getModSetting: $path could not be found!');
 			#end
@@ -174,7 +174,7 @@ class LuaUtils
 
 		if(settings.exists(saveTag)) return settings.get(saveTag);
 		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-		PlayState.instance.addTextToDebug('getModSetting: "$saveTag" could not be found inside $modName\'s settings!', FlxColor.RED);
+		psychlua.ScriptHandler.addTextToDebug('getModSetting: "$saveTag" could not be found inside $modName\'s settings!', FlxColor.RED);
 		#else
 		FlxG.log.warn('getModSetting: "$saveTag" could not be found inside $modName\'s settings!');
 		#end
@@ -231,7 +231,7 @@ class LuaUtils
 		switch(objectName)
 		{
 			case 'this' | 'instance' | 'game':
-				return PlayState.instance;
+				return getTargetInstance();
 			
 			default:
 				var obj:Dynamic = PlayState.instance.getLuaObject(objectName, checkForTextsToo);
@@ -242,7 +242,7 @@ class LuaUtils
 
 	inline public static function getTextObject(name:String):FlxText
 	{
-		return #if LUA_ALLOWED PlayState.instance.modchartTexts.exists(name) ? PlayState.instance.modchartTexts.get(name) : #end Reflect.getProperty(PlayState.instance, name);
+		return #if LUA_ALLOWED psychlua.ScriptHandler.modchartTexts.exists(name) ? psychlua.ScriptHandler.modchartTexts.get(name) : #end Reflect.getProperty(getTargetInstance, name);
 	}
 	
 	public static function isOfTypes(value:Any, types:Array<Dynamic>)
@@ -256,7 +256,10 @@ class LuaUtils
 	
 	public static inline function getTargetInstance()
 	{
-		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
+		if(FlxG.state == PlayState.instance)
+			return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
+
+		return FlxG.state;
 	}
 
 	public static inline function getLowestCharacterGroup():FlxSpriteGroup
@@ -326,40 +329,38 @@ class LuaUtils
 		}
 	}
 
-	public static function resetTextTag(tag:String) {
+	public static function resetTag(tag:String, map:Map<String, Any>) {
 		#if LUA_ALLOWED
-		if(!PlayState.instance.modchartTexts.exists(tag)) {
+		if(!map.exists(tag)) {
 			return;
 		}
 
-		var target:FlxText = PlayState.instance.modchartTexts.get(tag);
+		var target:Dynamic = map.get(tag);
 		target.kill();
-		PlayState.instance.remove(target, true);
+		getTargetInstance().remove(target, true);
 		target.destroy();
-		PlayState.instance.modchartTexts.remove(tag);
+		map.remove(tag);
 		#end
 	}
 
-	public static function resetSpriteTag(tag:String) {
+	public static function resetVideoTag(tag:String) {
 		#if LUA_ALLOWED
-		if(!PlayState.instance.modchartSprites.exists(tag)) {
+		if(!psychlua.ScriptHandler.modchartSprites.exists(tag)) {
 			return;
 		}
 
-		var target:ModchartSprite = PlayState.instance.modchartSprites.get(tag);
-		target.kill();
-		PlayState.instance.remove(target, true);
-		target.destroy();
-		PlayState.instance.modchartSprites.remove(tag);
+		var pee:FlxVideoSprite = psychlua.ScriptHandler.modchartVideos.get(tag);
+		pee.destroy();
+		psychlua.ScriptHandler.modchartVideos.remove(tag);
 		#end
 	}
 
 	public static function cancelTween(tag:String) {
 		#if LUA_ALLOWED
-		if(PlayState.instance.modchartTweens.exists(tag)) {
-			PlayState.instance.modchartTweens.get(tag).cancel();
-			PlayState.instance.modchartTweens.get(tag).destroy();
-			PlayState.instance.modchartTweens.remove(tag);
+		if(psychlua.ScriptHandler.modchartTweens.exists(tag)) {
+			psychlua.ScriptHandler.modchartTweens.get(tag).cancel();
+			psychlua.ScriptHandler.modchartTweens.get(tag).destroy();
+			psychlua.ScriptHandler.modchartTweens.remove(tag);
 		}
 		#end
 	}
@@ -374,11 +375,11 @@ class LuaUtils
 
 	public static function cancelTimer(tag:String) {
 		#if LUA_ALLOWED
-		if(PlayState.instance.modchartTimers.exists(tag)) {
-			var theTimer:FlxTimer = PlayState.instance.modchartTimers.get(tag);
+		if(psychlua.ScriptHandler.modchartTimers.exists(tag)) {
+			var theTimer:FlxTimer = psychlua.ScriptHandler.modchartTimers.get(tag);
 			theTimer.cancel();
 			theTimer.destroy();
-			PlayState.instance.modchartTimers.remove(tag);
+			psychlua.ScriptHandler.modchartTimers.remove(tag);
 		}
 		#end
 	}
@@ -472,10 +473,22 @@ class LuaUtils
 	}
 
 	public static function cameraFromString(cam:String):FlxCamera {
-		switch(cam.toLowerCase()) {
-			case 'camhud' | 'hud': return PlayState.instance.camHUD;
-			case 'camother' | 'other': return PlayState.instance.camOther;
-		}
-		return PlayState.instance.camGame;
+		#if LUA_ALLOWED
+		if(psychlua.ScriptHandler.modchartCameras.exists(cam)) return psychlua.ScriptHandler.modchartCameras.get(cam);
+		#end
+
+		if(FlxG.state == PlayState.instance)
+			switch(cam.toLowerCase()) {
+				case 'camgame' | 'game': return PlayState.instance.camGame;
+				case 'camhud' | 'hud': return PlayState.instance.camHUD;
+				case 'camother' | 'other': return PlayState.instance.camOther;
+			}
+
+		#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+		FunkinLua.luaTrace('cameraFromString: "$cam" could not be found! Grabbing default...');
+		#else
+		FlxG.log.add('cameraFromString: "$cam" could not be found! Grabbing default...');
+		#end
+		return FlxG.camera;
 	}
 }

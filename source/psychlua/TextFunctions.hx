@@ -8,13 +8,13 @@ class TextFunctions
 		var game:PlayState = PlayState.instance;
 		Lua_helper.add_callback(lua, "makeLuaText", function(tag:String, text:String, width:Int, x:Float, y:Float) {
 			tag = tag.replace('.', '');
-			LuaUtils.resetTextTag(tag);
+			LuaUtils.resetTag(tag, psychlua.ScriptHandler.modchartTexts);
 			var leText:FlxText = new FlxText(x, y, width, text, 16);
 			leText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			leText.cameras = [game.camHUD];
+			leText.cameras = [game != null ? game.camHUD : FlxG.camera];
 			leText.scrollFactor.set();
 			leText.borderSize = 2;
-			game.modchartTexts.set(tag, leText);
+			psychlua.ScriptHandler.modchartTexts.set(tag, leText);
 		});
 
 		Lua_helper.add_callback(lua, "setTextString", function(tag:String, text:String) {
@@ -167,17 +167,17 @@ class TextFunctions
 		});
 
 		Lua_helper.add_callback(lua, "addLuaText", function(tag:String) {
-			if(game.modchartTexts.exists(tag)) {
-				var shit:FlxText = game.modchartTexts.get(tag);
+			if(psychlua.ScriptHandler.modchartTexts.exists(tag)) {
+				var shit:FlxText = psychlua.ScriptHandler.modchartTexts.get(tag);
 				LuaUtils.getTargetInstance().add(shit);
 			}
 		});
 		Lua_helper.add_callback(lua, "removeLuaText", function(tag:String, destroy:Bool = true) {
-			if(!game.modchartTexts.exists(tag)) {
+			if(!psychlua.ScriptHandler.modchartTexts.exists(tag)) {
 				return;
 			}
 
-			var pee:FlxText = game.modchartTexts.get(tag);
+			var pee:FlxText = psychlua.ScriptHandler.modchartTexts.get(tag);
 			if(destroy) {
 				pee.kill();
 			}
@@ -185,7 +185,7 @@ class TextFunctions
 			LuaUtils.getTargetInstance().remove(pee, true);
 			if(destroy) {
 				pee.destroy();
-				game.modchartTexts.remove(tag);
+				psychlua.ScriptHandler.modchartTexts.remove(tag);
 			}
 		});
 	}
