@@ -186,6 +186,11 @@ class Paths
 		return 'assets/shared/$file';
 	}
 
+	inline public static function ndll(key:String)
+	{
+		return getPath('data/ndlls/$key.ndll');
+	}
+
 	inline static public function txt(key:String, ?library:String)
 	{
 		return getPath('data/$key.txt', TEXT, library);
@@ -194,6 +199,31 @@ class Paths
 	inline static public function xml(key:String, ?library:String)
 	{
 		return getPath('data/$key.xml', TEXT, library);
+	}
+
+	inline static public function obj(key:String) 
+	{
+		return getPath('models/$key.obj', BINARY, null);
+	}
+
+	inline static public function dae(key:String) 
+	{
+		return getPath('models/$key.dae', BINARY, null);
+	}
+
+	inline static public function md2(key:String) 
+	{
+		return getPath('models/$key.md2', BINARY, null);
+	}
+
+	inline static public function md5(key:String) 
+	{
+		return getPath('models/$key.md5', BINARY, null);
+	}
+	
+
+	inline static public function awd(key:String) {
+		return getPath('models/$key.awd', BINARY, null);
 	}
 
 	inline static public function json(key:String, ?library:String)
@@ -491,6 +521,11 @@ class Paths
 
 	inline static public function modsJson(key:String) {
 		return modFolders('data/' + key + '.json');
+	}
+
+	inline static public function modsNdll(key:String)
+	{
+		return modFolders('data/ndlls/$key.ndll');
 	}
 
 	inline static public function modsVideo(key:String) {

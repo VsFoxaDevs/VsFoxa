@@ -140,7 +140,7 @@ class CharacterSelectionState extends MusicBeatState {
 		if (previewMode) controlsText.text = "PREVIEW MODE\nPress I to play idle animation.\nPress your controls to play an animation.\n";
 		else {
 			controlsText.text = "Press P to enter preview mode.";
-			boyfriend.playAnim('idle');
+			boyfriend.playAnim('idle', true);
 		}
 	}
 

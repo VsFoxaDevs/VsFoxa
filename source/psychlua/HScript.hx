@@ -105,7 +105,7 @@ class HScript extends SScript
 		set('ClientPrefs', ClientPrefs);
 		set('CoolUtil', CoolUtil);
 		set('Socket', backend.Socket);
-		set('GitCommitMacro', macro.GitCommitMacro);
+		set('GitCommitMacro', macros.GitCommitMacro);
 		#if ACHIEVEMENTS_ALLOWED
 		set('Achievements', Achievements);
 		#end

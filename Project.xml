@@ -23,6 +23,7 @@
 	
 	<define name="CRASH_HANDLER" if="desktop" />
 	<define name="GITHUB_ALLOWED" />
+	<haxedef name="NDLLS_ALLOWED" if="cpp"/>
 	<!--<define name="FREEPLAY_SECTIONS" />-->
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="LOADING_SCREEN" />
