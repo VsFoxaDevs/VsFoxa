@@ -226,9 +226,6 @@ class MusicBeatState extends FlxUIState
 
 		if (curStep % 4 == 0)
 			beatHit();
-
-		psychlua.ScriptHandler.setOnScripts('curStep', curStep);
-		psychlua.ScriptHandler.callOnScripts('onStepHit');
 	}
 
 	public var stages:Array<BaseStage> = [];
@@ -240,9 +237,6 @@ class MusicBeatState extends FlxUIState
 			stage.curDecBeat = curDecBeat;
 			stage.beatHit();
 		});
-
-		psychlua.ScriptHandler.setOnScripts('curBeat', curBeat);
-		psychlua.ScriptHandler.callOnScripts('onBeatHit');
 	}
 
 	public function sectionHit():Void
@@ -252,9 +246,6 @@ class MusicBeatState extends FlxUIState
 			stage.curSection = curSection;
 			stage.sectionHit();
 		});
-
-		psychlua.ScriptHandler.setOnScripts('curSection', curSection);
-		psychlua.ScriptHandler.callOnScripts('onSectionHit');
 	}
 
 	function stagesFunc(func:BaseStage->Void)
