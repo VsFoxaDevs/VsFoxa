@@ -316,7 +316,7 @@ class Note extends FlxSprite
 		/*if(texture == null) texture = '';
 		if(postfix == null) postfix = '';*/
 		for (e in [texture, postfix])
-			if ( == null)
+			if (e == null)
 				e = '';
 
 		var skin:String = texture + postfix;

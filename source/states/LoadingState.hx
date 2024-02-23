@@ -66,7 +66,7 @@ class LoadingState extends MusicBeatState
 		"Oo0ooOoOOo000OOO!!!",
 		"Witness the might\nof the seas!",
 		"WE GOTTA GET SPONGEBOB BACK",
-		"Blud really said-"
+		"Blud really said-",
 		"CARAMEL ARROW SUPREMACY",
 		"I put the new Forgi's on the jeep-",
 		"I will rip your intestines out.",
@@ -81,7 +81,7 @@ class LoadingState extends MusicBeatState
 		"Is Week 8 gonna come out anytime soon?",
 		"FIRE IN THE HOLE",
 		"WATER IN THE HILL",
-		
+
 		"There might be someone out there that's thinking about making a mod about you.\nKeep that in mind.",
 		"Funkin' Forever.",
 		"i hope you go mooseing\nand get fucked by a campfire",
