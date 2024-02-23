@@ -93,14 +93,14 @@ class MenuCharacterEditorState extends MusicBeatState
 		addCharacterUI();
 		add(UI_mainbox);
 
-		var loadButton:FlxButton = new FlxButton(0, 480, "Load Character", function() {
+		var loadButton:FlxButton = new FlxButton(0, 480, "Load Character", () -> {
 			loadCharacter();
 		});
 		loadButton.screenCenter(X);
 		loadButton.x -= 60;
 		add(loadButton);
 	
-		var saveButton:FlxButton = new FlxButton(0, 480, "Save Character", function() {
+		var saveButton:FlxButton = new FlxButton(0, 480, "Save Character", () -> {
 			saveCharacter();
 		});
 		saveButton.screenCenter(X);
@@ -117,21 +117,21 @@ class MenuCharacterEditorState extends MusicBeatState
 		tab_group.name = "Character Type";
 
 		opponentCheckbox = new FlxUICheckBox(10, 20, null, null, "Opponent", 100);
-		opponentCheckbox.callback = function()
+		opponentCheckbox.callback = () ->
 		{
 			curTypeSelected = 0;
 			updateCharTypeBox();
 		};
 
 		boyfriendCheckbox = new FlxUICheckBox(opponentCheckbox.x, opponentCheckbox.y + 40, null, null, "Boyfriend", 100);
-		boyfriendCheckbox.callback = function()
+		boyfriendCheckbox.callback = () ->
 		{
 			curTypeSelected = 1;
 			updateCharTypeBox();
 		};
 
 		girlfriendCheckbox = new FlxUICheckBox(boyfriendCheckbox.x, boyfriendCheckbox.y + 40, null, null, "Girlfriend", 100);
-		girlfriendCheckbox.callback = function()
+		girlfriendCheckbox.callback = () ->
 		{
 			curTypeSelected = 2;
 			updateCharTypeBox();
@@ -160,13 +160,13 @@ class MenuCharacterEditorState extends MusicBeatState
 		blockPressWhileTypingOn.push(confirmInputText);
 
 		flipXCheckbox = new FlxUICheckBox(10, confirmInputText.y + 30, null, null, "Flip X", 100);
-		flipXCheckbox.callback = function()
+		flipXCheckbox.callback = () ->
 		{
 			grpWeekCharacters.members[curTypeSelected].flipX = flipXCheckbox.checked;
 			characterFile.flipX = flipXCheckbox.checked;
 		};
 
-		var reloadImageButton:FlxButton = new FlxButton(140, confirmInputText.y + 30, "Reload Char", function() {
+		var reloadImageButton:FlxButton = new FlxButton(140, confirmInputText.y + 30, "Reload Char", () -> {
 			reloadSelectedCharacter();
 		});
 		

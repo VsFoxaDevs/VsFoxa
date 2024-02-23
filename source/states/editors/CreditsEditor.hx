@@ -152,7 +152,7 @@ class CreditsEditor extends MusicBeatState {
 		linkInput = new FlxUIInputText(60, descInput.y + yDist, 180, '', 8);
 		colorInput = new FlxUIInputText(60, linkInput.y + yDist, 70, '', 8);
 		colorSquare = new FlxSprite(colorInput.x + 80, colorInput.y).makeGraphic(15, 15, 0xFFFFFFFF);
-		var getIconColor:FlxButton = new FlxButton(colorSquare.x + 23, colorSquare.y - 2, "Get Icon Color", function() {
+		var getIconColor:FlxButton = new FlxButton(colorSquare.x + 23, colorSquare.y - 2, "Get Icon Color", () -> {
 			var icon:String;
 			if(iconInput.text != null && iconInput.text.length > 0) icon = iconInput.text;
 			else icon = creditsStuff[curSelected][1];

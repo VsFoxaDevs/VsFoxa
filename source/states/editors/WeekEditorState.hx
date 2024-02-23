@@ -126,21 +126,21 @@ class WeekEditorState extends MusicBeatState
 		UI_box.selected_tab_id = 'Week';
 		add(UI_box);
 
-		var loadWeekButton:FlxButton = new FlxButton(0, 650, "Load Week", function() {
+		var loadWeekButton:FlxButton = new FlxButton(0, 650, "Load Week", () -> {
 			loadWeek();
 		});
 		loadWeekButton.screenCenter(X);
 		loadWeekButton.x -= 120;
 		add(loadWeekButton);
 		
-		var freeplayButton:FlxButton = new FlxButton(0, 650, "Freeplay", function() {
+		var freeplayButton:FlxButton = new FlxButton(0, 650, "Freeplay", () -> {
 			FlxG.switchState(() -> new WeekEditorFreeplayState(weekFile));
 			
 		});
 		freeplayButton.screenCenter(X);
 		add(freeplayButton);
 	
-		var saveWeekButton:FlxButton = new FlxButton(0, 650, "Save Week", function() {
+		var saveWeekButton:FlxButton = new FlxButton(0, 650, "Save Week", () -> {
 			saveWeek(weekFile);
 		});
 		saveWeekButton.screenCenter(X);
@@ -193,7 +193,7 @@ class WeekEditorState extends MusicBeatState
 		reloadWeekThing();
 
 		hideCheckbox = new FlxUICheckBox(10, weekFileInputText.y + 40, null, null, "Hide Week from Story Mode?", 100);
-		hideCheckbox.callback = function() weekFile.hideStoryMode = hideCheckbox.checked;
+		hideCheckbox.callback = () -> weekFile.hideStoryMode = hideCheckbox.checked;
 
 		for (i in 0...flashColSteppers.length) {
 			final defaultColors: Array<Int> = [51, 255, 255];
@@ -241,7 +241,7 @@ class WeekEditorState extends MusicBeatState
 		tab_group.name = "Other";
 
 		lockedCheckbox = new FlxUICheckBox(10, 30, null, null, "Week starts Locked", 100);
-		lockedCheckbox.callback = function()
+		lockedCheckbox.callback = () ->
 		{
 			weekFile.startUnlocked = !lockedCheckbox.checked;
 			lock.visible = lockedCheckbox.checked;
@@ -249,7 +249,7 @@ class WeekEditorState extends MusicBeatState
 		};
 
 		hiddenUntilUnlockCheckbox = new FlxUICheckBox(10, lockedCheckbox.y + 25, null, null, "Hidden until Unlocked", 110);
-		hiddenUntilUnlockCheckbox.callback = function()
+		hiddenUntilUnlockCheckbox.callback = () ->
 		{
 			weekFile.hiddenUntilUnlocked = hiddenUntilUnlockCheckbox.checked;
 		};
@@ -670,21 +670,21 @@ class WeekEditorFreeplayState extends MusicBeatState
 		blackBlack.alpha = 0.6;
 		add(blackBlack);
 
-		var loadWeekButton:FlxButton = new FlxButton(0, 685, "Load Week", function() {
+		var loadWeekButton:FlxButton = new FlxButton(0, 685, "Load Week", () -> {
 			WeekEditorState.loadWeek();
 		});
 		loadWeekButton.screenCenter(X);
 		loadWeekButton.x -= 120;
 		add(loadWeekButton);
 		
-		var storyModeButton:FlxButton = new FlxButton(0, 685, "Story Mode", function() {
+		var storyModeButton:FlxButton = new FlxButton(0, 685, "Story Mode", () -> {
 			FlxG.switchState(() -> new WeekEditorState(weekFile));
 			
 		});
 		storyModeButton.screenCenter(X);
 		add(storyModeButton);
 	
-		var saveWeekButton:FlxButton = new FlxButton(0, 685, "Save Week", function() {
+		var saveWeekButton:FlxButton = new FlxButton(0, 685, "Save Week", () -> {
 			WeekEditorState.saveWeek(weekFile);
 		});
 		saveWeekButton.screenCenter(X);
@@ -715,10 +715,10 @@ class WeekEditorFreeplayState extends MusicBeatState
 		bgColorStepperG = new FlxUINumericStepper(80, 40, 20, 255, 0, 255, 0);
 		bgColorStepperB = new FlxUINumericStepper(150, 40, 20, 255, 0, 255, 0);
 
-		var copyColor:FlxButton = new FlxButton(10, bgColorStepperR.y + 25, "Copy Color", function() {
+		var copyColor:FlxButton = new FlxButton(10, bgColorStepperR.y + 25, "Copy Color", () -> {
 			Clipboard.text = bg.color.red + ',' + bg.color.green + ',' + bg.color.blue;
 		});
-		var pasteColor:FlxButton = new FlxButton(140, copyColor.y, "Paste Color", function() {
+		var pasteColor:FlxButton = new FlxButton(140, copyColor.y, "Paste Color", () -> {
 			if(Clipboard.text != null) {
 				var leColor:Array<Int> = [];
 				var splitted:Array<String> = Clipboard.text.trim().split(',');
@@ -744,7 +744,7 @@ class WeekEditorFreeplayState extends MusicBeatState
 
 		var hideFreeplayCheckbox:FlxUICheckBox = new FlxUICheckBox(10, iconInputText.y + 30, null, null, "Hide Week from Freeplay?", 100);
 		hideFreeplayCheckbox.checked = weekFile.hideFreeplay;
-		hideFreeplayCheckbox.callback = function()
+		hideFreeplayCheckbox.callback = () ->
 		{
 			weekFile.hideFreeplay = hideFreeplayCheckbox.checked;
 		};

@@ -385,7 +385,7 @@ class TitleState extends MusicBeatState {
 				CppAPI.setWindowOpacity(numTween.value);
 			}
 			#else
-			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
+			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, () ->
 			{
 				Sys.exit(0);
 			}, false);
@@ -574,10 +574,10 @@ class TitleState extends MusicBeatState {
 			switch (sickBeats)
 			{
 				case 1:
-					if (FlxG.sound.music == null) {
-						FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-						FlxG.sound.music.fadeIn(4, 0, 0.7);
-					}
+					trace('freaky night guys');
+					//FlxG.sound.music.stop();
+					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
 					#if ALLEYWAY_WATERMARKS
 					createCoolText(['Alleyway Engine', 'by'], 40);

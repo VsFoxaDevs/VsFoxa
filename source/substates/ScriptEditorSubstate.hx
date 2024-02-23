@@ -28,7 +28,7 @@ class ScriptEditorSubstate extends FlxSubState
 	{
 		super.create();
 		app = new HaxeUIApp();
-		app.ready(function()
+		app.ready(() ->
 		{
 			WM = new WindowManager();
 			// var mainView:Component = ComponentBuilder.fromFile("assets/data/main-view.xml");

@@ -294,7 +294,7 @@ class CharacterEditorState extends MusicBeatState
 		tab_group.name = "Ghost";
 
 		//var hideGhostButton:FlxButton = null;
-		var makeGhostButton:FlxButton = new FlxButton(25, 15, "Make Ghost", function() {
+		var makeGhostButton:FlxButton = new FlxButton(25, 15, "Make Ghost", () -> {
 			var anim = anims[curAnim];
 			if(!character.isAnimationNull())
 			{
@@ -354,7 +354,7 @@ class CharacterEditorState extends MusicBeatState
 			}
 		});
 
-		/*hideGhostButton = new FlxButton(20 + makeGhostButton.width, makeGhostButton.y, "Hide Ghost", function() {
+		/*hideGhostButton = new FlxButton(20 + makeGhostButton.width, makeGhostButton.y, "Hide Ghost", () -> {
 			ghost.visible = false;
 			hideGhostButton.active = false;
 			hideGhostButton.alpha = 0.6;
@@ -363,7 +363,7 @@ class CharacterEditorState extends MusicBeatState
 		hideGhostButton.alpha = 0.6;*/
 
 		var highlightGhost:FlxUICheckBox = new FlxUICheckBox(20 + makeGhostButton.x + makeGhostButton.width, makeGhostButton.y, null, null, "Highlight Ghost", 100);
-		highlightGhost.callback = function()
+		highlightGhost.callback = () ->
 		{
 			var value = highlightGhost.checked ? 125 : 0;
 			ghost.colorTransform.redOffset = value;
@@ -402,7 +402,7 @@ class CharacterEditorState extends MusicBeatState
 
 		check_player = new FlxUICheckBox(10, 60, null, null, "Playable Character", 100);
 		check_player.checked = character.isPlayer;
-		check_player.callback = function()
+		check_player.callback = () ->
 		{
 			character.isPlayer = !character.isPlayer;
 			character.flipX = !character.flipX;
@@ -410,7 +410,7 @@ class CharacterEditorState extends MusicBeatState
 			updatePointerPos(false);
 		};
 
-		var reloadCharacter:FlxButton = new FlxButton(140, 20, "Reload Char", function()
+		var reloadCharacter:FlxButton = new FlxButton(140, 20, "Reload Char", () ->
 		{
 			addCharacter(true);
 			updatePointerPos();
@@ -418,7 +418,7 @@ class CharacterEditorState extends MusicBeatState
 			reloadCharacterDropDown();
 		});
 
-		var templateCharacter:FlxButton = new FlxButton(140, 50, "Load Template", function()
+		var templateCharacter:FlxButton = new FlxButton(140, 50, "Load Template", () ->
 		{
 			final _template:CharacterFile =
 			{
@@ -519,7 +519,7 @@ class CharacterEditorState extends MusicBeatState
 			animationIndicesInputText.text = indicesStr.substr(1, indicesStr.length - 2);
 		});
 
-		var addUpdateButton:FlxButton = new FlxButton(70, animationIndicesInputText.y + 30, "Add/Update", function() {
+		var addUpdateButton:FlxButton = new FlxButton(70, animationIndicesInputText.y + 30, "Add/Update", () -> {
 			var indices:Array<Int> = [];
 			var indicesStr:Array<String> = animationIndicesInputText.text.trim().split(',');
 			if(indicesStr.length > 1) {
@@ -558,7 +558,7 @@ class CharacterEditorState extends MusicBeatState
 			trace('Added/Updated animation: ' + animationInputText.text);
 		});
 
-		var removeButton:FlxButton = new FlxButton(180, animationIndicesInputText.y + 30, "Remove", function() {
+		var removeButton:FlxButton = new FlxButton(180, animationIndicesInputText.y + 30, "Remove", () -> {
 			for (anim in character.animationsArray)
 				if(animationInputText.text == anim.anim)
 				{
@@ -624,7 +624,7 @@ class CharacterEditorState extends MusicBeatState
 		tab_group.name = "Character";
 
 		imageInputText = new FlxUIInputText(15, 30, 200, character.imageFile, 8);
-		var reloadImage:FlxButton = new FlxButton(imageInputText.x + 210, imageInputText.y - 3, "Reload Image", function()
+		var reloadImage:FlxButton = new FlxButton(imageInputText.x + 210, imageInputText.y - 3, "Reload Image", () ->
 		{
 			var lastAnim = character.getAnimationName();
 			character.imageFile = imageInputText.text;
@@ -634,7 +634,7 @@ class CharacterEditorState extends MusicBeatState
 			}
 		});
 
-		var decideIconColor:FlxButton = new FlxButton(reloadImage.x, reloadImage.y + 30, "Get Icon Color", function()
+		var decideIconColor:FlxButton = new FlxButton(reloadImage.x, reloadImage.y + 30, "Get Icon Color", () ->
 			{
 				var coolColor:FlxColor = FlxColor.fromInt(CoolUtil.dominantColor(healthIcon));
 				character.healthColorArray[0] = coolColor.red;
@@ -652,14 +652,14 @@ class CharacterEditorState extends MusicBeatState
 		flipXCheckBox = new FlxUICheckBox(singDurationStepper.x + 80, singDurationStepper.y, null, null, "Flip X", 50);
 		flipXCheckBox.checked = character.flipX;
 		if(character.isPlayer) flipXCheckBox.checked = !flipXCheckBox.checked;
-		flipXCheckBox.callback = function() {
+		flipXCheckBox.callback = () -> {
 			character.originalFlipX = !character.originalFlipX;
 			character.flipX = (character.originalFlipX != character.isPlayer);
 		};
 
 		noAntialiasingCheckBox = new FlxUICheckBox(flipXCheckBox.x, flipXCheckBox.y + 40, null, null, "No Antialiasing", 80);
 		noAntialiasingCheckBox.checked = character.noAntialiasing;
-		noAntialiasingCheckBox.callback = function() {
+		noAntialiasingCheckBox.callback = () -> {
 			character.antialiasing = false;
 			if(!noAntialiasingCheckBox.checked && ClientPrefs.data.antialiasing) {
 				character.antialiasing = true;
@@ -673,7 +673,7 @@ class CharacterEditorState extends MusicBeatState
 		positionCameraXStepper = new FlxUINumericStepper(positionXStepper.x, positionXStepper.y + 40, 10, character.cameraPosition[0], -9000, 9000, 0);
 		positionCameraYStepper = new FlxUINumericStepper(positionYStepper.x, positionYStepper.y + 40, 10, character.cameraPosition[1], -9000, 9000, 0);
 
-		var saveCharacterButton:FlxButton = new FlxButton(reloadImage.x, noAntialiasingCheckBox.y + 40, "Save Character", function() {
+		var saveCharacterButton:FlxButton = new FlxButton(reloadImage.x, noAntialiasingCheckBox.y + 40, "Save Character", () -> {
 			saveCharacter();
 		});
 

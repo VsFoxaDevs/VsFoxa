@@ -121,10 +121,10 @@ class Note extends FlxSprite
 	public var hitsoundChartEditor:Bool = true;
 	public var hitsound:String = 'hitsound';
 
-	private function set_multSpeed(value:Float):Float {
+	inline private function set_multSpeed(value:Float):Float {
 		resizeByRatio(value / multSpeed);
 		multSpeed = value;
-		//trace('fuck cock');
+
 		return value;
 	}
 
@@ -137,7 +137,7 @@ class Note extends FlxSprite
 		}
 	}
 
-	private function set_texture(value:String):String {
+	inline private function set_texture(value:String):String {
 		if(texture != value) reloadNote(value);
 
 		texture = value;
@@ -313,8 +313,11 @@ class Note extends FlxSprite
 	public var originalHeight:Float = 6;
 	public var correctionOffset:Float = 0; //dont mess with this
 	public function reloadNote(texture:String = '', postfix:String = '') {
-		if(texture == null) texture = '';
-		if(postfix == null) postfix = '';
+		/*if(texture == null) texture = '';
+		if(postfix == null) postfix = '';*/
+		for (e in [texture, postfix])
+			if ( == null)
+				e = '';
 
 		var skin:String = texture + postfix;
 		if(texture.length < 1) {

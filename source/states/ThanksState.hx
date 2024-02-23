@@ -43,7 +43,7 @@ class ThanksState extends MusicBeatState {
 			32);
 		#else
 		var txt:FlxText = new FlxText(0, 0, FlxG.width,
-			"Thanks for playing Vs. Foxa 3.0!\nWe have worked hard on this for long, and we appreciate you playing the mod!"
+			"Thanks for playing Vs. Foxa 3.0!\nWe have worked hard on this for long, \nand we appreciate you playing the mod!"
 			+ "\n\nPress Enter to continue.",
 			32);
 		#end
@@ -73,7 +73,12 @@ class ThanksState extends MusicBeatState {
 	override function update(elapsed:Float){
         if(controls.ACCEPT || controls.BACK){
 			FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);
-			FlxG.switchState(new MainMenuState());
+			try {
+				FlxG.switchState(() -> new states.SaveFileState());
+			}
+			catch (e:Dynamic) {
+					FlxG.switchState(() -> new states.MainMenuState());
+			}
 		}
 
 		super.update(elapsed);

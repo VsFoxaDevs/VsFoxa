@@ -65,9 +65,10 @@ class LoadingState extends MusicBeatState
 		"Worjdjhewndjaiqkkwbdjkwqodbdjwoen&:’eked&3rd!2’wonenksiwnwihqbdibejwjebdjjejwjenfjdjejejjwkwiwjnensjsiieejjsjskikdjdnnwjwiwjejdjdjwiejdbdiwjdhehhrifjdnwoqnd",
 		"Oo0ooOoOOo000OOO!!!",
 		"Witness the might\nof the seas!",
-		"KadeDev is best.\nBut his own engine sucks though.",
+		"WE GOTTA GET SPONGEBOB BACK",
+		"Blud really said-"
 		"CARAMEL ARROW SUPREMACY",
-		"No, you are not getting 3.5. Get over it.",
+		"I put the new Forgi's on the jeep-",
 		"I will rip your intestines out.",
 		"flippity floppity",
 		"i'm surprised people might actually\nbe reading this at this point",
@@ -79,6 +80,8 @@ class LoadingState extends MusicBeatState
 		"I love to smash my keyboard.",
 		"Is Week 8 gonna come out anytime soon?",
 		"FIRE IN THE HOLE",
+		"WATER IN THE HILL",
+		
 		"There might be someone out there that's thinking about making a mod about you.\nKeep that in mind.",
 		"Funkin' Forever.",
 		"i hope you go mooseing\nand get fucked by a campfire",
