@@ -1427,38 +1427,6 @@ class ChartingState extends MusicBeatState
 
 	function loadSong():Void
 	{
-		if(FlxG.sound.music != null) FlxG.sound.music.stop();
-
-		vocals = new FlxSound();
-		try {
-			var file:Dynamic = Paths.voices(currentSongName);
-			if((Std.isOfType(file, Sound) || OpenFlAssets.exists(file)) && file != null){
-				vocals.loadEmbedded(file);
-				vocals.autoDestroy = false;
-				FlxG.sound.list.add(vocals);
-			}
-		}
-		catch(e:Dynamic) {}
-		generateSong();
-		FlxG.sound.music.pause();
-		Conductor.songPosition = sectionStartTime();
-		FlxG.sound.music.time = Conductor.songPosition;
-
-		var curTime:Float = 0;
-		
-		if(_song.notes.length <= 1) //First load ever
-		{
-			trace('first load ever!!');
-			while(curTime < FlxG.sound.music.length)
-			{
-				addSection();
-				curTime += (60 / _song.bpm) * 4000;
-			}
-		}
-	}
-
-	function loadSong():Void
-	{
 		if(FlxG.sound.music != null)  FlxG.sound.music.stop();
 
 		if(vocals != null) {
@@ -1559,8 +1527,8 @@ class ChartingState extends MusicBeatState
 			curSec = 0;
 			updateGrid();
 			updateSectionUI();
-			if(vocals !null) vocals.play();
-			if(opponentVocals !null) opponentVocals.play();
+			vocals?.play();
+			opponentVocals?.play();
 		};
 	}
 

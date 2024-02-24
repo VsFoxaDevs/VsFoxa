@@ -123,8 +123,7 @@ class Paths
 			var levelPath:String = '';
 			if(currentLevel != 'shared') {
 				levelPath = getLibraryPathForce(file, 'week_assets', currentLevel);
-				if (OpenFlAssets.exists(levelPath, type))
-					return levelPath;
+				if (OpenFlAssets.exists(levelPath, type)) return levelPath;
 			}
 		}
 
@@ -182,77 +181,35 @@ class Paths
 	}
 
 	inline public static function getSharedPath(file:String = '')
-	{
 		return 'assets/shared/$file';
-	}
 
 	inline public static function ndll(key:String)
-	{
 		return getPath('data/ndlls/$key.ndll');
-	}
-
+		
 	inline static public function txt(key:String, ?library:String)
-	{
 		return getPath('data/$key.txt', TEXT, library);
-	}
 
 	inline static public function xml(key:String, ?library:String)
-	{
 		return getPath('data/$key.xml', TEXT, library);
-	}
-
-	inline static public function obj(key:String) 
-	{
-		return getPath('models/$key.obj', BINARY, null);
-	}
-
-	inline static public function dae(key:String) 
-	{
-		return getPath('models/$key.dae', BINARY, null);
-	}
-
-	inline static public function md2(key:String) 
-	{
-		return getPath('models/$key.md2', BINARY, null);
-	}
-
-	inline static public function md5(key:String) 
-	{
-		return getPath('models/$key.md5', BINARY, null);
-	}
-	
-
-	inline static public function awd(key:String) {
-		return getPath('models/$key.awd', BINARY, null);
-	}
 
 	inline static public function json(key:String, ?library:String)
-	{
 		return getPath('data/$key.json', TEXT, library);
-	}
 
 	inline static public function shaderFragment(key:String, ?library:String)
-	{
 		return getPath('shaders/$key.frag', TEXT, library);
-	}
 
 	inline static public function shaderVertex(key:String, ?library:String)
-	{
 		return getPath('shaders/$key.vert', TEXT, library);
-	}
 
 	inline static public function lua(key:String, ?library:String)
-	{
 		return getPath('$key.lua', TEXT, library);
-	}
 
 	static public function video(key:String)
 	{
 		#if MODS_ALLOWED
 		var file:String = modsVideo(key);
-		if(FileSystem.exists(file)) {
+		if(FileSystem.exists(file))
 			return file;
-		}
 		#end
 		return 'assets/videos/$key.$VIDEO_EXT';
 	}
@@ -272,7 +229,7 @@ class Paths
 		return file;
 	}
 
-	inline static public function voices(song:String, postfix:String = null):Any {
+	inline static public function voices(song:String, postfix:String = null):Sound/*Any*/ {
 		var songKey:String = '${formatToSongPath(song)}/Voices';
 		if(postfix != null) songKey += '-' + postfix;
 
@@ -280,7 +237,7 @@ class Paths
 		return voices;
 	}
 
-	inline static public function inst(song:String):Any {
+	inline static public function inst(song:String):Sound/*Any*/ {
 		var songKey:String = '${formatToSongPath(song)}/Inst';
 		var inst = returnSound(null, songKey, 'songs');
 		return inst;
@@ -294,8 +251,7 @@ class Paths
 
 		#if MODS_ALLOWED
 		file = modsImages(key);
-		if (currentTrackedAssets.exists(file))
-		{
+		if (currentTrackedAssets.exists(file)) {
 			localTrackedAssets.push(file);
 			return currentTrackedAssets.get(file);
 		}
@@ -325,12 +281,10 @@ class Paths
 		if (bitmap == null)
 		{
 			#if MODS_ALLOWED
-			if (FileSystem.exists(file))
-				bitmap = BitmapData.fromFile(file);
+			if (FileSystem.exists(file)) bitmap = BitmapData.fromFile(file);
 			else
 			#end
-			if (OpenFlAssets.exists(file, IMAGE))
-				bitmap = OpenFlAssets.getBitmapData(file);
+			if (OpenFlAssets.exists(file, IMAGE)) bitmap = OpenFlAssets.getBitmapData(file);
 
 			if (bitmap == null) return null;
 		}
@@ -362,20 +316,16 @@ class Paths
 	{
 		#if sys
 		#if MODS_ALLOWED
-		if (!ignoreMods && FileSystem.exists(modFolders(key)))
-			return File.getContent(modFolders(key));
+		if (!ignoreMods && FileSystem.exists(modFolders(key))) return File.getContent(modFolders(key));
 		#end
 
-		if (FileSystem.exists(getSharedPath(key)))
-			return File.getContent(getSharedPath(key));
+		if (FileSystem.exists(getSharedPath(key))) return File.getContent(getSharedPath(key));
 
-		if (currentLevel != null)
-		{
+		if (currentLevel != null) {
 			var levelPath:String = '';
 			if(currentLevel != 'shared') {
 				levelPath = getLibraryPathForce(key, 'week_assets', currentLevel);
-				if (FileSystem.exists(levelPath))
-					return File.getContent(levelPath);
+				if (FileSystem.exists(levelPath)) return File.getContent(levelPath);
 			}
 		}
 		#end
@@ -388,9 +338,7 @@ class Paths
 	{
 		#if MODS_ALLOWED
 		var file:String = modsFont(key);
-		if(FileSystem.exists(file)) {
-			return file;
-		}
+		if(FileSystem.exists(file)) return file;
 		#end
 		return 'assets/fonts/$key';
 	}
@@ -398,23 +346,16 @@ class Paths
 	public static function fileExists(key:String, type:AssetType, ?ignoreMods:Bool = false, ?library:String = null)
 	{
 		#if MODS_ALLOWED
-		if(!ignoreMods)
-		{
-			for(mod in Mods.getGlobalMods())
-				if (FileSystem.exists(mods('$mod/$key')))
-					return true;
+		if(!ignoreMods) {
+			for(mod in Mods.getGlobalMods()) if (FileSystem.exists(mods('$mod/$key'))) return true;
 
-			if (FileSystem.exists(mods(Mods.currentModDirectory + '/' + key)) || FileSystem.exists(mods(key)))
-				return true;
+			if (FileSystem.exists(mods(Mods.currentModDirectory + '/' + key)) || FileSystem.exists(mods(key))) return true;
 
-			if (FileSystem.exists(mods('$key')))
-				return true;
+			if (FileSystem.exists(mods('$key'))) return true;
 		}
 		#end
 
-		if(OpenFlAssets.exists(getPath(key, type, library, false))) {
-			return true;
-		}
+		if(OpenFlAssets.exists(getPath(key, type, library, false))) return true;
 		return false;
 	}
 
@@ -512,69 +453,52 @@ class Paths
 	}
 
 	#if MODS_ALLOWED
-	inline static public function mods(key:String = '') {
-		return key;
-	}
+	inline static public function mods(key:String = '')
+		return key; 
 
-	inline static public function modsFont(key:String) {
+	inline static public function modsFont(key:String)
 		return modFolders('fonts/' + key);
-	}
 
-	inline static public function modsJson(key:String) {
+	inline static public function modsJson(key:String)
 		return modFolders('data/' + key + '.json');
-	}
 
 	inline static public function modsNdll(key:String)
-	{
 		return modFolders('data/ndlls/$key.ndll');
-	}
 
-	inline static public function modsVideo(key:String) {
+	inline static public function modsVideo(key:String)
 		return modFolders('videos/' + key + '.' + VIDEO_EXT);
-	}
 
-	inline static public function modsSounds(path:String, key:String) {
+	inline static public function modsSounds(path:String, key:String)
 		return modFolders(path + '/' + key + '.' + SOUND_EXT);
-	}
 
-	inline static public function modsImages(key:String) {
+	inline static public function modsImages(key:String) 
 		return modFolders('images/' + key + '.png');
-	}
+	
 
-	inline static public function modsXml(key:String) {
+	inline static public function modsXml(key:String) 
 		return modFolders('images/' + key + '.xml');
-	}
 
-	inline static public function modsTxt(key:String) {
+	inline static public function modsTxt(key:String) 
 		return modFolders('images/' + key + '.txt');
-	}
-
-	/* Goes unused for now
-
+	
 	inline static public function modsShaderFragment(key:String, ?library:String)
-	{
 		return modFolders('shaders/'+key+'.frag');
-	}
+
 	inline static public function modsShaderVertex(key:String, ?library:String)
-	{
 		return modFolders('shaders/'+key+'.vert');
-	}
-	inline static public function modsAchievements(key:String) {
+
+	inline static public function modsAchievements(key:String)
 		return modFolders('achievements/' + key + '.json');
-	}*/
 
 	static public function modFolders(key:String) {
 		if(Mods.currentModDirectory != null && Mods.currentModDirectory.length > 0) {
 			var fileToCheck:String = mods(Mods.currentModDirectory + '/' + key);
-			if(FileSystem.exists(fileToCheck)) {
-				return fileToCheck;
-			}
+			if(FileSystem.exists(fileToCheck)) return fileToCheck;
 		}
 
 		for(mod in Mods.getGlobalMods()){
 			var fileToCheck:String = mods(mod + '/' + key);
-			if(FileSystem.exists(fileToCheck))
-				return fileToCheck;
+			if(FileSystem.exists(fileToCheck)) return fileToCheck;
 		}
 		return 'mods/' + key;
 	}
@@ -587,14 +511,12 @@ class Paths
 		var changedAtlasJson = false;
 		var changedImage = false;
 		
-		if(spriteJson != null)
-		{
+		if(spriteJson != null) {
 			changedAtlasJson = true;
 			spriteJson = File.getContent(spriteJson);
 		}
 
-		if(animationJson != null) 
-		{
+		if(animationJson != null)  {
 			changedAnimJson = true;
 			animationJson = File.getContent(animationJson);
 		}
@@ -603,63 +525,38 @@ class Paths
 		if(Std.isOfType(folderOrImg, String))
 		{
 			var originalPath:String = folderOrImg;
-			for (i in 0...10)
-			{
+			for (i in 0...10) {
 				var st:String = '$i';
 				if(i == 0) st = '';
 
-				if(!changedAtlasJson)
-				{
+				if(!changedAtlasJson) {
 					spriteJson = getTextFromFile('images/$originalPath/spritemap$st.json');
 					if(spriteJson != null)
 					{
-						//trace('found Sprite Json');
 						changedImage = true;
 						changedAtlasJson = true;
 						folderOrImg = Paths.image('$originalPath/spritemap$st');
 						break;
 					}
-				}
-				else if(Paths.fileExists('images/$originalPath/spritemap$st.png', IMAGE))
-				{
-					//trace('found Sprite PNG');
+				} else if(Paths.fileExists('images/$originalPath/spritemap$st.png', IMAGE)) {
 					changedImage = true;
 					folderOrImg = Paths.image('$originalPath/spritemap$st');
 					break;
 				}
 			}
 
-			if(!changedImage)
-			{
-				//trace('Changing folderOrImg to FlxGraphic');
+			if(!changedImage) {
 				changedImage = true;
 				folderOrImg = Paths.image(originalPath);
 			}
 
-			if(!changedAnimJson)
-			{
-				//trace('found Animation Json');
+			if(!changedAnimJson) {
 				changedAnimJson = true;
 				animationJson = getTextFromFile('images/$originalPath/Animation.json');
 			}
 		}
 
-		//trace(folderOrImg);
-		//trace(spriteJson);
-		//trace(animationJson);
 		spr.loadAtlasEx(folderOrImg, spriteJson, animationJson);
 	}
-
-	/*private static function getContentFromFile(path:String):String
-	{
-		var onAssets:Bool = false;
-		var path:String = Paths.getPath(path, TEXT, true);
-		if(FileSystem.exists(path) || (onAssets = true && Assets.exists(path, TEXT)))
-		{
-			//trace('Found text: $path');
-			return !onAssets ? File.getContent(path) : Assets.getText(path);
-		}
-		return null;
-	}*/
 	#end
 }

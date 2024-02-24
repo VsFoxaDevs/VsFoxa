@@ -2,7 +2,7 @@
 # SETUP FOR MAC AND LINUX SYSTEMS!!!
 #
 # REMINDER THAT YOU NEED HAXE INSTALLED PRIOR TO USING THIS
-# https://haxe.org/download/version/4.2.5/
+# https://haxe.org/download/version/4.3.3/
 haxelib install lime
 haxelib install openfl
 haxelib install flixel
