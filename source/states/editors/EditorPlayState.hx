@@ -14,6 +14,11 @@ import flixel.animation.FlxAnimationController;
 import flixel.input.keyboard.FlxKey;
 import openfl.events.KeyboardEvent;
 
+import haxe.Json;
+import objects.Character;
+
+using StringTools;
+
 class EditorPlayState extends MusicBeatSubstate
 {
 	// Borrowed from original PlayState
@@ -23,8 +28,10 @@ class EditorPlayState extends MusicBeatSubstate
 	var startingSong:Bool = true;
 
 	var playbackRate:Float = 1;
-	var vocals:FlxSound;
+
 	var inst:FlxSound;
+	var vocals:FlxSound;
+	var opponentVocals:FlxSound;
 	
 	var notes:FlxTypedGroup<Note>;
 	var unspawnNotes:Array<Note> = [];
@@ -221,14 +228,17 @@ class EditorPlayState extends MusicBeatSubstate
 						\nStep: $curStep';
 		super.update(elapsed);
 	}
-	
+
 	var lastStepHit:Int = -1;
 	override function stepHit()
 	{
-		if (FlxG.sound.music.time >= -ClientPrefs.data.noteOffset)
+		if (PlayState.SONG.needsVoices && FlxG.sound.music.time >= -ClientPrefs.data.noteOffset)
 		{
-			if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)
-				|| (PlayState.SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)))
+			var timeSub:Float = Conductor.songPosition - Conductor.offset;
+			var syncTime:Float = 20 * playbackRate;
+			if (Math.abs(FlxG.sound.music.time - timeSub) > syncTime ||
+			(vocals.length > 0 && Math.abs(vocals.time - timeSub) > syncTime) ||
+			(opponentVocals.length > 0 && Math.abs(opponentVocals.time - timeSub) > syncTime))
 			{
 				resyncVocals();
 			}
@@ -283,6 +293,9 @@ class EditorPlayState extends MusicBeatSubstate
 		vocals.volume = 1;
 		vocals.time = startPos;
 		vocals.play();
+		opponentVocals.volume = 1;
+		opponentVocals.time = startPos;
+		opponentVocals.play();
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
@@ -306,12 +319,30 @@ class EditorPlayState extends MusicBeatSubstate
 		var songData = PlayState.SONG;
 		Conductor.bpm = songData.bpm;
 
+		var boyfriendVocals:String = loadCharacterFile(PlayState.SONG.player1).vocals_file;
+		var dadVocals:String = loadCharacterFile(PlayState.SONG.player2).vocals_file;
+
 		vocals = new FlxSound();
-		if (songData.needsVoices) vocals.loadEmbedded(Paths.voices(songData.song));
+		opponentVocals = new FlxSound();
+		try {
+			if (songData.needsVoices) {
+				var playerVocals = Paths.voices(songData.song, (boyfriendVocals == null || boyfriendVocals.length < 1) ? 'Player' : boyfriendVocals);
+				vocals.loadEmbedded(playerVocals ?? Paths.voices(songData.song));
+
+				var oppVocals = Paths.voices(songData.song, (dadVocals == null || dadVocals.length < 1) ? 'Opponent' : dadVocals);
+				if(oppVocals != null) opponentVocals.loadEmbedded(oppVocals);
+			}
+		}
+		catch(e:Dynamic) {}
+
 		vocals.volume = 0;
+		opponentVocals.volume = 0;
 
 		vocals.pitch = playbackRate;
+		opponentVocals.pitch = playbackRate;
+
 		FlxG.sound.list.add(vocals);
+		FlxG.sound.list.add(opponentVocals);
 
 		inst = new FlxSound().loadEmbedded(Paths.inst(songData.song));
 		FlxG.sound.list.add(inst);
@@ -472,6 +503,8 @@ class EditorPlayState extends MusicBeatSubstate
 	{
 		vocals.pause();
 		vocals.destroy();
+		opponentVocals.pause();
+		opponentVocals.destroy();
 		if(finishTimer != null)
 		{
 			finishTimer.cancel();
@@ -779,8 +812,8 @@ class EditorPlayState extends MusicBeatSubstate
 	
 	function opponentNoteHit(note:Note):Void
 	{
-		if (PlayState.SONG.needsVoices)
-			vocals.volume = 1;
+		if (PlayState.SONG.needsVoices && opponentVocals.length <= 0)
+			opponentVocals.volume = 1;
 
 		var strum:StrumNote = opponentStrums.members[Std.int(Math.abs(note.noteData))];
 		if(strum != null) {
@@ -898,21 +931,25 @@ class EditorPlayState extends MusicBeatSubstate
 		grpNoteSplashes.add(splash);
 	}
 	
-	function resyncVocals():Void
-	{
+	function resyncVocals():Void {
 		if(finishTimer != null) return;
 
 		vocals.pause();
+		opponentVocals.pause();
 
 		FlxG.sound.music.play();
 		FlxG.sound.music.pitch = playbackRate;
 		Conductor.songPosition = FlxG.sound.music.time;
-		if (Conductor.songPosition <= vocals.length)
-		{
+		if (Conductor.songPosition <= vocals.length) {
 			vocals.time = Conductor.songPosition;
 			vocals.pitch = playbackRate;
 		}
+		if (Conductor.songPosition <= opponentVocals.length) {
+			opponentVocals.time = Conductor.songPosition;
+			opponentVocals.pitch = playbackRate;
+		}
 		vocals.play();
+		opponentVocals.play();
 	}
 
 	function RecalculateRating(badHit:Bool = false) {
@@ -926,8 +963,7 @@ class EditorPlayState extends MusicBeatSubstate
 	function updateScore(miss:Bool = false)
 	{
 		var str:String = '?';
-		if(totalPlayed != 0)
-		{
+		if(totalPlayed != 0) {
 			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
 			str = '$percent% - $ratingFC';
 		}
@@ -942,13 +978,30 @@ class EditorPlayState extends MusicBeatSubstate
 		var shits:Int = ratingsData[3].hits;
 
 		ratingFC = 'Clear';
-		if(songMisses < 1)
-		{
+		if(songMisses < 1) {
 			if (bads > 0 || shits > 0) ratingFC = 'FC';
 			else if (goods > 0) ratingFC = 'GFC';
 			else if (sicks > 0) ratingFC = 'SFC';
 		}
-		else if (songMisses < 10)
-			ratingFC = 'SDCB';
+		else if (songMisses < 10) ratingFC = 'SDCB';
+	}
+
+	function loadCharacterFile(char:String):CharacterFile {
+		var characterPath:String = 'characters/' + char + '.json';
+		#if MODS_ALLOWED
+		var path:String = Paths.modFolders(characterPath);
+		if (!FileSystem.exists(path)) path = Paths.getSharedPath(characterPath);
+
+		if (!FileSystem.exists(path))
+		#else
+		var path:String = Paths.getSharedPath(characterPath);
+		if (!OpenFlAssets.exists(path))
+		#end
+		{
+			path = Paths.getSharedPath('characters/' + Character.DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
+		}
+
+		var rawJson = #if MODS_ALLOWED File.getContent(path); #else OpenFlAssets.getText(path); #end
+		return cast Json.parse(rawJson);
 	}
 }

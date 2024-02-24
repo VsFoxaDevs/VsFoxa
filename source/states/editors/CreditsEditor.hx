@@ -41,6 +41,8 @@ class CreditsEditor extends MusicBeatState {
 		DiscordClient.changePresence("Credits Editor", null);
 		#end
 
+		FlxG.sound.playMusic(Paths.music('breakfast'), 0.5);
+		
 		persistentUpdate = true;
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);

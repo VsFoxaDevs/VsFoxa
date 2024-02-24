@@ -4,7 +4,6 @@ import cppthing.WindowsData;
 
 import backend.WeekData;
 import backend.Highscore;
-import backend.ButtplugUtils;
 
 import flixel.input.keyboard.FlxKey;
 import flixel.addons.transition.FlxTransitionableState;
@@ -155,9 +154,9 @@ class TitleState extends MusicBeatState {
 	{
 		if (!initialized)
 		{
-			if(FlxG.sound.music == null) {
-				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-			}
+			//if(FlxG.sound.music == null) {
+				FlxG.sound.playMusic(Paths.music('freakyMenu'), 1);
+			//}
 		}
 
 		Conductor.bpm = titleJSON.bpm;
@@ -546,8 +545,8 @@ class TitleState extends MusicBeatState {
 				case 1:
 					trace('freaky night guys');
 					//FlxG.sound.music.stop();
-					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
-					FlxG.sound.music.fadeIn(4, 0, 0.7);
+					FlxG.sound.playMusic(Paths.music('freakyMenu'), 0.1);
+					FlxG.sound.music.fadeIn(4, 0.1, 0.7);
 				case 2:
 					#if ALLEYWAY_WATERMARKS
 					createCoolText(['Alleyway Engine', 'by'], 40);

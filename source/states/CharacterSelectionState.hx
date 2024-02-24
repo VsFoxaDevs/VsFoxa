@@ -5,7 +5,7 @@ import objects.HealthIcon;
 
 /**
     This is not from the Dave & Bambi source code, it's completely made by Delta.
-    Modified by Altertoriel. (Ported to Psych 0.7.3)
+    Modified by Altertoriel and CharlesCatYY. (Ported to Alleyway Engine/Psych 0.7.3)
 **/
 
 class CharacterSelectionState extends MusicBeatState {
@@ -57,7 +57,7 @@ class CharacterSelectionState extends MusicBeatState {
 	var camHUD:FlxCamera;
 
 	override function create() {
-		#if DISCORD_ALLOWED DiscordClient.changePresence('Selecting Character'); #end
+		#if desktop DiscordClient.changePresence('Selecting a Character'); #end
 
 		persistentUpdate = true;
 

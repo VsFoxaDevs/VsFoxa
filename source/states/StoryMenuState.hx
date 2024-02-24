@@ -49,7 +49,7 @@ class StoryMenuState extends MusicBeatState {
 		
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
 		persistentUpdate = persistentDraw = true;
-
+		
 		scoreText = new FlxText(80, 10, 0, "SCORE: 49324858", 36);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32);
 
@@ -57,7 +57,7 @@ class StoryMenuState extends MusicBeatState {
 		txtWeekTitle.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
 		txtWeekTitle.alpha = 0.7;
 
-		var rankText:FlxText = new FlxText(0, 10);
+		var rankText:FlxText = new FlxText(0, 10); // this is unused btw
 		rankText.text = 'RANK: GREAT';
 		rankText.setFormat(Paths.font("vcr.ttf"), 32);
 		rankText.size = scoreText.size;

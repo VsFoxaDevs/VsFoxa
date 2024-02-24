@@ -235,10 +235,12 @@ class Paths
 	{
 		return getPath('shaders/$key.frag', TEXT, library);
 	}
+
 	inline static public function shaderVertex(key:String, ?library:String)
 	{
 		return getPath('shaders/$key.vert', TEXT, library);
 	}
+
 	inline static public function lua(key:String, ?library:String)
 	{
 		return getPath('$key.lua', TEXT, library);
@@ -262,9 +264,7 @@ class Paths
 	}
 
 	inline static public function soundRandom(key:String, min:Int, max:Int, ?library:String)
-	{
 		return sound(key + FlxG.random.int(min, max), library);
-	}
 
 	inline static public function music(key:String, ?library:String):Sound
 	{
@@ -272,15 +272,15 @@ class Paths
 		return file;
 	}
 
-	inline static public function voices(song:String):Any
-	{
+	inline static public function voices(song:String, postfix:String = null):Any {
 		var songKey:String = '${formatToSongPath(song)}/Voices';
+		if(postfix != null) songKey += '-' + postfix;
+
 		var voices = returnSound(null, songKey, 'songs');
 		return voices;
 	}
 
-	inline static public function inst(song:String):Any
-	{
+	inline static public function inst(song:String):Any {
 		var songKey:String = '${formatToSongPath(song)}/Inst';
 		var inst = returnSound(null, songKey, 'songs');
 		return inst;
@@ -503,7 +503,8 @@ class Paths
 			if(path == 'songs') folder = 'songs:';
 
 			var retKey:String = (path != null) ? '$path/$key' : key;
-			currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(folder + getPath('$retKey.$SOUND_EXT', SOUND, library)));
+			retKey = ((path == 'songs') ? 'songs:' : '') + getPath('$retKey.$SOUND_EXT', SOUND, library);
+			if(OpenFlAssets.exists(retKey, SOUND)) currentTrackedSounds.set(gottenPath, OpenFlAssets.getSound(retKey));
 		}
 		#end
 		localTrackedAssets.push(gottenPath);

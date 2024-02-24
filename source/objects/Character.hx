@@ -26,6 +26,7 @@ typedef CharacterFile = {
 	var flip_x:Bool;
 	var no_antialiasing:Bool;
 	var healthbar_colors:Array<Int>;
+	var vocals_file:String;
 	@:optional var _editor_isPlayer:Null<Bool>;
 }
 
@@ -66,6 +67,7 @@ class Character extends FlxSprite {
 	public var healthColorArray:Array<Int> = [255, 0, 0]; // i wonder if i can turn this to hex optionally hmmmmm
 
 	public var hasMissAnimations:Bool = false;
+	public var vocalsFile:String = '';
 
 	//Used on Character Editor
 	public var imageFile:String = '';
@@ -96,6 +98,8 @@ class Character extends FlxSprite {
 				#end
 				{
 					path = Paths.getSharedPath('characters/' + DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
+					color = FlxColor.BLACK;
+					alpha = 0.6;
 				}
 
 				try {
@@ -168,6 +172,7 @@ class Character extends FlxSprite {
 		flipX = (json.flip_x != isPlayer);
 		healthColorArray = (json.healthbar_colors != null && json.healthbar_colors.length > 2) ? json.healthbar_colors : [161, 161, 161];
 		originalFlipX = (json.flip_x == true);
+		vocalsFile = json.vocals_file ?? '';
 		editorIsPlayer = json._editor_isPlayer;
 		// antialiasing
 		noAntialiasing = (json.no_antialiasing == true);

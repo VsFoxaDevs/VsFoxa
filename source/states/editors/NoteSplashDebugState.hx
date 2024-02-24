@@ -120,8 +120,7 @@ class NoteSplashDebugState extends MusicBeatState {
 		{
 			switch(action)
 			{
-				case 'enter':
-					nameInputText.hasFocus = false;
+				case 'enter': nameInputText.hasFocus = false;
 				
 				default:
 					trace('changed anim name to $text');
@@ -330,22 +329,18 @@ class NoteSplashDebugState extends MusicBeatState {
 		#if sys
 		var maxLen:Int = maxAnims * Note.colArray.length;
 		var curLen:Int = config.offsets.length;
-		while(curLen > maxLen)
-		{
+		while(curLen > maxLen){
 			config.offsets.pop();
 			curLen = config.offsets.length;
 		}
 
 		var strToSave = config.anim + '\n' + config.minFps + ' ' + config.maxFps;
-		for (offGroup in config.offsets)
-			strToSave += '\n' + offGroup[0] + ' ' + offGroup[1];
+		for (offGroup in config.offsets) strToSave += '\n' + offGroup[0] + ' ' + offGroup[1];
 
 		var pathSplit:Array<String> = (Paths.getPath('images/$texturePath.png', IMAGE, true).split('.png')[0] + '.txt').split(':');
 		var path:String = pathSplit[pathSplit.length-1].trim();
 		savedText.text = 'Saved to: $path';
 		File.saveContent(path, strToSave);
-
-		//trace(strToSave);
 		#else
 		savedText.text = 'Can\'t save on this platform, too bad.';
 		#end
@@ -445,8 +440,7 @@ class NoteSplashDebugState extends MusicBeatState {
 		if(sel < 0) sel = curSelected;
 		var animID:Int = sel + ((curAnim - 1) * Note.colArray.length);
 		if(config.offsets[animID] == null) {
-			while(config.offsets[animID] == null)
-				config.offsets.push(config.offsets[FlxMath.wrap(animID, 0, config.offsets.length-1)].copy());
+			while(config.offsets[animID] == null) config.offsets.push(config.offsets[FlxMath.wrap(animID, 0, config.offsets.length-1)].copy());
 		}
 		return config.offsets[FlxMath.wrap(animID, 0, config.offsets.length-1)];
 	}

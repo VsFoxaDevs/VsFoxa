@@ -26,6 +26,7 @@
 	<haxedef name="NDLLS_ALLOWED" if="cpp"/>
 	<!--<define name="FREEPLAY_SECTIONS" />-->
 	<define name="ACHIEVEMENTS_ALLOWED" />
+	<!--<define name="BUTTPLUG_ALLOWED" />-->
 	<define name="LOADING_SCREEN" />
 	<define name="VIDEOS_ALLOWED" if="windows || linux || android" unless="32bits" /><!-- wait why is there some hints of an official android port wtf -->
 	<define name="ALLEYWAY_WATERMARKS" />

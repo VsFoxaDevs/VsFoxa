@@ -252,7 +252,7 @@ class DialogueEditorState extends MusicBeatState
 		if (daText.rows > 2)
 			daText.y -= DialogueBoxPsych.LONG_TEXT_ADD;
 
-		#if DISCORD_ALLOWED
+		#if desktop
 		// Updating Discord Rich Presence
 		var rpcText:String = lineInputText.text;
 		if (rpcText == null || rpcText.length < 1)

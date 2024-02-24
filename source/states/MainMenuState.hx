@@ -64,7 +64,7 @@ class MainMenuState extends MusicBeatState {
 		"vile fnf (-BambiTGA)",
 		"I'm gonna stop updating Psych Engine soon. (-ShadowMario)",
 		"Its already been 1 beer... (-cyborg henry)",
-		"are you learning about rocks (-TheAmimateMan)",
+		"are you learning about rocks (-TheAnimateMan)",
 		"this is FANUM TAX! first i GYATT your brother... now i RIZZ you! SKIBIDI my friend! (-Foxa The Artist)",
 		"sorry i may have taken a bite out of your chicken (-cyborg henry)",
 		"Damn how many fnf mods are ya'll making1?!?! (-ItsToppy)",

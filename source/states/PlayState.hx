@@ -14,7 +14,7 @@ import backend.Highscore;
 import backend.StageData;
 import backend.WeekData;
 import backend.Song;
-import backend.ButtplugUtils;
+#if BUTTPLUG_ALLOWED import backend.ButtplugUtils; #end
 import backend.Section;
 import backend.Rating;
 
@@ -152,8 +152,9 @@ class PlayState extends MusicBeatState
 
 	public var spawnTime:Float = 2000;
 
-	public var vocals:FlxSound;
 	public var inst:FlxSound;
+	public var vocals:FlxSound;
+	public var opponentVocals:FlxSound;
 
 	public var dad:Character = null;
 	public var gf:Character = null;
@@ -289,7 +290,7 @@ class PlayState extends MusicBeatState
 	//public var cam3D:Flx3DView;
 
 	//the payload for beat-based buttplug support
-	public var bpPayload:String = "";
+	#if BUTTPLUG_ALLOWED public var bpPayload:String = ""; #end
 
 	override public function create()
 	{
@@ -770,7 +771,10 @@ class PlayState extends MusicBeatState
 	inline function set_playbackRate(value:Float):Float
 	{
 		if(generatedMusic){
-			if(vocals != null) vocals.pitch = value;
+			if(vocals != null) {
+				vocals.pitch = value;
+				opponentVocals.pitch = value;
+			}
 			FlxG.sound.music.pitch = value;
 
 			var ratio:Float = playbackRate / value; //funny word huh
@@ -1262,6 +1266,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.sound.music.pause();
 		vocals.pause();
+		opponentVocals.pause();
 
 		FlxG.sound.music.time = time;
 		FlxG.sound.music.pitch = playbackRate;
@@ -1270,9 +1275,12 @@ class PlayState extends MusicBeatState
 		if (Conductor.songPosition <= vocals.length)
 		{
 			vocals.time = time;
+			opponentVocals.time = time;
 			vocals.pitch = playbackRate;
+			opponentVocals.pitch = playbackRate;
 		}
 		vocals.play();
+		opponentVocals.play();
 		Conductor.songPosition = time;
 	}
 
@@ -1294,6 +1302,7 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.pitch = playbackRate;
 		FlxG.sound.music.onComplete = () -> finishSong();
 		vocals.play();
+		opponentVocals.play();
 
 		if(startOnTime > 0) setSongTime(startOnTime - 500);
 		startOnTime = 0;
@@ -1302,6 +1311,7 @@ class PlayState extends MusicBeatState
 			//trace('Oopsie doopsie! Paused sound');
 			FlxG.sound.music.pause();
 			vocals.pause();
+			opponentVocals.pause();
 		}
 
 		// Song duration in a float, useful for the time left feature
@@ -1326,7 +1336,6 @@ class PlayState extends MusicBeatState
 	private var eventsPushed:Array<String> = [];
 	private function generateSong(dataPath:String):Void
 	{
-		// FlxG.log.add(ChartParser.parse());
 		songSpeed = PlayState.SONG.speed;
 		songSpeedType = ClientPrefs.getGameplaySetting('scrolltype');
 		switch(songSpeedType){
@@ -1339,12 +1348,22 @@ class PlayState extends MusicBeatState
 		curSong = songData.song;
 
 		vocals = new FlxSound();
-		try {if(songData.needsVoices) vocals.loadEmbedded(Paths.voices(songData.song));}
-		catch(e:Dynamic) {
-			#if debug trace('IS THAT A LEAK REFERENCE'); #end
+		opponentVocals = new FlxSound();
+		try {
+			if (songData.needsVoices) {
+				var playerVocals = Paths.voices(songData.song, (boyfriend.vocalsFile == null || boyfriend.vocalsFile.length < 1) ? 'Player' : boyfriend.vocalsFile);
+				vocals.loadEmbedded(playerVocals ?? Paths.voices(songData.song));
+
+				var oppVocals = Paths.voices(songData.song, (dad.vocalsFile == null || dad.vocalsFile.length < 1) ? 'Opponent' : dad.vocalsFile);
+				if(oppVocals != null) opponentVocals.loadEmbedded(oppVocals);
+			}
 		}
+		catch(e:Dynamic) {#if debug trace('no vocals?') #end}
+
 		vocals.pitch = playbackRate;
+		opponentVocals.pitch = playbackRate;
 		FlxG.sound.list.add(vocals);
+		FlxG.sound.list.add(opponentVocals);
 
 		inst = new FlxSound();
 		try {
@@ -1356,7 +1375,7 @@ class PlayState extends MusicBeatState
 		FlxG.sound.list.add(inst);
 
 		//generate the payload for the frontend
-		bpPayload = ButtplugUtils.createPayload(Conductor.crochet);
+		#if BUTTPLUG_ALLOWED bpPayload = ButtplugUtils.createPayload(Conductor.crochet); #end
 
 		notes = new FlxTypedGroup<Note>();
 		add(notes);
@@ -1575,6 +1594,7 @@ class PlayState extends MusicBeatState
 			{
 				FlxG.sound.music.pause();
 				vocals.pause();
+				opponentVocals.pause();
 			}
 
 			if (startTimer != null && !startTimer.finished) startTimer.active = false;
@@ -1665,7 +1685,7 @@ class PlayState extends MusicBeatState
 	{
 		if(finishTimer != null) return;
 
-		vocals.pause();
+		trace('resynced vocals at ' + Math.floor(Conductor.songPosition));
 
 		FlxG.sound.music.play();
 		FlxG.sound.music.pitch = playbackRate;
@@ -1743,16 +1763,24 @@ class PlayState extends MusicBeatState
 			health = healthBar.bounds.max;
 
 		updateIcons(elapsed);
-		
-		if (startedCountdown && !paused)
-			Conductor.songPosition += FlxG.elapsed * 1000 * playbackRate;
 
-		if (startingSong)
-		{
-			if (startedCountdown && Conductor.songPosition >= 0)
-				startSong();
-			else if(!startedCountdown)
-				Conductor.songPosition = -Conductor.crochet * 5;
+		if (startedCountdown && !paused) {
+			Conductor.songPosition += elapsed * 1000 * playbackRate;
+			if (checkIfDesynced) {
+				var diff:Float = 20 * playbackRate;
+				var timeSub:Float = Conductor.songPosition - Conductor.offset;
+				if (Math.abs(FlxG.sound.music.time - timeSub) > diff
+					|| (vocals.length > 0 && Math.abs(vocals.time - timeSub) > diff)
+					|| (opponentVocals.length > 0 && Math.abs(opponentVocals.time - timeSub) > diff)) {
+					resyncVocals();
+				}
+				checkIfDesynced = false;
+			}
+		}
+
+		if (startingSong) {
+			if (startedCountdown && Conductor.songPosition >= 0) startSong();
+			else if(!startedCountdown) Conductor.songPosition = -Conductor.crochet * 5;
 		}
 		else if (!paused && updateTime)
 		{
@@ -1933,6 +1961,7 @@ class PlayState extends MusicBeatState
 		if(FlxG.sound.music != null) {
 			FlxG.sound.music.pause();
 			vocals.pause();
+			opponentVocals.pause();
 		}
 		if(!cpuControlled)
 		{
@@ -1963,6 +1992,7 @@ class PlayState extends MusicBeatState
 		if(FlxG.sound.music != null) {
 			FlxG.sound.music.pause();
 			vocals.pause();
+			opponentVocals.pause();
 		}
 		openSubState(new substates.GameplayChangersSubstate());
 	}
@@ -2005,17 +2035,14 @@ class PlayState extends MusicBeatState
 				paused = true;
 
 				vocals.stop();
+				opponentVocals.stop();
 				FlxG.sound.music.stop();
 
 				persistentUpdate = false;
 				persistentDraw = false;
 				#if LUA_ALLOWED
-				for (tween in modchartTweens) {
-					tween.active = true;
-				}
-				for (timer in modchartTimers) {
-					timer.active = true;
-				}
+				for (tween in modchartTweens) tween.active = true;
+				for (timer in modchartTimers) timer.active = true;
 				#end
 				if (!ClientPrefs.data.instantRespawn)
 					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x - boyfriend.positionArray[0], boyfriend.getScreenPosition().y - boyfriend.positionArray[1], camFollow.x, camFollow.y));
@@ -2039,10 +2066,9 @@ class PlayState extends MusicBeatState
 	public function checkEventNote() {
 		while(eventNotes.length > 0) {
 			var leStrumTime:Float = eventNotes[0].strumTime;
-			if(Conductor.songPosition < leStrumTime) {
+			if(Conductor.songPosition < leStrumTime)
 				return;
-			}
-
+			
 			var value1:String = '';
 			if(eventNotes[0].value1 != null)
 				value1 = eventNotes[0].value1;
@@ -2362,6 +2388,8 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
 		vocals.pause();
+		opponentVocals.volume = 0;
+		opponentVocals.pause();
 		if(ClientPrefs.data.noteOffset <= 0 || ignoreNoteOffset) {
 			endCallback();
 		} else {
@@ -2375,7 +2403,7 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong()
 	{
-		ButtplugUtils.stop();
+		#if BUTTPLUG_ALLOWED ButtplugUtils.stop(); #end
 
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
@@ -2928,6 +2956,7 @@ class PlayState extends MusicBeatState
 		if(instakillOnMiss)
 		{
 			vocals.volume = 0;
+			opponentVocals.volume = 0;
 			doDeathCheck(true);
 		}
 
@@ -3003,9 +3032,10 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (SONG.needsVoices)
-			vocals.volume = 1;
+		/*if (SONG.needsVoices)
+			opponentVocals.volume = 1;*/
 
+		if(opponentVocals.length <= 0) vocals.volume = 1;
 		strumPlayAnim(true, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 		note.hitByOpponent = true;
 
@@ -3070,7 +3100,6 @@ class PlayState extends MusicBeatState
 		}
 		else strumPlayAnim(false, Std.int(Math.abs(note.noteData)), Conductor.stepCrochet * 1.25 / 1000 / playbackRate);
 		vocals.volume = 1;
-
 
 		if(sustainNoteHeal == true){
 			if(!note.isSustainNote){
@@ -3148,23 +3177,16 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.fadeTween = null;
 	}
 
+	var checkIfDesynced:Bool = false;
 	var lastStepHit:Int = -1;
 	override function stepHit()
 	{
-		if(FlxG.sound.music.time >= -ClientPrefs.data.noteOffset)
-		{
-			if (Math.abs(FlxG.sound.music.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)
-				|| (SONG.needsVoices && Math.abs(vocals.time - (Conductor.songPosition - Conductor.offset)) > (20 * playbackRate)))
-			{
-				resyncVocals();
-			}
-		}
+		if (SONG.needsVoices && FlxG.sound.music.time >= -ClientPrefs.data.noteOffset) checkIfDesynced = true;
 
 		super.stepHit();
 
-		if(curStep == lastStepHit) {
+		if(curStep == lastStepHit)
 			return;
-		}
 
 		lastStepHit = curStep;
 		setOnScripts('curStep', curStep);
@@ -3175,13 +3197,9 @@ class PlayState extends MusicBeatState
 
 	override function beatHit()
 	{
-		if(lastBeatHit >= curBeat) {
-			//trace('BEAT HIT: ' + curBeat + ', LAST HIT: ' + lastBeatHit);
-			return;
-		}
+		if(lastBeatHit >= curBeat) return;
 
-		if (generatedMusic)
-			notes.sort(FlxSort.byY, ClientPrefs.data.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
+		if (generatedMusic) notes.sort(FlxSort.byY, ClientPrefs.data.downScroll ? FlxSort.ASCENDING : FlxSort.DESCENDING);
 
 		iconP1.scale.set(1.2, 1.2);
 		iconP2.scale.set(1.2, 1.2);
@@ -3194,7 +3212,7 @@ class PlayState extends MusicBeatState
 		super.beatHit();
 		lastBeatHit = curBeat;
 		//buttplug fuckery
-		ButtplugUtils.sendPayload(bpPayload);
+		#if BUTTPLUG_ALLOWED ButtplugUtils.sendPayload(bpPayload); #end
 
 		setOnScripts('curBeat', curBeat);
 		callOnScripts('onBeatHit');

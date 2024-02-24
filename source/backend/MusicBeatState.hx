@@ -23,11 +23,9 @@ class MusicBeatState extends FlxUIState
 	private var curDecStep:Float = 0;
 	private var curDecBeat:Float = 0;
 	public var controls(get, never):Controls;
-	private function get_controls()
-	{
+	inline private function get_controls()
 		return Controls.instance;
-	}
-
+	
 	//public static var camBeat:FlxCamera;
 	var _psychCameraInitialized:Bool = false;
 

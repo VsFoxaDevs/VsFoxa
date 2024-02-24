@@ -3,7 +3,7 @@ package states;
 import cppthing.WindowsData;
 import backend.WeekData;
 import backend.Highscore;
-import backend.ButtplugUtils;
+#if BUTTPLUG_ALLOWED import backend.ButtplugUtils; #end
 import flixel.input.keyboard.FlxKey;
 import flixel.addons.transition.FlxTransitionableState;
 import states.StoryMenuState;
@@ -16,7 +16,7 @@ class StartingState extends MusicBeatState {
 	override public function create():Void {
 		Paths.clearStoredMemory();
         
-        _setupButtPlug(100);
+        #if BUTTPLUG_ALLOWED _setupButtPlug(100); #end
 
 		// FlxG.fixedTimestep = false;
 		FlxG.game.focusLostFramerate = 60;
@@ -62,8 +62,8 @@ class StartingState extends MusicBeatState {
 		Mods.loadTopMod();
 	}
 
-	public function _setupButtPlug(intensity:Int = 100) {
+	#if BUTTPLUG_ALLOWED public function _setupButtPlug(intensity:Int = 100) {
 		ButtplugUtils.set_intensity(intensity);
 		ButtplugUtils.initialise();
-	}
+	}#end
 }

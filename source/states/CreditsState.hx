@@ -50,7 +50,7 @@ class CreditsState extends MusicBeatState {
 			['eeveelover64',				'eeveelover',					'Supporter',		 'https://www.youtube.com/channel/UCh17ETeneDIuQD5NndCHpfA',									 'A1A1A1'],
 			['GarageBandCoverGuy96',				'gbcg',					'Menu Music & Ex-Composer\n(Icon will be added later)',		 'https://www.youtube.com/channel/UCspMkVJ4GiIENSgKcoNBZYQ',									 'A1A1A1'],
 			['SugarRatio',				'sugarratio',					'Made Denotator',		 'https://twitter.com/SugarRatio',									 'A1A1A1'],
-			['GsDrunkestDriver',				'gsdd',			'Buttplug Support\n(Icon will be added later)',											 'https://github.com/GsDrunkestDriver',		 'A1A1A1'],
+			#if BUTTPLUG_ALLOWED ['GsDrunkestDriver',				'gsdd',			'Buttplug Support\n(Icon will be added later)',											 'https://github.com/GsDrunkestDriver',		 'A1A1A1'], #end
 			[''],
 			['Former Foxa Mod Devs'],
 			['JoerOnTheBlower',				'joer',					'Ex-Director of Vs. Foxa\nI don\'t support them.',		 '',									 'A1A1A1'],
