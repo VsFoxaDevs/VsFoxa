@@ -7,6 +7,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import flixel.effects.FlxFlicker;
 
 using StringTools;
 
@@ -20,6 +21,8 @@ class ThanksState extends MusicBeatState {
 		'#70526e',
 		'#594465'
     ];
+
+	var txt:FlxText;
 
     override function create(){
 		#if desktop DiscordClient.changePresence("Thanks Menu", null); #end
@@ -37,13 +40,13 @@ class ThanksState extends MusicBeatState {
 		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
 
 		#if debug
-		var txt:FlxText = new FlxText(0, 0, FlxG.width,
-			"Thanks for playing Vs. Foxa 3.0!\nYou are on a Developer Build.\nIf you were given this by someone who isn't a dev/playtester,\nplease contact one of the devs at Foxacord.\n(https://discord.gg/FARpwR9K4k)"
+		txt = new FlxText(0, 0, FlxG.width,
+			"Thanks for playing Vs. Foxa SE 3.0!\nYou are on a Developer Build.\nIf you were given this by someone who isn't a dev/playtester,\nplease contact one of the devs at Foxacord.\n(https://discord.gg/FARpwR9K4k)"
 			+ "\n\nPress Enter to continue.",
 			32);
 		#else
-		var txt:FlxText = new FlxText(0, 0, FlxG.width,
-			"Thanks for playing Vs. Foxa 3.0!\nWe have worked hard on this for long, \nand we appreciate you playing the mod!"
+		txt = new FlxText(0, 0, FlxG.width,
+			"Thanks for playing Vs. Foxa SE 3.0!\nWe have worked hard on this for long, \nand we appreciate you playing the mod!"
 			+ "\n\nPress Enter to continue.",
 			32);
 		#end
@@ -72,12 +75,32 @@ class ThanksState extends MusicBeatState {
 
 	override function update(elapsed:Float){
         if(controls.ACCEPT || controls.BACK){
-			FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);
-			try {
-				FlxG.switchState(() -> new states.SaveFileState());
-			}
-			catch (e:Dynamic) {
-					FlxG.switchState(() -> new states.MainMenuState());
+			if(!controls.BACK) {
+				FlxG.sound.play(Paths.sound('confirmMenu'), 0.4);
+				FlxFlicker.flicker(txt, 1, 0.1, false, true, function(flk:FlxFlicker) {
+					new FlxTimer().start(0.5, function (tmr:FlxTimer) {
+						try {
+							FlxG.switchState(() -> new states.SaveFileState());
+						}
+						catch (e:Dynamic) {
+							trace('nice save file, but unfortunately- ${e}');
+								FlxG.switchState(() -> new states.MainMenuState());
+						}
+					});
+				});
+			} else {
+				FlxG.sound.play(Paths.sound('cancelMenu'), 0.4);
+				FlxTween.tween(txt, {alpha: 0}, 1, {
+					onComplete: function (twn:FlxTween) {
+						try {
+							FlxG.switchState(() -> new states.TitleState());
+						}
+						catch (e:Dynamic) {
+							trace('nice argument, but unfortunately- ${e}');
+								FlxG.switchState(() -> new states.MainMenuState());
+						}
+					}
+				});
 			}
 		}
 

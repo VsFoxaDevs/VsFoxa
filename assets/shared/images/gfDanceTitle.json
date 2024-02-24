@@ -13,5 +13,9 @@
 	"versiontext":"Friday Night Funkin': Vs. Foxa 3.0",
 	"friday":"FNF",
 	"night":"Vs",
-	"funkin":"Foxa"
+	"funkin":"Foxa",
+	"ngtext":"newgrounds",
+	"noAssociate":true,
+	"logoHover":true,
+	"showThanks":true
 }

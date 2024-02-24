@@ -56,6 +56,12 @@ import objects.Alphabet;
 import objects.BGSprite;
 import states.PlayState;
 import states.LoadingState;
+import states.StartingState;
+import states.FreeplayState;
+import states.SaveFileState;
+import states.CreditsState;
+import states.MainMenuState;
+import states.CharacterSelectionState;
 
 // Flixel
 #if (flixel >= "5.3.0")

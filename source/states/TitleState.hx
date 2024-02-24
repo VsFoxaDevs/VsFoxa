@@ -42,15 +42,15 @@ typedef TitleData = {
 	versiontext:String,
 	friday:String,
 	night:String,
-	funkin:String
+	funkin:String,
+	ngtext:String,
+	noAssociate:Bool,
+	logoHover:Bool,
+	showThanks:Bool
 }
 
 class TitleState extends MusicBeatState {
-	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
-	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
-	public static var volumeUpKeys:Array<FlxKey> = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
-
-	public static var initialized:Bool = false;
+    public static var initialized:Bool = false;
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
@@ -81,25 +81,9 @@ class TitleState extends MusicBeatState {
 	{
 		Paths.clearStoredMemory();
 
-		#if LUA_ALLOWED
-		Mods.pushGlobalMods();
-		#end
-		Mods.loadTopMod();
-
-		ButtplugUtils.set_intensity(100);
-		ButtplugUtils.initialise();
-
-		// FlxG.fixedTimestep = false;
-		FlxG.game.focusLostFramerate = 60;
-		FlxG.keys.preventDefaultKeys = [TAB];
-
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 
 		super.create();
-
-		FlxG.save.bind('funkin', CoolUtil.getSavePath());
-
-		ClientPrefs.loadPrefs();
 
 		#if CHECK_FOR_UPDATES
 		if(ClientPrefs.data.checkForUpdates && !closedState) {
@@ -125,8 +109,6 @@ class TitleState extends MusicBeatState {
 		}
 		#end
 
-		Highscore.load();
-
 		// IGNORE THIS!!!
 		titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
 
@@ -148,34 +130,18 @@ class TitleState extends MusicBeatState {
 
 		if(!initialized)
 		{
-			if (FlxG.save.data != null && ClientPrefs.data.fullscreen) FlxG.fullscreen = ClientPrefs.data.fullscreen;
-			if(FlxG.save.data.weekCompleted != null) states.StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-			if(FlxG.save.data.unlockedCharacters == null) FlxG.save.data.unlockedCharacters = ["Boyfriend", "Foxa (Lesson)"];
 			persistentUpdate = true;
 			persistentDraw = true;
 		}
 
-		if (FlxG.save.data.weekCompleted != null)
+		if (initialized)
+			startIntro();
+		else
 		{
-			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
-		}
-
-		FlxG.mouse.visible = false;
-		
-		if(FlxG.save.data.flashing == null && !FlashingState.leftState) {
-			FlxTransitionableState.skipNextTransIn = true;
-			FlxTransitionableState.skipNextTransOut = true;
-			FlxG.switchState(() -> new FlashingState());
-		} else {
-			if (initialized)
-				startIntro();
-			else
+			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					startIntro();
-				});
-			}
+				startIntro();
+			});
 		}
 	}
 
@@ -302,8 +268,11 @@ class TitleState extends MusicBeatState {
 		engineVersionText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(engineVersionText);
 
+		if (titleJSON.logoHover)
+			{
 		FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
 		FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
+}
 
 		credGroup = new FlxGroup();
 		add(credGroup);
@@ -447,7 +416,8 @@ class TitleState extends MusicBeatState {
 					if (mustUpdate) {
 						FlxG.switchState(() -> new OutdatedState());
 					} else {
-						FlxG.switchState(() -> new ThanksState());
+						if (titleJSON.showThanks) FlxG.switchState(() -> new ThanksState());
+						else FlxG.switchState(() -> new MainMenuState());
 					}
 					closedState = true;
 				});
@@ -595,12 +565,13 @@ class TitleState extends MusicBeatState {
 					deleteCoolText();
 				case 6:
 					#if ALLEYWAY_WATERMARKS
-					createCoolText(['Not associated', 'with'], -40);
+					if (titleJSON.noAssociate) createCoolText(['Not associated', 'with'], -40);
+					else createCoolText(['In association', 'with'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
 					#end
 				case 8:
-					addMoreText('newgrounds', -40);
+					addMoreText(titleJSON.ngtext, -40);
 					ngSpr.visible = true;
 				case 9:
 					deleteCoolText();

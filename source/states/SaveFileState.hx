@@ -1,10 +1,11 @@
 package states;
 
 // taken from vs marcello
-import Controls;
+import backend.Controls;
 import openfl.Lib;
 import flash.text.TextField;
 import flixel.FlxG;
+import backend.Highscore;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -36,6 +37,8 @@ class SaveFileState extends MusicBeatState {
 	override function create() {
         Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
+
+		#if desktop DiscordClient.changePresence("Picking a Save File", null); #end
 
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 
@@ -107,7 +110,13 @@ class SaveFileState extends MusicBeatState {
 									saveFile.bind("VsFoxaSaves" + Std.string(curSelected), "saves");
 									saveFile.data.init = true;
 									saveFile.flush();
-									Highscore.load();
+									try {
+										Highscore.load();
+									}
+									catch (e:Dynamic) { // youre not gonna work
+										trace('FUCK YOU');
+										Highscore.load();
+									}
 									FlxG.switchState(() -> new MainMenuState());		
 								});
 							}

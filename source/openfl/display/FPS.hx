@@ -39,6 +39,8 @@ class FPS extends TextField
 	public var memoryMegas:Float = 0;
 	public var memoryTotal:Float = 0;
 
+	public var isRainbow:Bool= false;
+	
 	public var borderSize:Int = 1;
 
 	// border code by @raltyro and @sayofthelor, taken from psike engine mcuz i 

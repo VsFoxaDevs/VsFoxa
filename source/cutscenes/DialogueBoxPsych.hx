@@ -6,8 +6,6 @@ import objects.TypedAlphabet;
 import cutscenes.DialogueCharacter;
 import psychlua.LuaUtils;
 
-// Gonna try to kind of make it compatible to Forever Engine,
-// love u Shubs no homo :flushedh4:
 typedef DialogueFile =
 {
 	var dialogue:Array<DialogueLine>;

@@ -1,6 +1,7 @@
 package backend;
 
 import flixel.FlxBasic;
+import flixel.FlxObject;
 //import flixel.util.FlxSave;
 
 //import flixel.math.FlxPoint;
@@ -9,6 +10,12 @@ import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 
 using StringTools;
+
+enum SlideCalcMethod
+{
+	SIN;
+	COS;
+}
 
 class CoolUtil
 {
@@ -87,6 +94,9 @@ class CoolUtil
 		return daList;
 	}
 
+	inline public static function removeFromString(remove:String = "", string:String = "")
+		return string.replace(remove, "");
+	
 	public static function removeDuplicates(string:Array<String>):Array<String> {
 		var tempArray:Array<String> = new Array<String>();
 		var lastSeen:String = null;
@@ -120,17 +130,56 @@ class CoolUtil
 		return endResult;
 	}
 
-	inline public static function dominantColor(sprite:flixel.FlxSprite):Int
+	/**
+	 * Pablooooooo
+	 * @param amplitude 
+	 * @param calcMethod 
+	 * @param slowness 
+	 * @param delayIndex 
+	 * @param offset 
+	 * @return Float
+	 */
+	public static function slideEffect(amplitude:Float, calcMethod:SlideCalcMethod, slowness:Float = 1, delayIndex:Float = 0, ?offset:Float):Float
 	{
+		if (slowness < 0) slowness = 1;
+		var slider:Float = (FlxG.sound.music.time / 1000) * (Conductor.bpm / 60);
+
+		var slideValue:Float;
+
+		switch (calcMethod) {
+			case SIN: slideValue = offset + amplitude * Math.sin(((slider + delayIndex) / slowness) * Math.PI);
+			case COS: slideValue = offset + amplitude * Math.cos(((slider + delayIndex) / slowness) * Math.PI);
+		}
+
+		return slideValue;
+	}
+
+	inline public static function GCD(a, b)
+		return b == 0 ? FlxMath.absInt(a) : GCD(b, a % b);
+
+	inline public static function closest2Multiple(num:Float)
+		return Math.floor(num/2)*2;
+
+	public static function addZeros(v:String, length:Int, end:Bool = false) {
+		var r = v;
+		while(r.length < length)
+			r = end ? r + '0': '0$r';
+		return r;
+	}
+
+	public static function objectCenter(object:FlxObject, target:FlxObject, axis:FlxAxes = XY) {
+		if (axis == XY || axis == X) object.x = target.x + target.width / 2 - object.width / 2;
+		if (axis == XY || axis == Y) object.y = target.y + target.height / 2 - object.height / 2;
+	}
+
+	inline public static function dominantColor(sprite:flixel.FlxSprite):Int {
 		final countByColor:Map<Int, Int> = [];
 		for(col in 0...sprite.frameWidth) {
 			for(row in 0...sprite.frameHeight) {
 				final colorOfThisPixel:Int = sprite.pixels.getPixel32(col, row);
 				if(colorOfThisPixel != 0) {
-					if(countByColor.exists(colorOfThisPixel))
-						countByColor[colorOfThisPixel] = countByColor[colorOfThisPixel] + 1;
-					else if(countByColor[colorOfThisPixel] != 13520687 - (2*13520687))
-						countByColor[colorOfThisPixel] = 1;
+					if(countByColor.exists(colorOfThisPixel)) countByColor[colorOfThisPixel] = countByColor[colorOfThisPixel] + 1;
+					else if(countByColor[colorOfThisPixel] != 13520687 - (2*13520687)) countByColor[colorOfThisPixel] = 1;
 				}
 			}
 		}

@@ -5,16 +5,26 @@ import flixel.FlxSubState;
 import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import flixel.addons.transition.FlxTransitionableState;
+import tjson.TJSON as Json;
+
+/*typedef FlashingData = {
+	warningText:String,
+	font:String
+}*/
 
 class FlashingState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
 	var warnText:FlxText;
-	override function create()
-	{
+	// var flashJSON:FlashingData;
+
+	override function create() {
 		super.create();
 
+		// IGNORE THIS!!!
+		// flashJSON = Json.parse(Paths.getTextFromFile('data/warnText.json'));
+		
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
@@ -24,21 +34,20 @@ class FlashingState extends MusicBeatState
 			Press ENTER to disable them now or go to Options Menu.\n
 			Press ESCAPE to ignore this message.\n
 			You've been warned!",
+			//flashJSON.warningText,
 			32);
-		warnText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER);
+		warnText.setFormat(Paths.font(/*flashJSON.font*/"vcr.ttf"), 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
 	}
 
-	override function update(elapsed:Float)
-	{
+	override function update(elapsed:Float) {
 		if(!leftState) {
-			var back:Bool = controls.BACK;
-			if (controls.ACCEPT || back) {
+			if (controls.ACCEPT || controls.BACK) {
 				leftState = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
-				if(!back) {
+				if(!controls.BACK) {
 					ClientPrefs.data.flashing = false;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('confirmMenu'));

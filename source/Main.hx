@@ -44,7 +44,7 @@ class Main extends Sprite
 		width: 1280, // WINDOW width
 		height: 720, // WINDOW height
 		zoom: -1.0, // game state bounds
-		initialState: () -> new TitleState(), // initial game state
+		initialState: () -> new StartingState(), // initial game state
 		framerate: 60, // default framerate
 		skipSplash: true, // if the default flixel splash screen should be skipped
 		startFullscreen: false // if the game should start at fullscreen mode
@@ -61,8 +61,7 @@ class Main extends Sprite
 		Lib.current.addChild(new Main());
 	}
 
-	public function new()
-	{
+	public function new() {
 		super();
 
 		// Credits to MAJigsaw77 (he's the og author for this code)
@@ -75,35 +74,24 @@ class Main extends Sprite
 
 		instance = this;
 
-		if (stage != null)
-		{
-			init();
-		}
-		else
-		{
-			addEventListener(Event.ADDED_TO_STAGE, init);
-		}
+		if (stage != null) init();
+		else addEventListener(Event.ADDED_TO_STAGE, init);
 	}
 
-	private function init(?E:Event):Void
-	{
+	private function init(?E:Event):Void {
 		if (hasEventListener(Event.ADDED_TO_STAGE))
-		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-		}
 
 		setupGame();
 
 		var timer = new haxe.Timer(1);
-		timer.run = function()
-		{
+		timer.run = () -> {
 			coloring();
 			if (fpsVar.textColor == 0) fpsVar.textColor = -4775566;
 		} // needs to be done because textcolor beco
 	}
 
-	private function setupGame():Void
-	{
+	private function setupGame():Void {
 		final stageWidth:Int = Lib.current.stage.stageWidth;
 		final stageHeight:Int = Lib.current.stage.stageHeight;
 
@@ -130,8 +118,7 @@ class Main extends Sprite
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
-		if(fpsVar != null)
-			fpsVar.visible = ClientPrefs.data.showFPS;
+		if (fpsVar != null) fpsVar.visible = ClientPrefs.data.showFPS;
 		#end
 
 		#if linux
@@ -139,29 +126,18 @@ class Main extends Sprite
 		Lib.current.stage.window.setIcon(icon);
 		#end
 
-		#if html5
-		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
-		#end
+		#if html5 FlxG.autoPause = FlxG.mouse.visible = false; #end
 		
-		#if (CRASH_HANDLER && !hl)
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
-		#end
-		#if (CRASH_HANDLER && hl)
-		hl.Api.setErrorHandler(onCrash);
-		#end
-
-		#if desktop
-		DiscordClient.start();
-		#end
+		#if (CRASH_HANDLER && !hl) Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash); #end
+		#if (CRASH_HANDLER && hl) hl.Api.setErrorHandler(onCrash); #end
+		#if desktop DiscordClient.start(); #end
 
 		// shader coords fix
-		FlxG.signals.gameResized.add(function (w, h) {
+		FlxG.signals.gameResized.add((w, h) -> {
 		     if (FlxG.cameras != null) {
 			   for (cam in FlxG.cameras.list) {
 				@:privateAccess
-				if (cam != null && cam.filters != null)
-					resetSpriteCache(cam.flashSprite);
+				if (cam != null && cam.filters != null) resetSpriteCache(cam.flashSprite);
 			   }
 		     }
 
@@ -189,27 +165,23 @@ class Main extends Sprite
 	var currentColor = 0;
 
 	// Event Handlers
-	public function coloring():Void
-	{
-		// Hippity, Hoppity, your code is now my property (from KadeEngine)
-		if (ClientPrefs.data.fpsRainbow)
-		{
+	public function coloring():Void {
+		// Hippity, Hoppity, your code is now my property (from Kade Engine)
+		if (ClientPrefs.data.fpsRainbow) {
+			fpsVar.isRainbow = true;
 			if (currentColor >= array.length) currentColor = 0;
 			currentColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / ClientPrefs.data.framerate));
 			(cast(Lib.current.getChildAt(0), Main)).changeFPSColor(array[currentColor]);
 			currentColor++;
 			skippedFrames++;
-			if (skippedFrames > ClientPrefs.data.framerate)
-				skippedFrames = 0;
-		}
-		else
+			if (skippedFrames > ClientPrefs.data.framerate) skippedFrames = 0;
+		} else {
+			fpsVar.isRainbow = false;
 			fpsVar.textColor = FlxColor.fromRGB(255, 255, 255);
+		}
 	}
 
-	public function changeFPSColor(color:FlxColor)
-	{
-		fpsVar.textColor = color;
-	}
+	public function changeFPSColor(color:FlxColor) fpsVar.textColor = color;
 
 	static function resetSpriteCache(sprite:Sprite):Void {
 		@:privateAccess {
