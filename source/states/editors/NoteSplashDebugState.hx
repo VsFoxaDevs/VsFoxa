@@ -80,7 +80,7 @@ class NoteSplashDebugState extends MusicBeatState {
 		add(imageName);
 
 		imageInputText = new FlxInputText(txtx, txty - 100, 360, defaultTexture, 16);
-		imageInputText.callback = function(text:String, action:String)
+		imageInputText.callback = (text:String, action:String) ->
 		{
 			switch(action) {
 				case 'enter':
@@ -116,7 +116,7 @@ class NoteSplashDebugState extends MusicBeatState {
 		add(animName);
 
 		nameInputText = new FlxInputText(txtx, txty + 20, 360, '', 16);
-		nameInputText.callback = function(text:String, action:String)
+		nameInputText.callback = (text:String, action:String) ->
 		{
 			switch(action)
 			{
@@ -290,7 +290,7 @@ class NoteSplashDebugState extends MusicBeatState {
 			else if(forceFrame >= maxFrame) forceFrame = maxFrame - 1;
 			
 			curFrameText.text = 'Force Frame: ${forceFrame+1} / $maxFrame\n(Press Q/E to change)';
-			splashes.forEachAlive(function(spr:FlxSprite) {
+			splashes.forEachAlive((spr:FlxSprite) -> {
 				spr.animation.curAnim.paused = true;
 				spr.animation.curAnim.curFrame = forceFrame;
 			});
@@ -308,7 +308,7 @@ class NoteSplashDebugState extends MusicBeatState {
 	function loadFrames()
 	{
 		texturePath = 'noteSplashes/' + textureName;
-		splashes.forEachAlive(function(spr:FlxSprite) {
+		splashes.forEachAlive((spr:FlxSprite) -> {
 			spr.frames = Paths.getSparrowAtlas(texturePath);
 		});
 	
@@ -370,7 +370,7 @@ class NoteSplashDebugState extends MusicBeatState {
 	function reloadAnims()
 	{
 		var loopContinue:Bool = true;
-		splashes.forEachAlive(function(spr:FlxSprite)
+		splashes.forEachAlive((spr:FlxSprite) ->
 		{
 			spr.animation.destroyAnimations();
 		});
@@ -379,7 +379,7 @@ class NoteSplashDebugState extends MusicBeatState {
 		while(loopContinue)
 		{
 			var animID:Int = maxAnims + 1;
-			splashes.forEachAlive(function(spr:FlxSprite)
+			splashes.forEachAlive((spr:FlxSprite) ->
 			{
 				for (i in 0...Note.colArray.length) {
 					var animName = 'note$i-$animID';

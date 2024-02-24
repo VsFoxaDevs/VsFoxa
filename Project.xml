@@ -9,7 +9,7 @@
 
 	<define name="STORY_EDITION" />
 
-	<!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND, theres no issues :) -->
+	<!-- NOTE TO SELF: DISABLE THIS IF ISSUES ARE FOUND- theres no issues :) -->
 	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB" /> <!-- stable lua -->
 
 	<app preloader="flixel.system.FlxPreloader" />
@@ -159,15 +159,12 @@
 	<!-- Android & iOS specifications -->
 	<section if="android">
         <config>
-			<!--Gradle-->
 			<!--<android gradle-version="7.4.2" gradle-plugin="7.3.1" /-->
-			<!--Target SDK-->
 			<android target-sdk-version="28" />
 		</config>
 	</section>
 
 	<section if="ios">
-		<!--Dependency--> 
 		<dependency name="Metal.framework" if="${lime &lt; 8.0.0}" />
 	</section>
 

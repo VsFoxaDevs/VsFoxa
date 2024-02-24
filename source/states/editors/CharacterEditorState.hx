@@ -382,7 +382,7 @@ class CharacterEditorState extends MusicBeatState
 		var ghostAlphaSlider:FlxUISlider = new FlxUISlider(this, 'ghostAlpha', 10, makeGhostButton.y + 25, 0, 1, 210, null, 5, FlxColor.WHITE, FlxColor.BLACK);
 		ghostAlphaSlider.nameLabel.text = 'Opacity:';
 		ghostAlphaSlider.decimals = 2;
-		ghostAlphaSlider.callback = function(relativePos:Float) {
+		ghostAlphaSlider.callback = (relativePos:Float) -> {
 			ghost.alpha = ghostAlpha;
 			if(animateGhost != null) animateGhost.alpha = ghostAlpha;
 		};
@@ -457,7 +457,7 @@ class CharacterEditorState extends MusicBeatState
 		templateCharacter.label.color = FlxColor.WHITE;
 
 
-		charDropDown = new FlxUIDropDownMenu(10, 30, FlxUIDropDownMenu.makeStrIdLabelArray([''], true), function(index:String)
+		charDropDown = new FlxUIDropDownMenu(10, 30, FlxUIDropDownMenu.makeStrIdLabelArray([''], true), (index:String) ->
 		{
 			var intended = characterList[Std.parseInt(index)];
 			if(intended == null || intended.length < 1) return;
@@ -512,7 +512,7 @@ class CharacterEditorState extends MusicBeatState
 		animationNameFramerate = new FlxUINumericStepper(animationInputText.x + 170, animationInputText.y, 1, 24, 0, 240, 0);
 		animationLoopCheckBox = new FlxUICheckBox(animationNameInputText.x + 170, animationNameInputText.y - 1, null, null, "Should it Loop?", 100);
 
-		animationDropDown = new FlxUIDropDownMenu(15, animationInputText.y - 55, FlxUIDropDownMenu.makeStrIdLabelArray([''], true), function(pressed:String) {
+		animationDropDown = new FlxUIDropDownMenu(15, animationInputText.y - 55, FlxUIDropDownMenu.makeStrIdLabelArray([''], true), (pressed:String) -> {
 			var selectedAnimation:Int = Std.parseInt(pressed);
 			var anim:AnimArray = character.animationsArray[selectedAnimation];
 			animationInputText.text = anim.anim;
