@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=VsFoxa
+Comment=A story expansion and prologue to Vs. Whitty, using a heavily-modified version of Psych Engine 
+Icon=io.github.vsfoxateam.vsfoxa
+Exec=VsFoxa
+Categories=Game
