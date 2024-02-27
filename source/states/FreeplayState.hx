@@ -17,6 +17,8 @@ import substates.ResetScoreSubState;
 import flixel.math.FlxMath;
 import flixel.ui.FlxBar;
 import flixel.util.FlxStringUtil;
+import flixel.util.FlxDestroyUtil;
+import tjson.TJSON as Json;
 
 @:access(flixel.sound.FlxSound)
 
@@ -564,7 +566,7 @@ class FreeplayState extends MusicBeatState {
 
 	override function beatHit()
 	{
-		if (player.playingMusic && !player.paused) {
+		if (player.playingMusic && player.playing) {
 			var icon:HealthIcon = iconArray[curSelected];
 			icon.scale.set(1.2, 1.2);
 			icon.updateHitbox();

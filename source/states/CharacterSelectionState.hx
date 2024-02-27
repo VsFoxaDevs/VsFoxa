@@ -57,7 +57,7 @@ class CharacterSelectionState extends MusicBeatState {
 	var camHUD:FlxCamera;
 
 	override function create() {
-		#if desktop DiscordClient.changePresence('Selecting a Character'); #end
+		#if desktop DiscordClient.changePresence('Selecting a Character', null); #end
 
 		persistentUpdate = true;
 
