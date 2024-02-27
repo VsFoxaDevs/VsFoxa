@@ -5,7 +5,7 @@ import objects.HealthIcon;
 
 /**
     This is not from the Dave & Bambi source code, it's completely made by Delta.
-    Modified by Altertoriel and CharlesCatYY. (Ported to Alleyway Engine/Psych 0.7.3)
+    Modified by Altertoriel and CharlesCatYT. (Ported to Alleyway Engine/Psych 0.7.3)
 **/
 
 class CharacterSelectionState extends MusicBeatState {
