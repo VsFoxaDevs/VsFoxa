@@ -1304,7 +1304,7 @@ class PlayState extends MusicBeatState
 		vocals.play();
 		opponentVocals.play();
 
-		if(startOnTime > 0) setSongTime(startOnTime - 500);
+		setSongTime(Math.max(0, startOnTime - 500));
 		startOnTime = 0;
 
 		if(paused) {
@@ -1751,30 +1751,31 @@ class PlayState extends MusicBeatState
 			if(ret != FunkinLua.Function_Stop) openPauseMenu();
 		}
 
-        if(!endingSong && !inCutscene && !SONG.disableDebugButtons)
-		{
-			if (controls.justPressed('debug_1'))
-				openChartEditor();
-			else if (controls.justPressed('debug_2'))
-				openCharacterEditor();
+        if(!endingSong && !inCutscene && !SONG.disableDebugButtons) {
+			if (controls.justPressed('debug_1')) openChartEditor();
+			else if (controls.justPressed('debug_2')) openCharacterEditor();
 		}
 
-		if (healthBar.bounds.max != null && health > healthBar.bounds.max)
-			health = healthBar.bounds.max;
+		if (healthBar.bounds.max != null && health > healthBar.bounds.max) health = healthBar.bounds.max;
 
 		updateIcons(elapsed);
 
-		if (startedCountdown && !paused) {
+		if (startedCountdown && !paused)
+		{
 			Conductor.songPosition += elapsed * 1000 * playbackRate;
-			if (checkIfDesynced) {
-				var diff:Float = 20 * playbackRate;
-				var timeSub:Float = Conductor.songPosition - Conductor.offset;
-				if (Math.abs(FlxG.sound.music.time - timeSub) > diff
-					|| (vocals.length > 0 && Math.abs(vocals.time - timeSub) > diff)
-					|| (opponentVocals.length > 0 && Math.abs(opponentVocals.time - timeSub) > diff)) {
-					resyncVocals();
+			if (Conductor.songPosition >= 0) {
+				var timeDiff:Float = Math.abs(FlxG.sound.music.time - Conductor.songPosition - Conductor.offset);
+				if(timeDiff > 15 * playbackRate)
+					Conductor.songPosition = FlxMath.lerp(Conductor.songPosition, FlxG.sound.music.time, FlxMath.bound(elapsed * 10, 0, 1));
+
+				if (timeDiff > 25 * playbackRate) trace('Warning! Delay is too fucking high!!');
+
+				#if debug
+				if(FlxG.keys.justPressed.K) {
+					trace('Times: ' + FlxG.sound.music.time, vocals.time, opponentVocals.time);
+					trace('Difference: ' + (FlxG.sound.music.time - Conductor.songPosition));
 				}
-				checkIfDesynced = false;
+				#end
 			}
 		}
 
@@ -1797,7 +1798,7 @@ class PlayState extends MusicBeatState
 				timeTxt.text = '${FlxStringUtil.formatTime(secondsTotal, false)}${(ClientPrefs.data.timeBarType.contains('/')) ? ' / ${FlxStringUtil.formatTime(songLength / 1000, false)}' : ''}';
 		}
 
-		if(camZooming){
+		if(camZooming) {
 			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, Math.exp(-elapsed * 3.125 * camZoomingDecay * playbackRate));
 			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, Math.exp(-elapsed * 3.125 * camZoomingDecay * playbackRate));
 		}
@@ -1810,7 +1811,6 @@ class PlayState extends MusicBeatState
 		if(!ClientPrefs.data.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong){
 			//doDeathCheck(true);
 			health = 0;
-			//trace("RESET = True");
 		}
 		doDeathCheck();
 
@@ -1868,8 +1868,7 @@ class PlayState extends MusicBeatState
 							// Kill extremely late notes and cause misses
 							if (Conductor.songPosition - daNote.strumTime > noteKillOffset)
 							{
-								if (daNote.mustPress && !cpuControlled && !daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit))
-									noteMiss(daNote);
+								if (daNote.mustPress && !cpuControlled && !daNote.ignoreNote && !endingSong && (daNote.tooLate || !daNote.wasGoodHit)) noteMiss(daNote);
 
 								daNote.active = daNote.visible = false;
 								invalidateNote(daNote);
@@ -1878,8 +1877,7 @@ class PlayState extends MusicBeatState
 					}
 					else
 					{
-						notes.forEachAlive(function(daNote:Note)
-						{
+						notes.forEachAlive((daNote:Note) -> {
 							daNote.canBeHit = false;
 							daNote.wasGoodHit = false;
 						});
@@ -3177,13 +3175,10 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.fadeTween = null;
 	}
 
-	var checkIfDesynced:Bool = false;
 	var lastStepHit:Int = -1;
 	override function stepHit()
 	{
-		if (SONG.needsVoices && FlxG.sound.music.time >= -ClientPrefs.data.noteOffset) checkIfDesynced = true;
-
-		super.stepHit();
+        super.stepHit();
 
 		if(curStep == lastStepHit)
 			return;

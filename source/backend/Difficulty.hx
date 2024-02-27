@@ -8,22 +8,15 @@ class Difficulty
 		'Hard'
 	];
 	public static var list:Array<String> = [];
-	private static var defaultDifficulty(default, never):String = 'Normal'; //The chart that has no suffix and starting difficulty on Freeplay/Story Mode
+	private static var defaultDifficulty(default, never):String = 'Normal'; //The chart that has no postfix and starting difficulty on Freeplay/Story Mode
 
-	inline public static function getFilePath(num:Null<Int> = null)
-	{
+	inline public static function getFilePath(num:Null<Int> = null) {
 		if(num == null) num = PlayState.storyDifficulty;
 
-		var fileSuffix:String = list[num].toLowerCase();
-		if(fileSuffix != defaultDifficulty.toLowerCase())
-		{
-			fileSuffix = '-' + fileSuffix;
-		}
-		else
-		{
-			fileSuffix = '';
-		}
-		return Paths.formatToSongPath(fileSuffix);
+		var filePostfix:String = list[num];
+		if(Paths.formatToSongPath(filePostfix) != Paths.formatToSongPath(defaultDifficulty)) filePostfix = '-' + filePostfix;
+		else filePostfix = '';
+		return Paths.formatToSongPath(filePostfix);
 	}
 
 	inline public static function loadFromWeek(week:WeekData = null)
