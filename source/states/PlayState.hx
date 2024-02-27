@@ -191,6 +191,11 @@ class PlayState extends MusicBeatState
 	public var timeBar:Bar;
 	var songPercent:Float = 0;
 
+	// something experimental, probably might soon be a debug-only feature ig...
+	public var delayBar:FlxSprite;
+	public var delayBarBg:FlxSprite;
+	public var delayBarTxt:FlxText;
+
 	public var ratingsData:Array<Rating> = Rating.loadDefault();
 	public var fullComboFunction:Void->Void = null;
 
@@ -546,6 +551,24 @@ class PlayState extends MusicBeatState
 		timeBar.visible = showTime;
 		uiGroup.add(timeBar);
 		uiGroup.add(timeTxt);
+
+		delayBarBg = new FlxSprite().makeGraphic(300, 30, FlxColor.BLACK);
+		delayBarBg.screenCenter();
+
+		delayBar = new FlxSprite(640).makeGraphic(1, 22, FlxColor.WHITE);
+		delayBar.scale.x = 0;
+		delayBar.updateHitbox();
+		delayBar.screenCenter(Y);
+
+		delayBarTxt = new FlxText(0, 312, 100, '0 ms', 32);
+		delayBarTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		delayBarTxt.scrollFactor.set();
+		delayBarTxt.borderSize = 2;
+		delayBarTxt.screenCenter(X);
+
+		uiGroup.add(delayBarBg);
+		uiGroup.add(delayBar);
+		uiGroup.add(delayBarTxt);
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
@@ -1765,8 +1788,7 @@ class PlayState extends MusicBeatState
 			Conductor.songPosition += elapsed * 1000 * playbackRate;
 			if (Conductor.songPosition >= 0) {
 				var timeDiff:Float = Math.abs(FlxG.sound.music.time - Conductor.songPosition - Conductor.offset);
-				if(timeDiff > 15 * playbackRate)
-					Conductor.songPosition = FlxMath.lerp(Conductor.songPosition, FlxG.sound.music.time, FlxMath.bound(elapsed * 10, 0, 1));
+				Conductor.songPosition = FlxMath.lerp(Conductor.songPosition, FlxG.sound.music.time, FlxMath.bound(elapsed * 2.5, 0, 1));
 
 				if (timeDiff > 25 * playbackRate) trace('Warning! Delay is too fucking high!!');
 
@@ -1776,6 +1798,17 @@ class PlayState extends MusicBeatState
 					trace('Difference: ' + (FlxG.sound.music.time - Conductor.songPosition));
 				}
 				#end
+
+				var daScale = Math.max(-144, Math.min(144, FlxG.sound.music.time - Conductor.songPosition) * (144/25));
+				delayBar.scale.x = Math.abs(daScale);
+				delayBar.updateHitbox();
+				if(daScale < 0) delayBar.x = 640 - delayBar.scale.x;
+				else delayBar.x = 640;
+
+				var timeDiff:Int = Math.round(FlxG.sound.music.time - Conductor.songPosition);
+				delayBarTxt.text = '$timeDiff ms';
+				if(Math.abs(timeDiff) > 15) delayBar.color = FlxColor.RED;
+				else delayBar.color = FlxColor.WHITE;
 			}
 		}
 
