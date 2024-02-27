@@ -1,6 +1,14 @@
 # Friday Night Funkin' - Vs. Foxa / Alleyway Engine
 Not a Psych fork again...
 
+(I would appericate if you do a PR on like)
+
+
+![](https://github.com/ShadowMario/FNF-PsychEngine/blob/main/docs/img/ohno.PNG?raw=true
+this, I don't have time to do it now, maybe tomorrow, but right now i'd like a bit of help to get this actually working, it would be a good idea for me :D )
+
+Yeah, Alleyway Engine, your average Psych fork, but sometimes, it's that and not a fork at the same time, to us, it's such an experience to get this worked on, and like I said, a lot of help would get me appericated as much as you would, oh and the engine was, right now, specifically designed for Vs. Foxa (OG & SE), so when you want to make your own mod using this engine, some major changes at least may be required for. Anyways, see you there when it's finally done!
+
 ## Story
 You and your girlfriend go down an alleyway, searching for the famous "Whitmore". However, a pink fox blocks your way! She seems to be trying to protect someone... And she does not want you to rap battle him! Sing 5 or more songs with her, maybe even a 6th one too? 
 
