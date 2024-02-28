@@ -207,8 +207,7 @@ class Note extends FlxSprite
 		antialiasing = ClientPrefs.data.antialiasing;
 		if(createdFrom == null) createdFrom = PlayState.instance;
 
-		if (prevNote == null)
-			prevNote = this;
+		if (prevNote == null) prevNote = this;
 
 		this.prevNote = prevNote;
 		isSustainNote = sustainNote;
@@ -236,10 +235,7 @@ class Note extends FlxSprite
 			}
 		}
 
-		// trace(prevNote);
-
-		if(prevNote != null)
-			prevNote.nextNote = this;
+		if(prevNote != null) prevNote.nextNote = this;
 
 		if (isSustainNote && prevNote != null)
 		{
@@ -257,8 +253,7 @@ class Note extends FlxSprite
 
 			offsetX -= width / 2;
 
-			if (PlayState.isPixelStage)
-				offsetX += 30;
+			if (PlayState.isPixelStage) offsetX += 30;
 
 			if (prevNote.isSustainNote)
 			{

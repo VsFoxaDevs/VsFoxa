@@ -1,7 +1,7 @@
 # Friday Night Funkin' - Vs. Foxa / Alleyway Engine
 Not a Psych fork again...
 
-(I would appericate if you do a PR on like)
+(I would appericate if you do a PR on like uh
 
 
 ![](https://github.com/ShadowMario/FNF-PsychEngine/blob/main/docs/img/ohno.PNG?raw=true
@@ -64,7 +64,8 @@ Anyway, back to the original Psych README...
 # Friday Night Funkin' - Psych Engine
 Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
-## Installation:
+## Installation:'
+
 You must have [Haxe 4.2.5](https://haxe.org/download/), installed in order to move on to these next steps.
 
 ------------------
@@ -83,11 +84,47 @@ For Linux and Mac users, often double clicking on `setup-unix.sh` is the solutio
 
 ------------------
 
-Once finished, you should be ready to compile, you can open a terminal in the source code folder, and then type `lime test <target>`.
 
-With `<target>` being either `windows`, `mac` or `linux`.
+# Compiling the Mod
 
-If you want to just play the mod and not compile, just use the action builds (either through just Github's Actions tab, which requires a Github account, or use nightly.link). For Linux users though, fuck you, use Wine to play the mod, suckers!!!!!
+Now that you finished setting this up, you're now ready to compile the mod!
+
+## Desktop Building:
+
+Desktop building can be a bit tedious. Each different version requires a different setup.
+
+### Linux/Mac Building:
+
+1. Open your machine's command prompt/terminal and navigate to your root folder of the mod. [An easy guide can be found here!](https://ninjamuffin99.newgrounds.com/news/post/1090480)
+2. Type `lime build mac` to build the Mac version of the mod.
+3. Type `lime run mac` to run the Mac version of the mod from the command prompt/terminal. (You can also run the mod from `funkin/export/release/mac/bin`)
+
+For Linux users, replace `mac` with `linux`.
+
+### Windows Building:
+1. Install [Visual Studio Community](https://visualstudio.microsoft.com/downloads/).
+2. Open the installer and go to the individual workloads tab and download the following:
+```
+* C++ CMake tools for windows 
+* C++ Profiling tools 
+* C++ ATL for v142 build tools (x86 & x64)
+* C++ MFC for v142 build tools (x86 & x64)
+* C++/CLI support for v142 build tools (14.21)
+* C++ Modules for v142 build tools (x64/x86)
+* Clang Compiler for Windows
+* MSVC v140 - VS 2015 C++ build tools (v14.00) 
+* MSVC v141 - VS 2017 C++ x64/x86 build tools
+* MSVC v142 - VS 2019 C++ x64/x86 build tools
+* Windows 10 SDK (10.0.16299.0)
+* Windows 10 SDK (10.0.17134.0)
+* Windows SDK (10.0.17763.0)
+```
+3. Wait for the install to finish, which might take a while, this shit is 22 gigabytes so you gotta save some space if you need to.
+4. Open your machine's command prompt/terminal and navigate to your root folder of the mod. [An easy guide can be found here!](https://ninjamuffin99.newgrounds.com/news/post/1090480)
+5. Once everything is installed, type `lime build windows` to build the Windows version of the mod.
+6. Type `lime run windows` after the mod is compiled to run the Windows version of the mod. (You can also run the mod from `funkin/export/release/windows/bin`, or type `test` instead of `build`.)
+
+If you want to just play the mod and not compile, just use the action builds (either through just Github's Actions tab, which requires a Github account, or use nightly.link).
 
 ## Customization:
 

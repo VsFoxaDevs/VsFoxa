@@ -119,6 +119,9 @@
 		<ndll name="systools" haxelib="systools" />
 	</section>
 
+	<haxedef name="openflPos" />
+	<haxedef name="hscriptPos" />
+
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
 	<!--Enable the Flixel core recording system-->
@@ -151,6 +154,7 @@
 	<!--Macro fixes-->
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
+	<haxeflag name="-dce" value="std" unless="HSCRIPT_ALLOWED" />
 	<haxeflag name="-dce" value="no" if="HSCRIPT_ALLOWED" />
 
 	<!--Disables the use of precompiled headers but can cause issues with build times and memory usage-->
