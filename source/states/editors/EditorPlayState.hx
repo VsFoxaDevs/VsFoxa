@@ -1007,7 +1007,7 @@ class EditorPlayState extends MusicBeatSubstate
 	function decreaseCombo(direction:Int):Void {
 		// score and data
 		// if (!daNote.noMissAnimation) {
-			lilPlayBf.animation.play("miss" + daNote.noteData, true);
+			lilPlayBf.animation.play("miss" + direction, true);
 			if(singTimerPlayer != null) singTimerPlayer.cancel();
 			singTimerPlayer = new FlxTimer().start(0.6, (tmr:FlxTimer) -> {
 				lilPlayBf.animation.play("idle", true);
