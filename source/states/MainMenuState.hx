@@ -39,6 +39,8 @@ typedef MainMenuData = {
 	fridayAchieve:String,
 	discordLink:String,
 	checkboard:Bool,
+	allowEditorsMenu:Bool,
+	bgColors:Array<String>,
 	versionText:String
 }
 
@@ -126,6 +128,9 @@ class MainMenuState extends MusicBeatState {
 		bg.updateHitbox();
 		bg.screenCenter();
 		add(bg);
+
+		if (menuJunk.bgColors != null) bgColors = menuJunk.bgColors;
+		else bgColors = ['#517bc4', '#eb9bee', '#eb3030', '#eb7e19']
 		
 		camFollow = new FlxObject(0, 0, 1, 1);
 		//add(camFollow);
@@ -141,7 +146,7 @@ class MainMenuState extends MusicBeatState {
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 
-		if(menuJunk.checkboard == true){
+		if(menuJunk.checkboard == true && ClientPrefs.data.checkerBoard){
 			var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33525252, 0x0));
 			grid.velocity.set(40, 40);
 			grid.alpha = 0;
@@ -306,8 +311,10 @@ class MainMenuState extends MusicBeatState {
 			#if desktop
 			else if (controls.justPressed('debug_1'))
 			{
-				selectedSomethin = true;
-				FlxG.switchState(() -> new MasterEditorMenu());
+				if (menuJunk.allowEditorsMenu == true) {
+					selectedSomethin = true;
+					FlxG.switchState(() -> new MasterEditorMenu());
+				}
 			}
 			#end
 		}

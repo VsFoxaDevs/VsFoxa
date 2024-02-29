@@ -19,6 +19,7 @@ import flixel.util.FlxColor;
 import lime.app.Application;
 import haxe.EnumFlags;
 import haxe.Exception;
+import debug.FPSCounter;
 
 #if linux
 import lime.graphics.Image;
@@ -50,7 +51,8 @@ class Main extends Sprite
 		startFullscreen: false // if the game should start at fullscreen mode
 	};
 
-	public static var fpsVar:FPS;
+	public static var fpsVar:FPSCounter;
+	public static var watermark:Sprite;
 
 	public static var instance:Main;
 
@@ -70,6 +72,15 @@ class Main extends Sprite
 		Sys.setCwd(Path.addTrailingSlash(Context.getExternalFilesDir()));
 		#elseif ios
 		Sys.setCwd(lime.system.System.applicationStorageDirectory);
+		#end
+
+		#if windows
+		@:functionCode("
+		#include <windows.h>
+		#include <winuser.h>
+		setProcessDPIAware() // allows for more crisp visuals
+		DisableProcessWindowsGhosting() // lets you move the window and such if it's not responding
+		")
 		#end
 
 		instance = this;
@@ -113,13 +124,22 @@ class Main extends Sprite
 
 		cppthing.CppAPI.darkMode();
 		
-		#if !mobile
-		fpsVar = new FPS(10, 3, 0xFFFFFF);
+		#if !mobile fpsVar = new FPSCounter(10, 3);
 		addChild(fpsVar);
 		Lib.current.stage.align = "tl";
 		Lib.current.stage.scaleMode = StageScaleMode.NO_SCALE;
 		if (fpsVar != null) fpsVar.visible = ClientPrefs.data.showFPS;
-		#end
+        #end
+
+		// Mic'd Up SC code :D
+		var bitmapData = Assets.getBitmapData("assets/shared/images/foxaIcon.png");
+		watermark = new Sprite();
+		watermark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
+		watermark.alpha = 0.4;
+		watermark.x = Lib.application.window.width - 10 - watermark.width;
+		watermark.y = Lib.application.window.height - 10 - watermark.height;
+		addChild(watermark);
+		if (watermark != null) watermark.visible = ClientPrefs.data.watermarkIcon;
 
 		#if linux
 		var icon = Image.fromFile("icon.png");
@@ -145,43 +165,6 @@ class Main extends Sprite
 			 resetSpriteCache(FlxG.game);
 		});
 	}
-
-	// Chroma Effect (12 Colors)
-	var array:Array<FlxColor> = [
-		FlxColor.fromRGB(216, 34, 83),
-		FlxColor.fromRGB(255, 38, 0),
-		FlxColor.fromRGB(255, 80, 0),
-		FlxColor.fromRGB(255, 147, 0),
-		FlxColor.fromRGB(255, 199, 0),
-		FlxColor.fromRGB(255, 255, 0),
-		FlxColor.fromRGB(202, 255, 0),
-		FlxColor.fromRGB(0, 255, 0),
-		FlxColor.fromRGB(0, 146, 146),
-		FlxColor.fromRGB(0, 0, 255),
-		FlxColor.fromRGB(82, 40, 204),
-		FlxColor.fromRGB(150, 33, 146)
-	];
-	var skippedFrames = 0;
-	var currentColor = 0;
-
-	// Event Handlers
-	public function coloring():Void {
-		// Hippity, Hoppity, your code is now my property (from Kade Engine)
-		if (ClientPrefs.data.fpsRainbow) {
-			fpsVar.isRainbow = true;
-			if (currentColor >= array.length) currentColor = 0;
-			currentColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / ClientPrefs.data.framerate));
-			(cast(Lib.current.getChildAt(0), Main)).changeFPSColor(array[currentColor]);
-			currentColor++;
-			skippedFrames++;
-			if (skippedFrames > ClientPrefs.data.framerate) skippedFrames = 0;
-		} else {
-			fpsVar.isRainbow = false;
-			fpsVar.textColor = FlxColor.fromRGB(255, 255, 255);
-		}
-	}
-
-	public function changeFPSColor(color:FlxColor) fpsVar.textColor = color;
 
 	static function resetSpriteCache(sprite:Sprite):Void {
 		@:privateAccess {

@@ -3,9 +3,9 @@ package;
 import animateatlas.JSONData.AtlasData;
 import openfl.display.BitmapData;
 import animateatlas.JSONData.AnimationData;
-import openfl.display.FPS;
 import openfl.Lib;
 import openfl.events.MouseEvent;
+import debug.FPSCounter;
 import animateatlas.HelperEnums.LoopMode;
 import openfl.events.Event;
 import openfl.display.Tilemap;
@@ -48,7 +48,7 @@ class Main extends Sprite {
 		renderer.tileColorTransformEnabled = false;
 
 		addChild(renderer);
-		addChild(new FPS(10, 10, 0xFFFFFF));
+		addChild(new FPSCounter(10, 10, 0xFFFFFF));
 
 		tileSymbols = [];
 		spriteSymbols = [];

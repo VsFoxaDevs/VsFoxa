@@ -9,6 +9,11 @@ import flixel.FlxObject;
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
 
+#if sys
+import sys.io.File;
+import sys.FileSystem;
+#end
+
 using StringTools;
 
 enum SlideCalcMethod
@@ -92,6 +97,20 @@ class CoolUtil
 		var daList:Array<String> = string.trim().split('\n');
 		for (i in 0...daList.length) daList[i] = daList[i].trim();
 		return daList;
+	}
+
+	public static function formatMemory(num:UInt):String {
+		var size:Float = num;
+		var data = 0;
+		var dataTexts = ["B", "KB", "MB", "GB", "TB"];
+		while (size > 1024 && data < dataTexts.length - 1) {
+			data++;
+			size = size / 1024;
+		}
+
+		size = Math.round(size * 100) / 100;
+		var formatSize:String = formatAccuracy(size);
+		return formatSize + " " + dataTexts[data];
 	}
 
 	inline public static function removeFromString(remove:String = "", string:String = "")

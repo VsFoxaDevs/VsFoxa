@@ -77,11 +77,14 @@ class ModsMenuState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 
-		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33525252, 0x0));
-		grid.velocity.set(40, 40);
-		grid.alpha = 0;
-		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-		add(grid);
+		if (ClientPrefs.data.checkerBoard)
+		{
+			var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
+		}	
 
 		bgList = FlxSpriteUtil.drawRoundRect(new FlxSprite(40, 40).makeGraphic(340, 440, FlxColor.TRANSPARENT), 0, 0, 340, 440, 15, 15, FlxColor.BLACK);
 		bgList.alpha = 0.6;
@@ -319,14 +322,11 @@ class ModsMenuState extends MusicBeatState
 	{
 		if(controls.BACK && hoveringOnMods)
 		{
-			if(colorTween != null) {
-				colorTween.cancel();
-			}
+			if(colorTween != null) colorTween.cancel();
 			saveTxt();
 
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			if(waitingToRestart)
-			{
+			if(waitingToRestart) {
 				//FlxG.switchState(() -> new TitleState());
 				TitleState.initialized = false;
 				TitleState.closedState = false;
@@ -451,8 +451,7 @@ class ModsMenuState extends MusicBeatState
 								if(!moved)
 								{
 									var factor:Float = -1;
-									if(FlxG.mouse.y < bgList.y)
-										factor = Math.abs(Math.max(0.2, Math.min(0.5, 0.5 - (bgList.y - FlxG.mouse.y) / 100)));
+									if(FlxG.mouse.y < bgList.y) factor = Math.abs(Math.max(0.2, Math.min(0.5, 0.5 - (bgList.y - FlxG.mouse.y) / 100)));
 									else if(FlxG.mouse.y > bgList.y + bgList.height)
 										factor = Math.abs(Math.max(0.2, Math.min(0.5, 0.5 - (FlxG.mouse.y - bgList.y - bgList.height) / 100)));
 		
@@ -523,16 +522,14 @@ class ModsMenuState extends MusicBeatState
 									var button = getButton();
 									button.ignoreCheck = button.onFocus = false;
 									changeSelectedMod();
-								case -1:
-									changeSelectedButton(-1);
+								case -1: changeSelectedButton(-1);
 							}
 						}
 						else if(controls.UI_DOWN_P)
 						{
 							switch(curSelectedButton)
 							{
-								case -2:
-									changeSelectedButton(1);
+								case -2: changeSelectedButton(1);
 								case -1:
 									curSelectedMod = 0;
 									hoveringOnMods = true;
@@ -549,10 +546,8 @@ class ModsMenuState extends MusicBeatState
 							changeSelectedButton();
 						}
 					}
-					else if(controls.UI_LEFT_P)
-						changeSelectedButton(-1);
-					else if(controls.UI_RIGHT_P)
-						changeSelectedButton(1);
+					else if(controls.UI_LEFT_P) changeSelectedButton(-1);
+					else if(controls.UI_RIGHT_P) changeSelectedButton(1);
 				}
 			}
 		}
@@ -597,13 +592,10 @@ class ModsMenuState extends MusicBeatState
 
 		var curMod:ModItem = modsGroup.members[curSelectedMod];
 		if(curMod != null) curMod.selectBg.visible = false;
-		if(curSelectedButton < 0)
-		{
+		if(curSelectedButton < 0) {
 			bgButtons.color = FlxColor.BLACK;
 			bgButtons.alpha = 0.2;
-		}
-		else
-		{
+		} else {
 			bgButtons.color = FlxColor.WHITE;
 			bgButtons.alpha = 0.8;
 		}
@@ -658,8 +650,7 @@ class ModsMenuState extends MusicBeatState
 				curSelectedButton = -1;
 				changeSelectedButton();
 				return;
-			}
-			else // pressed down on last mod
+			} else // pressed down on last mod
 			{
 				curSelectedMod = lastSelected;
 				hoveringOnMods = false;
@@ -690,8 +681,7 @@ class ModsMenuState extends MusicBeatState
 		var curMod:ModItem = modsGroup.members[curSelectedMod];
 		if(curMod == null) return;
 
-		if(colorTween != null)
-		{
+		if(colorTween != null) {
 			colorTween.cancel();
 			colorTween.destroy();
 		}
@@ -768,7 +758,6 @@ class ModsMenuState extends MusicBeatState
 
 		modsGroup.remove(curMod, true);
 		modsList.all.remove(mod);
-		//if(position > id) position--;
 		modsGroup.insert(position, curMod);
 		modsList.all.insert(position, mod);
 
@@ -845,8 +834,7 @@ class ModItem extends FlxSpriteGroup {
 			var data:String = File.getContent(path);
 			try
 			{settings = Json.parse(data);}
-			catch(e:Dynamic)
-			{
+			catch(e:Dynamic) {
 				var errorTitle = 'Mod name: ' + Mods.currentModDirectory;
 				var errorMsg = 'An error occurred: $e';
 				#if windows lime.app.Application.current.window.alert(errorMsg, errorTitle); #end
@@ -898,8 +886,7 @@ class ModItem extends FlxSpriteGroup {
 		}
 		text.text = this.name;
 
-		if(bmp != null)
-		{
+		if(bmp != null){
 			totalFrames = Math.floor(bmp.width / 150) * Math.floor(bmp.height / 150);
 			icon.animation.add("icon", [for (i in 0...totalFrames) i], iconFps);
 			icon.animation.play("icon");

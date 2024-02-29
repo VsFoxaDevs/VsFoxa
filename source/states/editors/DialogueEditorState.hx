@@ -30,11 +30,14 @@ class DialogueEditorState extends MusicBeatState
 		FlxG.sound.playMusic(Paths.music('breakfast'), 0.5);
 		FlxG.camera.bgColor = FlxColor.fromHSL(0, 0, 0.5);
 
-		var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
-		grid.velocity.set(40, 40);
-		grid.alpha = 0;
-		FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
-		add(grid);
+		if (ClientPrefs.data.checkerBoard)
+		{
+			var grid:FlxBackdrop = new FlxBackdrop(FlxGridOverlay.createGrid(80, 80, 160, 160, true, 0x33FFFFFF, 0x0));
+			grid.velocity.set(40, 40);
+			grid.alpha = 0;
+			FlxTween.tween(grid, {alpha: 1}, 0.5, {ease: FlxEase.quadOut});
+			add(grid);
+		}	
 
 		defaultLine = {
 			portrait: DialogueCharacter.DEFAULT_CHARACTER,

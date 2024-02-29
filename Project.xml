@@ -90,6 +90,9 @@
 	<assets path='art/readme.txt' rename='dont_look_at_this_folder/warned.txt' />
 	<assets path='art/the rel readme.txt' rename='readme.txt' />
 
+	<!-- This seems to be occuring only on linux, so I'm gonna do this -->
+	<template path="source/ManifestResources.hx" rename="../haxe/ManifestResources.hx" if="linux" />
+	
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />

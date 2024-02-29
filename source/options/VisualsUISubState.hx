@@ -114,15 +114,29 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
-		var option:Option = new Option('Show Watermark',
+		var option:Option = new Option('In-Game Watermark',
 			"If you want a watermark on the bottom left during a song,\ngo for it.",
 			'showWatermark',
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Icon Watermark',
+			"Uncheck this if you don't want to see that Vs.Foxa icon on the bottom right.\nThis isn't the in-game watermark you see during songs though.",
+			'watermarkIcon',
+			'bool');
+		addOption(option);
+		option.onChange = onWatermarkIcon;
+
+
 		var option:Option = new Option('Score Text Zoom on Hit',
 			"If unchecked, disables the Score text zooming\nevery time you hit a note.",
 			'scoreZoom',
+			'bool');
+		addOption(option);
+
+		var option:Option = new Option('Checkerboard Style',
+			'If checked, gives most menus (if not all) a checkboard effect on top of the background.',
+			'checkerBoard',
 			'bool');
 		addOption(option);
 
@@ -158,13 +172,38 @@ class VisualsUISubState extends BaseOptionsMenu
 
 		#if !mobile
 		var option:Option = new Option('FPS Counter',
-			'If unchecked, hides FPS Counter.',
-			'showFPS',
-			'bool');
+			'If unchecked, hides FPS Counter.', 'showFPS', 'bool');
 		addOption(option);
 		option.onChange = onChangeFPSCounter;
 
-		var option:Option = new Option('Rainbow FPS', "If checked, makes the FPS have a chroma effect.\nSo Kade Engine, isn't it?", 'fpsRainbow', 'bool');
+		var option:Option = new Option('Total FPS Counter',
+			'If checked, shows the Total FPS in the counter.', 'showTotalFPS', 'bool');
+		addOption(option);
+
+		var option:Option = new Option('Memory Counter',
+			'If unchecked, hides the memory part of the FPS Counter.', 'memory', 'bool');
+		addOption(option);
+
+		var option:Option = new Option('Memory Peak Counter',
+			'If checked, shows the maximum memory on the FPS Counter.', 'totalMemory', 'bool');
+		addOption(option);
+
+		var option:Option = new Option('Engine Version Counter',
+			"If checked, shows the engine's version on the FPS Counter.", 'engineVersion', 'bool');
+		addOption(option);
+
+		#if debug
+		var option:Option = new Option('Debug Info Counter',
+			'If checked, shows debug info on the FPS Counter.', 'debugInfo', 'bool');
+		addOption(option);
+		#end
+
+		var option:Option = new Option('Rainbow FPS',
+			'If checked, gives the FPS counter a rainbow effect, like Kade Engine.', 'rainbowFPS', 'bool');
+		addOption(option);
+
+		var option:Option = new Option('Red Counter on Low FPS',
+			'If checked, makes the counter red, whenever the FPS gets very low.', 'redText', 'bool');
 		addOption(option);
 		#end
 		
