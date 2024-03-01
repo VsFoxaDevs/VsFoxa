@@ -21,7 +21,7 @@ import states.StartingState;
 	public var showTotalFPS:Bool = false;
 	public var memory:Bool = true;
 	public var totalMemory:Bool = false;
-	public var engineVersion:Bool = false;
+	public var engineVersion:Bool = true;
 	public var debugInfo:Bool = false;
 	public var rainbowFPS:Bool = false;
 	public var redText:Bool = true;

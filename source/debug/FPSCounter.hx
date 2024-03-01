@@ -2,15 +2,16 @@ package debug;
 
 import openfl.text.TextField;
 import openfl.text.TextFormat;
-#if flash
 import openfl.Lib;
-#end
+import openfl.events.Event;
 
 #if openfl
 import openfl.system.System;
 #end
 
 import states.MainMenuState;
+
+using StringTools;
 
 /**
 	modified version of openfl's fps counter, lol
@@ -65,13 +66,13 @@ class FPSCounter extends TextField {
 		currentTime = 0;
 		times = [];
 
-		#if flash
+		//#if flash
 		addEventListener(Event.ENTER_FRAME, function(e)
 		{
 			var time = Lib.getTimer();
 			__enterFrame(time - currentTime);
 		});
-		#end
+		//#end
 	}
 
 	// Event Handlers
@@ -110,9 +111,12 @@ class FPSCounter extends TextField {
 
 			if (ClientPrefs.data.totalMemory) text += "\n" + CoolUtil.formatMemory(Std.int(maximumMemory));
 
-			if (ClientPrefs.data.engineVersion) text += "\n[ALLEYWAY VER] 1.0b / [PE VER]" + MainMenuState.psychEngineVersion;
+			if (ClientPrefs.data.engineVersion) {
+				text += "\n[ALLEYWAY VER] 1.0b / [PE VER]" + MainMenuState.psychEngineVersion;
+				text += "\n[VS.FOXA VER] 3.0 SE";
+			}
 
-			#if debug
+			// #if debug
 			if (ClientPrefs.data.debugInfo) {
 				text += '\nState: ${Type.getClassName(Type.getClass(FlxG.state))}';
 				if (FlxG.state.subState != null)
@@ -123,7 +127,7 @@ class FPSCounter extends TextField {
 				text += "\nGL Shading version: " + '${getGLInfo(SHADING_LANGUAGE_VERSION)})';
 				text += "\nFlixel: " + FlxG.VERSION;
 			}
-			#end
+			// #end
 
 			if (ClientPrefs.data.redText) {
 				textColor = FlxColor.fromRGBFloat(255, 255, 255, realAlpha);

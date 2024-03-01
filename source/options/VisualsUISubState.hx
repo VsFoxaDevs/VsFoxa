@@ -26,7 +26,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			notes.add(note);
 		}
 
-		// options
+		//\\ -> options <- //\\
 
 		var noteSkins:Array<String> = Mods.mergeAllTextsNamed('images/noteSkins/list.txt');
 		if(noteSkins.length > 0)
@@ -126,7 +126,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 		option.onChange = onWatermarkIcon;
-
 
 		var option:Option = new Option('Score Text Zoom on Hit',
 			"If unchecked, disables the Score text zooming\nevery time you hit a note.",
@@ -293,6 +292,12 @@ class VisualsUISubState extends BaseOptionsMenu
 	{
 		if(changedMusic && !OptionsState.onPlayState) FlxG.sound.playMusic(Paths.music('freakyMenu'), 1, true);
 		super.destroy();
+	}
+
+	function onWatermarkIcon()
+	{
+		if(Main.watermark != null)
+			Main.watermark.visible = ClientPrefs.data.watermarkIcon;
 	}
 
 	#if !mobile
