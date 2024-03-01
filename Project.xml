@@ -23,11 +23,10 @@
 	
 	<define name="CRASH_HANDLER" if="desktop" />
 	<define name="GITHUB_ALLOWED" />
-	<haxedef name="NDLLS_ALLOWED" if="cpp"/>
 	<!--<define name="FREEPLAY_SECTIONS" />-->
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<!--<define name="BUTTPLUG_ALLOWED" />-->
-	<define name="LOADING_SCREEN" />
+	<!--<define name="LOADING_SCREEN" />--> <!-- i will uncomment this once moxie does something with this repo lol -->
 	<define name="VIDEOS_ALLOWED" if="windows || linux || android" unless="32bits" /><!-- wait why is there some hints of an official android port wtf -->
 	<define name="ALLEYWAY_WATERMARKS" />
 	<define name="TITLE_SCREEN_EASTER_EGG" />

@@ -29,8 +29,7 @@ class Conductor
 	{
 		var data:Array<Rating> = arr;
 		for(i in 0...data.length-1) //skips last window (Shit)
-			if (diff <= data[i].hitWindow)
-				return data[i];
+			if (diff <= data[i].hitWindow) return data[i];
 
 		return data[data.length - 1];
 	}
@@ -49,8 +48,7 @@ class Conductor
 		}
 		for (i in 0...Conductor.bpmChangeMap.length)
 		{
-			if (time >= Conductor.bpmChangeMap[i].songTime)
-				lastChange = Conductor.bpmChangeMap[i];
+			if (time >= Conductor.bpmChangeMap[i].songTime) lastChange = Conductor.bpmChangeMap[i];
 		}
 
 		return lastChange;
@@ -65,8 +63,7 @@ class Conductor
 		}
 		for (i in 0...Conductor.bpmChangeMap.length)
 		{
-			if (Conductor.bpmChangeMap[i].stepTime<=step)
-				lastChange = Conductor.bpmChangeMap[i];
+			if (Conductor.bpmChangeMap[i].stepTime<=step) lastChange = Conductor.bpmChangeMap[i];
 		}
 
 		return lastChange;
@@ -88,11 +85,11 @@ class Conductor
 		return lastChange.stepTime + Math.floor(time - lastChange.songTime) / lastChange.stepCrochet;
 	}
 
-	public static function getBeat(time:Float){
+	inline public static function getBeat(time:Float){
 		return getStep(time)/4;
 	}
 
-	public static function getBeatRounded(time:Float):Int{
+	inline public static function getBeatRounded(time:Float):Int{
 		return Math.floor(getStepRounded(time)/4);
 	}
 
