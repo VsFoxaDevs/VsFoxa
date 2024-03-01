@@ -130,7 +130,7 @@ class MainMenuState extends MusicBeatState {
 		add(bg);
 
 		if (menuJunk.bgColors != null) bgColors = menuJunk.bgColors;
-		else bgColors = ['#517bc4', '#eb9bee', '#eb3030', '#eb7e19']
+		else bgColors = ['#517bc4', '#eb9bee', '#eb3030', '#eb7e19'];
 		
 		camFollow = new FlxObject(0, 0, 1, 1);
 		//add(camFollow);
