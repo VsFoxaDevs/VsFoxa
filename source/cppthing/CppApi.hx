@@ -23,6 +23,9 @@ class CppAPI
 	public static function enableVisualStyles()
 		WindowsData.enableVisualStyles();
 
+	public static function _enableCloseButton(why:Bool)
+		WindowsData.setCloseButtonEnabled(why);
+
 	public static function _setWindowLayered()
 		WindowsData._setWindowLayered();
 	#end

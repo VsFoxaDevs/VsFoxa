@@ -60,6 +60,22 @@ class WindowsData
 		return 0;
 	}
 
+	// kudos to bing chatgpt thing i hate C++
+    #if windows
+    @:functionCode('
+        HWND hwnd = GetActiveWindow();
+        HMENU hmenu = GetSystemMenu(hwnd, FALSE);
+        if (enable) {
+            EnableMenuItem(hmenu, SC_CLOSE, MF_BYCOMMAND | MF_ENABLED);
+        } else {
+            EnableMenuItem(hmenu, SC_CLOSE, MF_BYCOMMAND | MF_GRAYED);
+        }
+    ')
+    #end
+    public static function setCloseButtonEnabled(enable:Bool) {
+        return enable;
+    }
+
 	#if windows
 	@:functionCode('
         int darkMode = mode;

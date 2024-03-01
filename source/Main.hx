@@ -8,8 +8,8 @@ import flixel.FlxGame;
 import haxe.io.Path;
 import openfl.Assets;
 import openfl.Lib;
-import openfl.display.FPS;
 import openfl.display.Sprite;
+import openfl.display.Bitmap;
 import openfl.events.Event;
 import openfl.display.StageScaleMode;
 import lime.app.Application;
@@ -94,12 +94,6 @@ class Main extends Sprite
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 
 		setupGame();
-
-		var timer = new haxe.Timer(1);
-		timer.run = () -> {
-			coloring();
-			if (fpsVar.textColor == 0) fpsVar.textColor = -4775566;
-		} // needs to be done because textcolor beco
 	}
 
 	private function setupGame():Void {
@@ -114,6 +108,8 @@ class Main extends Sprite
 			game.width = Math.ceil(stageWidth / game.zoom);
 			game.height = Math.ceil(stageHeight / game.zoom);
 		}
+
+		flixel.FlxG.plugins.add(new flixel.addons.plugin.ScreenShotPlugin());
 	
 		#if LUA_ALLOWED Lua.set_callbacks_function(cpp.Callable.fromStaticFunction(psychlua.CallbackHandler.call)); #end
 		Controls.instance = new Controls();
@@ -190,6 +186,8 @@ class Main extends Sprite
 		"I did but error oof - Vencerist",
 		"Ah bueno adios master - ShadowMario",
 		"Skibidy bah mmm dada *explodes* - ShadowMario",
+		"Wow, you're struggling! - CharlesCatYT",
+		"WHY - CharlesCatYT",
 		"What have you done, you killed it! - crowplexus",
 		"Have you checked if the variable exists? - crowplexus",
 		"Have you even read the wiki before trying that? - crowplexus"

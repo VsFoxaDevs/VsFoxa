@@ -8,6 +8,11 @@
       "url": "https://github.com/VsFoxaDevs/lime"
     },
     {
+      "name": "flixel-screenshot-plugin",
+      "type": "haxelib",
+      "version": null
+    },
+    {
       "name": "haxeui-core",
       "type": "haxelib",
       "version": null

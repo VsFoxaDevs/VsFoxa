@@ -20,7 +20,7 @@ enum GLInfo {
 	RENDERER;
 	SHADING_LANGUAGE_VERSION;
 }
-class FPS extends TextField {
+class FPSCounter extends TextField {
 	/**
 		The current frame rate, expressed using frames-per-second
 	**/

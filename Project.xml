@@ -106,7 +106,7 @@
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="SScript" if="HSCRIPT_ALLOWED"/>
 	<haxelib name="hxvlc" if="VIDEOS_ALLOWED"/>
-	<haxelib name="discord_rpc" if="desktop"/>
+	<haxelib name="discord_rpc" if="desktop cpp"/>
 	<haxelib name="flxanimate"/>
 	<haxelib name="tjson" />
 
@@ -116,13 +116,15 @@
 	<!-- Enables a terminal log prompt on debug builds -->
 	<haxelib name="hxcpp-debug-server" if="debug"/>
 	
+	<haxelib name="flixel-screenshot-plugin" />
+	
 	<section unless="mac">
 		<haxelib name="systools" />
 		<ndll name="systools" haxelib="systools" />
 	</section>
 
 	<haxedef name="openflPos" />
-	<haxedef name="hscriptPos" />
+	<haxedef name="hscriptPos" if="HSCRIPT_ALLOWED" />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 

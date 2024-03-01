@@ -2,12 +2,16 @@ package backend;
 
 import flixel.FlxBasic;
 import flixel.FlxObject;
+import flixel.tweens.FlxEase;
+import flixel.FlxG;
+import flixel.input.keyboard.FlxKey;
 //import flixel.util.FlxSave;
 
 //import flixel.math.FlxPoint;
 
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
+import lime.system.System;
 
 #if sys
 import sys.io.File;
@@ -24,6 +28,34 @@ enum SlideCalcMethod
 
 class CoolUtil
 {
+	/**
+    Returns the midpoint between 2 numbers. Can be useful for X or Y positions.
+
+    @param val1 The initial number
+    @param val2 The second number
+	**/
+    inline public static function midpoint(val1:Float, val2:Float) {
+        return (val1 + val2) / 2;
+    }
+
+	// sleep function that blocks the main thread
+	public static inline function blockExecution(time:Float):Void {
+		var start:Float = Sys.time();
+		while (Sys.time() - start < time) {"do nothing";}
+	}
+
+    /**
+		Returns a decimal where the `baseValue` is divided by the `denominator`, in a sense splitting it like a fraction.
+        Optionally, you can add the `numerator` value to increate the fraction you get back, ex 2/3 instead of 1/3.
+
+        @param baseValue The value you want divided
+        @param denominator The amount to divide by
+        @param numerator How many pieces of the fraction you want
+	**/
+    inline public static function fractionAmount(baseValue:Float, denominator:Float, ?numerator:Float = 1) {
+        return (baseValue / denominator) * numerator;
+    }
+
 	public static function makeOutlinedGraphic(Width:Int, Height:Int, Color:Int, LineThickness:Int, OutlineColor:Int){
 		var rectangle = flixel.graphics.FlxGraphic.fromRectangle(Width, Height, OutlineColor, true);
 		rectangle.bitmap.fillRect(new openfl.geom.Rectangle(LineThickness, LineThickness, Width - LineThickness * 2, Height - LineThickness * 2), Color);
@@ -38,7 +70,6 @@ class CoolUtil
 		if(n < l) n = l;
 		return n;
 	}
-
 		
 	inline public static function quantize(f:Float, snap:Float){
 		// changed so this actually works lol
@@ -47,21 +78,54 @@ class CoolUtil
 		return (m / snap);
 	}
 
-	public static function rotate(x:Float, y:Float, angle:Float, ?point:FlxPoint):FlxPoint
-	{
+	/**
+     * Just a simple function to determine which key was pressed. Good for sequential keypresses. An example of how to use this is by simply adding the value to a string in the update function.
+     * 
+     * Ex: 
+     * ```
+     * public var value:String = '';
+     * override function update(elapsed:Float) {
+     *      value += keypressToString(); // This will add a key to the string everytime a key is pressed
+     * }
+     * ```
+     * @return Key that was pressed as a String
+     */
+    public static function keypressToString():String  {
+        var characterToAdd:String = "";
+        if (FlxG.keys.justPressed.ANY) {
+            final key = cast(FlxG.keys.firstJustPressed(), FlxKey);
+            if (key != FlxKey.NONE){
+                final upperKeyLol = key.toString().toUpperCase();
+                characterToAdd += FlxKey.fromStringMap.get(upperKeyLol);
+            }
+        }
+        return characterToAdd;
+    }
+
+	public static function rotate(x:Float, y:Float, angle:Float, ?point:FlxPoint):FlxPoint {
 		var p = point == null ? FlxPoint.weak() : point;
 		return p.set((x * Math.cos(angle)) - (y * Math.sin(angle)), (x * Math.sin(angle)) + (y * Math.cos(angle)));
 	}
-	
+
+	/**
+		Just insert an ease name, like linear or quadOut for example, and it'll return it as an actual FlxEase value instead of a string. Useful if you have something customizable instead of perma set to a ease.
+
+		@param easeName The ease you want the function to return
+
+		@return FlxEase
+
+		@author LunarCleint
+	**/
+	inline public static function stringToEase(easeName:String, ?suffix:String = "")
+		return Reflect.field(FlxEase, easeName + (easeName == "linear" ? "" : suffix));
+
 	inline public static function quantizeAlpha(f:Float, interval:Float)
-		return Std.int((f+interval/2)/interval)*interval;
+		return Std.int((f + interval / 2) / interval) * interval;
 
 	inline public static function capitalize(text:String)
 		return text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
 
-	inline public static function boundTo(value:Float, min:Float, max:Float):Float {
-		return Math.max(min, Math.min(max, value));
-	}
+	inline public static function boundTo(value:Float, min:Float, max:Float):Float {return Math.max(min, Math.min(max, value));}
 
 	inline public static function coolTextFile(path:String):Array<String>
 	{
@@ -92,8 +156,7 @@ class CoolUtil
 		return FlxColor.fromRGB(colors[0], colors[1], colors[2], colors[3]);
 	}
 
-	inline public static function listFromString(string:String):Array<String>
-	{
+	inline public static function listFromString(string:String):Array<String> {
 		var daList:Array<String> = string.trim().split('\n');
 		for (i in 0...daList.length) daList[i] = daList[i].trim();
 		return daList;
@@ -103,6 +166,7 @@ class CoolUtil
 		var size:Float = num;
 		var data = 0;
 		var dataTexts = ["B", "KB", "MB", "GB", "TB"];
+
 		while (size > 1024 && data < dataTexts.length - 1) {
 			data++;
 			size = size / 1024;
@@ -113,19 +177,43 @@ class CoolUtil
 		return formatSize + " " + dataTexts[data];
 	}
 
-	inline public static function removeFromString(remove:String = "", string:String = "")
-		return string.replace(remove, "");
+	public static function formatAccuracy(value:Float) {
+		var conversion:Map<String, String> = [
+			'0' => '0.00',
+			'0.0' => '0.00',
+			'0.00' => '0.00',
+			'00' => '00.00',
+			'00.0' => '00.00',
+			'00.00' => '00.00',
+			'000' => '000.00'
+		];
+
+		var stringVal:String = Std.string(value);
+		var converVal:String = '';
+		for (whyTho in 0...stringVal.length) {
+			if (stringVal.charAt(whyTho) == '.') converVal += '.';
+			else converVal += '0';
+		}
+
+		var wantedConversion:String = conversion.get(converVal);
+		var convertedValue:String = '';
+		for (ohThingy in 0...wantedConversion.length) {
+			if (stringVal.charAt(ohThingy) == '') convertedValue += wantedConversion.charAt(ohThingy);
+			else convertedValue += stringVal.charAt(ohThingy);
+		}
+
+		if (convertedValue.length == 0) return '$value';
+		return convertedValue;
+	}
+
+	inline public static function removeFromString(remove:String = "", string:String = "") return string.replace(remove, "");
 	
 	public static function removeDuplicates(string:Array<String>):Array<String> {
 		var tempArray:Array<String> = new Array<String>();
 		var lastSeen:String = null;
-		string.sort(function(str1:String, str2:String) {
-		  return (str1 == str2) ? 0 : (str1 > str2) ? 1 : -1; 
-		});
+		string.sort(function(str1:String, str2:String) {return (str1 == str2) ? 0 : (str1 > str2) ? 1 : -1;});
 		for (str in string) {
-		  if (str != lastSeen) {
-			tempArray.push(str);
-		  }
+		  if (str != lastSeen) tempArray.push(str);
 		  lastSeen = str;
 		}
 		return tempArray;
@@ -162,7 +250,6 @@ class CoolUtil
 	{
 		if (slowness < 0) slowness = 1;
 		var slider:Float = (FlxG.sound.music.time / 1000) * (Conductor.bpm / 60);
-
 		var slideValue:Float;
 
 		switch (calcMethod) {
@@ -177,12 +264,11 @@ class CoolUtil
 		return b == 0 ? FlxMath.absInt(a) : GCD(b, a % b);
 
 	inline public static function closest2Multiple(num:Float)
-		return Math.floor(num/2)*2;
+		return Math.floor(num / 2) * 2;
 
 	public static function addZeros(v:String, length:Int, end:Bool = false) {
 		var r = v;
-		while(r.length < length)
-			r = end ? r + '0': '0$r';
+		while(r.length < length) r = end ? r + '0': '0$r';
 		return r;
 	}
 
